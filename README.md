@@ -1,4 +1,4 @@
-# oduck-server
+# oduck-client
 
 ## 커밋 메세지 컨벤션
 
