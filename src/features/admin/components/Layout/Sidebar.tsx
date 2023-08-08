@@ -22,7 +22,7 @@ const Header = styled.div<{ isCollapsed: boolean }>(
     },
   },
   ({ isCollapsed }) => ({
-    paddingLeft: isCollapsed ? ".5rem" : "",
+    paddingLeft: isCollapsed ? "" : ".5rem",
   }),
 );
 
