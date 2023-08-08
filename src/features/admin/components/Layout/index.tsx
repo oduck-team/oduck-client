@@ -2,13 +2,24 @@ import { Layout as Container } from "antd";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 
+import MobileNavigation from "./MobileNavigation";
 import Sidebar from "./Sidebar";
 
 export default function Layout() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isShowMobileMenu, setIsShowMobileMenu] = useState(false);
 
   const handleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
+  };
+
+  const hanleMobileMenu = () => {
+    if (isShowMobileMenu) {
+      document.body.style.overflow = "";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+    setIsShowMobileMenu(!isShowMobileMenu);
   };
 
   return (
@@ -18,6 +29,10 @@ export default function Layout() {
         setIsCollapsed={handleSidebar}
       />
       <Container.Content>
+        <MobileNavigation
+          isActive={isShowMobileMenu}
+          setIsActive={hanleMobileMenu}
+        />
         <Outlet />
       </Container.Content>
     </Container>
