@@ -9,7 +9,6 @@ import {
   HeadsetHelp,
   Tv,
 } from "iconoir-react";
-import { useState } from "react";
 
 import Profile from "./Profile";
 import SidebarToggle from "./SidebarToggle";
@@ -102,13 +101,12 @@ const Header = styled.div<{ isCollapsed: boolean }>(
   }),
 );
 
-export default function Sidebar() {
-  const [isCollapsed, setIsCollapsed] = useState(false); // 사이드바 접힘 여부
+interface SidebarProps {
+  readonly isCollapsed: boolean;
+  readonly setIsCollapsed: () => void;
+}
 
-  const hanleCollapsed = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
+export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   return (
     <Sider
       theme="light"
@@ -125,7 +123,7 @@ export default function Sidebar() {
         },
       }}
     >
-      <Header isCollapsed={isCollapsed}>
+      <Header isCollapsed={!isCollapsed}>
         <h1>메뉴</h1>
         {/* TODO: 로고 추가되면 <div/> 로고로 바꾸기 */}
         <div
@@ -162,7 +160,7 @@ export default function Sidebar() {
           width={sidebarWith}
           collapsedWidth={collapsedWidth}
           isCollapsed={isCollapsed}
-          onClick={hanleCollapsed}
+          onClick={setIsCollapsed}
         />
       </IconoirProvider>
     </Sider>
