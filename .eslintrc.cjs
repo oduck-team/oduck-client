@@ -31,6 +31,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
     "import/order": [
       "error",
       {
