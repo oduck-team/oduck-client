@@ -93,6 +93,9 @@ const Header = styled.div<{ isCollapsed: boolean }>(
     margin: "0.25rem",
     overflow: "hidden",
     transition: "padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)",
+    "& h1": {
+      display: "none",
+    },
   },
   ({ isCollapsed }) => ({
     paddingLeft: isCollapsed ? ".5rem" : "",
@@ -114,8 +117,16 @@ export default function Sidebar() {
       trigger={null}
       collapsible
       collapsed={isCollapsed}
+      css={{
+        display: "none",
+        // TODO: global 미디어쿼리
+        "@media (min-width: 640px)": {
+          display: "block",
+        },
+      }}
     >
       <Header isCollapsed={isCollapsed}>
+        <h1>메뉴</h1>
         {/* TODO: 로고 추가되면 <div/> 로고로 바꾸기 */}
         <div
           style={{
@@ -145,7 +156,7 @@ export default function Sidebar() {
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={items}
-          style={{ marginTop: "1.25rem", flex: 1 }}
+          style={{ marginTop: "1.25rem" }}
         />
         <SidebarToggle
           width={sidebarWith}
