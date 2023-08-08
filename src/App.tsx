@@ -1,7 +1,9 @@
-import { IconoirProvider, Check } from "iconoir-react";
+import { IconoirProvider } from "iconoir-react";
 import { HelmetProvider } from "react-helmet-async";
 import { Routes, Route } from "react-router-dom";
 
+import AdminLayout from "./features/admin/components/Layout";
+import Dashboard from "./features/admin/routes/Dashboard";
 import Home from "./routes/Home";
 
 export default function App() {
@@ -16,8 +18,10 @@ export default function App() {
           <Route path="/">
             <Route path="" element={<Home />} />
           </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="" element={<Dashboard />} />
+          </Route>
         </Routes>
-        <Check />
       </IconoirProvider>
     </HelmetProvider>
   );
