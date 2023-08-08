@@ -7,7 +7,7 @@ import Profile from "./Profile";
 import SidebarToggle from "./SidebarToggle";
 
 const { Sider } = Layout;
-const sidebarWith = 256; // 사이드바 넓이
+const sidebarWidth = 256; // 사이드바 넓이
 const collapsedWidth = 80; // 사이드바 줄었을때 넓이
 
 const Header = styled.div<{ isCollapsed: boolean }>(
@@ -35,7 +35,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
   return (
     <Sider
       theme="light"
-      width={sidebarWith}
+      width={sidebarWidth}
       collapsedWidth={collapsedWidth}
       trigger={null}
       collapsible
@@ -77,7 +77,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
       >
         <Menus style={{ marginTop: "1.25rem" }} />
         <SidebarToggle
-          width={sidebarWith}
+          width={sidebarWidth}
           collapsedWidth={collapsedWidth}
           isCollapsed={isCollapsed}
           onClick={setIsCollapsed}

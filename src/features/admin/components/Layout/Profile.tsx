@@ -18,13 +18,13 @@ interface ProfileProps {
 }
 
 export default function Profile({ isVisible }: ProfileProps) {
-  const hanleLogout = () => {};
+  const handleLogout = () => {};
 
   const items: MenuProps["items"] = [
     {
       key: "1",
       label: (
-        <a tabIndex={0} role="button" onClick={hanleLogout}>
+        <a tabIndex={0} role="button" onClick={handleLogout}>
           로그아웃
         </a>
       ),

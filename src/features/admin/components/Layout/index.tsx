@@ -13,7 +13,7 @@ export default function Layout() {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
-  const hanleMobileMenu = () => {
+  const handleMobileMenu = () => {
     if (isShowMobileMenu) {
       document.body.style.overflow = "";
     } else {
@@ -31,7 +31,7 @@ export default function Layout() {
       <Container.Content>
         <MobileNavigation
           isActive={isShowMobileMenu}
-          setIsActive={hanleMobileMenu}
+          setIsActive={handleMobileMenu}
         />
         <Outlet />
       </Container.Content>
