@@ -1,4 +1,4 @@
-export const colors = {
+export const colors = Object.freeze({
   blue: {
     "100": "#003371",
     "90": "#00469C",
@@ -39,4 +39,4 @@ export const colors = {
     "20": "#FF9090",
     "10": "#FFBEBE",
   },
-};
+});

@@ -2,7 +2,6 @@ import "@emotion/react";
 import { colors } from "./colors";
 import { Theme } from "@emotion/react";
 
-
 const heading1 = {
   // heading 1 예시입니다.
   fontWeight: "bold",
@@ -11,7 +10,11 @@ const heading1 = {
   letterSpacing: "0",
 };
 
-export const theme:Theme = {
-  colors,
+export const theme: Theme = {
+  colors: {
+    primary: colors.blue,
+    secondary: colors.yellow,
+    warning: colors.red,
+  },
   heading1,
 };

@@ -95,7 +95,8 @@ const reset = css`
     vertical-align: baseline;
   }
   html,
-  body {
+  body,
+  :root {
     height: 100%;
   }
   article,
