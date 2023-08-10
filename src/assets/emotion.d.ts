@@ -4,7 +4,16 @@ import "@emotion/react";
 declare module "@emotion/react" {
   export interface Theme {
     colors: {
-      [key: string]: string;
+      [key: string]: {
+        [key: string]: string;
+      };
+    };
+    // 테스트를 위해 임시 추가
+    heading1: {
+      fontWeight: string;
+      fontSize: string;
+      lineHeight: string;
+      letterSpacing: string;
     };
   }
 }
