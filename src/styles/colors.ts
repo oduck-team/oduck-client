@@ -1,6 +1,6 @@
 export type Colors = typeof colors;
 
-export const colors = Object.freeze({
+export const colors = {
   blue: {
     "100": "#003371",
     "90": "#00469C",
@@ -41,4 +41,4 @@ export const colors = Object.freeze({
     "20": "#FF9090",
     "10": "#FFBEBE",
   },
-});
+} as const;
