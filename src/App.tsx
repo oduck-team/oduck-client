@@ -5,7 +5,7 @@ import { Global, ThemeProvider } from "@emotion/react";
 
 import { theme } from "./assets/theme";
 import GlobalStyle from './assets/GlobalStyle'
-import Style from "./routes/style";
+import Style from "./routes/Style";
 
 export default function App() {
   return (
