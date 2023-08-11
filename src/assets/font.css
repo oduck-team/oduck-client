@@ -1,8 +1,4 @@
-@font-face {
-  font-family: "Spoqa Han Sans Neo";
-  src: url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
-  font-display: swap;
-}
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
 * {
   font-family: "Spoqa Han Sans Neo", "sans-serif", "system-ui";
