@@ -6,18 +6,32 @@ const REGULAR = 400;
 
 const LETTER_SPACING = "-0.02em"; // -2%
 
+/** @description css 스타일에서 사용할 것 */
+// const generateTypography = (
+//   size: number,
+//   weight: number,
+//   letterSpacing?: string,
+// ) => css`
+//   font-family: "Spoqa Han Sans Neo", "sans-serif", "system-ui";
+//   font-style: normal;
+//   line-height: 150%;
+//   font-weight: ${weight};
+//   font-size: ${size}px;
+//   ${letterSpacing && `letter-spacing: ${letterSpacing};`}
+// `;
+
 const generateTypography = (
   size: number,
   weight: number,
   letterSpacing?: string,
-) => css`
-  font-family: "Spoqa Han Sans Neo", "sans-serif", "system-ui";
-  font-style: normal;
-  line-height: 150%;
-  font-weight: ${weight};
-  font-size: ${size}px;
-  ${letterSpacing && `letter-spacing: ${letterSpacing};`}
-`;
+) => ({
+  fontFamily: '"Spoqa Han Sans Neo", "sans-serif", "system-ui"',
+  fontStyle: "normal",
+  lineHeight: "150%",
+  fontWeight: weight,
+  fontSize: `${size}px`,
+  ...(letterSpacing && { letterSpacing: letterSpacing }),
+});
 
 export type Typography = typeof typo;
 
