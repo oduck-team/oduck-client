@@ -8,6 +8,7 @@ export const theme: Theme = {
     primary: colors.blue,
     secondary: colors.yellow,
     warn: colors.red,
+    neutral: colors.neutral,
   },
   typo,
 };
