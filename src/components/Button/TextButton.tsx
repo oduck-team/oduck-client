@@ -1,15 +1,16 @@
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { ComponentProps } from "react";
-import { CommonBtn } from "./styles";
+
 import { ButtonColor, Size } from "./Button";
+import { CommonButton } from "./styles";
 
 export interface TextProps extends ComponentProps<"button"> {
   readonly color?: ButtonColor;
   readonly size?: Size;
 }
 
-export const TextBtn = styled(CommonBtn)<TextProps>`
+export const TextButton = styled(CommonButton)<TextProps>`
   ${({ color = "primary", size = "md", theme }) => {
     let styleColor: string = theme.colors[color]["60"];
     let activeColor: string = theme.colors[color]["80"];

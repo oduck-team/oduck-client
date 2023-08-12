@@ -1,8 +1,10 @@
-import { theme } from "@/styles/theme";
-import { SolidBtn } from "./SolidBtn";
-import { OutlineBtn } from "./OutlineBtn";
 import { ComponentProps } from "react";
-import { TextBtn } from "./TextBtn";
+
+import { theme } from "@/styles/theme";
+
+import { OutlineButton } from "./OutlineButton";
+import { SolidButton } from "./SolidButton";
+import { TextButton } from "./TextButton";
 
 export type ButtonStyle = "solid" | "outline" | "text";
 export type ButtonColor = keyof typeof theme.colors;
@@ -24,27 +26,27 @@ export default function Button({
   switch (styleType) {
     case "solid":
       return (
-        <SolidBtn color={color} size={size} {...rest}>
+        <SolidButton color={color} size={size} {...rest}>
           {children}
-        </SolidBtn>
+        </SolidButton>
       );
     case "outline":
       return (
-        <OutlineBtn color={color} size={size} {...rest}>
+        <OutlineButton color={color} size={size} {...rest}>
           {children}
-        </OutlineBtn>
+        </OutlineButton>
       );
     case "text":
       return (
-        <TextBtn color={color} size={size}  {...rest}>
+        <TextButton color={color} size={size} {...rest}>
           {children}
-        </TextBtn>
+        </TextButton>
       );
     default:
       return (
-        <SolidBtn color={color} size={size} {...rest}>
+        <SolidButton color={color} size={size} {...rest}>
           {children}
-        </SolidBtn>
+        </SolidButton>
       );
   }
 }

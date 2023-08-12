@@ -1,13 +1,18 @@
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { CommonBtn, SolidOrOutlineProps, SolidOrOutlineStyle } from "./styles";
+import styled from "@emotion/styled";
 
-export const SolidBtn = styled(CommonBtn)<SolidOrOutlineProps>`
+import {
+  CommonButton,
+  SolidOrOutlineProps,
+  SolidOrOutlineStyle,
+} from "./styles";
+
+export const SolidButton = styled(CommonButton)<SolidOrOutlineProps>`
   ${SolidOrOutlineStyle}
   ${({ color = "primary", theme }) => {
     let styleColor: string = theme.colors[color]["60"];
     if (color === "neutral") styleColor = theme.colors["neutral"]["20"];
-    let activeColor =
+    const activeColor =
       color === "neutral"
         ? theme.colors["neutral"][30]
         : theme.colors[color][80];
@@ -17,7 +22,7 @@ export const SolidBtn = styled(CommonBtn)<SolidOrOutlineProps>`
       color: ${color === "neutral" ? theme.colors["neutral"]["80"] : "white"};
       background-color: ${styleColor};
       border: 1px solid ${styleColor};
-      // border가 없는 경우, OutlineBtn과 약간의 사이즈 차이가 있어서 추가했습니다.
+      // border가 없는 경우, OutlineButton과 약간의 사이즈 차이가 있어서 추가했습니다.
 
       // disabled
       &:disabled {

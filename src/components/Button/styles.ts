@@ -1,10 +1,10 @@
-import styled from "@emotion/styled";
-import { ButtonColor, Size } from "./Button";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { ComponentProps } from "react";
 
-export interface CommonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import { ButtonColor, Size } from "./Button";
+
+export interface CommonProps extends ComponentProps<"button"> {
   readonly size?: Size;
 }
 
@@ -13,11 +13,10 @@ export interface SolidOrOutlineProps extends ComponentProps<"button"> {
 }
 
 // 공통 스타일
-export const CommonBtn = styled.button<CommonProps>`
+export const CommonButton = styled.button<CommonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
   text-align: center;
 

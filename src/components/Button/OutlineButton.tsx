@@ -1,8 +1,13 @@
-import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { CommonBtn, SolidOrOutlineProps, SolidOrOutlineStyle } from "./styles";
+import styled from "@emotion/styled";
 
-export const OutlineBtn = styled(CommonBtn)<SolidOrOutlineProps>`
+import {
+  CommonButton,
+  SolidOrOutlineProps,
+  SolidOrOutlineStyle,
+} from "./styles";
+
+export const OutlineButton = styled(CommonButton)<SolidOrOutlineProps>`
   ${SolidOrOutlineStyle}
   ${({ color = "primary", theme }) => {
     let styleColor: string = theme.colors[color]["60"];
