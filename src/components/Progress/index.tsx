@@ -2,22 +2,6 @@ import styled from "@emotion/styled";
 
 import { theme } from "@/styles/theme";
 
-const Container = styled.div<ProgressProps>(
-  ({ color, value, height, isRounded, theme }) => ({
-    height,
-    backgroundColor: theme.colors[color!]["10"],
-    borderRadius: isRounded ? "999px" : 0,
-    overflow: "hidden",
-
-    // progress bar
-    "& div": {
-      height: "100%",
-      width: `${value}%`,
-      backgroundColor: theme.colors[color!]["60"],
-    },
-  }),
-);
-
 interface ProgressProps {
   readonly max?: number;
   readonly min?: number;
@@ -51,3 +35,20 @@ export default function Progress({
     </Container>
   );
 }
+
+const Container = styled.div<ProgressProps>(
+  ({ color = "primary", value, height, isRounded, theme }) => ({
+    height,
+    width: "100%",
+    backgroundColor: theme.colors.neutral["20"],
+    borderRadius: isRounded ? "999px" : 0,
+    overflow: "hidden",
+
+    // progress bar
+    "& div": {
+      height: "100%",
+      width: `${value}%`,
+      backgroundColor: theme.colors[color!]["60"],
+    },
+  }),
+);
