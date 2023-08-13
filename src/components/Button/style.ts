@@ -70,15 +70,15 @@ function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
       // pressed
       &:not([disabled]):active {
         background-color: ${theme.colors["neutral"]["10"]};
-        ${!isNeutral && `border-color: ${theme.colors[color]["80"]};`} // 80 90
-        ${!isNeutral && `color: ${theme.colors[color]["80"]};`}// 80 90
+        ${!isNeutral && `border-color: ${theme.colors[color]["80"]};`}
+        ${!isNeutral && `color: ${theme.colors[color]["80"]};`}
       }
     `,
     text: css`
       color: ${isNeutral
         ? theme.colors["neutral"]["90"]
         : theme.colors[color]["60"]};
-      background-color: rgba(0, 0, 0, 0); // 60 90
+      background-color: rgba(0, 0, 0, 0);
       border: 1px solid rgba(0, 0, 0, 0);
 
       // disabled
