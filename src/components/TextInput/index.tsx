@@ -3,24 +3,24 @@ import { ComponentProps } from "react";
 import { Message, TextInputBox, TextInputContainer } from "./style";
 
 export interface TextInputProps extends ComponentProps<"input"> {
-  readonly warning?: boolean;
+  readonly warn?: boolean;
   readonly message?: string;
 }
 
 export interface TextInputBoxProps extends ComponentProps<"input"> {
-  readonly warning?: boolean;
+  readonly warn?: boolean;
 }
 
 export default function TextInput({
-  warning = false,
+  warn = false,
   message = "",
   style,
   ...rest
 }: TextInputProps) {
   return (
     <TextInputContainer style={style}>
-      <TextInputBox warning={warning} {...rest}></TextInputBox>
-      {warning && message !== "" && <Message>{message}</Message>}
+      <TextInputBox warn={warn} {...rest}></TextInputBox>
+      {warn && message !== "" && <Message>{message}</Message>}
     </TextInputContainer>
   );
 }

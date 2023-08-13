@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { TextInputBoxProps } from ".";
 
 export const TextInputBox = styled.input<TextInputBoxProps>`
-  ${({ warning = false, theme }) => {
+  ${({ warn = false, theme }) => {
     return css`
       ${theme.typo["body-2-r"]};
       display: flex;
@@ -18,7 +18,7 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
       color: ${theme.colors["neutral"]["50"]};
       border-radius: 6px;
       border: 1px solid
-        ${warning ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
+        ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
       transition: all 0.2s;
 
       &::placeholder {
@@ -26,15 +26,15 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
       }
 
       &:hover {
-        ${!warning && `border: 1px solid ${theme.colors["primary"]["60"]};`}
+        ${!warn && `border: 1px solid ${theme.colors["primary"]["60"]};`}
       }
 
       // pressed
       &:focus {
         color: ${theme.colors["neutral"]["90"]};
         outline: none;
-        ${!warning && `border: 1px solid ${theme.colors["primary"]["60"]};`}
-        ${!warning && `box-shadow: 0px 0px 2px 0px rgba(17, 124, 255, 0.8);`}
+        ${!warn && `border: 1px solid ${theme.colors["primary"]["60"]};`}
+        ${!warn && `box-shadow: 0px 0px 2px 0px rgba(17, 124, 255, 0.8);`}
       }
     `;
   }}
