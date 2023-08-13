@@ -10,6 +10,7 @@ declare module "@emotion/react" {
       primary: Colors["blue"];
       secondary: Colors["yellow"];
       warn: Colors["red"];
+      neutral: Colors["neutral"];
     };
     typo: Typography;
   }
