@@ -1,22 +1,9 @@
-import styled from "@emotion/styled";
 import { Button } from "antd";
 import { NavArrowLeft, NavArrowRight } from "iconoir-react";
 
-const Container = styled.div<SidebarToggleProps>(
-  {
-    position: "fixed",
-    bottom: "0",
-    height: "80px",
-    display: "flex",
-    justifyContent: "center",
-    transition: "all 0.2s",
-  },
-  ({ isCollapsed, width, collapsedWidth }) => ({
-    width: isCollapsed ? collapsedWidth : width,
-  }),
-);
+import { Container } from "./SidebarToggle.style";
 
-interface SidebarToggleProps {
+export interface SidebarToggleProps {
   readonly width: number;
   readonly collapsedWidth: number;
   readonly isCollapsed: boolean;

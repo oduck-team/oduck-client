@@ -1,19 +1,8 @@
-import styled from "@emotion/styled";
 import { Button, Dropdown, MenuProps } from "antd";
 import { LogOut } from "iconoir-react";
 
-const Container = styled.div<ProfileProps>(
-  {
-    display: "flex",
-    flexDirection: "column",
-    transition: "opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)",
-  },
-  ({ isVisible }) => ({
-    opacity: isVisible ? 1 : 0,
-  }),
-);
-
-interface ProfileProps {
+import { Container } from "./Profile.style";
+export interface ProfileProps {
   readonly isVisible: boolean;
 }
 
