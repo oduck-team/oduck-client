@@ -111,8 +111,14 @@ section {
 }
 
 ol,
-ul {
+ul,
+li {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 blockquote,
