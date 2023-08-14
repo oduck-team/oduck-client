@@ -1,6 +1,7 @@
 import "@emotion/react";
 
 import { Colors } from "./colors";
+import { MediaQuery } from "./mediaQuery";
 import { Typography } from "./typography";
 import { zIndex } from "./z-index";
 
@@ -15,5 +16,6 @@ declare module "@emotion/react" {
     };
     typo: Typography;
     zIndex: typeof zIndex;
+    mq: MediaQuery;
   }
 }

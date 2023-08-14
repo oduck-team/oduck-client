@@ -1,6 +1,7 @@
 import { Theme } from "@emotion/react";
 
 import { colors } from "./colors";
+import { mq } from "./mediaQuery";
 import { typo } from "./typography";
 import { zIndex } from "./z-index";
 
@@ -13,4 +14,5 @@ export const theme: Theme = {
   },
   typo,
   zIndex,
+  mq,
 };
