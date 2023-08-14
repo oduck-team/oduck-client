@@ -1,40 +1,8 @@
-import styled from "@emotion/styled";
 import { Button } from "antd";
 import { Menu, Cancel } from "iconoir-react";
 
 import Menus from "./Menus";
-
-// TODO: 미디어쿼리
-const Container = styled.div({
-  position: "sticky",
-  top: 0,
-  height: "3.5rem",
-
-  paddingLeft: "1rem",
-  paddingRight: "1rem",
-  backgroundColor: "#ffffff",
-  borderBottom: "1px solid #cccccc",
-
-  "@media (min-width: 640px)": {
-    display: "none",
-  },
-});
-
-const Header = styled.div({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-});
-
-const Profile = styled.div({
-  display: "flex",
-  alignItems: "center",
-  "& p": {
-    marginLeft: ".5rem",
-    fontSize: "1.125rem",
-    fontWeight: "bold",
-  },
-});
+import { Container, Header, Profile } from "./MobileNavigation.style";
 
 interface MobileNavigationProps {
   readonly isActive: boolean;

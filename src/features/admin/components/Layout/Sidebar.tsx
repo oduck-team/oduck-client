@@ -1,30 +1,14 @@
-import styled from "@emotion/styled";
 import { Layout } from "antd";
 import { IconoirProvider } from "iconoir-react";
 
 import Menus from "./Menus";
 import Profile from "./Profile";
+import { Header } from "./Sidebar.style";
 import SidebarToggle from "./SidebarToggle";
 
 const { Sider } = Layout;
 const sidebarWidth = 256; // 사이드바 넓이
 const collapsedWidth = 80; // 사이드바 줄었을때 넓이
-
-const Header = styled.div<{ isCollapsed: boolean }>(
-  {
-    display: "flex",
-    gap: ".5rem",
-    margin: "0.25rem",
-    overflow: "hidden",
-    transition: "padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)",
-    "& h1": {
-      display: "none",
-    },
-  },
-  ({ isCollapsed }) => ({
-    paddingLeft: isCollapsed ? "" : ".5rem",
-  }),
-);
 
 interface SidebarProps {
   readonly isCollapsed: boolean;

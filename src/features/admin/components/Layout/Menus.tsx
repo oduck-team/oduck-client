@@ -8,13 +8,13 @@ import {
   HeadsetHelp,
 } from "iconoir-react";
 
-type CreateItemProps = {
+interface CreateItemProps {
   key: string;
   label: React.ReactNode;
   icon?: React.ReactNode;
   style?: React.CSSProperties;
   children?: CreateItemProps[];
-};
+}
 
 function createItem(
   key: string,
