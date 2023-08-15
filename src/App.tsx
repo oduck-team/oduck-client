@@ -9,7 +9,7 @@ import Dashboard from "./features/admin/routes/Dashboard";
 import AnimationDetail from "./features/animations/routes/Detail";
 import AnimationList from "./features/animations/routes/List";
 import NotFound from "./features/common/routes/404";
-import Helpdesk from "./features/common/routes/Helpdesk";
+import HelpDesk from "./features/common/routes/HelpDesk";
 import Home from "./features/common/routes/Home";
 import Search from "./features/common/routes/Search";
 import UserProfile from "./features/users/routes/Profile";
@@ -30,7 +30,7 @@ export default function App() {
               <Route path="/animations" element={<AnimationList />} />
               <Route path="/animations/:id" element={<AnimationDetail />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/helpdesk" element={<Helpdesk />} />
+              <Route path="/helpdesk" element={<HelpDesk />} />
               {/* TODO: 인증 */}
               <Route path="/users/:id" element={<UserProfile />} />
             </Route>
