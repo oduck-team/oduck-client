@@ -4,7 +4,7 @@ import { Container, Item } from "./style";
 
 interface NavigationItem {
   readonly key: string;
-  readonly to?: string;
+  readonly to: string;
   readonly icon: React.ReactNode;
   readonly label: React.ReactNode;
 }
