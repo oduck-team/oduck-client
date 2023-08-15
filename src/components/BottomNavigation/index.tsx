@@ -40,6 +40,7 @@ export default function BottomNavigation({
           <li key={item.key}>
             <Item
               isActive={activeKey === item.key}
+              href={item.to}
               onClick={(e) => handleItemClick(item.key, item.to, e)}
             >
               {item.icon}
