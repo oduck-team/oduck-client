@@ -25,6 +25,7 @@ export default function BottomNavigation({
   const navigate = useNavigate();
 
   const handleItemClick = (key: string, to: string, e: React.MouseEvent) => {
+    e.preventDefault();
     if (onClickItem) {
       onClickItem(key, e);
     } else {
