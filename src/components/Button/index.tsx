@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 import { theme } from "@/styles/theme";
 
-import { Container } from "./style";
+import { Container, ContentWrapper, IconWrapper, IconButton } from "./style";
 
 export type Style = "solid" | "outline" | "text";
 export type Color = keyof Pick<typeof theme.colors, ColorKeys>;
@@ -13,6 +13,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
   readonly styleType?: Style;
   readonly color?: Color;
   readonly size?: Size;
+  readonly icon?: React.ReactNode;
 }
 
 export default function Button({
@@ -20,9 +21,25 @@ export default function Button({
   color = "primary",
   size = "md",
   type = "button",
+  icon,
   children,
   ...props
 }: ButtonProps) {
+  const isIconOnly = icon !== undefined && !children;
+  if (isIconOnly) {
+    return (
+      <IconButton
+        styleType={styleType}
+        color={color}
+        size={size}
+        type={type}
+        {...props}
+      >
+        <IconWrapper>{icon}</IconWrapper>
+      </IconButton>
+    );
+  }
+
   return (
     <Container
       styleType={styleType}
@@ -31,7 +48,10 @@ export default function Button({
       type={type}
       {...props}
     >
-      {children}
+      <ContentWrapper>
+        {icon && <IconWrapper>{icon}</IconWrapper>}
+        <span>{children}</span>
+      </ContentWrapper>
     </Container>
   );
 }

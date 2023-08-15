@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import { Size, Color, ButtonProps, Style } from ".";
 
-const sizes: Record<Size, SerializedStyles> = {
+const buttonSizes: Record<Size, SerializedStyles> = {
   sm: css`
     height: 24px;
     padding: 6px 12px;
@@ -98,17 +98,70 @@ function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
 
   return styles[styleType];
 }
-export const Container = styled.button<
-  Pick<ButtonProps, "styleType" | "color" | "size">
->`
+
+const baseStyle = css`
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   text-align: center;
+`;
+
+export const Container = styled.button<
+  Pick<ButtonProps, "styleType" | "color" | "size">
+>`
+  ${baseStyle}
 
   ${({ styleType = "solid", color = "primary", size = "md", theme }) => css`
-    ${sizes[size]}
+    ${buttonSizes[size]}
     ${getButtonStyle(styleType, color, theme)}
   `}
+`;
+
+const iconButtonSizes: Record<Size, SerializedStyles> = {
+  sm: css`
+    height: 24px;
+    width: 24px;
+    font-size: 14px;
+  `,
+  md: css`
+    height: 32px;
+    width: 32px;
+    font-size: 16px;
+  `,
+  lg: css`
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+  `,
+};
+
+export const IconButton = styled.button<
+  Pick<ButtonProps, "styleType" | "color" | "size">
+>`
+  ${baseStyle}
+  border-radius: 999px;
+
+  ${({ styleType = "solid", color = "primary", size = "md", theme }) => css`
+    ${iconButtonSizes[size]}
+    ${getButtonStyle(styleType, color, theme)}
+  `}
+`;
+
+export const IconWrapper = styled.span`
+  ${baseStyle}
+`;
+
+/**
+ *   다음 구조에서 시각적으로 중앙정렬 하기위해 적용하는 css
+ *   <span>icon</span> <span>children</span>
+ *   없으면 아이콘 이미지 자체 공백때문에 버튼 컨텐츠 정렬이 어색해진다
+ */
+export const ContentWrapper = styled.span`
+  display: flex;
+  align-items: center;
+
+  & > span + span {
+    margin-left: 0.4em;
+  }
 `;
