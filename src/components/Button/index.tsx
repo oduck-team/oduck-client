@@ -10,6 +10,7 @@ type ColorKeys = "primary" | "neutral" | "warn";
 export type Size = "lg" | "md" | "sm";
 
 export interface ButtonProps extends ComponentProps<"button"> {
+  readonly name: string;
   readonly styleType?: Style;
   readonly color?: Color;
   readonly size?: Size;
@@ -17,6 +18,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
 }
 
 export default function Button({
+  name,
   styleType = "solid",
   color = "primary",
   size = "md",
@@ -42,6 +44,7 @@ export default function Button({
 
   return (
     <Container
+      aria-label={name}
       styleType={styleType}
       color={color}
       size={size}
