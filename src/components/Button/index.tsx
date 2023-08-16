@@ -31,6 +31,7 @@ export default function Button({
   if (isIconOnly) {
     return (
       <IconButton
+        aria-label={name}
         styleType={styleType}
         color={color}
         size={size}
