@@ -3,7 +3,7 @@ import "@emotion/react";
 import { Colors } from "./colors";
 import { MediaQuery } from "./mediaQuery";
 import { Typography } from "./typography";
-import { zIndex } from "./z-index";
+import { ZIndex } from "./z-index";
 
 // Theme 타입에 colors, typo 프로퍼티를 추가하여 확장합니다.
 declare module "@emotion/react" {
@@ -15,7 +15,7 @@ declare module "@emotion/react" {
       neutral: Colors["neutral"];
     };
     typo: Typography;
-    zIndex: typeof zIndex;
+    zIndex: ZIndex;
     mq: MediaQuery;
   }
 }

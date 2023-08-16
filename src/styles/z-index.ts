@@ -7,3 +7,5 @@ export const zIndex = {
   toast: 1400,
   tooltip: 1500,
 } as const;
+
+export type ZIndex = typeof zIndex;
