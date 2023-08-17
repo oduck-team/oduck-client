@@ -1,6 +1,6 @@
 # oduck-client
 
-## 커밋 메세지 컨벤션
+## 💬 커밋 메세지 컨벤션
 
 ### 커밋 형식
 
@@ -43,3 +43,37 @@ feat: Header 컴포넌트 구현 및 스타일 수정 #123
 - `cleanup` : 불필요 파일 삭제, 코드 삭제
 - `rename` : 파일, 폴더 이름 변경
 - `chore` : 프로젝트 운영(유지보수, 개선) 업데이트. 빌드 설정, 의존성 변경, 스크립트 추가 등
+
+## ⚛️ React Component 컨벤션
+### 폴더, 파일 구조
+Component 폴더, 파일 구조는 다음을 따릅니다:
+```bash
+ComponentName/
+  index.tsx
+  style.ts
+```
+하위 카테고리에 속하는 컴포넌트의 경우, 별도의 파일을 만듭니다:
+```bash
+ComponentName/
+  index.tsx
+  style.ts
+  AddComponentName.style.ts
+  AddComponentName.tsx
+  ComponentNameList.tsx
+  ComponentNameList.style.ts
+```
+
+### 코드
+컴포넌트는 `function` 키워드를 사용합니다.
+```tsx
+export default function Component() {
+  return <></>;
+}
+```
+이벤트 핸들러는 `handle~` 명칭과 함께 `arrow function` 키워드를 사용합니다.
+```tsx
+export default function Component() {
+  const handleClick = () => {};
+  return <></>;
+}
+```
