@@ -85,6 +85,7 @@ export const Slides = styled.div<SlidesProps>`
   touch-action: pan-x;
   transform: ${({ translateValue }) => `translateX(${translateValue}px)`};
   transition: ${({ transitionValue }) => `all ${transitionValue}s`};
+  cursor: pointer;
 `;
 
 export const Slide = styled.div<SlideProps>`

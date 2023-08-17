@@ -1,5 +1,6 @@
 import { NavArrowLeft, NavArrowRight, Star } from "iconoir-react";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 
@@ -188,8 +189,9 @@ export default function Carousel({ animations }: Props) {
 }
 
 const SlideItem = ({ ani }: { ani: Animation }) => {
+  const navigate = useNavigate();
   return (
-    <Slide image={ani.image}>
+    <Slide image={ani.image} onClick={() => navigate(`/animations/${ani.id}`)}>
       <InfoContainer>
         <Info>
           <div>{ani.title}</div>
