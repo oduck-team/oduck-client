@@ -10,25 +10,31 @@ type ColorKeys = "primary" | "neutral" | "warn";
 export type Size = "lg" | "md" | "sm";
 
 export interface ButtonProps extends ComponentProps<"button"> {
+  readonly name: string;
   readonly styleType?: Style;
   readonly color?: Color;
   readonly size?: Size;
+  readonly isBlock?: boolean;
   readonly icon?: React.ReactNode;
 }
 
 export default function Button({
+  name,
   styleType = "solid",
   color = "primary",
   size = "md",
   type = "button",
+  isBlock = false,
   icon,
   children,
   ...props
 }: ButtonProps) {
+  console.log(isBlock);
   const isIconOnly = icon !== undefined && !children;
   if (isIconOnly) {
     return (
       <IconButton
+        aria-label={name}
         styleType={styleType}
         color={color}
         size={size}
@@ -42,10 +48,12 @@ export default function Button({
 
   return (
     <Container
+      aria-label={name}
       styleType={styleType}
       color={color}
       size={size}
       type={type}
+      isBlock={isBlock}
       {...props}
     >
       <ContentWrapper>
