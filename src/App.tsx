@@ -8,6 +8,7 @@ import AdminLayout from "./features/admin/components/Layout";
 import Dashboard from "./features/admin/routes/Dashboard";
 import AnimationDetail from "./features/animations/routes/Detail";
 import AnimationList from "./features/animations/routes/List";
+import Login from "./features/auth/routes/Login";
 import NotFound from "./features/common/routes/404";
 import HelpDesk from "./features/common/routes/HelpDesk";
 import Home from "./features/common/routes/Home";
@@ -25,6 +26,7 @@ export default function App() {
           }}
         >
           <Routes>
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<Layout />}>
               <Route path="" element={<Home />} />
               <Route path="/animations" element={<AnimationList />} />
