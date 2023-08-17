@@ -14,6 +14,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
   readonly styleType?: Style;
   readonly color?: Color;
   readonly size?: Size;
+  readonly isBlock?: boolean;
   readonly icon?: React.ReactNode;
 }
 
@@ -23,10 +24,12 @@ export default function Button({
   color = "primary",
   size = "md",
   type = "button",
+  isBlock = false,
   icon,
   children,
   ...props
 }: ButtonProps) {
+  console.log(isBlock);
   const isIconOnly = icon !== undefined && !children;
   if (isIconOnly) {
     return (
@@ -50,6 +53,7 @@ export default function Button({
       color={color}
       size={size}
       type={type}
+      isBlock={isBlock}
       {...props}
     >
       <ContentWrapper>

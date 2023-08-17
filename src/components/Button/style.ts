@@ -108,9 +108,10 @@ const baseStyle = css`
 `;
 
 export const Container = styled.button<
-  Pick<ButtonProps, "styleType" | "color" | "size">
+  Pick<ButtonProps, "styleType" | "color" | "size" | "isBlock">
 >`
   ${baseStyle}
+  width: ${({ isBlock }) => (isBlock ? "100%" : "auto")};
 
   ${({ styleType = "solid", color = "primary", size = "md", theme }) => css`
     ${buttonSizes[size]}

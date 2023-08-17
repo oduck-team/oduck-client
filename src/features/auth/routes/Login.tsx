@@ -40,13 +40,19 @@ export default function Login() {
           </Title>
           <SoicalGroup>
             <li>
-              <Button name="1">TODO로 로그인</Button>
+              <Button name="1" isBlock>
+                TODO로 로그인
+              </Button>
             </li>
             <li>
-              <Button name="1">TODO로 로그인</Button>
+              <Button name="1" isBlock>
+                TODO로 로그인
+              </Button>
             </li>
             <li>
-              <Button name="1">TODO로 로그인</Button>
+              <Button name="1" isBlock>
+                TODO로 로그인
+              </Button>
             </li>
           </SoicalGroup>
         </MainContent>
