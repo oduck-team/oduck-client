@@ -31,16 +31,20 @@ interface Props {
 }
 
 export default function Carousel({ animations }: Props) {
-  const [current, setCurrent] = useState(1);
-  const [translateValue, setTranslateValue] = useState(0);
-  const [transitionValue, setTransitionValue] = useState(0);
-  const touchStartX = useRef<number | null>(null);
-  const slideContainerRef = useRef<HTMLDivElement | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(1); // 현재 슬라이드 인덱스
+  const [translateValue, setTranslateValue] = useState(0); // 슬라이드 이동(translate)를 위해 사용
+  const [transitionValue, setTransitionValue] = useState(0); // 슬라이드 이동 transition 값
+  const touchStartX = useRef<number | null>(null); // 터치 start 좌표 값
+  const slideContainerRef = useRef<HTMLDivElement | null>(null); // 슬라이드 박스 가로 길이 측정에 사용됨
   const [width, setWidth] = useState<number | null>(null); // 슬라이드 박스 가로 길이
+
+  const SLIDE_RESET_DELAY = 500;
+  const SLIDE_AUTO_INTERVAL = 5000;
 
   // 무한 캐러셀을 위한 배열 확장
   const animationsList = [
-    animations[animations.length - 1],
+    // animations[animations.length - 1],
+    animations.at(-1) as Animation,
     ...animations,
     animations[0],
   ];
@@ -51,7 +55,7 @@ export default function Carousel({ animations }: Props) {
     setTransitionValue(0);
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchDrag = (e: React.TouchEvent) => {
     if (touchStartX.current === null) return;
     setTransitionValue(0);
     const touchCurrentX = e.touches[0].clientX;
@@ -67,7 +71,7 @@ export default function Carousel({ animations }: Props) {
         Math.max(Math.round(-translateValue / width), 0),
         animationsList.length - 1,
       );
-      setCurrent(newIndex);
+      setCurrentSlide(newIndex);
       setTranslateValue(width * -newIndex);
     }
     touchStartX.current = null;
@@ -75,28 +79,28 @@ export default function Carousel({ animations }: Props) {
 
   // 처음, 마지막 슬라이드일 때 수행
   const goTo = (width: number, i: number) => {
-    setCurrent(i);
+    setCurrentSlide(i);
     setTimeout(() => {
       setTranslateValue(width * -i);
       setTransitionValue(0);
-    }, 500);
+    }, SLIDE_RESET_DELAY);
   };
 
   // 다음 슬라이드 이동
   const goNext = () => {
-    if (current < animationsList.length - 1 && width) {
+    if (currentSlide < animationsList.length - 1 && width) {
       setTransitionValue(0.5);
-      setTranslateValue(width * -(current + 1));
-      setCurrent((prev) => prev + 1);
+      setTranslateValue(width * -(currentSlide + 1));
+      setCurrentSlide((prev) => prev + 1);
     }
   };
 
   // 이전 슬라이드 이동
   const goPrev = () => {
-    if (current > 0 && width) {
+    if (currentSlide > 0 && width) {
       setTransitionValue(0.5);
-      setTranslateValue(width * -(current - 1));
-      setCurrent((prev) => prev - 1);
+      setTranslateValue(width * -(currentSlide - 1));
+      setCurrentSlide((prev) => prev - 1);
     }
   };
 
@@ -113,7 +117,7 @@ export default function Carousel({ animations }: Props) {
   useEffect(() => {
     const timer = setInterval(() => {
       goNext();
-    }, 5000);
+    }, SLIDE_AUTO_INTERVAL);
     return () => {
       clearInterval(timer);
     };
@@ -125,7 +129,7 @@ export default function Carousel({ animations }: Props) {
       if (slideContainerRef.current) {
         const w = slideContainerRef.current.getBoundingClientRect().width;
         setWidth(w);
-        setTranslateValue(w * -current);
+        setTranslateValue(w * -currentSlide);
         setTransitionValue(0);
       }
     };
@@ -133,19 +137,19 @@ export default function Carousel({ animations }: Props) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [current]);
+  }, [currentSlide]);
 
   // 처음, 마지막 슬라이드일 때 이동
   useEffect(() => {
     if (width) {
-      if (current === 5) {
+      if (currentSlide === animationsList.length - 1) {
         goTo(width, 1);
       }
-      if (current === 0) {
-        goTo(width, 4);
+      if (currentSlide === 0) {
+        goTo(width, animationsList.length - 2);
       }
     }
-  }, [current, width]);
+  }, [currentSlide, width, animationsList.length]);
 
   return (
     <Container>
@@ -168,7 +172,7 @@ export default function Carousel({ animations }: Props) {
         ></Button>
         <Slides
           onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
+          onTouchMove={handleTouchDrag}
           onTouchEnd={handleTouchEnd}
           translateValue={translateValue}
           transitionValue={transitionValue}
@@ -179,11 +183,11 @@ export default function Carousel({ animations }: Props) {
         </Slides>
         <IndicatorContainer>
           {[...Array(animations.length)].map((a, i) => (
-            <Indicator active={current - 1 === i} key={i}></Indicator>
+            <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
           ))}
         </IndicatorContainer>
       </SlideContainer>
-      <Background image={animationsList[current].image}></Background>
+      <Background image={animationsList[currentSlide].image}></Background>
     </Container>
   );
 }

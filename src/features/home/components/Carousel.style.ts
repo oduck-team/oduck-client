@@ -49,7 +49,7 @@ export const SlideContainer = styled.div`
   position: absolute;
   top: 55px;
   left: calc(50% - (var(--width) / 2));
-  z-index: 500; // 논의 필요
+  z-index: ${({ theme }) => theme.zIndex.carousel};
   border-radius: 17px;
 
   & > button {
@@ -58,7 +58,7 @@ export const SlideContainer = styled.div`
     }
     display: none;
     position: absolute;
-    z-index: 600;
+    z-index: ${({ theme }) => theme.zIndex.carousel + 1};
     color: rgba(255, 255, 255, 0.6);
     top: calc(50% - 15px);
 
@@ -193,7 +193,7 @@ export const IndicatorContainer = styled.div`
   position: absolute;
   left: calc(50% - 21px);
   bottom: 20.7px;
-  z-index: 600;
+  z-index: ${({ theme }) => theme.zIndex.carousel + 1};
 `;
 
 export const Indicator = styled.span<IndicatorProps>`
