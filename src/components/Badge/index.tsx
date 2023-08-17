@@ -2,8 +2,7 @@ import { ComponentProps } from "react";
 
 import { theme } from "@/styles/theme";
 
-import { DotBadge } from "./DotBadge";
-import { NumberBadge } from "./NumberBadge";
+import { Container, DotBadge } from "./style";
 
 type BadgeStyle = "fill" | "inverted";
 type BadgeColor = keyof typeof theme.colors;
@@ -28,8 +27,8 @@ export default function Badge({
   const displayCount = count > overflowCount ? `${overflowCount}+` : `${count}`;
 
   return (
-    <NumberBadge styleType={styleType} color={color} aria-label={displayCount}>
+    <Container styleType={styleType} color={color} aria-label={displayCount}>
       {displayCount}
-    </NumberBadge>
+    </Container>
   );
 }
