@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  BigItem,
-  BigItemContainer,
+  HighlightItem,
+  HighlightItemContainer,
   Container,
   Content,
   Rank,
-  SlideContainer,
-  SmallItem,
-  SmallItemImage,
-  SmallItemRating,
+  ItemSlider,
+  SliderItem,
+  SliderItemImage,
+  SliderItemRating,
 } from "./Ranking.style";
 
 // 임시 정의
@@ -44,30 +44,30 @@ export default function Ranking({ title, contents }: Props) {
     <Container>
       <h1>{title}</h1>
       <Content>
-        <BigItemContainer>
-          <BigItem
+        <HighlightItemContainer>
+          <HighlightItem
             image={contents[currentIndex].image}
             onClick={() => navgiate(`/animations/${currentIndex}`)}
           >
             <Rank size="lg">{contents[currentIndex].rank}</Rank>
             <h3>{contents[currentIndex].genre}</h3>
             <h2>{contents[currentIndex].title}</h2>
-            <SmallItemRating>
+            <SliderItemRating>
               <Star />
               <span>{contents[currentIndex].rating}</span>
-            </SmallItemRating>
-          </BigItem>
-        </BigItemContainer>
-        <SlideContainer>
+            </SliderItemRating>
+          </HighlightItem>
+        </HighlightItemContainer>
+        <ItemSlider>
           {list.map((ani, i) => (
-            <SmallItem key={i} onClick={() => setCurrentIndex(ani.rank - 1)}>
-              <SmallItemImage image={ani.image}>
+            <SliderItem key={i} onClick={() => setCurrentIndex(ani.rank - 1)}>
+              <SliderItemImage image={ani.image}>
                 <Rank>{ani.rank}</Rank>
-              </SmallItemImage>
+              </SliderItemImage>
               <div>{ani.title}</div>
-            </SmallItem>
+            </SliderItem>
           ))}
-        </SlideContainer>
+        </ItemSlider>
       </Content>
     </Container>
   );

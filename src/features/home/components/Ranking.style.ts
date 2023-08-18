@@ -34,20 +34,16 @@ const RankSizes: Record<RankSize, SerializedStyles> = {
     backdrop-filter: blur(1.5px);
     right: 8px;
     top: 8px;
-    font-size: 18px;
   `,
 };
 
 export const Rank = styled.div<RankProps>`
   position: absolute;
   color: #fff;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
   display: flex;
   justify-content: center;
   align-items: center;
-
+  ${({ theme }) => theme.typo["title-2-b"]};
   ${({ size = "sm" }) => css`
     ${RankSizes[size]}
   `}
@@ -79,14 +75,14 @@ export const Content = styled.div`
   flex-shrink: 0;
 `;
 
-export const BigItemContainer = styled.div`
+export const HighlightItemContainer = styled.div`
   position: relative;
   width: calc(100% - 16px);
   height: 0;
   padding-bottom: 46%;
 `;
 
-export const BigItem = styled.div<ItemProps>`
+export const HighlightItem = styled.div<ItemProps>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -124,7 +120,7 @@ export const BigItem = styled.div<ItemProps>`
   }
 `;
 
-export const SlideContainer = styled.div`
+export const ItemSlider = styled.div`
   width: 100%;
   padding-right: 16px;
   height: 139px;
@@ -140,7 +136,7 @@ export const SlideContainer = styled.div`
   }
 `;
 
-export const SmallItem = styled.div`
+export const SliderItem = styled.div`
   width: 95px;
   display: flex;
   flex-direction: column;
@@ -159,7 +155,7 @@ export const SmallItem = styled.div`
   }
 `;
 
-export const SmallItemImage = styled.div<ItemProps>`
+export const SliderItemImage = styled.div<ItemProps>`
   width: 100%;
   height: 95px;
   border-radius: 5px;
@@ -170,7 +166,7 @@ export const SmallItemImage = styled.div<ItemProps>`
   position: relative;
 `;
 
-export const SmallItemRating = styled(Rating)`
+export const SliderItemRating = styled(Rating)`
   position: absolute;
   right: 16px;
   bottom: 20px;
