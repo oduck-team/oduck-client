@@ -6,6 +6,7 @@ export const zIndex = {
   snackbar: 1400,
   toast: 1400,
   tooltip: 1500,
+  carousel: 500,
 } as const;
 
 export type ZIndex = typeof zIndex;
