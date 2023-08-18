@@ -22,7 +22,7 @@ const ellipsis = css`
 
 export const Container = styled.div`
   width: 100%;
-  height: 558px;
+  height: 545px;
   overflow: hidden;
   position: relative;
 `;
@@ -30,13 +30,14 @@ export const Container = styled.div`
 export const Background = styled.div<SlideProps>`
   width: 100%;
   height: 100%;
-  background: ${({
-    image,
-  }) => `linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%),
-    url(${image}),
-    lightgray -36.515px 1.434px / 119.018% 99.743% no-repeat`};
-
+  ${({ image }) => css`
+    background:
+      linear-gradient(0deg, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.5) 100%),
+      url(${image}),
+      lightgray -36.515px 1.434px / 119.018% 99.743% no-repeat;
+  `}
   background-size: cover;
+  background-position: center;
   filter: blur(5px);
   transform: scale(1.05);
 `;
@@ -47,7 +48,7 @@ export const SlideContainer = styled.div`
   height: 442.699px;
   overflow: hidden;
   position: absolute;
-  top: 55px;
+  top: 50px;
   left: calc(50% - (var(--width) / 2));
   z-index: ${({ theme }) => theme.zIndex.carousel};
   border-radius: 17px;
@@ -94,11 +95,12 @@ export const Slide = styled.div<SlideProps>`
   border-radius: 17px;
   ${({ image }) => css`
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.8) 100%),
       url(${image}),
       lightgray -31.19px 1.138px / 119.018% 99.743% no-repeat;
   `}
   background-size: cover;
+  background-position: center;
   box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.17);
   padding: 0 16px 42px;
   display: flex;
