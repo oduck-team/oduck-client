@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import { Container, Item } from "./style";
 
 export interface INavigationItem {
@@ -13,7 +11,7 @@ interface BottomNavigationProps {
   readonly title: string;
   readonly activeId?: string; // 활성화(선택된) item의 id
   readonly items: INavigationItem[];
-  readonly onClickItem?: (id: string, e: React.MouseEvent) => void;
+  readonly onClickItem: (id: string, e: React.MouseEvent) => void;
 }
 
 export default function BottomNavigation({
@@ -22,17 +20,6 @@ export default function BottomNavigation({
   items,
   onClickItem,
 }: BottomNavigationProps) {
-  const navigate = useNavigate();
-
-  const handleItemClick = (id: string, to: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    if (onClickItem) {
-      onClickItem(id, e);
-    } else {
-      navigate(to); // onClickItem이 없을땐 라우팅 처리
-    }
-  };
-
   return (
     <Container>
       <h1>{title}</h1>
@@ -42,7 +29,7 @@ export default function BottomNavigation({
             <Item
               isActive={activeId === item.id}
               href={item.to}
-              onClick={(e) => handleItemClick(item.id, item.to, e)}
+              onClick={(e) => onClickItem(item.id, e)}
             >
               {item.icon}
               <span>{item.label}</span>
