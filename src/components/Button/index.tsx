@@ -29,7 +29,6 @@ export default function Button({
   children,
   ...props
 }: ButtonProps) {
-  console.log(isBlock);
   const isIconOnly = icon !== undefined && !children;
   if (isIconOnly) {
     return (
