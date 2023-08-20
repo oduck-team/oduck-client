@@ -10,7 +10,7 @@ export const Container = styled.div<RatingProps>`
   --size: ${({ size = "md" }) => Sizes[size] + "px"};
   width: calc(var(--size) * 5);
   position: relative;
-  cursor: ${({ readonly }) => (readonly ? "not-allowed" : "pointer")};
+  cursor: ${({ readonly }) => (readonly ? "default" : "pointer")};
   svg {
     width: var(--size);
     height: var(--size);
@@ -23,6 +23,7 @@ export const EventContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  touch-action: pan-x;
   z-index: ${({ theme }) => theme.zIndex.rating + 1};
 `;
 

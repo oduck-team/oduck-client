@@ -6,21 +6,16 @@ import {
   ColorStarContainer,
   Container,
   EventContainer,
+  Sizes,
 } from "./style";
 
-type Size = "lg" | "md" | "sm";
+export type Size = "lg" | "md" | "sm";
 
 export interface RatingProps extends ComponentProps<"div"> {
   readonly size?: Size;
   readonly readonly?: boolean;
   readonly value?: number;
 }
-
-export const Sizes: Record<Size, number> = {
-  sm: 16,
-  md: 24,
-  lg: 36,
-};
 
 export default function Rating({
   size = "md",
