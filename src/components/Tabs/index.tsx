@@ -23,7 +23,7 @@ export default function Tabs({ defaultActiveKey = 1, items }: TabsProps) {
   const [tabIndex, setTabIndex] = useState<number>(defaultActiveKey - 1);
   const navigate = useNavigate();
 
-  const handleChange = (v: ItemProps) => {
+  const handleClick = (v: ItemProps) => {
     if (v.url) navigate(v.url);
     setTabIndex(v.key - 1);
   };
@@ -36,7 +36,7 @@ export default function Tabs({ defaultActiveKey = 1, items }: TabsProps) {
           .map((v, idx) => (
             <TabTitle
               key={idx}
-              onClick={() => handleChange(v)}
+              onClick={() => handleClick(v)}
               active={idx === tabIndex}
             >
               {v.title}
