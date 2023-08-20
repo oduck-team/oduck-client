@@ -1,6 +1,6 @@
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
 import { useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
 
@@ -37,6 +37,7 @@ const bottomNavItems: INavigationItem[] = [
 export default function Layout() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const currentPath = location.pathname;
 
@@ -49,12 +50,25 @@ export default function Layout() {
     //TODO: 로그인 유무에 따른 라우팅 처리
   };
 
-  const handleClickNav = (id: string) => {
-    //TODO: 로그인 유무에 따른 라우팅 처리
+  const handleClickNav = (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+
     switch (id) {
-      case "/menu":
+      // 메뉴 sidebar 켜기
+      case "/menu": {
         setIsSidebarVisible(true);
-        return;
+        break;
+      }
+      // 아니라면 화면 이동
+      default: {
+        const item = bottomNavItems.find((item) => item.id === id);
+        if (item) {
+          navigate(item.to);
+          return;
+        }
+        console.warn(`navigation id ${id} is not exists`);
+        navigate("/"); // 기본 동작
+      }
     }
   };
 
