@@ -1,10 +1,16 @@
 import styled from "@emotion/styled";
 
-import { RatingProps, Sizes } from ".";
+import { RatingProps, Size } from ".";
 
 interface ColorStarProps {
   width: number;
 }
+
+export const Sizes: Record<Size, number> = {
+  sm: 16,
+  md: 24,
+  lg: 36,
+};
 
 export const Container = styled.div<RatingProps>`
   --size: ${({ size = "md" }) => Sizes[size] + "px"};
