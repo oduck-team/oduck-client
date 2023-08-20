@@ -28,13 +28,14 @@ export default function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Layout />}>
-              <Route path="" element={<Home />} />
+              <Route index path="" element={<Home />} />
               <Route path="/animations" element={<AnimationList />} />
               <Route path="/animations/:id" element={<AnimationDetail />} />
               <Route path="/search" element={<Search />} />
               <Route path="/helpdesk" element={<HelpDesk />} />
               {/* TODO: 인증 */}
               <Route path="/users/:id" element={<UserProfile />} />
+              <Route path="/profile" element={<UserProfile />} />
             </Route>
             <Route path="/admin" element={<AdminLayout />}>
               <Route path="" element={<Dashboard />} />
