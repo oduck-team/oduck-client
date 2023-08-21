@@ -192,7 +192,7 @@ export default function Carousel({ animations }: Props) {
   );
 }
 
-const SlideItem = ({ ani }: { ani: Animation }) => {
+function SlideItem({ ani }: { ani: Animation }) {
   const navigate = useNavigate();
   return (
     <Slide image={ani.image} onClick={() => navigate(`/animations/${ani.id}`)}>
@@ -210,4 +210,4 @@ const SlideItem = ({ ani }: { ani: Animation }) => {
       </InfoContainer>
     </Slide>
   );
-};
+}

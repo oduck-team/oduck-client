@@ -1,92 +1,94 @@
-import { Menu, Space, Badge } from "antd";
-import type { MenuProps } from "antd";
-import {
-  HomeSimpleDoor,
-  Tv,
-  BubbleStar,
-  User,
-  HeadsetHelp,
-} from "iconoir-react";
+import { Badge, Box, Flex } from "@mantine/core";
+import { HomeSimpleDoor, Tv, User, HeadsetHelp } from "iconoir-react";
+import { useNavigate } from "react-router-dom";
 
-interface CreateItemProps {
-  key: string;
-  label: React.ReactNode;
-  icon?: React.ReactNode;
-  style?: React.CSSProperties;
-  children?: CreateItemProps[];
-}
+import Menu, { IMenu } from "./Menu";
 
-function createItem(
-  key: string,
-  label: React.ReactNode,
-  icon?: React.ReactNode,
-  style?: React.CSSProperties,
-  children?: CreateItemProps[],
-) {
-  return {
-    key,
-    label,
-    icon,
-    style,
-    children,
+export default function Menus() {
+  const naviagate = useNavigate();
+
+  const handleClickMenu = (e: React.MouseEvent, to: string) => {
+    e.preventDefault();
+    naviagate(to);
   };
-}
 
-const items: MenuProps["items"] = [
-  createItem(
-    "1",
-    "홈",
-    <span>
-      <HomeSimpleDoor width={"1rem"} height={"1rem"} />
-    </span>,
-    { fontSize: "1rem" },
-  ),
-  {
-    type: "divider",
-  },
-  createItem("2", "애니메이션", <Tv />, { fontSize: "1rem" }, [
-    createItem("anime-1", "목록", null, { fontSize: "0.875rem" }),
-    createItem("anime-2", "장르", null, { fontSize: "0.875rem" }),
-    createItem("anime-3", "제작", null, { fontSize: "0.875rem" }),
-    createItem("anime-4", "작가", null, { fontSize: "0.875rem" }),
-  ]),
-  createItem("3", "리뷰", <BubbleStar />, { fontSize: "1rem" }, [
-    createItem("review-1", "목록", null, { fontSize: "0.875rem" }),
-  ]),
-  createItem("4", "회원", <User />, { fontSize: "1rem" }, [
-    createItem("user-1", "목록", null, { fontSize: "0.875rem" }),
-  ]),
-  createItem("5", "고객센터", <HeadsetHelp />, { fontSize: "1rem" }, [
-    createItem(
-      "helpdesk-1",
-      <Space>
-        문의 <Badge count={999} />
-      </Space>,
-      null,
-      { fontSize: "0.875rem" },
-    ),
-    createItem(
-      "helpdesk-2",
-      <Space>
-        신고 <Badge count={999} />
-      </Space>,
-      null,
-      { fontSize: "0.875rem" },
-    ),
-  ]),
-];
-
-interface MenusProps {
-  readonly style?: React.CSSProperties;
-}
-
-export default function Menus({ style }: MenusProps) {
   return (
-    <Menu
-      mode="inline"
-      defaultSelectedKeys={["1"]}
-      items={items}
-      style={style}
-    />
+    <Box component="ul" pt={"md"}>
+      {items.map((item) => (
+        <li key={item.id}>
+          <Menu menu={item} onClick={handleClickMenu} />
+        </li>
+      ))}
+    </Box>
   );
 }
+
+const items: IMenu[] = [
+  {
+    id: "home",
+    label: "홈",
+    icon: <HomeSimpleDoor width={"1rem"} height={"1rem"} />,
+    to: "/admin",
+  },
+  {
+    id: "animations",
+    label: "애니메이션",
+    icon: <Tv width={"1rem"} height={"1rem"} />,
+    to: "/admin/animations",
+    children: [
+      {
+        id: "animation-list",
+        label: "목록",
+        to: "/amdin/animations",
+      },
+      {
+        id: "genres",
+        label: "장르",
+        to: "/amdin/animations/genres",
+      },
+      {
+        id: "studios",
+        label: "제작",
+        to: "/admin/animations/studios",
+      },
+    ],
+  },
+  {
+    id: "users",
+    label: "회원",
+    icon: <User width={"1rem"} height={"1rem"} />,
+    to: "/admin/users",
+  },
+  {
+    id: "helpdesk",
+    label: "고객센터",
+    icon: <HeadsetHelp width={"1rem"} height={"1rem"} />,
+    to: "/admin/helpdesk",
+    children: [
+      {
+        id: "qna",
+        label: (
+          <Flex justify={"space-between"}>
+            문의
+            <Badge variant="gradient" gradient={{ from: "orange", to: "red" }}>
+              999
+            </Badge>
+          </Flex>
+        ),
+        to: "/admin/helpdesk/qna",
+      },
+      {
+        id: "report",
+        label: (
+          <Flex justify={"space-between"}>
+            신고
+            <Badge variant="gradient" gradient={{ from: "orange", to: "red" }}>
+              999
+            </Badge>
+          </Flex>
+        ),
+        to: "/admin/helpdesk/report",
+      },
+    ],
+  },
+];

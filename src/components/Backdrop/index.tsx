@@ -1,6 +1,13 @@
+import { Variants } from "framer-motion";
+
 import { StrictPropsWithChildren } from "@/types";
 
 import { Container } from "./style";
+
+const variants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
 
 export interface BackdropProps {
   readonly isVisible?: boolean;
@@ -15,7 +22,16 @@ export default function Backdrop({
   children,
 }: StrictPropsWithChildren<BackdropProps>) {
   return (
-    <Container isVisible={isVisible} className={className} onClick={onClick}>
+    <Container
+      isVisible={isVisible}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      variants={variants}
+      transition={{ duration: 0.15 }}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </Container>
   );

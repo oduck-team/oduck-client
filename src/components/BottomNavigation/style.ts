@@ -7,8 +7,9 @@ export const Container = styled.nav`
   justify-content: center;
   bottom: 0;
   width: 100%;
-  height: 62px;
+  height: 66px;
   background-color: white;
+  box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.06);
 
   & > h1 {
     display: none;
@@ -39,19 +40,18 @@ export const Container = styled.nav`
 
 export const Item = styled.a<{ isActive: boolean }>`
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
+  flex: 1;
+  gap: 2px;
   height: 100%;
-  border-top-style: solid;
-  border-width: 2px;
+  padding-top: 8px;
   transition: color 0.2s;
 
   ${({ isActive, theme }) => css`
     & span {
       ${theme.typo["micro-m"]}
+      font-size: 9px;
     }
 
     color: ${isActive
@@ -61,9 +61,5 @@ export const Item = styled.a<{ isActive: boolean }>`
     :hover {
       color: ${theme.colors.primary["60"]};
     }
-
-    border-top-color: ${isActive
-      ? `${theme.colors.primary["60"]}`
-      : "transparent"};
   `};
 `;
