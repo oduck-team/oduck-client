@@ -1,3 +1,5 @@
+import { AnimatePresence } from "framer-motion";
+
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -14,6 +16,25 @@ export interface DrawerProps {
   readonly onClose: () => void;
 }
 
+const variants = {
+  top: {
+    hidden: { y: "-100%" },
+    visible: { y: "0px" },
+  },
+  bottom: {
+    hidden: { y: "100%" },
+    visible: { y: "0" },
+  },
+  left: {
+    hidden: { x: "-100%" },
+    visible: { x: "0px" },
+  },
+  right: {
+    hidden: { x: "100%" },
+    visible: { x: "0px" },
+  },
+};
+
 export default function Drawer({
   title,
   isOpen = false,
@@ -22,15 +43,31 @@ export default function Drawer({
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
-  if (!isOpen) return null;
   return (
-    <Portal elementId="modal-root">
-      <Backdrop isVisible={showBackdrop} onClick={onClose}>
-        <Container position={position} onClick={(e) => e.stopPropagation()}>
-          <Header>{title}</Header>
-          <Content>{children}</Content>
-        </Container>
-      </Backdrop>
-    </Portal>
+    <AnimatePresence>
+      {isOpen && (
+        <Portal elementId="modal-root">
+          <Backdrop isVisible={showBackdrop} onClick={onClose}>
+            <Container
+              position={position}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={variants[position]}
+              transition={{
+                type: "springs",
+                tiffness: 300,
+                damping: 30,
+                duration: 0.15,
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Header>{title}</Header>
+              <Content>{children}</Content>
+            </Container>
+          </Backdrop>
+        </Portal>
+      )}
+    </AnimatePresence>
   );
 }

@@ -1,9 +1,10 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
 import { BackdropProps } from ".";
 
-export const Container = styled.div<BackdropProps>`
+export const Container = styled(motion.div)<BackdropProps>`
   position: fixed;
   display: flex;
   align-items: center;
