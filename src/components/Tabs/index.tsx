@@ -8,7 +8,7 @@ export interface StyleProps {
 }
 
 interface ItemProps {
-  readonly key: number;
+  readonly id: number;
   readonly title?: string;
   readonly children?: string;
   readonly url?: string;
@@ -25,14 +25,14 @@ export default function Tabs({ defaultActiveKey = 1, items }: TabsProps) {
 
   const handleClick = (v: ItemProps) => {
     if (v.url) navigate(v.url);
-    setTabIndex(v.key - 1);
+    setTabIndex(v.id - 1);
   };
 
   return (
     <div>
       <TabTitles>
         {items
-          .sort((x, y) => x["key"] - y["key"])
+          .sort((x, y) => x["id"] - y["id"])
           .map((v, idx) => (
             <TabTitle
               key={idx}
