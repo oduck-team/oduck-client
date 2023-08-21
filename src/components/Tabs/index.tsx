@@ -15,12 +15,12 @@ interface ItemProps {
 }
 
 interface TabsProps {
-  readonly defaultActiveKey?: number;
+  readonly defaultActiveId?: number;
   readonly items: ItemProps[];
 }
 
-export default function Tabs({ defaultActiveKey = 1, items }: TabsProps) {
-  const [tabIndex, setTabIndex] = useState<number>(defaultActiveKey - 1);
+export default function Tabs({ defaultActiveId = 1, items }: TabsProps) {
+  const [tabIndex, setTabIndex] = useState<number>(defaultActiveId - 1);
   const navigate = useNavigate();
 
   const handleClick = (v: ItemProps) => {
@@ -31,17 +31,15 @@ export default function Tabs({ defaultActiveKey = 1, items }: TabsProps) {
   return (
     <div>
       <TabTitles>
-        {items
-          .sort((x, y) => x["id"] - y["id"])
-          .map((v, idx) => (
-            <TabTitle
-              key={idx}
-              onClick={() => handleClick(v)}
-              active={idx === tabIndex}
-            >
-              {v.title}
-            </TabTitle>
-          ))}
+        {items.map((v, idx) => (
+          <TabTitle
+            key={idx}
+            onClick={() => handleClick(v)}
+            active={idx === tabIndex}
+          >
+            {v.title}
+          </TabTitle>
+        ))}
       </TabTitles>
       <div>{items[tabIndex].children}</div>
     </div>
