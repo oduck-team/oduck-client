@@ -10,15 +10,18 @@ import {
 } from "./style";
 
 export type Size = "lg" | "md" | "sm";
+export type Color = "primary" | "secondary";
 
 export interface RatingProps extends ComponentProps<"div"> {
   readonly size?: Size;
+  readonly color?: Color;
   readonly readonly?: boolean;
   readonly value?: number;
 }
 
 export default function Rating({
   size = "md",
+  color = "secondary",
   readonly,
   value = 10,
   style,
@@ -97,7 +100,7 @@ export default function Rating({
         <Star />
         <Star />
       </BackStarContainer>
-      <ColorStarContainer width={rating * 10}>
+      <ColorStarContainer width={rating * 10} color={color}>
         <Star />
         <Star />
         <Star />

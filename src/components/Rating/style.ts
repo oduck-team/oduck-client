@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
-import { RatingProps, Size } from ".";
+import { Color, RatingProps, Size } from ".";
 
 interface ColorStarProps {
   width: number;
+  color?: Color;
 }
 
 export const Sizes: Record<Size, number> = {
@@ -43,8 +44,14 @@ export const ColorStarContainer = styled.div<ColorStarProps>`
   white-space: nowrap;
   z-index: ${({ theme }) => theme.zIndex.rating};
   & > svg {
-    fill: ${({ theme }) => theme.colors["secondary"]["50"]};
-    color: ${({ theme }) => theme.colors["secondary"]["50"]};
+    fill: ${({ theme, color = "secondary" }) =>
+      color === "secondary"
+        ? theme.colors[color]["50"]
+        : theme.colors[color][60]};
+    color: ${({ theme, color = "secondary" }) =>
+      color === "secondary"
+        ? theme.colors[color]["50"]
+        : theme.colors[color][60]};
   }
 `;
 
