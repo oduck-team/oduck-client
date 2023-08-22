@@ -11,7 +11,7 @@ const AnimationDetail = lazy(
 );
 const Search = lazy(() => import("@/features/common/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
-const Profile = lazy(() => import("@/features/common/routes/Search"));
+const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const NotFound = lazy(() => import("@/features/common/routes/404"));
 
 export const publicRoutes: RouteObject[] = [
