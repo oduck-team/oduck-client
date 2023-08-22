@@ -1,5 +1,5 @@
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
@@ -74,20 +74,22 @@ export default function Layout() {
 
   return (
     <>
-      <Outlet />
-      <Sidebar
-        isVisible={isSidebarVisible}
-        // userName={}
-        // userImage={}
-        onClose={() => handleSidebarVisible(false)}
-        onClickProfile={handleClickProfile}
-      />
-      <BottomNavigation
-        title="모바일 네비게이션"
-        activeId={currentPath}
-        onClickItem={handleClickNav}
-        items={bottomNavItems}
-      />
+      <Suspense fallback={"loading"}>
+        <Outlet />
+        <Sidebar
+          isVisible={isSidebarVisible}
+          // userName={}
+          // userImage={}
+          onClose={() => handleSidebarVisible(false)}
+          onClickProfile={handleClickProfile}
+        />
+        <BottomNavigation
+          title="모바일 네비게이션"
+          activeId={currentPath}
+          onClickItem={handleClickNav}
+          items={bottomNavItems}
+        />
+      </Suspense>
     </>
   );
 }
