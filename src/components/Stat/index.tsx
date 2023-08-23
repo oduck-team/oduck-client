@@ -20,9 +20,14 @@ export interface StatStyleProps {
 
 interface StatProps extends StatStyleProps {
   readonly items: StatItemProps[];
+  readonly className?: string;
 }
 
-export default function Stat({ items, primary = false }: StatProps) {
+export default function Stat({
+  items,
+  primary = false,
+  className = "",
+}: StatProps) {
   const getItems = ({ items }: StatProps) => {
     if (items.length === 1) {
       return (
@@ -47,5 +52,9 @@ export default function Stat({ items, primary = false }: StatProps) {
     });
   };
 
-  return <Container primary={primary}>{getItems({ items })}</Container>;
+  return (
+    <Container primary={primary} className={className}>
+      {getItems({ items })}
+    </Container>
+  );
 }

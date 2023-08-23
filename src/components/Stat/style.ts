@@ -8,6 +8,7 @@ export const Container = styled.div<StatStyleProps>`
   display: flex;
   align-items: center;
   padding: 8px 24px;
+  background-color: #fff;
 
   ${({ primary, theme }) => css`
     backdrop-filter: ${primary ? "blur(38px)" : ""};
