@@ -15,6 +15,7 @@ export const Container = styled.div<ProgressProps>(
       height: "100%",
       width: `${value}%`,
       backgroundColor: theme.colors[color]["60"],
+      borderRadius: isRounded ? "999px" : 0,
     },
   }),
 );
