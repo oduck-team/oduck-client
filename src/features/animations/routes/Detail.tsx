@@ -7,6 +7,8 @@ import Chip from "@/components/Chip";
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
 import BaseStat from "@/components/Stat";
+import SimpleReview from "@/features/reviews/components/SimpleReview";
+import LikeButton from "@/features/reviews/components/LikeButton";
 
 export default function AnimationDetail() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -46,7 +48,13 @@ export default function AnimationDetail() {
               borderTop: "solid 1px #F1F1F1",
             }}
           >
-            <Button name="입덕 버튼" size="lg" isBlock color="neutral">
+            <Button
+              name="입덕 버튼"
+              size="lg"
+              isBlock
+              color="neutral"
+              style={{ fontSize: "14px" }}
+            >
               입덕하기
             </Button>
           </div>
@@ -104,7 +112,7 @@ export default function AnimationDetail() {
             }}
           />
         </div>
-        {/* 입덕포인트 */}
+
         <AttractionPoint>
           <h2>입덕포인트</h2>
           <GridContainer>
@@ -114,22 +122,22 @@ export default function AnimationDetail() {
           </GridContainer>
           <GridContainer>
             <AttractionPointLabel>스토리</AttractionPointLabel>
-            <Progress isRounded value={60} />
+            <Progress isRounded value={60} style={{ opacity: 0.9 }} />
             <AttractionPointRatio>100%</AttractionPointRatio>
           </GridContainer>
           <GridContainer>
             <AttractionPointLabel>음악</AttractionPointLabel>
-            <Progress isRounded value={50} />
+            <Progress isRounded value={50} style={{ opacity: 0.8 }} />
             <AttractionPointRatio>100%</AttractionPointRatio>
           </GridContainer>
           <GridContainer>
             <AttractionPointLabel>캐릭터</AttractionPointLabel>
-            <Progress isRounded value={40} />
+            <Progress isRounded value={40} style={{ opacity: 0.7 }} />
             <AttractionPointRatio>100%</AttractionPointRatio>
           </GridContainer>
           <GridContainer>
             <AttractionPointLabel>성우</AttractionPointLabel>
-            <Progress isRounded value={30} />
+            <Progress isRounded value={30} style={{ opacity: 0.6 }} />
             <AttractionPointRatio>100%</AttractionPointRatio>
           </GridContainer>
         </AttractionPoint>
@@ -142,7 +150,14 @@ export default function AnimationDetail() {
         <p style={{ marginTop: "8px", marginBottom: "8px" }}>
           총 1,120명이 리뷰를 남겨 주셨어요
         </p>
-        <ul style={{ display: "flex", gap: "4px" }}>
+        <ul
+          style={{
+            display: "flex",
+            gap: "4px",
+            paddingBottom: "16px",
+            borderBottom: "1px solid #F1F1F1",
+          }}
+        >
           <li>
             <Chip styleType="selectable" active>
               좋아요순
@@ -156,6 +171,25 @@ export default function AnimationDetail() {
           </li>
           <li>
             <Chip styleType="selectable">평점 낮은 순</Chip>
+          </li>
+        </ul>
+
+        <ul>
+          <li></li>
+          <li>
+            <SimpleReview>
+              <SimpleReview.Header rating={5} userId="123" userName="John" />
+              <SimpleReview.Content isSpoiler={true}>
+                스포일러 스포일러 스포일러 스포일러스포일러 스포일러스포일러
+                스포일러스포일러 스포일러스포일러 스포일러스포일러
+                스포일러스포일러 스포일러스포일러 스포일러스포일러
+                스포일러스포일러 스포일러스포일러 스포일러스포일러
+                스포일러스포일러 스포일러
+              </SimpleReview.Content>
+              <SimpleReview.Actions>
+                <LikeButton isLike={false} count={0} onClick={() => {}} />
+              </SimpleReview.Actions>
+            </SimpleReview>
           </li>
         </ul>
       </Section>
@@ -334,22 +368,6 @@ const GridContainer = styled.div`
   grid-template-columns: 1fr 5fr 1fr;
   gap: 14px;
   align-items: center;
-
-  &:nth-child(3) div {
-    opacity: 0.9;
-  }
-
-  &:nth-child(4) div {
-    opacity: 0.8;
-  }
-
-  &:nth-child(5) div {
-    opacity: 0.7;
-  }
-
-  &:nth-child(6) div {
-    opacity: 0.6;
-  }
 `;
 
 const AttractionPointLabel = styled.span`
