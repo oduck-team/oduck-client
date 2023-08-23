@@ -14,7 +14,7 @@ export default function LikeButton({
   onClick,
 }: LikeButtonProps) {
   return (
-    <Container onClick={onClick} isLike={isLike}>
+    <Container onClick={onClick} isLike={isLike} aria-label="좋아요">
       <Heart width={16} height={16} />
       <span> {count}</span>
     </Container>

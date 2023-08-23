@@ -7,8 +7,9 @@ import Chip from "@/components/Chip";
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
 import BaseStat from "@/components/Stat";
-import SimpleReview from "@/features/reviews/components/SimpleReview";
 import LikeButton from "@/features/reviews/components/LikeButton";
+import MoreButton from "@/features/reviews/components/MoreButton";
+import SimpleReview from "@/features/reviews/components/SimpleReview";
 
 export default function AnimationDetail() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -186,8 +187,20 @@ export default function AnimationDetail() {
                 스포일러스포일러 스포일러스포일러 스포일러스포일러
                 스포일러스포일러 스포일러
               </SimpleReview.Content>
-              <SimpleReview.Actions>
-                <LikeButton isLike={false} count={0} onClick={() => {}} />
+              <SimpleReview.Actions
+                style={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <time dateTime="2023-04-01" style={{ fontSize: "12px" }}>
+                    2023.07.30
+                  </time>
+                </div>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "4px" }}
+                >
+                  <LikeButton isLike={false} count={0} onClick={() => {}} />
+                  <MoreButton />
+                </div>
               </SimpleReview.Actions>
             </SimpleReview>
           </li>
@@ -305,8 +318,6 @@ const Plot = styled.p<{ isExpanded: boolean }>`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
-const MoreButton = styled.button``;
 
 const Section = styled.section`
   padding: 16px;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ComponentProps, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Avatar from "@/components/Avatar";
@@ -81,6 +81,9 @@ function SpoilerButton({ onClick }: { onClick: () => void }) {
 }
 
 // =================================== Actions ===================================
-function Actions({ children }: StrictPropsWithChildren) {
-  return <ActionsContainer>{children}</ActionsContainer>;
+function Actions({
+  children,
+  ...props
+}: StrictPropsWithChildren<ComponentProps<"div">>) {
+  return <ActionsContainer {...props}>{children}</ActionsContainer>;
 }
