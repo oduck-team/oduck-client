@@ -36,7 +36,7 @@ export const Divider = styled.div`
 `;
 
 export const Content = styled.div`
-  min-width: 72px;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   text-align: center;
