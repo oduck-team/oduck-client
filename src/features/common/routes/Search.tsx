@@ -50,6 +50,7 @@ export default function Search() {
 const Container = styled.main`
   ${({ theme }) => theme.container}
   margin: 0 auto;
+  padding: 0 16px;
 
   & > h1 {
     display: none;
