@@ -10,6 +10,7 @@ export const Container = styled.nav`
   height: 66px;
   background-color: white;
   box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.06);
+  z-index: ${({ theme }) => theme.zIndex.default};
 
   & > h1 {
     display: none;

@@ -1,3 +1,5 @@
+import { ComponentProps } from "react";
+
 import {
   Container,
   StatContainer,
@@ -18,11 +20,12 @@ export interface StatStyleProps {
   readonly primary?: boolean;
 }
 
-interface StatProps extends StatStyleProps {
+interface StatProps extends StatStyleProps, ComponentProps<"div"> {
   readonly items: StatItemProps[];
+  readonly className?: string;
 }
 
-export default function Stat({ items, primary = false }: StatProps) {
+export default function Stat({ items, primary = false, ...props }: StatProps) {
   const getItems = ({ items }: StatProps) => {
     if (items.length === 1) {
       return (
@@ -47,5 +50,9 @@ export default function Stat({ items, primary = false }: StatProps) {
     });
   };
 
-  return <Container primary={primary}>{getItems({ items })}</Container>;
+  return (
+    <Container primary={primary} {...props}>
+      {getItems({ items })}
+    </Container>
+  );
 }

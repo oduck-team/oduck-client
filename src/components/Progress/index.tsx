@@ -1,8 +1,10 @@
+import { ComponentProps } from "react";
+
 import { theme } from "@/styles/theme";
 
 import { Container } from "./style";
 
-export interface ProgressProps {
+export interface ProgressProps extends ComponentProps<"div"> {
   readonly max?: number;
   readonly min?: number;
   readonly value?: number;
@@ -18,6 +20,7 @@ export default function Progress({
   color = "primary",
   height = 12,
   isRounded = false,
+  ...props
 }: ProgressProps) {
   return (
     <Container
@@ -25,6 +28,7 @@ export default function Progress({
       color={color}
       height={height}
       isRounded={isRounded}
+      {...props}
     >
       <div
         role="progressbar"
