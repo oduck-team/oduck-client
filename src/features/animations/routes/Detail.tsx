@@ -25,7 +25,7 @@ export default function AnimationDetail() {
           <HeroImageGradient />
           <HeroInfo>
             <h1>주술회전 2기</h1>
-            <div style={{ width: "100%", paddingTop: "16px" }}>
+            <div style={{ width: "100%", paddingTop: "8px" }}>
               <span>판타지 | 12부작 | 완결 | 15세</span>
             </div>
           </HeroInfo>
@@ -39,6 +39,7 @@ export default function AnimationDetail() {
               { title: "덕후", data: "1111" },
               { title: "방영년도", data: "2023" },
             ]}
+            style={{ maxWidth: "600px", margin: "0 auto" }}
           />
           <Rating size="lg" />
           <div
