@@ -4,9 +4,9 @@ import styled from "@emotion/styled";
 import { StatStyleProps } from "./index";
 
 export const Container = styled.div<StatStyleProps>`
-  width: fit-content;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  display: inline-grid;
+  grid-auto-flow: column;
   padding: 8px 24px;
   background-color: #fff;
 
@@ -27,6 +27,7 @@ export const Container = styled.div<StatStyleProps>`
 export const StatContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
 `;
 
 export const Divider = styled.div`
@@ -37,21 +38,21 @@ export const Divider = styled.div`
 `;
 
 export const Content = styled.div`
-  width: fit-content;
-  display: flex;
+  width: 100%;
+  display: inline-grid;
   flex-direction: column;
   text-align: center;
   gap: 8px;
 `;
 
-export const Title = styled.span(({ theme }) => ({
-  ...theme.typo["body-3-r"],
-}));
+export const Title = styled.span`
+  ${({ theme }) => theme.typo["body-3-r"]}
+`;
 
-export const Data = styled.span(({ theme }) => ({
-  ...theme.typo["body-2-m"],
-}));
+export const Data = styled.span`
+  ${({ theme }) => theme.typo["body-2-m"]}
+`;
 
-export const Text = styled.span(({ theme }) => ({
-  ...theme.typo["micro-r"],
-}));
+export const Text = styled.span`
+  ${({ theme }) => theme.typo["micro-r"]}
+`;
