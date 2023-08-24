@@ -3,3 +3,11 @@
 * {
   font-family: "Spoqa Han Sans Neo", "sans-serif", "system-ui";
 }
+
+@font-face {
+  font-family: "Gmarket Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+    format("woff");
+}
