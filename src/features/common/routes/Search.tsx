@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { Search as SearchIcon } from "iconoir-react";
+import { ComponentProps, useState } from "react";
 
+import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Head from "@/components/Head";
 
@@ -15,13 +17,49 @@ const 최근_많이_검색된 = [
   "무직전생",
 ];
 
+const 애니_1 = {
+  id: "123456",
+  title: "주술회전",
+  image: "https://url.kr/lo4miy",
+  rating: 4.8,
+};
+
+const 애니_2 = {
+  id: "123457",
+  title:
+    "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
+  image: "https://url.kr/azbxi1",
+  rating: 4.5,
+};
+
 export default function Search() {
+  const [searchInputValue, setSearchInputValue] = useState(""); // 입력된 검색어
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInputValue(e.target.value);
+  };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // TODO 검색
+  };
+
+  const handleSearchCancel = () => {
+    setSearchInputValue("");
+  };
+
   return (
     <>
       <Head title="오덕 | 검색하기" />
       <Container>
         <h1>검색하기</h1>
-        <Searchbar style={{ marginTop: "50px" }} />
+        <Searchbar
+          value={searchInputValue}
+          style={{ marginTop: "50px" }}
+          onChange={handleSearchChange}
+          onSearch={handleSearch}
+          onCancel={handleSearchCancel}
+        />
         <Section style={{ marginTop: "32px" }}>
           <h1>최근 많이 검색된</h1>
           <ul
@@ -57,19 +95,55 @@ const Container = styled.main`
   }
 `;
 
-function Searchbar({ ...props }) {
+interface SearchbarProps extends ComponentProps<"div"> {
+  readonly value: string;
+  readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  readonly onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
+  readonly onCancel: () => void;
+}
+
+function Searchbar({
+  value,
+  onChange,
+  onSearch,
+  onCancel,
+  ...props
+}: SearchbarProps) {
+  const isButtonVisible = value.length > 0;
   return (
-    <SearchbarContainer {...props}>
+    <SearchbarContainer isButtonVisible={isButtonVisible} {...props}>
       <SearchIcon height={20} width={20} />
-      <form action="/search">
+      <form action="/search" onSubmit={onSearch}>
         <label htmlFor="search">검색</label>
-        <input id="search" type="text" placeholder="검색어를 입력해주세요" />
+        <input
+          id="search"
+          type="text"
+          placeholder="검색어를 입력해주세요"
+          value={value}
+          onChange={onChange}
+        />
+        {isButtonVisible && (
+          <Button
+            name="검색취소"
+            styleType="text"
+            size="sm"
+            style={{
+              minWidth: "fit-content",
+              marginLeft: "8px",
+              paddingLeft: "0",
+              paddingRight: 0,
+            }}
+            onClick={onCancel}
+          >
+            취소
+          </Button>
+        )}
       </form>
     </SearchbarContainer>
   );
 }
 
-const SearchbarContainer = styled.div`
+const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
   position: relative;
 
   & > svg {
@@ -77,6 +151,11 @@ const SearchbarContainer = styled.div`
     top: 10px;
     left: 8px;
     color: ${({ theme }) => theme.colors.neutral["60"]};
+  }
+
+  & form {
+    display: flex;
+    align-items: center;
   }
 
   & label {
@@ -89,6 +168,7 @@ const SearchbarContainer = styled.div`
     height: 40px;
     width: 100%;
     padding-left: 36px;
+    padding-right: 16px;
     background-color: ${({ theme }) => theme.colors.neutral["10"]};
     border: none;
     border-radius: 5px;
