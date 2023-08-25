@@ -12,6 +12,7 @@ export const Container = styled.li`
   }
 
   & > a {
+    ${({ theme }) => theme.typo["body-2-m"]}
     display: flex;
     align-items: center;
     gap: 0.5rem;
