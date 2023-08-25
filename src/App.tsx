@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider, Global, css } from "@emotion/react";
 import { IconoirProvider } from "iconoir-react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
@@ -15,6 +15,13 @@ export default function App() {
             strokeWidth: 1.5,
           }}
         >
+          <Global
+            styles={css`
+              body {
+                color: ${theme.colors.neutral["90"]};
+              }
+            `}
+          />
           <RouterProvider router={router} />
         </IconoirProvider>
       </ThemeProvider>
