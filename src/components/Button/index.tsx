@@ -16,6 +16,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
   readonly size?: Size;
   readonly isBlock?: boolean;
   readonly icon?: React.ReactNode;
+  readonly className?: string;
 }
 
 export default function Button({
@@ -27,6 +28,7 @@ export default function Button({
   isBlock = false,
   icon,
   children,
+  className = "",
   ...props
 }: ButtonProps) {
   const isIconOnly = icon !== undefined && !children;
@@ -38,6 +40,7 @@ export default function Button({
         color={color}
         size={size}
         type={type}
+        className={className}
         {...props}
       >
         <IconWrapper>{icon}</IconWrapper>
@@ -53,6 +56,7 @@ export default function Button({
       size={size}
       type={type}
       isBlock={isBlock}
+      className={className}
       {...props}
     >
       <ContentWrapper>

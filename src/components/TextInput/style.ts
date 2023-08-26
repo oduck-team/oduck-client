@@ -8,7 +8,7 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
     return css`
       ${theme.typo["body-2-r"]};
       display: flex;
-      width: 328px;
+      width: 100%;
       height: 40px;
       padding: 0px 1rem;
       justify-content: space-between;
@@ -52,5 +52,5 @@ export const Message = styled.div`
 `;
 
 export const TextInputContainer = styled.div`
-  width: fit-content;
+  width: 328px;
 `;
