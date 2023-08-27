@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Animation } from "./Carousel";
+import { Animation } from "./AnimationCarousel";
 
 export const Container = styled.div`
   width: 160px;
