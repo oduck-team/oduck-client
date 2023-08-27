@@ -16,7 +16,7 @@ import {
   IndicatorContainer,
   Rating,
   Review,
-} from "./Carousel.style";
+} from "./AnimationCarousel.style";
 
 export interface Animation {
   id: string;
@@ -26,11 +26,13 @@ export interface Animation {
   rating: number;
 }
 
-interface Props {
+interface AnimationCarouselProps {
   animations: Animation[];
 }
 
-export default function Carousel({ animations }: Props) {
+export default function AnimationCarousel({
+  animations,
+}: AnimationCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(1); // 현재 슬라이드 인덱스
   const [translateValue, setTranslateValue] = useState(0); // 슬라이드 이동(translate)를 위해 사용
   const [transitionValue, setTransitionValue] = useState(0); // 슬라이드 이동 transition 값

@@ -7,9 +7,9 @@ import Chip from "@/components/Chip";
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
 import BaseStat from "@/components/Stat";
-import LikeButton from "@/features/reviews/components/LikeButton";
-import MoreButton from "@/features/reviews/components/MoreButton";
-import SimpleReview from "@/features/reviews/components/SimpleReview";
+import ReviewLikeButton from "@/features/reviews/components/ReviewLikeButton";
+import ReviewMoreButton from "@/features/reviews/components/ReviewMoreButton";
+import ReviewSimpleCard from "@/features/reviews/components/ReviewSimpleCard";
 
 export default function AnimationDetail() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -72,7 +72,7 @@ export default function AnimationDetail() {
           줄거리가 넘누 기러용 줄거리가 너무 기러용 줄거리가 너무기러용 줄거리가
           너무 길어용 줄거리가 너무 길어용 줄거리가 너무기러용
         </Plot>
-        <MoreButton>더 보기</MoreButton>
+        <ReviewMoreButton />
         <ul>
           <li>
             <span>작가</span>
@@ -179,16 +179,20 @@ export default function AnimationDetail() {
         <ul>
           <li></li>
           <li>
-            <SimpleReview>
-              <SimpleReview.Header rating={5} userId="123" userName="John" />
-              <SimpleReview.Content isSpoiler={true}>
+            <ReviewSimpleCard>
+              <ReviewSimpleCard.Header
+                rating={5}
+                userId="123"
+                userName="John"
+              />
+              <ReviewSimpleCard.Content isSpoiler={true}>
                 스포일러 스포일러 스포일러 스포일러스포일러 스포일러스포일러
                 스포일러스포일러 스포일러스포일러 스포일러스포일러
                 스포일러스포일러 스포일러스포일러 스포일러스포일러
                 스포일러스포일러 스포일러스포일러 스포일러스포일러
                 스포일러스포일러 스포일러
-              </SimpleReview.Content>
-              <SimpleReview.Actions
+              </ReviewSimpleCard.Content>
+              <ReviewSimpleCard.Actions
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -199,11 +203,15 @@ export default function AnimationDetail() {
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "4px" }}
                 >
-                  <LikeButton isLike={false} count={0} onClick={() => {}} />
-                  <MoreButton />
+                  <ReviewLikeButton
+                    isLike={false}
+                    count={0}
+                    onClick={() => {}}
+                  />
+                  <ReviewMoreButton />
                 </div>
-              </SimpleReview.Actions>
-            </SimpleReview>
+              </ReviewSimpleCard.Actions>
+            </ReviewSimpleCard>
           </li>
         </ul>
       </Section>
@@ -273,7 +281,7 @@ const HeroInfo = styled.div`
   bottom: 56px;
   margin: 0 16px;
   ${({ theme }) => theme.mq("md")} {
-    margin: 0 40px;
+    padding: 0 40px;
   }
 
   & > h1 {

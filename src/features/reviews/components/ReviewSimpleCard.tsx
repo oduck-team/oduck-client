@@ -12,15 +12,17 @@ import {
   UserContainer,
   SpoilerButtonContainer,
   ActionsContainer,
-} from "./SimpleReview.style";
+} from "./ReviewSimpleCard.style";
 
-export default function SimpleReview({ children }: StrictPropsWithChildren) {
+export default function ReviewSimpleCard({
+  children,
+}: StrictPropsWithChildren) {
   return <Container>{children}</Container>;
 }
 
-SimpleReview.Header = Header;
-SimpleReview.Content = Content;
-SimpleReview.Actions = Actions;
+ReviewSimpleCard.Header = Header;
+ReviewSimpleCard.Content = Content;
+ReviewSimpleCard.Actions = Actions;
 
 // =================================== Header ===================================
 interface HeaderProps {
