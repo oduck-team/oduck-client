@@ -40,13 +40,13 @@ const helpMenuItems: IMenu[] = [
 ];
 
 export default function Menus() {
-  const handleClickUserMenu = (id: string, e: React.MouseEvent) => {
+  const handleClickUserMenu = (_id: string, e: React.MouseEvent) => {
     e.preventDefault();
     // TODO: id와 인증상태에 따른 처리
     return;
   };
 
-  const handleClickHelpMenu = (id: string, e: React.MouseEvent) => {
+  const handleClickHelpMenu = (_id: string, e: React.MouseEvent) => {
     e.preventDefault();
     // TODO: id와 인증상태에 따른 처리
     return;

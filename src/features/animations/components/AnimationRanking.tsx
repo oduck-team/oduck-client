@@ -36,7 +36,7 @@ export default function AnimationRanking({
   const navgiate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [list, setList] = useState(
-    contents.filter((a, i) => i !== currentIndex),
+    contents.filter((_, i) => i !== currentIndex),
   );
 
   useEffect(() => {

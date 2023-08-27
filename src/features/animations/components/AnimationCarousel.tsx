@@ -184,7 +184,7 @@ export default function AnimationCarousel({
           ))}
         </Slides>
         <IndicatorContainer>
-          {[...Array(animations.length)].map((a, i) => (
+          {[...Array(animations.length)].map((_, i) => (
             <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
           ))}
         </IndicatorContainer>
