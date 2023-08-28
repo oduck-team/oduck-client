@@ -6,22 +6,26 @@ export interface TextInputProps extends ComponentProps<"input"> {
   readonly warn?: boolean;
   readonly message?: string;
   readonly className?: string;
+  readonly icon?: React.ReactNode;
 }
 
 export interface TextInputBoxProps extends ComponentProps<"input"> {
   readonly warn?: boolean;
+  readonly icon?: React.ReactNode;
 }
 
 export default function TextInput({
   warn = false,
   message = "",
   style,
+  icon,
   className = "",
   ...rest
 }: TextInputProps) {
   return (
     <TextInputContainer style={style} className={className}>
-      <TextInputBox warn={warn} {...rest}></TextInputBox>
+      {icon}
+      <TextInputBox warn={warn} icon {...rest}></TextInputBox>
       {warn && message !== "" && <Message>{message}</Message>}
     </TextInputContainer>
   );
