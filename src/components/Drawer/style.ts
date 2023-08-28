@@ -53,7 +53,7 @@ export const Container = styled(motion.div)<Pick<DrawerProps, "position">>`
   position: fixed;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.neutral["05"]};
 
   ${({ position }) => positions[position]}
 `;
