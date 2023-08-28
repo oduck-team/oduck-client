@@ -5,6 +5,7 @@ import { ComponentProps, useState } from "react";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Head from "@/components/Head";
+import AnimationCard from "@/features/animations/components/AnimationCard";
 
 const 최근_많이_검색된 = [
   "판타지",
@@ -17,23 +18,36 @@ const 최근_많이_검색된 = [
   "무직전생",
 ];
 
-const 애니_1 = {
-  id: "123456",
-  title: "주술회전",
-  image: "https://url.kr/lo4miy",
-  rating: 4.8,
-};
-
-const 애니_2 = {
-  id: "123457",
-  title:
-    "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
-  image: "https://url.kr/azbxi1",
-  rating: 4.5,
-};
+const 이런_애니_어떠세요 = [
+  {
+    id: "123456",
+    title: "주술회전",
+    image: "https://url.kr/lo4miy",
+    rating: 4.8,
+  },
+  {
+    id: "12345",
+    title: "주술회전",
+    image: "https://url.kr/lo4miy",
+    rating: 4.8,
+  },
+  {
+    id: "1234",
+    title: "주술회전",
+    image: "https://url.kr/lo4miy",
+    rating: 4.8,
+  },
+  {
+    id: "1234",
+    title: "주술회전",
+    image: "https://url.kr/lo4miy",
+    rating: 4.8,
+  },
+];
 
 export default function Search() {
-  const [searchInputValue, setSearchInputValue] = useState(""); // 입력된 검색어
+  const [searchInputValue, setSearchInputValue] = useState(""); // 사용자가 입력하는 검색어
+  const [finalSearchKeyword, setFinalSearchKeyword] = useState(""); // 사용자가 실제로 검색을 실행할 때 사용하는 검색어
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(e.target.value);
@@ -46,6 +60,11 @@ export default function Search() {
 
   const handleSearchCancel = () => {
     setSearchInputValue("");
+  };
+
+  const handleClickPopularKeyowrd = (value: string) => {
+    setSearchInputValue(value);
+    setFinalSearchKeyword(value);
   };
 
   return (
@@ -67,18 +86,26 @@ export default function Search() {
               display: "flex",
               flexWrap: "wrap",
               gap: "8px",
-              marginTop: "8px",
             }}
           >
             {최근_많이_검색된.map((item) => (
               <li key={item}>
-                <Chip>{item}</Chip>
+                <Chip onClick={() => handleClickPopularKeyowrd(item)}>
+                  {item}
+                </Chip>
               </li>
             ))}
           </ul>
         </Section>
         <Section style={{ marginTop: "32px" }}>
           <h1>이런 애니는 어떠세요?</h1>
+          <ul style={{ display: "flex", gap: "32px 8px", flexWrap: "wrap" }}>
+            {이런_애니_어떠세요.map((ani) => (
+              <li key={ani.id}>
+                <AnimationCard ani={ani} />
+              </li>
+            ))}
+          </ul>
         </Section>
       </Container>
     </>
@@ -197,6 +224,7 @@ const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
 const Section = styled.section`
   & > h1 {
     ${({ theme }) => theme.typo["title-3-m"]}
-    color: ${({ theme }) => theme.colors.neutral["80"]}
+    color: ${({ theme }) => theme.colors.neutral["80"]};
+    margin-bottom: 8px;
   }
 `;
