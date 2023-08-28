@@ -3,7 +3,7 @@ import { IconoirProvider, MoreHoriz } from "iconoir-react";
 
 import Button from "@/components/Button";
 
-export default function MoreButton() {
+export default function ReviewMoreButton() {
   const theme = useTheme();
   return (
     <IconoirProvider

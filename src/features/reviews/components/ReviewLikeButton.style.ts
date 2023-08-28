@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 import { colors } from "@/styles/colors";
 
-import { LikeButtonProps } from "./LikeButton";
+import { ReviewLikeButtonProps } from "./ReviewLikeButton";
 
-export const Container = styled.button<Pick<LikeButtonProps, "isLike">>`
+export const Container = styled.button<Pick<ReviewLikeButtonProps, "isLike">>`
   display: flex;
   align-items: center;
   padding: 2px 0;

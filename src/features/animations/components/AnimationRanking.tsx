@@ -12,7 +12,7 @@ import {
   SliderItem,
   SliderItemImage,
   SliderItemRating,
-} from "./Ranking.style";
+} from "./AnimationRanking.style";
 
 // 임시 정의
 export interface IRanking {
@@ -24,20 +24,23 @@ export interface IRanking {
   readonly rating: number;
 }
 
-interface Props {
+interface AnimationRankingProps {
   readonly title: string;
   readonly contents: IRanking[];
 }
 
-export default function Ranking({ title, contents }: Props) {
+export default function AnimationRanking({
+  title,
+  contents,
+}: AnimationRankingProps) {
   const navgiate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [list, setList] = useState(
-    contents.filter((a, i) => i !== currentIndex),
+    contents.filter((_, i) => i !== currentIndex),
   );
 
   useEffect(() => {
-    setList(contents.filter((a, i) => i !== currentIndex));
+    setList(contents.filter((_, i) => i !== currentIndex));
   }, [contents, currentIndex]);
 
   return (

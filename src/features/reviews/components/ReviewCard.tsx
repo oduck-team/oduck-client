@@ -11,7 +11,7 @@ import {
   Image,
   InfoContainer,
   SpoilerButtonContainer,
-} from "./CardReview.style";
+} from "./ReviewCard.style";
 
 interface AniProps {
   title: string;
@@ -19,16 +19,16 @@ interface AniProps {
   rating: number;
 }
 
-export default function CardReview({
+export default function ReviewCard({
   children,
   className,
 }: StrictPropsWithChildren<{ className?: string }>) {
   return <Container className={className}>{children}</Container>;
 }
 
-CardReview.Animation = Animation;
-CardReview.Content = Content;
-CardReview.Actions = Actions;
+ReviewCard.Animation = Animation;
+ReviewCard.Content = Content;
+ReviewCard.Actions = Actions;
 
 function Animation({ title, image, rating }: AniProps) {
   return (

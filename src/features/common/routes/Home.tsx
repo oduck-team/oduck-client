@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 
 import Button from "@/components/Button";
-import Carousel, { Animation } from "@/features/animations/components/Carousel";
-import Ranking, { IRanking } from "@/features/animations/components/Ranking";
-import Slide from "@/features/animations/components/Slide";
-import CardReview from "@/features/reviews/components/CardReview";
-import LikeButton from "@/features/reviews/components/LikeButton";
-import MoreButton from "@/features/reviews/components/MoreButton";
+import AnimationCarousel, {
+  Animation,
+} from "@/features/animations/components/AnimationCarousel";
+import AnimationRanking, {
+  IRanking,
+} from "@/features/animations/components/AnimationRanking";
+import AnimationSlide from "@/features/animations/components/AnimationSlide";
+import ReviewCard from "@/features/reviews/components/ReviewCard";
+import ReviewLikeButton from "@/features/reviews/components/ReviewLikeButton";
+import ReviewMoreButton from "@/features/reviews/components/ReviewMoreButton";
 
 export default function Home() {
   const CarouselAni: Animation[] = [
@@ -150,8 +154,8 @@ export default function Home() {
 
   return (
     <Container>
-      <Carousel animations={CarouselAni} />
-      <Ranking title="이번주 TOP10" contents={RankingAni} />
+      <AnimationCarousel animations={CarouselAni} />
+      <AnimationRanking title="이번주 TOP10" contents={RankingAni} />
       <DiscordContainer>
         <div>
           <span>오덕&nbsp;</span>
@@ -173,7 +177,7 @@ export default function Home() {
           />
         </svg>
       </DiscordContainer>
-      <Slide title="2023년 3분기 신작" animations={SlideAni} />
+      <AnimationSlide title="2023년 3분기 신작" animations={SlideAni} />
       <RecentReview>
         <Header>
           <h1>최근 한줄리뷰</h1>
@@ -182,17 +186,17 @@ export default function Home() {
           </Button>
         </Header>
         <StyleCardReview>
-          <CardReview.Animation
+          <ReviewCard.Animation
             title="레벨 1이지만 유니크 스킬로 최강이 되었습니다"
             image="https://url.kr/4gtucf"
             rating={10}
           />
-          <CardReview.Content>
+          <ReviewCard.Content>
             너무너무 재밌게 안 봤습니다. 애니제목을 왜 이딴식으로 짓는지 이해가
             안 가네요
             하하하하하하하하하하하하하하하하하하하하핳아항항핳하아항하하하하아항하아항하아항항
-          </CardReview.Content>
-          <CardReview.Actions
+          </ReviewCard.Content>
+          <ReviewCard.Actions
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -201,14 +205,14 @@ export default function Home() {
               </time>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-              <LikeButton isLike={false} count={0} onClick={() => {}} />
-              <MoreButton />
+              <ReviewLikeButton isLike={false} count={0} onClick={() => {}} />
+              <ReviewMoreButton />
             </div>
-          </CardReview.Actions>
+          </ReviewCard.Actions>
         </StyleCardReview>
       </RecentReview>
-      <Slide title="덕후들의 눈물샘을 터뜨린" animations={SlideAni} />
-      <Slide title="이불밖을 못 나오게 하는" animations={SlideAni} />
+      <AnimationSlide title="덕후들의 눈물샘을 터뜨린" animations={SlideAni} />
+      <AnimationSlide title="이불밖을 못 나오게 하는" animations={SlideAni} />
       <Bottom>
         <span>감명 깊게 본 애니를 다른 회원님들과 공유해보세요!</span>
         <Button name="리뷰" size="lg">
@@ -288,7 +292,7 @@ const Header = styled.div`
   }
 `;
 
-const StyleCardReview = styled(CardReview)`
+const StyleCardReview = styled(ReviewCard)`
   border-top: solid 2px ${({ theme }) => theme.colors["neutral"]["05"]};
   border-bottom: solid 2px ${({ theme }) => theme.colors["neutral"]["05"]};
 `;
