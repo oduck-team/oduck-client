@@ -11,7 +11,7 @@ export interface ChipProps extends ComponentProps<"button"> {
   active?: boolean;
   icon?: React.ReactNode;
 }
-
+// TODO: size를 옵션으로 받기
 export default function Chip({
   styleType = "action",
   active,

@@ -4,13 +4,13 @@ import { ChipProps } from ".";
 
 export const Container = styled.button<Omit<ChipProps, "styleType" | "icon">>`
   width: fit-content;
-  height: 24px;
+  height: 28px;
   padding: 6px 10px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  ${({ theme }) => theme.typo["micro-r"]};
+  ${({ theme }) => theme.typo["body-3-r"]};
   border: ${({ active, theme }) =>
     active
       ? `1px solid ${theme.colors["primary"]["60"]}`
