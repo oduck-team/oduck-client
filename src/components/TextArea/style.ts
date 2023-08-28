@@ -1,16 +1,15 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { TextInputBoxProps } from ".";
+import { TextareaBoxProps } from ".";
 
-export const TextInputBox = styled.input<TextInputBoxProps>`
-  ${({ warn = false, icon, theme }) => css`
+export const TextareaBox = styled.textarea<TextareaBoxProps>`
+  ${({ warn = false, theme }) => css`
     ${theme.typo["body-2-r"]};
     display: flex;
     width: 100%;
-    height: 40px;
-    padding: ${icon ? `0 1rem 0 calc(1rem + 20px)` : `0 1rem`};
-
+    height: calc(100% - 19px);
+    padding: 0.5rem 1rem;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
@@ -20,6 +19,7 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
     border: 1px solid
       ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
     transition: all 0.2s;
+    resize: none;
 
     &::placeholder {
       color: ${theme.colors["neutral"]["50"]};
@@ -46,22 +46,12 @@ export const Message = styled.div`
     width: fit-content;
     margin: 4px 0px 0px 8px;
   `}
+  flex-shrink: 0;
 `;
 
-export const TextInputContainer = styled.div`
+export const TextareaContainer = styled.div`
   width: 328px;
-  position: relative;
-  & > svg {
-    position: absolute;
-    top: calc(50% - 10px);
-    left: 10px;
-    color: ${({ theme }) => theme.colors["neutral"]["50"]};
-    transition: all 0.2s;
-  }
-
-  &:focus-within {
-    svg {
-      color: ${({ theme }) => theme.colors["primary"]["60"]};
-    }
-  }
+  height: 138px;
+  display: flex;
+  flex-direction: column;
 `;
