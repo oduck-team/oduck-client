@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
 import BaseBackdrop from "../Backdrop";
 
@@ -6,7 +7,7 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.bottomSheet};
 `;
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   position: fixed;
   display: flex;
   flex-direction: column;
