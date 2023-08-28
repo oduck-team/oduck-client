@@ -72,20 +72,19 @@ export default function AnimationDetail() {
           줄거리가 넘누 기러용 줄거리가 너무 기러용 줄거리가 너무기러용 줄거리가
           너무 길어용 줄거리가 너무 길어용 줄거리가 너무기러용
         </Plot>
-        <ReviewMoreButton />
-        <ul>
+        <AnimationMetaInfo>
           <li>
             <span>작가</span>
             <span>이름</span>
           </li>
           <li>
             <span>성우진</span>
-            <span>이름1, 이름2, 이름3,</span>
+            <span>이름1, 이름2,</span>
           </li>
           <li>
             <span>제작사</span>
           </li>
-        </ul>
+        </AnimationMetaInfo>
       </Section>
 
       <Divider />
@@ -336,6 +335,25 @@ const Section = styled.section`
     ${({ theme }) => theme.mq("md")} {
       ${({ theme }) => theme.typo["title-2-m"]}
     }
+  }
+`;
+
+const AnimationMetaInfo = styled.ul`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+
+  & > li {
+    display: contents;
+  }
+
+  & li span:nth-of-type(1) {
+    width: 48px;
+    opacity: 0.6;
+  }
+
+  & li span:nth-of-type(2) {
+    grid-column: 2;
   }
 `;
 
