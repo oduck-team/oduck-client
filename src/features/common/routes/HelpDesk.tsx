@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Mail } from "iconoir-react";
 import { useState } from "react";
 
 import Button from "@/components/Button";
@@ -77,6 +78,7 @@ export default function HelpDesk() {
               onChange={handlerEmailChange}
               warn={emailError}
               message="이메일을 입력해 주세요."
+              icon={<Mail width={20} height={20} />}
               required
             />
             <InquiryContentTextarea
@@ -159,7 +161,7 @@ const FormArea = styled.div`
 
 const EmailTextInput = styled(TextInput)`
   width: 100%;
-  margin: 15px 0;
+  margin: 8px 0 15px;
   & > input {
     border-radius: 12px;
   }
