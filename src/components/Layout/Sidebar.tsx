@@ -35,6 +35,10 @@ export default function Sidebar({
           onClick={onClose}
         />
       }
+      style={{
+        borderTopLeftRadius: "20px",
+        borderBottomLeftRadius: "20px",
+      }}
       onClose={onClose}
     >
       <div>
