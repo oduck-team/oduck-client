@@ -56,7 +56,10 @@ export default function BottomSheet({
 }: StrictPropsWithChildren<BottomSheetProps>) {
   useEffect(() => {
     if (isOpen) {
-      document.body.setAttribute("style", "overflow: hidden");
+      document.body.setAttribute(
+        "style",
+        "position:relative; overflow: hidden;",
+      );
 
       return () => {
         document.body.removeAttribute("style");
