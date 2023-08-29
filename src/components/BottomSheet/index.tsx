@@ -1,4 +1,5 @@
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 import { StrictPropsWithChildren } from "@/types";
 
@@ -53,12 +54,23 @@ export default function BottomSheet({
   onClose,
   children,
 }: StrictPropsWithChildren<BottomSheetProps>) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.setAttribute("style", "overflow: hidden");
+
+      return () => {
+        document.body.removeAttribute("style");
+      };
+    }
+  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
         <Portal elementId="modal-root">
           <Backdrop isVisible={showBackdrop} onClick={onClose}>
             <Container
+              aria-modal={isOpen}
+              role="dialog"
               initial="hidden"
               animate="visible"
               exit="exit"
