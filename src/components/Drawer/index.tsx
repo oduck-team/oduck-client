@@ -1,4 +1,5 @@
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 import { StrictPropsWithChildren } from "@/types";
 
@@ -43,6 +44,15 @@ export default function Drawer({
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.setAttribute("style", "overflow: hidden");
+
+      return () => {
+        document.body.removeAttribute("style");
+      };
+    }
+  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
