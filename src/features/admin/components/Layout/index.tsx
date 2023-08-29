@@ -15,7 +15,7 @@ import Sidebar from "./Sidebar";
 const SIDEBAR_WIDTH = 256;
 
 export default function Layout() {
-  const [isNavbarOpened, setIsNavbarOpened] = useState(true);
+  const [isNavbarOpen, setIsNavbarOpen] = useState(false);
   const theme = useMantineTheme();
 
   return (
@@ -27,7 +27,7 @@ export default function Layout() {
           width={{ base: "100%", sm: SIDEBAR_WIDTH }}
           p="sm"
           hiddenBreakpoint="sm"
-          hidden={!isNavbarOpened}
+          hidden={!isNavbarOpen}
         />
       }
       header={
@@ -40,8 +40,8 @@ export default function Layout() {
             Oduck
             <MediaQuery largerThan="sm" styles={{ display: "none" }}>
               <Burger
-                opened={isNavbarOpened}
-                onClick={() => setIsNavbarOpened((prev) => !prev)}
+                opened={isNavbarOpen}
+                onClick={() => setIsNavbarOpen((prev) => !prev)}
                 size="sm"
                 mr="xl"
                 color={theme.colors.gray[6]}
