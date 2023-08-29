@@ -47,7 +47,6 @@ const 이런_애니_어떠세요 = [
 
 export default function Search() {
   const [searchInputValue, setSearchInputValue] = useState(""); // 사용자가 입력하는 검색어
-  const [finalSearchKeyword, setFinalSearchKeyword] = useState(""); // 사용자가 실제로 검색을 실행할 때 사용하는 검색어
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchInputValue(e.target.value);
@@ -64,7 +63,6 @@ export default function Search() {
 
   const handleClickPopularKeyowrd = (value: string) => {
     setSearchInputValue(value);
-    setFinalSearchKeyword(value);
   };
 
   return (
