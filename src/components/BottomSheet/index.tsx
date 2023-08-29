@@ -56,13 +56,16 @@ export default function BottomSheet({
 }: StrictPropsWithChildren<BottomSheetProps>) {
   useEffect(() => {
     if (isOpen) {
-      document.body.setAttribute(
-        "style",
-        "position:relative; overflow: hidden;",
-      );
+      document.body.style.cssText = `
+        position: fixed; 
+        top: -${window.scrollY}px;
+        overflow-y: auto;
+        width: 100%;`;
 
       return () => {
-        document.body.removeAttribute("style");
+        const scrollY = document.body.style.top;
+        document.body.style.cssText = "";
+        window.scrollTo(0, parseInt(scrollY || "0") * -1);
       };
     }
   }, [isOpen]);
