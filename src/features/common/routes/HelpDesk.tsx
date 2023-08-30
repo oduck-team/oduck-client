@@ -13,8 +13,15 @@ export default function HelpDesk() {
   const [translateX, setTranslateX] = useState(0);
   const [email, setEmail] = useState("");
   const [inquiryContent, setInquiryContent] = useState("");
-  const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState<number>(0);
   const [contentError, setContentError] = useState(false);
+
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const emailErrorMessage = [
+    "",
+    "이메일을 입력해 주세요.",
+    "이메일 형식이 올바르지 않습니다.",
+  ];
 
   const handlerItem = (i: number) => {
     setSelected(i + 1);
@@ -24,7 +31,7 @@ export default function HelpDesk() {
   const goPrev = () => {
     setTranslateX(0);
     setSelected(0);
-    setEmailError(false);
+    setEmailError(0);
     setContentError(false);
     setEmail("");
     setInquiryContent("");
@@ -39,8 +46,9 @@ export default function HelpDesk() {
   };
 
   const send = () => {
-    if (email === "") setEmailError(true);
-    else setEmailError(false);
+    if (email === "") setEmailError(1);
+    else if (!emailPattern.test(email)) setEmailError(2);
+    else setEmailError(0);
     if (inquiryContent === "") setContentError(true);
     else setContentError(false);
   };
@@ -76,8 +84,8 @@ export default function HelpDesk() {
               type="email"
               placeholder="답변 받을 이메일 주소"
               onChange={handlerEmailChange}
-              warn={emailError}
-              message="이메일을 입력해 주세요."
+              warn={Boolean(emailError)}
+              message={emailError ? emailErrorMessage[emailError] : ""}
               icon={<Mail width={20} height={20} />}
               required
             />
