@@ -4,7 +4,9 @@ import { RouteObject } from "react-router-dom";
 import { StrictPropsWithChildren } from "@/types";
 
 const Layout = lazy(() => import("@/features/admin/components/Layout"));
-const Dashboard = lazy(() => import("@/features/admin/routes/Dashboard"));
+const Dashboard = lazy(
+  () => import("@/features/admin/common/routes/Dashboard"),
+);
 
 function AdminRoute({ children }: StrictPropsWithChildren) {
   // TODO: ADMIN ROLE 확인
