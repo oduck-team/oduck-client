@@ -39,12 +39,12 @@ const items: IMenu[] = [
       {
         id: "animation-list",
         label: "목록",
-        to: "/amdin/animations",
+        to: "/admin/animations",
       },
       {
         id: "genres",
         label: "장르",
-        to: "/amdin/animations/genres",
+        to: "/admin/animations/genres",
       },
       {
         id: "studios",
