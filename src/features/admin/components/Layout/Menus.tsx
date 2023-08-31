@@ -38,17 +38,17 @@ const items: IMenu[] = [
     children: [
       {
         id: "animation-list",
-        label: "목록",
+        label: "애니 목록",
         to: "/admin/animations",
       },
       {
         id: "genres",
-        label: "장르",
+        label: "애니 장르",
         to: "/admin/animations/genres",
       },
       {
         id: "studios",
-        label: "제작",
+        label: "애니 제작",
         to: "/admin/animations/studios",
       },
     ],
