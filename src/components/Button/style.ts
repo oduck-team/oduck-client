@@ -22,12 +22,18 @@ const buttonSizes: Record<Size, SerializedStyles> = {
     border-radius: 8px;
     font-size: 16px;
   `,
+  xl: css`
+    height: 48px;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+  `,
 };
 
 function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
   const isNeutral = color === "neutral";
   const solidColor = isNeutral
-    ? theme.colors["neutral"]["20"]
+    ? theme.colors["neutral"]["05"]
     : theme.colors[color]["60"];
   const solidPressedColor = isNeutral
     ? theme.colors["neutral"]["30"]
@@ -133,6 +139,11 @@ const iconButtonSizes: Record<Size, SerializedStyles> = {
   lg: css`
     height: 40px;
     width: 40px;
+    font-size: 20px;
+  `,
+  xl: css`
+    height: 48px;
+    width: 48px;
     font-size: 20px;
   `,
 };
