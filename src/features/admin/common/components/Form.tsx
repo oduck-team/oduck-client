@@ -1,9 +1,10 @@
 import { Card } from "@mantine/core";
+import { FormEvent } from "react";
 
 import { StrictPropsWithChildren } from "@/types";
 
 interface FormProps {
-  onSubmit?: () => void;
+  onSubmit?: (e: FormEvent) => void;
 }
 
 // https://github.com/mantinedev/mantine/issues/2853
