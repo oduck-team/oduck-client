@@ -28,6 +28,9 @@ export function useAnimation() {
       setError(new Error("invalid animation id")); // TODO: 상수 처리
       return;
     }
+    /**
+     * StrictMode에서 useParams에서 꺼내온 id가 각각 다른 값으로 인식되어 api 요청이 4번 될 수 있음
+     */
     fetchAnimation(animationId);
   }, [id]);
 
