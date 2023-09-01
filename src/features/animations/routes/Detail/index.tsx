@@ -34,10 +34,16 @@ export default function AnimationDetail() {
       <Container>
         <Hero animation={animation} />
         <SectionDivider />
-        <PlotAndInfo />
+
+        {/* 줄거리 및 정보 */}
+        <PlotAndInfo animation={animation} />
         <SectionDivider />
+
+        {/* 평점 */}
         <Ratings />
         <SectionDivider />
+
+        {/* 리뷰 목록 */}
         <Reviews />
       </Container>
     );

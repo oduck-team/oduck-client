@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Rating from "@/components/Rating";
+import { CDN_URL } from "@/config";
 
 import { IAnimation } from "../../types";
 
@@ -18,16 +19,33 @@ interface AnimationHeroProps {
 }
 
 export default function Hero({ animation }: AnimationHeroProps) {
+  let rating: string;
+  switch (animation.rating) {
+    case "ADULT":
+      rating = "성인";
+      break;
+    case "FIFTEEN":
+      rating = "15세";
+      break;
+    case "TWELVE":
+      rating = "12세";
+      break;
+    case "ALL":
+    default:
+      rating = "전체";
+  }
+
   return (
     <Container>
       <Banner>
-        {/* TODO 링크 */}
-        <Image url={animation.imageUrl}></Image>
+        <Image url={`${CDN_URL}${animation.imageUrl}`}></Image>
         <ImageGradient />
         <Info>
           <h1>{animation.name}</h1>
           <div style={{ width: "100%", paddingTop: "8px" }}>
-            <span>판타지 | {animation.episodeNumber}부작 | 완결 | 15세</span>
+            <span>
+              판타지 | {animation.episodeNumber}부작 | 완결 | {rating}
+            </span>
           </div>
         </Info>
       </Banner>

@@ -12,5 +12,12 @@ export interface IAnimation {
   status: Status;
   isReleased: boolean;
   imageUrl: string;
-  studios: string[];
+  studios: IStudio[];
+}
+// TODO: 후에 분리
+export interface IStudio {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
 }

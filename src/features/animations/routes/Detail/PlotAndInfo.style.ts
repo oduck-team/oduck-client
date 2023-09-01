@@ -9,3 +9,24 @@ export const Plot = styled.p<{ isExpanded: boolean }>`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
+export const Grid = styled.ul`
+  display: grid;
+  grid-template-columns: max-content auto;
+  gap: 4px;
+  list-style: none;
+
+  & > li {
+    display: contents; // li 요소를 없는 것처럼 처리
+  }
+
+  & > li > span:first-of-type {
+    color: ${({ theme }) => theme.colors.neutral["70"]};
+    padding-right: 8px;
+    max-width: 140px;
+  }
+
+  & > li > span:last-of-type {
+    text-align: left;
+  }
+`;
