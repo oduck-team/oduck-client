@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 
+import { Sizes } from "./ActionChip.style";
+
 import { ChipProps } from ".";
 
 export const Container = styled.button<Omit<ChipProps, "styleType" | "icon">>`
   width: fit-content;
-  height: 28px;
+  ${({ size = "md" }) => Sizes[size]}
   padding: 6px 10px;
   display: inline-flex;
   justify-content: center;

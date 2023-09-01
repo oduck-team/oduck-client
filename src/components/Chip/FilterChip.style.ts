@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 
+import { Sizes } from "./ActionChip.style";
+
 import { ChipProps } from ".";
 
 export const Container = styled.button<Omit<ChipProps, "styleType">>`
   width: fit-content;
-  height: 32px;
+  ${({ size = "md" }) => Sizes[size]}
   padding: 8px 16px;
   display: inline-flex;
   justify-content: center;
@@ -21,6 +23,7 @@ export const Container = styled.button<Omit<ChipProps, "styleType">>`
   ${({ active }) => active && `font-weight: 700`};
   letter-spacing: normal;
   cursor: pointer;
+  flex-shrink: 0;
 
   & > svg {
     width: 16px;
