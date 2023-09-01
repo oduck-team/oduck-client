@@ -81,6 +81,7 @@ export default function BottomSheet({
               animate="visible"
               exit="exit"
               variants={variants}
+              onClick={(e) => e.stopPropagation()}
             >
               {header && (
                 <Header>

@@ -49,6 +49,12 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Footer = styled.div`
