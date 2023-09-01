@@ -1,4 +1,5 @@
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 import { StrictPropsWithChildren } from "@/types";
 
@@ -10,22 +11,31 @@ import { Container } from "./style";
 export type Size = "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
-  readonly isOpened?: boolean;
+  readonly isOpen?: boolean;
   readonly size?: Size;
   readonly showBackdrop?: boolean;
   readonly onClose: () => void;
 }
 
 export default function Modal({
-  isOpened = false,
+  isOpen = false,
   size = "sm",
   showBackdrop = true,
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.setAttribute("style", "overflow: hidden");
+
+      return () => {
+        document.body.removeAttribute("style");
+      };
+    }
+  }, [isOpen]);
   return (
     <AnimatePresence>
-      {isOpened && (
+      {isOpen && (
         <Portal elementId="modal-root">
           <Backdrop isVisible={showBackdrop} onClick={onClose}>
             <Container size={size} onClick={(e) => e.stopPropagation()}>
