@@ -26,10 +26,10 @@ ReviewSimpleCard.Actions = Actions;
 
 // =================================== Header ===================================
 interface HeaderProps {
-  readonly rating: number;
-  readonly userId: string;
-  readonly userName: string;
-  readonly userImage?: string;
+  rating: number;
+  userId: string;
+  userName: string;
+  userImage?: string;
 }
 function Header({ rating, userId, userName, userImage }: HeaderProps) {
   return (
@@ -41,10 +41,10 @@ function Header({ rating, userId, userName, userImage }: HeaderProps) {
 }
 
 interface UserProps {
-  readonly id: string;
-  readonly name: string;
-  readonly image?: string;
-  readonly onClick?: () => void;
+  id: string;
+  name: string;
+  image?: string;
+  onClick?: () => void;
 }
 function User({ id, name, image }: UserProps) {
   return (

@@ -11,18 +11,18 @@ import {
 } from "./style";
 
 interface StatItemProps {
-  readonly title?: string;
-  readonly data?: string;
-  readonly text?: string;
+  title?: string;
+  data?: string;
+  text?: string;
 }
 
 export interface StatStyleProps {
-  readonly primary?: boolean;
+  primary?: boolean;
 }
 
 interface StatProps extends StatStyleProps, ComponentProps<"div"> {
-  readonly items: StatItemProps[];
-  readonly className?: string;
+  items: StatItemProps[];
+  className?: string;
 }
 
 export default function Stat({ items, primary = false, ...props }: StatProps) {

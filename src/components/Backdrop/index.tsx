@@ -10,9 +10,9 @@ const variants: Variants = {
 };
 
 export interface BackdropProps {
-  readonly isVisible?: boolean;
-  readonly className?: string;
-  readonly onClick: () => void;
+  isVisible?: boolean;
+  className?: string;
+  onClick: () => void;
 }
 
 export default function Backdrop({
