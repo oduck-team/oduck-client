@@ -1,10 +1,16 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Animation } from "./AnimationCarousel";
+interface CardProps {
+  size?: "md" | "lg";
+}
 
-export const Container = styled.div`
-  width: 160px;
+interface ImageProps extends CardProps {
+  image: string;
+}
+
+export const Container = styled.div<CardProps>`
+  width: ${({ size = "md" }) => (size === "md" ? `160px` : `100%`)};
   flex-shrink: 0;
   & > a {
     display: flex;
@@ -14,9 +20,9 @@ export const Container = styled.div`
   }
 `;
 
-export const Image = styled.div<Pick<Animation, "image">>`
+export const Image = styled.div<ImageProps>`
   width: 100%;
-  height: 110px;
+  height: ${({ size = "md" }) => (size === "md" ? `110px` : `152px`)};
   border-radius: 5px;
   ${({ image }) => css`
     background:
@@ -27,9 +33,9 @@ export const Image = styled.div<Pick<Animation, "image">>`
   background-position: center;
 `;
 
-export const InfoContainer = styled.div`
+export const InfoContainer = styled.div<CardProps>`
   width: 100%;
-  height: 65px;
+  height: ${({ size = "md" }) => (size === "md" ? `65px` : `fit-content`)};
   display: flex;
   flex-direction: column;
   align-items: flex-start;

@@ -12,14 +12,16 @@ import { Animation } from "./AnimationCarousel";
 
 export default function AnimationCard({
   ani,
+  size,
 }: {
   ani: Omit<Animation, "review">;
+  size?: "md" | "lg";
 }) {
   return (
-    <Container>
+    <Container size={size}>
       <Link to={`/animations/${ani.id}`}>
-        <Image image={ani.image} />
-        <InfoContainer>
+        <Image image={ani.image} size={size} />
+        <InfoContainer size={size}>
           <Title>{ani.title}</Title>
           <Rating>
             <Star />
