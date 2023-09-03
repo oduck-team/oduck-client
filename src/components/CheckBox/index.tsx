@@ -5,13 +5,13 @@ import { Container } from "./style";
 export type Size = "lg" | "md";
 
 export interface StyleProps {
-  readonly size?: Size;
-  readonly checked?: boolean;
-  readonly disabled?: boolean;
+  size?: Size;
+  checked?: boolean;
+  disabled?: boolean;
 }
 
 interface CheckBoxProps extends StyleProps {
-  readonly onClick: () => void;
+  onClick: () => void;
 }
 
 export default function CheckBox({
