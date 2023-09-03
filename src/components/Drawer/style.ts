@@ -14,7 +14,7 @@ const positions: Record<Position, SerializedStyles> = {
     left: 0;
     box-shadow:
       0px 5px 15px 0px rgba(0, 0, 0, 0.1),
-      0px 3px 6px 0px rgba(0, 0, 0, 0.05);
+      0px 9px 12px 0px rgba(0, 0, 0, 0.15);
   `,
   bottom: css`
     width: 100%;
@@ -22,8 +22,8 @@ const positions: Record<Position, SerializedStyles> = {
     bottom: 0;
     left: 0;
     box-shadow:
-      0px -5px 15px 0px rgba(0, 0, 0, 0.1),
-      0px -3px 6px 0px rgba(0, 0, 0, 0.05);
+      0px 5px 15px 0px rgba(0, 0, 0, 0.1),
+      0px 9px 12px 0px rgba(0, 0, 0, 0.15);
   `,
   left: css`
     width: 288px;
@@ -31,8 +31,8 @@ const positions: Record<Position, SerializedStyles> = {
     top: 0;
     left: 0;
     box-shadow:
-      -5px 0px 15px 0px rgba(0, 0, 0, 0.1),
-      -3px 0px 6px 0px rgba(0, 0, 0, 0.05);
+      5px 0px 15px 0px rgba(0, 0, 0, 0.1),
+      9px 0px 12px 0px rgba(0, 0, 0, 0.15);
   `,
   right: css`
     width: 288px;
@@ -40,8 +40,8 @@ const positions: Record<Position, SerializedStyles> = {
     top: 0;
     right: 0;
     box-shadow:
-      5px 0px 15px 0px rgba(0, 0, 0, 0.1),
-      3px 0px 6px 0px rgba(0, 0, 0, 0.05);
+      -5px 0px 15px 0px rgba(0, 0, 0, 0.1),
+      -9px 0px 12px 0px rgba(0, 0, 0, 0.15);
   `,
 };
 
@@ -53,7 +53,7 @@ export const Container = styled(motion.div)<Pick<DrawerProps, "position">>`
   position: fixed;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.neutral["05"]};
 
   ${({ position }) => positions[position]}
 `;

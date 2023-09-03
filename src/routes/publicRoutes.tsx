@@ -13,6 +13,7 @@ const Search = lazy(() => import("@/features/common/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const NotFound = lazy(() => import("@/features/common/routes/404"));
+const ServerError = lazy(() => import("@/features/common/routes/500"));
 
 export const publicRoutes: RouteObject[] = [
   {
@@ -52,6 +53,10 @@ export const publicRoutes: RouteObject[] = [
         element: <Profile />,
       },
     ],
+  },
+  {
+    path: "/error",
+    element: <ServerError />,
   },
   {
     path: "*",

@@ -14,6 +14,8 @@ export interface DrawerProps {
   readonly isOpen?: boolean;
   readonly showBackdrop?: boolean;
   readonly position: Position;
+  readonly style?: React.CSSProperties;
+  readonly className?: string;
   readonly onClose: () => void;
 }
 
@@ -41,6 +43,8 @@ export default function Drawer({
   isOpen = false,
   showBackdrop = true,
   position,
+  style,
+  className = "",
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
@@ -76,6 +80,8 @@ export default function Drawer({
                 damping: 30,
                 duration: 0.15,
               }}
+              className={className}
+              style={style}
               onClick={(e) => e.stopPropagation()}
             >
               <Header>{title}</Header>
