@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import Button from "@/components/Button";
 import Head from "@/components/Head";
 import { getAnimations } from "@/features/animations/apis/getAnimations";
-
-import { Status } from "../apis/createAnimation";
+import { IAnimation, Status } from "@/features/animations/types";
 
 export default function AnimationList() {
-  const [animations, setAnimations] = useState([]);
+  const [animations, setAnimations] = useState<IAnimation[]>([]);
 
   useEffect(() => {
     getAnimations().then((data) => setAnimations(data));

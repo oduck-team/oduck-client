@@ -14,17 +14,15 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
+import Form from "@/features/admin/common/components/Form";
+import QuantityInput from "@/features/admin/common/components/QuantityInput";
+import { BroadcastType, Rating, Status } from "@/features/animations/types";
 import { useUploadImage } from "@/features/files/hooks/useUploadImage";
 
-import Form from "../../common/components/Form";
-import { QuantityInput } from "../../common/components/QuantityInput";
 import {
-  BroadcastType,
   CreateAnimationDto,
-  Rating,
-  Status,
   createAnimation,
-} from "../apis/createAnimation";
+} from "../../apis/createAnimation";
 
 // input내 요소 배치 순서
 const INPUT_WRAPPER_ORDER: ("label" | "input" | "description" | "error")[] = [
