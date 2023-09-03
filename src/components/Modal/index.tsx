@@ -11,10 +11,10 @@ import { Container } from "./style";
 export type Size = "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
-  readonly isOpen?: boolean;
-  readonly size?: Size;
-  readonly showBackdrop?: boolean;
-  readonly onClose: () => void;
+  isOpen?: boolean;
+  size?: Size;
+  showBackdrop?: boolean;
+  onClose: () => void;
 }
 
 export default function Modal({

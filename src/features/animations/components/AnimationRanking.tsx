@@ -16,17 +16,17 @@ import {
 
 // 임시 정의
 export interface IRanking {
-  readonly id: string;
-  readonly title: string;
-  readonly image: string;
-  readonly genre: string;
-  readonly rank: number;
-  readonly rating: number;
+  id: string;
+  title: string;
+  image: string;
+  genre: string;
+  rank: number;
+  rating: number;
 }
 
 interface AnimationRankingProps {
-  readonly title: string;
-  readonly contents: IRanking[];
+  title: string;
+  contents: IRanking[];
 }
 
 export default function AnimationRanking({

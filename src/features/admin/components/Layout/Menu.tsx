@@ -1,17 +1,17 @@
 import { NavLink } from "@mantine/core";
 
 export interface IMenu {
-  readonly id: string;
-  readonly label: React.ReactNode;
-  readonly icon?: React.ReactNode;
-  readonly to: string;
-  readonly initialOpened?: boolean; // 자식 아이템 목록 열림 여부
-  readonly children?: IMenu[];
+  id: string;
+  label: React.ReactNode;
+  icon?: React.ReactNode;
+  to: string;
+  initialOpened?: boolean; // 자식 아이템 목록 열림 여부
+  children?: IMenu[];
 }
 
 interface MenuProps {
-  readonly menu: IMenu;
-  readonly onClick: (e: React.MouseEvent, to: string) => void;
+  menu: IMenu;
+  onClick: (e: React.MouseEvent, to: string) => void;
 }
 
 export default function Menu({ menu, onClick }: MenuProps) {

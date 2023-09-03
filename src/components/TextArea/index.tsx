@@ -3,13 +3,13 @@ import { ComponentProps } from "react";
 import { Message, TextareaBox, TextareaContainer } from "./style";
 
 export interface TextareaProps extends ComponentProps<"textarea"> {
-  readonly warn?: boolean;
-  readonly message?: string;
-  readonly className?: string;
+  warn?: boolean;
+  message?: string;
+  className?: string;
 }
 
 export interface TextareaBoxProps extends ComponentProps<"textarea"> {
-  readonly warn?: boolean;
+  warn?: boolean;
 }
 
 export default function Textarea({

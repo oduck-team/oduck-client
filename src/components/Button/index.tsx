@@ -10,12 +10,12 @@ type ColorKeys = "primary" | "neutral" | "warn";
 export type Size = "xl" | "lg" | "md" | "sm";
 
 export interface ButtonProps extends ComponentProps<"button"> {
-  readonly name: string;
-  readonly styleType?: Style;
-  readonly color?: Color;
-  readonly size?: Size;
-  readonly isBlock?: boolean;
-  readonly icon?: React.ReactNode;
+  name: string;
+  styleType?: Style;
+  color?: Color;
+  size?: Size;
+  isBlock?: boolean;
+  icon?: React.ReactNode;
 }
 
 export default function Button({

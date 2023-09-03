@@ -35,15 +35,15 @@ const variants = {
 };
 
 export interface BottomSheetProps {
-  readonly isOpen?: boolean;
-  readonly showBackdrop?: boolean;
-  readonly header?: {
+  isOpen?: boolean;
+  showBackdrop?: boolean;
+  header?: {
     left?: React.ReactNode;
     title?: string;
     right?: React.ReactNode;
   };
-  readonly footer?: React.ReactNode;
-  readonly onClose: () => void;
+  footer?: React.ReactNode;
+  onClose: () => void;
 }
 
 export default function BottomSheet({

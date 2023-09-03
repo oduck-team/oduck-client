@@ -10,13 +10,13 @@ import { Backdrop, Container, Content, Header } from "./style";
 export type Position = "top" | "right" | "bottom" | "left";
 
 export interface DrawerProps {
-  readonly title?: React.ReactNode;
-  readonly isOpen?: boolean;
-  readonly showBackdrop?: boolean;
-  readonly position: Position;
-  readonly style?: React.CSSProperties;
-  readonly className?: string;
-  readonly onClose: () => void;
+  title?: React.ReactNode;
+  isOpen?: boolean;
+  showBackdrop?: boolean;
+  position: Position;
+  style?: React.CSSProperties;
+  className?: string;
+  onClose: () => void;
 }
 
 const variants = {

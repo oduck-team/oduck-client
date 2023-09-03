@@ -1,17 +1,17 @@
 import { Container, Item } from "./style";
 
 export interface INavigationItem {
-  readonly id: string;
-  readonly to: string;
-  readonly icon: React.ReactNode;
-  readonly label: React.ReactNode;
+  id: string;
+  to: string;
+  icon: React.ReactNode;
+  label: React.ReactNode;
 }
 
 interface BottomNavigationProps {
-  readonly title: string;
-  readonly activeId?: string; // 활성화(선택된) item의 id
-  readonly items: INavigationItem[];
-  readonly onClickItem: (id: string, e: React.MouseEvent) => void;
+  title: string;
+  activeId?: string; // 활성화(선택된) item의 id
+  items: INavigationItem[];
+  onClickItem: (id: string, e: React.MouseEvent) => void;
 }
 
 export default function BottomNavigation({
