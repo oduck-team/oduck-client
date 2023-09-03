@@ -129,38 +129,33 @@ export default function AnimationList() {
         isOpen={bottomSheetOpen}
         onClose={() => setBottomSheetOpen(false)}
         footer={
-          <OkButton
-            name="적용 완료"
-            size="lg"
-            style={{ width: "100%" }}
-            onClick={handlerOkClick}
-          >
-            적용 완료
-          </OkButton>
+          <Footer>
+            <ResetButton
+              styleType="text"
+              size="sm"
+              name="초기화"
+              onClick={resetFilter}
+              color="neutral"
+            >
+              필터 초기화
+            </ResetButton>
+            <OkButton name="적용 완료" size="lg" onClick={handlerOkClick}>
+              적용 완료
+            </OkButton>
+          </Footer>
         }
       >
         <FilterContainer>
           <Cancel width={24} height={24} onClick={handlerCloseClick} />
           {filtered.length > 0 && (
             <ChipsContiner style={{ marginBottom: "24px" }}>
-              <h3 style={{ marginTop: "0" }}>
-                선택된 필터
-                <Button
-                  styleType="text"
-                  size="sm"
-                  name="초기화"
-                  onClick={resetFilter}
-                >
-                  초기화
-                </Button>
-              </h3>
+              <h3 style={{ marginTop: "0" }}>선택된 필터</h3>
               <Chips>
                 {filtered.map((item, i) => (
                   <Chip
                     key={i}
                     active={filtered.includes(item)}
                     styleType="filter"
-                    size="lg"
                     onClick={() => handlerOptionClick(item)}
                     icon={<Cancel />}
                   >
@@ -178,7 +173,6 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(genre)}
                   styleType="filter"
-                  size="lg"
                   onClick={() => handlerOptionClick(genre)}
                 >
                   {genre}
@@ -194,7 +188,6 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(season)}
                   styleType="filter"
-                  size="lg"
                   onClick={() => handlerOptionClick(season)}
                 >
                   {season}
@@ -210,7 +203,6 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(type)}
                   styleType="filter"
-                  size="lg"
                   onClick={() => handlerOptionClick(type)}
                 >
                   {type}
@@ -226,7 +218,6 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(status)}
                   styleType="filter"
-                  size="lg"
                   onClick={() => handlerOptionClick(status)}
                 >
                   {status}
@@ -242,7 +233,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(num)}
                   styleType="filter"
-                  size="lg"
+                  // size="lg"
                   onClick={() => handlerOptionClick(num)}
                 >
                   {num}
@@ -304,27 +295,37 @@ const ChipsContiner = styled.div`
   position: relative;
   h3 {
     ${({ theme }) => theme.typo["body-1-m"]};
-    margin: 24px 0 12px;
+    margin: 24px 0 8px;
     display: flex;
     align-items: center;
-
-    button {
-      ${({ theme }) => theme.typo["body-3-r"]};
-      color: ${({ theme }) => theme.colors["neutral"]["50"]};
-      letter-spacing: normal;
-      margin-left: 3px;
-    }
   }
 `;
 
 const Chips = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 8px 4px;
   flex-wrap: wrap;
 `;
 
+const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 40px;
+  button {
+    flex-shrink: 0;
+  }
+`;
+
 const OkButton = styled(Button)`
+  width: 208px;
   span {
     ${({ theme }) => theme.typo["title-3-m"]};
   }
+`;
+
+const ResetButton = styled(Button)`
+  padding: 0;
+  color: ${({ theme }) => theme.colors["neutral"]["50"]};
 `;
