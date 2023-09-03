@@ -8,7 +8,7 @@ export const Container = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  border: 1px solid ${({ theme }) => theme.colors["primary"]["60"]};
+  border: 1px solid ${({ theme }) => theme.colors["primary"]["50"]};
   background-color: #ffffff;
   color: ${({ theme }) => theme.colors["primary"]["60"]};
   ${({ theme }) => theme.typo["body-2-m"]};
