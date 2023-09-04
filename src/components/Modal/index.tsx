@@ -5,7 +5,12 @@ import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
 
-import { Backdrop, Container } from "./style";
+import {
+  ActionsContainer,
+  Backdrop,
+  Container,
+  ContentContainer,
+} from "./style";
 
 export type Size = "sm" | "md" | "lg" | "xl";
 
@@ -38,4 +43,36 @@ export default function Modal({
       )}
     </AnimatePresence>
   );
+}
+
+Modal.Content = Content;
+Modal.Actions = Actions;
+
+// =================================== Content ===================================
+/**
+ * @description 모달에 들어갈 컨텐츠
+ */
+function Content({ children }: StrictPropsWithChildren) {
+  return <ContentContainer>{children}</ContentContainer>;
+}
+
+// =================================== Actions ===================================
+type Direction = "row" | "col";
+
+export interface ModalActionsProps {
+  /**
+   * 정렬 방향
+   * @default row
+   */
+  direction?: Direction;
+}
+
+/**
+ * @description 모달에 들어갈 액션들. 확인, 닫기 버튼 등
+ */
+function Actions({
+  direction = "row",
+  children,
+}: StrictPropsWithChildren<ModalActionsProps>) {
+  return <ActionsContainer direction={direction}>{children}</ActionsContainer>;
 }
