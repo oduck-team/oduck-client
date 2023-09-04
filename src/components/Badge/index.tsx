@@ -8,11 +8,11 @@ type BadgeStyle = "fill" | "inverted";
 type BadgeColor = keyof typeof theme.colors;
 
 export interface BadgeProps extends ComponentProps<"span"> {
-  readonly isDot?: boolean;
-  readonly styleType?: BadgeStyle;
-  readonly color?: BadgeColor;
-  readonly count?: number;
-  readonly overflowCount?: number;
+  isDot?: boolean;
+  styleType?: BadgeStyle;
+  color?: BadgeColor;
+  count?: number;
+  overflowCount?: number;
 }
 
 export default function Badge({

@@ -3,15 +3,15 @@ import { ComponentProps } from "react";
 import { Message, TextInputBox, TextInputContainer } from "./style";
 
 export interface TextInputProps extends ComponentProps<"input"> {
-  readonly warn?: boolean;
-  readonly message?: string;
-  readonly className?: string;
-  readonly icon?: React.ReactNode;
+  warn?: boolean;
+  message?: string;
+  className?: string;
+  icon?: React.ReactNode;
 }
 
 export interface TextInputBoxProps extends ComponentProps<"input"> {
-  readonly warn?: boolean;
-  readonly hasIcon?: boolean;
+  warn?: boolean;
+  hasIcon?: boolean;
 }
 
 export default function TextInput({

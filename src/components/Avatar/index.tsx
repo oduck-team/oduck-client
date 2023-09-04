@@ -3,9 +3,9 @@ import { Container, UserImage, UserName } from "./style";
 export type Size = "xl" | "lg" | "md" | "sm";
 
 export interface AvatarProps {
-  readonly userName: string;
-  readonly src?: string;
-  readonly size?: Size;
+  userName: string;
+  src?: string;
+  size?: Size;
 }
 
 export default function Avatar({ userName, src, size = "md" }: AvatarProps) {

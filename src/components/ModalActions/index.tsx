@@ -5,7 +5,7 @@ import { Container } from "./style";
 type Direction = "row" | "col";
 
 export interface ModalActionsProps {
-  readonly direction?: Direction; // 정렬 방향
+  direction?: Direction; // 정렬 방향
 }
 
 export default function ModalActions({

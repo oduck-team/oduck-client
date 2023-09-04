@@ -8,11 +8,11 @@ import Menus from "./Menus";
 import { Profile, UserName, NeedLogin } from "./Sidebar.style";
 
 interface SidebarProps {
-  readonly isVisible: boolean;
-  readonly userName?: string;
-  readonly userImage?: string;
-  readonly onClose: () => void;
-  readonly onClickProfile: (e: React.MouseEvent) => void;
+  isVisible: boolean;
+  userName?: string;
+  userImage?: string;
+  onClose: () => void;
+  onClickProfile: (e: React.MouseEvent) => void;
 }
 
 export default function Sidebar({

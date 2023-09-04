@@ -6,7 +6,7 @@ import {
   rem,
 } from "@mantine/core";
 import { Plus, Minus } from "iconoir-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -57,7 +57,7 @@ interface QuantityInputProps {
   onChange: (value: number) => void;
 }
 
-export function QuantityInput({
+export default function QuantityInput({
   min = 1,
   max = 10,
   value = 0,

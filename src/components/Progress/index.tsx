@@ -5,12 +5,12 @@ import { theme } from "@/styles/theme";
 import { Container } from "./style";
 
 export interface ProgressProps extends ComponentProps<"div"> {
-  readonly max?: number;
-  readonly min?: number;
-  readonly value?: number;
-  readonly color?: keyof typeof theme.colors;
-  readonly height?: number;
-  readonly isRounded?: boolean;
+  max?: number;
+  min?: number;
+  value?: number;
+  color?: keyof typeof theme.colors;
+  height?: number;
+  isRounded?: boolean;
 }
 
 export default function Progress({

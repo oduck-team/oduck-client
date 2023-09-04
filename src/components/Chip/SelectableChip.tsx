@@ -3,13 +3,19 @@ import { Container } from "./SelectableChip.style";
 import { ChipProps } from ".";
 
 export default function SelectableChip({
+  size,
   active = false,
   className,
   children,
   onClick,
 }: Omit<ChipProps, "styleType" | "icon">) {
   return (
-    <Container className={className} active={active} onClick={onClick}>
+    <Container
+      size={size}
+      active={active}
+      className={className}
+      onClick={onClick}
+    >
       {children}
     </Container>
   );

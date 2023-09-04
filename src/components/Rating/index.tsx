@@ -13,10 +13,10 @@ export type Size = "lg" | "md" | "sm";
 export type Color = "primary" | "secondary";
 
 export interface RatingProps extends ComponentProps<"div"> {
-  readonly size?: Size;
-  readonly color?: Color;
-  readonly readonly?: boolean;
-  readonly value?: number;
+  size?: Size;
+  color?: Color;
+  readonly?: boolean;
+  value?: number;
 }
 
 export default function Rating({
