@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 
+import { useScreenFix } from "@/hooks/useScreenFix";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -23,15 +23,8 @@ export default function Modal({
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.setAttribute("style", "overflow: hidden");
+  useScreenFix(isOpen);
 
-      return () => {
-        document.body.removeAttribute("style");
-      };
-    }
-  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (

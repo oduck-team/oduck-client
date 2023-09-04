@@ -1,38 +1,11 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 
+import { useScreenFix } from "@/hooks/useScreenFix";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
 
 import { Backdrop, Container, Header, Content, Footer } from "./style";
-
-const variants = {
-  hidden: {
-    y: "100%",
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  visible: {
-    y: "0%",
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    y: "100%",
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-};
 
 export interface BottomSheetProps {
   isOpen?: boolean;
@@ -54,21 +27,8 @@ export default function BottomSheet({
   onClose,
   children,
 }: StrictPropsWithChildren<BottomSheetProps>) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.cssText = `
-        position: fixed; 
-        top: -${window.scrollY}px;
-        overflow-y: auto;
-        width: 100%;`;
+  useScreenFix(isOpen);
 
-      return () => {
-        const scrollY = document.body.style.top;
-        document.body.style.cssText = "";
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
-      };
-    }
-  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -99,3 +59,30 @@ export default function BottomSheet({
     </AnimatePresence>
   );
 }
+
+const variants = {
+  hidden: {
+    y: "100%",
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  visible: {
+    y: "0%",
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    y: "100%",
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
