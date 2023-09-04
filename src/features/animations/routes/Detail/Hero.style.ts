@@ -95,3 +95,10 @@ export const Actions = styled.div`
 export const Stat = styled(BaseStat)`
   transform: translateY(-50%);
 `;
+
+export const BookmarkContainer = styled.div`
+  width: 100%;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: solid 1px ${({ theme }) => theme.colors.neutral["20"]};
+`;

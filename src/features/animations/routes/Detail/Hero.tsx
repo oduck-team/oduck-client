@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
 import Rating from "@/components/Rating";
 import { CDN_URL } from "@/config";
+import BookmarkButton from "@/features/bookmarks/components/BookmarkButton";
 
 import { IAnimation } from "../../types";
 
@@ -12,6 +12,7 @@ import {
   Info,
   Actions,
   Stat,
+  BookmarkContainer,
 } from "./Hero.style";
 
 interface AnimationHeroProps {
@@ -60,8 +61,8 @@ export default function Hero({ animation }: AnimationHeroProps) {
           ]}
           style={{ maxWidth: "600px", margin: "0 auto" }}
         />
-        <Rating size="lg" />
-        <div
+        <Rating size="lg" onClick={() => console.log("hi")} />
+        <BookmarkContainer
           style={{
             width: "100%",
             paddingTop: "16px",
@@ -69,16 +70,8 @@ export default function Hero({ animation }: AnimationHeroProps) {
             borderTop: "solid 1px #F1F1F1",
           }}
         >
-          <Button
-            name="입덕 버튼"
-            size="lg"
-            isBlock
-            color="neutral"
-            style={{ fontSize: "14px" }}
-          >
-            입덕하기
-          </Button>
-        </div>
+          <BookmarkButton isBookmarked={false} />
+        </BookmarkContainer>
       </Actions>
     </Container>
   );
