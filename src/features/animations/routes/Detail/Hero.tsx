@@ -1,6 +1,6 @@
-import Rating from "@/components/Rating";
 import { CDN_URL } from "@/config";
 import BookmarkButton from "@/features/bookmarks/components/BookmarkButton";
+import ReviewRating from "@/features/reviews/components/ReviewRating";
 
 import { IAnimation } from "../../types";
 
@@ -61,7 +61,7 @@ export default function Hero({ animation }: AnimationHeroProps) {
           ]}
           style={{ maxWidth: "600px", margin: "0 auto" }}
         />
-        <Rating size="lg" onClick={() => console.log("hi")} />
+        <ReviewRating />
         <BookmarkContainer
           style={{
             width: "100%",
