@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, Variants } from "framer-motion";
 
 import { useScreenFix } from "@/hooks/useScreenFix";
 import { StrictPropsWithChildren } from "@/types";
@@ -35,7 +35,14 @@ export default function Modal({
       {isOpen && (
         <Portal elementId="modal-root">
           <Backdrop isVisible={showBackdrop} onClick={onClose}>
-            <Container size={size} onClick={(e) => e.stopPropagation()}>
+            <Container
+              size={size}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              variants={varitends}
+              onClick={(e) => e.stopPropagation()}
+            >
               {children}
             </Container>
           </Backdrop>
@@ -47,6 +54,23 @@ export default function Modal({
 
 Modal.Content = Content;
 Modal.Actions = Actions;
+
+const varitends: Variants = {
+  initial: {
+    opacity: 0,
+    y: "30%",
+    transition: { duration: 0.3, ease: "easeInOut" },
+  },
+  animate: {
+    opacity: 1,
+    y: "0px",
+    transition: { duration: 0.3, ease: "easeInOut" },
+  },
+  exit: {
+    opacity: 0,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
+};
 
 // =================================== Content ===================================
 /**
