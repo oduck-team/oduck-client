@@ -3,10 +3,9 @@ import { useEffect } from "react";
 
 import { StrictPropsWithChildren } from "@/types";
 
-import Backdrop from "../Backdrop";
 import Portal from "../Portal";
 
-import { Container } from "./style";
+import { Backdrop, Container } from "./style";
 
 export type Size = "sm" | "md" | "lg" | "xl";
 
