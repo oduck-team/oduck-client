@@ -12,7 +12,8 @@ export const Container = styled.div<StatStyleProps>`
 
   ${({ primary, theme }) => css`
     backdrop-filter: ${primary ? "blur(38px)" : ""};
-    box-shadow: ${primary ? "0px 4px 22px 0px rgba(0, 0, 0, 0.08)" : ""};
+    box-shadow: ${primary ? "0px 4px 8px 0px rgba(0, 0, 0, 0.08)" : ""};
+    backdrop-filter: blur(38px);
     border-radius: ${primary ? "4px" : ""};
     border: ${primary ? `1px solid ${theme.colors.neutral["05"]}` : ""};
 

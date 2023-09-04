@@ -15,11 +15,11 @@ export const Container = styled.button<Omit<ChipProps, "styleType" | "icon">>`
   ${({ theme }) => theme.typo["body-3-r"]};
   border: ${({ active, theme }) =>
     active
-      ? `1px solid ${theme.colors["primary"]["60"]}`
-      : `1px solid ${theme.colors["neutral"]["30"]}`};
+      ? `1px solid ${theme.colors["primary"]["50"]}`
+      : `1px solid ${theme.colors["neutral"]["20"]}`};
   background-color: ${({ active, theme }) =>
     active ? theme.colors["primary"]["60"] : "#ffffff"};
   color: ${({ active, theme }) =>
-    active ? "#ffffff" : theme.colors["neutral"]["40"]};
+    active ? "#ffffff" : theme.colors["neutral"]["50"]};
   cursor: pointer;
 `;
