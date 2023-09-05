@@ -4,19 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { TabTitle, TabTitles } from "./style";
 
 export interface StyleProps {
-  readonly active?: boolean;
+  active?: boolean;
 }
 
 interface ItemProps {
-  readonly id: number;
-  readonly title?: string;
-  readonly children?: string;
-  readonly url?: string;
+  id: number;
+  title?: string;
+  children?: string;
+  url?: string;
 }
 
 interface TabsProps {
-  readonly defaultActiveId?: number;
-  readonly items: ItemProps[];
+  defaultActiveId?: number;
+  items: ItemProps[];
 }
 
 export default function Tabs({ defaultActiveId = 1, items }: TabsProps) {

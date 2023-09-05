@@ -18,7 +18,7 @@ export const TabTitle = styled.li<StyleProps>`
   border-bottom: ${({ active, theme }) =>
     active
       ? `2px solid ${theme.colors.primary["60"]}`
-      : `2px solid ${theme.colors.neutral["10"]}`};
+      : `2px solid ${theme.colors.neutral["20"]}`};
   ${({ theme }) => theme.typo["body-2-r"]}
   color: ${({ active, theme }) =>
     active ? theme.colors.primary["60"] : theme.colors.neutral["50"]};

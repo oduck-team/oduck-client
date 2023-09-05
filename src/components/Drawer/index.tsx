@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -9,11 +10,56 @@ import { Backdrop, Container, Content, Header } from "./style";
 export type Position = "top" | "right" | "bottom" | "left";
 
 export interface DrawerProps {
-  readonly title?: React.ReactNode;
-  readonly isOpen?: boolean;
-  readonly showBackdrop?: boolean;
-  readonly position: Position;
-  readonly onClose: () => void;
+  title?: React.ReactNode;
+  isOpen?: boolean;
+  showBackdrop?: boolean;
+  position: Position;
+  style?: React.CSSProperties;
+  className?: string;
+  onClose: () => void;
+}
+
+export default function Drawer({
+  title,
+  isOpen = false,
+  showBackdrop = true,
+  position,
+  style,
+  className = "",
+  onClose,
+  children,
+}: StrictPropsWithChildren<DrawerProps>) {
+  useScrollLock(isOpen);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <Portal elementId="modal-root">
+          <Backdrop isVisible={showBackdrop} onClick={onClose}>
+            <Container
+              position={position}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={variants[position]}
+              transition={{
+                type: "springs",
+                tiffness: 300,
+                damping: 30,
+                duration: 0.15,
+              }}
+              className={className}
+              style={style}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Header>{title}</Header>
+              <Content>{children}</Content>
+            </Container>
+          </Backdrop>
+        </Portal>
+      )}
+    </AnimatePresence>
+  );
 }
 
 const variants = {
@@ -34,40 +80,3 @@ const variants = {
     visible: { x: "0px" },
   },
 };
-
-export default function Drawer({
-  title,
-  isOpen = false,
-  showBackdrop = true,
-  position,
-  onClose,
-  children,
-}: StrictPropsWithChildren<DrawerProps>) {
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <Portal elementId="modal-root">
-          <Backdrop isVisible={showBackdrop} onClick={onClose}>
-            <Container
-              position={position}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={variants[position]}
-              transition={{
-                type: "springs",
-                tiffness: 300,
-                damping: 30,
-                duration: 0.15,
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Header>{title}</Header>
-              <Content>{children}</Content>
-            </Container>
-          </Backdrop>
-        </Portal>
-      )}
-    </AnimatePresence>
-  );
-}

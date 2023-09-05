@@ -121,10 +121,10 @@ const Container = styled.main`
 `;
 
 interface SearchbarProps extends ComponentProps<"div"> {
-  readonly value: string;
-  readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  readonly onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
-  readonly onCancel: () => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
+  onCancel: () => void;
 }
 
 function Searchbar({

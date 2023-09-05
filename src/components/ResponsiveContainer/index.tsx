@@ -3,7 +3,7 @@ import { StrictPropsWithChildren } from "@/types";
 import { Container } from "./style";
 
 interface ContainerProps {
-  readonly htmlType?: React.ElementType;
+  htmlType?: React.ElementType;
 }
 
 export default function ResponsiveContainer({

@@ -2,7 +2,9 @@ import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { motion } from "framer-motion";
 
-import { ModalProps, Size } from "./index";
+import BaseBackdrop from "../Backdrop";
+
+import { ModalActionsProps, ModalProps, Size } from "./";
 
 const sizes: Record<Size, SerializedStyles> = {
   sm: css`
@@ -19,6 +21,10 @@ const sizes: Record<Size, SerializedStyles> = {
   `,
 };
 
+export const Backdrop = styled(BaseBackdrop)`
+  z-index: ${({ theme }) => theme.zIndex.modal};
+`;
+
 export const Container = styled(motion.div)<Pick<ModalProps, "size">>`
   position: fixed;
   top: 40%;
@@ -28,8 +34,23 @@ export const Container = styled(motion.div)<Pick<ModalProps, "size">>`
     0px 10px 32px -4px rgba(24, 39, 75, 0.1),
     0px 6px 14px -6px rgba(24, 39, 75, 0.12);
 
-  ${({ size = "sm", theme }) => css`
+  ${({ size = "sm" }) => css`
     ${sizes[size]}
-    z-dinex: ${theme.zIndex.modal}
+  `}
+`;
+
+export const ContentContainer = styled.div`
+  padding: 16px 24px 12px 24px;
+`;
+
+export const ActionsContainer = styled.div<
+  Pick<ModalActionsProps, "direction">
+>`
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 16px 16px;
+
+  ${({ direction = "row" }) => css`
+    flex-direction: ${direction === "row" ? "row" : "column"};
   `}
 `;

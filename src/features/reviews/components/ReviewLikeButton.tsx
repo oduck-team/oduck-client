@@ -3,9 +3,9 @@ import { Heart } from "iconoir-react";
 import { Container } from "./ReviewLikeButton.style";
 
 export interface ReviewLikeButtonProps {
-  readonly isLike: boolean;
-  readonly count: number;
-  readonly onClick: () => void;
+  isLike: boolean;
+  count: number;
+  onClick: () => void;
 }
 
 export default function ReviewLikeButton({

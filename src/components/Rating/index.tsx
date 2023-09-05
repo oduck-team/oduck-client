@@ -13,10 +13,11 @@ export type Size = "lg" | "md" | "sm";
 export type Color = "primary" | "secondary";
 
 export interface RatingProps extends ComponentProps<"div"> {
-  readonly size?: Size;
-  readonly color?: Color;
-  readonly readonly?: boolean;
-  readonly value?: number;
+  size?: Size;
+  color?: Color;
+  readonly?: boolean;
+  value?: number;
+  onRate?: (value: number) => void;
 }
 
 export default function Rating({
@@ -25,6 +26,7 @@ export default function Rating({
   readonly,
   value = 10,
   style,
+  onRate,
 }: RatingProps) {
   const [rating, setRating] = useState(0); // 별점
   const [save, setSave] = useState(false); // 별점 저장 여부
@@ -72,14 +74,11 @@ export default function Rating({
 
   // 별점 save 처리
   useEffect(() => {
-    if (!readonly && save && rating !== 0) {
-      console.log("rating:", rating);
-      /* 별을 클릭하여 애니에 대한 별점을 추가 또는 취소했을 때 수행할 것 
-      (ex. 서버에 rating POST)
-      */
+    if (!readonly && save && rating !== 0 && onRate) {
+      onRate(rating);
       setSave((prev) => !prev);
     }
-  }, [readonly, save, rating]);
+  }, [readonly, save, rating, onRate]);
 
   return (
     <Container size={size} readonly={readonly} style={style}>
