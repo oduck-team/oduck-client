@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -19,25 +19,6 @@ export interface DrawerProps {
   onClose: () => void;
 }
 
-const variants = {
-  top: {
-    hidden: { y: "-100%" },
-    visible: { y: "0px" },
-  },
-  bottom: {
-    hidden: { y: "100%" },
-    visible: { y: "0" },
-  },
-  left: {
-    hidden: { x: "-100%" },
-    visible: { x: "0px" },
-  },
-  right: {
-    hidden: { x: "100%" },
-    visible: { x: "0px" },
-  },
-};
-
 export default function Drawer({
   title,
   isOpen = false,
@@ -48,21 +29,8 @@ export default function Drawer({
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.cssText = `
-        position: fixed; 
-        top: -${window.scrollY}px;
-        overflow-y: auto;
-        width: 100%;`;
+  useScrollLock(isOpen);
 
-      return () => {
-        const scrollY = document.body.style.top;
-        document.body.style.cssText = "";
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
-      };
-    }
-  }, [isOpen]);
   return (
     <AnimatePresence>
       {isOpen && (
@@ -93,3 +61,22 @@ export default function Drawer({
     </AnimatePresence>
   );
 }
+
+const variants = {
+  top: {
+    hidden: { y: "-100%" },
+    visible: { y: "0px" },
+  },
+  bottom: {
+    hidden: { y: "100%" },
+    visible: { y: "0" },
+  },
+  left: {
+    hidden: { x: "-100%" },
+    visible: { x: "0px" },
+  },
+  right: {
+    hidden: { x: "100%" },
+    visible: { x: "0px" },
+  },
+};
