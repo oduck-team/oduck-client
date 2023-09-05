@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 
-import { useScreenFix } from "@/hooks/useScreenFix";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -27,7 +27,7 @@ export default function BottomSheet({
   onClose,
   children,
 }: StrictPropsWithChildren<BottomSheetProps>) {
-  useScreenFix(isOpen);
+  useScrollLock(isOpen);
 
   return (
     <AnimatePresence>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useScreenFix(isFix: boolean) {
+export function useScrollLock(isFix: boolean) {
   useEffect(() => {
     if (isFix) {
       document.body.style.cssText = `

@@ -1,6 +1,6 @@
 import { AnimatePresence, Variants } from "framer-motion";
 
-import { useScreenFix } from "@/hooks/useScreenFix";
+import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -28,7 +28,7 @@ export default function Modal({
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
-  useScreenFix(isOpen);
+  useScrollLock(isOpen);
 
   return (
     <AnimatePresence>
