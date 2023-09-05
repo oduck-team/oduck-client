@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Rating from "@/components/Rating";
-import LoginAlretModal from "@/features/auth/components/LoginAlretModal";
+import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 
 interface ReviewRatingProps {}
 
@@ -25,7 +25,7 @@ export default function ReviewRating({}: ReviewRatingProps) {
   return (
     <>
       <Rating size="lg" onRate={handleRate} />
-      <LoginAlretModal
+      <LoginAlertModal
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
       />

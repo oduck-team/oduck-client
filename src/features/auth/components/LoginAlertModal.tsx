@@ -1,18 +1,19 @@
-import Button from "@/components/Button";
-import Modal from "@/components/Modal";
 import { useNavigate } from "react-router-dom";
 
-import { Text } from "./LoginAlretModal.style";
+import Button from "@/components/Button";
+import Modal from "@/components/Modal";
 
-interface LoginAlretModalProps {
+import { Text } from "./LoginAlertModal.style";
+
+interface LoginAlertModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function LoginAlretModal({
+export default function LoginAlertModal({
   isOpen,
   onClose,
-}: LoginAlretModalProps) {
+}: LoginAlertModalProps) {
   const navigate = useNavigate();
 
   const handleClickLogin = () => {
