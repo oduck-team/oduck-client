@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { TextInputBoxProps } from ".";
 
 export const TextInputBox = styled.input<TextInputBoxProps>`
-  ${({ warn = false, hasIcon = false, theme }) => css`
+  ${({ warn = false, hasIcon = false, disabled = false, theme }) => css`
     ${theme.typo["body-2-r"]};
     display: flex;
     width: 100%;
@@ -14,8 +14,10 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
-    background-color: white;
-    color: ${theme.colors["neutral"]["90"]};
+    background-color: ${!disabled ? "white" : theme.colors["neutral"]["20"]};
+    color: ${!disabled
+      ? theme.colors["neutral"]["90"]
+      : theme.colors["neutral"]["50"]};
     border-radius: 6px;
     border: 1px solid
       ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
@@ -26,14 +28,20 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
     }
 
     &:hover {
-      ${!warn && `border: 1px solid ${theme.colors["primary"]["60"]};`}
+      ${!warn &&
+      !disabled &&
+      `border: 1px solid ${theme.colors["primary"]["60"]};`}
     }
 
     // pressed
     &:focus {
       outline: none;
-      ${!warn && `border: 1px solid ${theme.colors["primary"]["60"]};`}
-      ${!warn && `box-shadow: 0px 0px 2px 0px rgba(17, 124, 255, 0.8);`}
+      ${!warn &&
+      !disabled &&
+      `border: 1px solid ${theme.colors["primary"]["60"]};`}
+      ${!warn &&
+      !disabled &&
+      `box-shadow: 0px 0px 2px 0px rgba(17, 124, 255, 0.8);`}
     }
   `}
 `;
