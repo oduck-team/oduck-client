@@ -10,8 +10,8 @@ export default function useForm({ setSuccess }: Props) {
   const [inquiryContent, setInquiryContent] = useState("");
 
   const [emailError, setEmailError] = useState<number>(0);
-  const [titleError, setTitleError] = useState(false);
-  const [contentError, setContentError] = useState(false);
+  const [titleError, setTitleError] = useState<number>(0);
+  const [contentError, setContentError] = useState<number>(0);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -30,8 +30,8 @@ export default function useForm({ setSuccess }: Props) {
     setTitle("");
     setInquiryContent("");
     setEmailError(0);
-    setTitleError(false);
-    setContentError(false);
+    setTitleError(0);
+    setContentError(0);
   };
 
   const send = () => {
@@ -41,10 +41,24 @@ export default function useForm({ setSuccess }: Props) {
       else if (!emailPattern.test(email)) return 2;
       else return 0;
     });
-    setTitleError(() => title === "");
-    setContentError(() => inquiryContent === "");
+    setTitleError(() => {
+      if (title === "") return 1;
+      else if (title.length > 50) return 2;
+      else return 0;
+    });
+    setContentError(() => {
+      if (inquiryContent === "") return 1;
+      else if (inquiryContent.length > 1000) return 2;
+      else return 0;
+    });
+
     const ok =
-      emailPattern.test(email) && title !== "" && inquiryContent !== "";
+      emailPattern.test(email) &&
+      title !== "" &&
+      title.length <= 50 &&
+      inquiryContent !== "" &&
+      inquiryContent.length <= 1000;
+
     if (ok) {
       // TODO: API 요청
       console.log("전송");

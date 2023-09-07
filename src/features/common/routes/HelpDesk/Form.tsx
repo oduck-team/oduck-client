@@ -33,6 +33,18 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
     "이메일 형식이 올바르지 않습니다.",
   ];
 
+  const titleErrorMessage = [
+    "",
+    "문의 제목을 입력해 주세요.",
+    "문의 제목을 50자 내로 입력해 주세요.",
+  ];
+
+  const contentErrorMessage = [
+    "",
+    "문의 내용을 입력해 주세요.",
+    "문의 내용을 1000자 내로 입력해 주세요.",
+  ];
+
   const handlerPrevClick = () => {
     goPrev();
     resetForm();
@@ -64,8 +76,8 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
             type="text"
             placeholder="제목을 입력해 주세요.(최대 50자)"
             onChange={handleTitleChange}
-            warn={titleError}
-            message="문의 제목을 입력해 주세요."
+            warn={Boolean(titleError)}
+            message={titleError ? titleErrorMessage[titleError] : ""}
             required
           />
         </FormItem>
@@ -75,8 +87,8 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
             value={inquiryContent}
             onChange={handleContentChange}
             placeholder="내용을 입력해 주세요.(최대 1,000자)"
-            warn={contentError}
-            message="문의 내용을 입력해 주세요."
+            warn={Boolean(contentError)}
+            message={contentError ? contentErrorMessage[contentError] : ""}
             required
           />
         </FormItem>
