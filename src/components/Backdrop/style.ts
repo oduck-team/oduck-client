@@ -7,8 +7,6 @@ import { BackdropProps } from ".";
 export const Container = styled(motion.div)<BackdropProps>`
   position: fixed;
   display: flex;
-  align-items: center;
-  justify-content: center;
   inset: 0;
 
   ${({ isVisible }) => css`
