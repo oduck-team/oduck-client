@@ -6,11 +6,17 @@ import Button from "@/components/Button";
 import Head from "@/components/Head";
 import ResponsiveContainer from "@/components/ResponsiveContainer";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function Login() {
   const navigate = useNavigate();
 
   const handleClickBack = () => {
     navigate(-1);
+  };
+
+  const handleLogin = (site: string) => {
+    window.location.href = `${BASE_URL}auth/${site}/login`;
   };
 
   return (
@@ -40,18 +46,18 @@ export default function Login() {
           </Title>
           <SoicalGroup>
             <li>
-              <Button name="1" isBlock>
-                TODO로 로그인
+              <Button name="1" onClick={() => handleLogin("google")} isBlock>
+                구글 로그인
               </Button>
             </li>
             <li>
-              <Button name="1" isBlock>
-                TODO로 로그인
+              <Button name="1" onClick={() => handleLogin("naver")} isBlock>
+                네이버 로그인
               </Button>
             </li>
             <li>
-              <Button name="1" isBlock>
-                TODO로 로그인
+              <Button name="1" onClick={() => handleLogin("kakao")} isBlock>
+                카카오 로그인
               </Button>
             </li>
           </SoicalGroup>

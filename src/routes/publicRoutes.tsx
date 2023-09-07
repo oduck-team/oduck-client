@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
 import Layout from "@/components/Layout";
+import Callback from "@/features/auth/routes/Callback";
 import Login from "@/features/auth/routes/Login";
 import Home from "@/features/common/routes/Home";
 
@@ -19,6 +20,10 @@ export const publicRoutes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/auth/callback",
+    element: <Callback />,
   },
   {
     path: "/",
