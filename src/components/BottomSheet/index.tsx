@@ -33,7 +33,7 @@ export default function BottomSheet({
   onClose,
   children,
 }: StrictPropsWithChildren<BottomSheetProps>) {
-  useScrollLock(isOpen);
+  // useScrollLock(isOpen);
   const controls = useAnimation();
   const dragControls = useDragControls(); // drag 이벤트 일어나는 시점을 지정
   const contentContainerRef = useRef<HTMLDivElement | null>(null);

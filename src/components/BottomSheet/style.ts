@@ -41,7 +41,8 @@ export const Handlebar = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  height: fit-content;
+  height: 100%;
+  max-height: 400px;
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -54,11 +55,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 24px;
-  padding-bottom: 250px; // mobile
-
-  ${({ theme }) => theme.mq("sm")} {
-    padding-bottom: 50px;
-  }
+  padding-bottom: 50px;
 `;
 
 export const Footer = styled.div`
