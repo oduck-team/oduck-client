@@ -3,6 +3,7 @@ import { IconoirProvider } from "iconoir-react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 
+import { AuthProvider } from "./contexts";
 import router from "./routes";
 import { theme } from "./styles/theme";
 
@@ -22,7 +23,9 @@ export default function App() {
               }
             `}
           />
-          <RouterProvider router={router} />
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
         </IconoirProvider>
       </ThemeProvider>
     </HelmetProvider>
