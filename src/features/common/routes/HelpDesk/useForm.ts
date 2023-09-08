@@ -13,6 +13,24 @@ export default function useForm({ setSuccess }: Props) {
   const [titleError, setTitleError] = useState<number>(0);
   const [contentError, setContentError] = useState<number>(0);
 
+  const emailErrorMessage = [
+    "",
+    "이메일을 입력해 주세요.",
+    "이메일 형식이 올바르지 않습니다.",
+  ];
+
+  const titleErrorMessage = [
+    "",
+    "문의 제목을 입력해 주세요.",
+    "문의 제목을 50자 내로 입력해 주세요.",
+  ];
+
+  const contentErrorMessage = [
+    "",
+    "문의 내용을 입력해 주세요.",
+    "문의 내용을 1000자 내로 입력해 주세요.",
+  ];
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -61,7 +79,6 @@ export default function useForm({ setSuccess }: Props) {
 
     if (ok) {
       // TODO: API 요청
-      console.log("전송");
       // POST 성공 시
       resetForm();
       setSuccess(true);
@@ -75,6 +92,9 @@ export default function useForm({ setSuccess }: Props) {
     emailError,
     titleError,
     contentError,
+    emailErrorMessage,
+    titleErrorMessage,
+    contentErrorMessage,
     handleEmailChange,
     handleTitleChange,
     handleContentChange,
