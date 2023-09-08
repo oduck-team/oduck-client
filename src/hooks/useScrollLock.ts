@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 
-export function useScrollLock(isFix: boolean) {
+export function useScrollLock(isLock: boolean) {
   useEffect(() => {
-    if (isFix) {
+    if (isLock) {
       document.body.style.cssText = `
         position: fixed; 
         top: -${window.scrollY}px;
@@ -15,5 +15,5 @@ export function useScrollLock(isFix: boolean) {
         window.scrollTo(0, parseInt(scrollY || "0") * -1);
       };
     }
-  }, [isFix]);
+  }, [isLock]);
 }

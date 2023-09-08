@@ -128,25 +128,8 @@ export default function AnimationList() {
       <BottomSheet
         isOpen={bottomSheetOpen}
         onClose={() => setBottomSheetOpen(false)}
-        footer={
-          <Footer>
-            <ResetButton
-              styleType="text"
-              size="sm"
-              name="초기화"
-              onClick={resetFilter}
-              color="neutral"
-            >
-              필터 초기화
-            </ResetButton>
-            <OkButton name="적용 완료" size="lg" onClick={handlerOkClick}>
-              적용 완료
-            </OkButton>
-          </Footer>
-        }
       >
-        <FilterContainer>
-          <Cancel width={24} height={24} onClick={handlerCloseClick} />
+        <BottomSheet.Content>
           {filtered.length > 0 && (
             <ChipsContiner style={{ marginBottom: "24px" }}>
               <h3 style={{ marginTop: "0" }}>선택된 필터</h3>
@@ -241,7 +224,21 @@ export default function AnimationList() {
               ))}
             </Chips>
           </ChipsContiner>
-        </FilterContainer>
+        </BottomSheet.Content>
+        <BottomSheet.Footer>
+          <ResetButton
+            styleType="text"
+            size="sm"
+            name="초기화"
+            onClick={resetFilter}
+            color="neutral"
+          >
+            필터 초기화
+          </ResetButton>
+          <OkButton name="적용 완료" size="lg" onClick={handlerOkClick}>
+            적용 완료
+          </OkButton>
+        </BottomSheet.Footer>
       </BottomSheet>
     </Container>
   );
@@ -256,6 +253,7 @@ const Container = styled.div`
   flex-direction: column;
   padding-bottom: 66px;
 `;
+
 const Header = styled.div`
   background-color: white;
   width: 100%;
@@ -281,16 +279,6 @@ const Content = styled.div`
   padding: 166px 16px 92px;
 `;
 
-const FilterContainer = styled.div`
-  position: relative;
-  & > svg {
-    position: fixed;
-    top: 32px;
-    right: 24px;
-    z-index: ${({ theme }) => theme.zIndex.bottomSheet + 1};
-  }
-`;
-
 const ChipsContiner = styled.div`
   position: relative;
   h3 {
@@ -305,17 +293,6 @@ const Chips = styled.div`
   display: flex;
   gap: 8px 4px;
   flex-wrap: wrap;
-`;
-
-const Footer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 40px;
-  button {
-    flex-shrink: 0;
-  }
 `;
 
 const OkButton = styled(Button)`
