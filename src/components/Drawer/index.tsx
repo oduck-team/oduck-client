@@ -1,13 +1,12 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, Variants } from "framer-motion";
 
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
 
+import { useDrawer, Position } from "./hooks/useDrawer";
 import { Backdrop, Container, Content, Header } from "./style";
-
-export type Position = "top" | "right" | "bottom" | "left";
 
 export interface DrawerProps {
   title?: React.ReactNode;
@@ -29,6 +28,10 @@ export default function Drawer({
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
+  const { handleTouchStart, handleTouchMove, handleTouchEnd } = useDrawer(
+    position,
+    onClose,
+  );
   useScrollLock(isOpen);
 
   return (
@@ -51,6 +54,9 @@ export default function Drawer({
               className={className}
               style={style}
               onClick={(e) => e.stopPropagation()}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <Header>{title}</Header>
               <Content>{children}</Content>
@@ -62,7 +68,7 @@ export default function Drawer({
   );
 }
 
-const variants = {
+const variants: Record<Position, Variants> = {
   top: {
     hidden: { y: "-100%" },
     visible: { y: "0px" },
