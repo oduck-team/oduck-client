@@ -14,7 +14,7 @@ export const TextareaBox = styled.textarea<TextareaBoxProps>`
     align-items: center;
     flex-shrink: 0;
     background-color: white;
-    color: ${theme.colors["neutral"]["50"]};
+    color: ${theme.colors["neutral"]["90"]};
     border-radius: 6px;
     border: 1px solid
       ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
