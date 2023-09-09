@@ -58,7 +58,7 @@ export const Info = styled.div`
   flex-direction: column;
   position: absolute;
   bottom: 56px;
-  margin: 0 16px;
+  padding: 0 16px;
   ${({ theme }) => theme.mq("md")} {
     padding: 0 40px;
   }
