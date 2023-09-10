@@ -1,16 +1,16 @@
-import { AnimatePresence, Variants } from "framer-motion";
+import { Variants } from "framer-motion";
 
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
-import Portal from "../Portal";
+import AnimatePortal from "../Portal/AnimatePortal";
 
 import { useDrawer, Position } from "./hooks/useDrawer";
 import { Backdrop, Container, Content, Header } from "./style";
 
 export interface DrawerProps {
   title?: React.ReactNode;
-  isOpen?: boolean;
+  isVisible?: boolean;
   showBackdrop?: boolean;
   position: Position;
   style?: React.CSSProperties;
@@ -20,7 +20,7 @@ export interface DrawerProps {
 
 export default function Drawer({
   title,
-  isOpen = false,
+  isVisible = false,
   showBackdrop = true,
   position,
   style,
@@ -32,39 +32,35 @@ export default function Drawer({
     position,
     onClose,
   );
-  useScrollLock(isOpen);
+  useScrollLock(isVisible);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <Portal elementId="modal-root">
-          <Backdrop isVisible={showBackdrop} onClick={onClose}>
-            <Container
-              position={position}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={variants[position]}
-              transition={{
-                type: "springs",
-                tiffness: 300,
-                damping: 30,
-                duration: 0.15,
-              }}
-              className={className}
-              style={style}
-              onClick={(e) => e.stopPropagation()}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-            >
-              <Header>{title}</Header>
-              <Content>{children}</Content>
-            </Container>
-          </Backdrop>
-        </Portal>
-      )}
-    </AnimatePresence>
+    <AnimatePortal isVisible={isVisible}>
+      <Backdrop isVisible={showBackdrop} onClick={onClose}>
+        <Container
+          position={position}
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={variants[position]}
+          transition={{
+            type: "springs",
+            tiffness: 300,
+            damping: 30,
+            duration: 0.15,
+          }}
+          className={className}
+          style={style}
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <Header>{title}</Header>
+          <Content>{children}</Content>
+        </Container>
+      </Backdrop>
+    </AnimatePortal>
   );
 }
 

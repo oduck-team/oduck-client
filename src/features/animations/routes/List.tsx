@@ -11,7 +11,7 @@ import AnimationCard from "../components/AnimationCard";
 import { Animation } from "../components/AnimationCarousel";
 
 export default function AnimationList() {
-  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
   const [filtered, setFiltered] = useState<string[]>([]);
 
@@ -101,7 +101,7 @@ export default function AnimationList() {
 
   const handlerCloseClick = () => {
     resetFilter();
-    setBottomSheetOpen(false);
+    setBottomSheetVisible(false);
   };
 
   const handlerOkClick = () => {
@@ -115,7 +115,7 @@ export default function AnimationList() {
         <Header>
           <NavArrowLeft />
           애니
-          <Filter onClick={() => setBottomSheetOpen(true)} />
+          <Filter onClick={() => setBottomSheetVisible(true)} />
         </Header>
         <Tabs items={items} defaultActiveId={1} />
       </div>
@@ -126,8 +126,8 @@ export default function AnimationList() {
         <AnimationCard size="lg" ani={CardAni2} />
       </Content>
       <BottomSheet
-        isOpen={bottomSheetOpen}
-        onClose={() => setBottomSheetOpen(false)}
+        isVisible={bottomSheetVisible}
+        onClose={() => setBottomSheetVisible(false)}
       >
         <BottomSheet.Content>
           {filtered.length > 0 && (

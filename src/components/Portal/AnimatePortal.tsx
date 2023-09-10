@@ -8,7 +8,7 @@ interface AnimatePortalProps
   /**
    * children 렌더링 여부
    */
-  isOpen: boolean;
+  isVisible: boolean;
   /**
    * framer-motion AnimatePresenceProps의 mode
    *
@@ -25,13 +25,13 @@ interface AnimatePortalProps
  * React 트리에서 제거된 component에 애니메이션을 적용하는 AnimatePresence와 Portal을 같이 사용합니다
  */
 export default function AnimatePortal({
-  isOpen,
+  isVisible,
   mode = "wait",
   children,
 }: AnimatePortalProps) {
   return (
     <Portal elementId="modal-root">
-      <AnimatePresence mode={mode}>{isOpen && children}</AnimatePresence>
+      <AnimatePresence mode={mode}>{isVisible && children}</AnimatePresence>
     </Portal>
   );
 }
