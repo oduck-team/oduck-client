@@ -8,8 +8,16 @@ export interface INavigationItem {
 }
 
 interface BottomNavigationProps {
+  /**
+   * 문서 구조상 제목
+   * @default 네비게이션
+   */
   title: string;
-  activeId?: string; // 활성화(선택된) item의 id
+
+  /**
+   * 활성화(선택된) item의 id
+   */
+  activeId?: string;
   items: INavigationItem[];
   onClickItem: (id: string, e: React.MouseEvent) => void;
 }
