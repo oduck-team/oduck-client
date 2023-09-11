@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { fileURLToPath, URL } from "node:url";
 
 import react from "@vitejs/plugin-react";
@@ -19,5 +20,10 @@ export default defineConfig({
         target: "http://localhost:8000",
       },
     },
+  },
+  test: {
+    include: ["**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    environment: "happy-dom",
+    setupFiles: ["./vitest.setup.ts"],
   },
 });

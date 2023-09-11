@@ -25,7 +25,7 @@ export default function Sidebar({
   return (
     <Drawer
       position="right"
-      isOpen={isVisible}
+      isVisible={isVisible}
       title={
         <Button
           icon={<Cancel />}

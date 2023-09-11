@@ -1,9 +1,9 @@
-import { AnimatePresence, Variants } from "framer-motion";
+import { Variants } from "framer-motion";
 
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
-import Portal from "../Portal";
+import AnimatePortal from "../Portal/AnimatePortal";
 
 import {
   ActionsContainer,
@@ -15,40 +15,36 @@ import {
 export type Size = "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
-  isOpen?: boolean;
+  isVisible?: boolean;
   size?: Size;
   showBackdrop?: boolean;
   onClose: () => void;
 }
 
 export default function Modal({
-  isOpen = false,
+  isVisible = false,
   size = "sm",
   showBackdrop = true,
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
-  useScrollLock(isOpen);
+  useScrollLock(isVisible);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <Portal elementId="modal-root">
-          <Backdrop isVisible={showBackdrop} onClick={onClose}>
-            <Container
-              size={size}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              variants={varitends}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {children}
-            </Container>
-          </Backdrop>
-        </Portal>
-      )}
-    </AnimatePresence>
+    <AnimatePortal isVisible={isVisible}>
+      <Backdrop isVisible={showBackdrop} onClick={onClose}>
+        <Container
+          size={size}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={varitends}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {children}
+        </Container>
+      </Backdrop>
+    </AnimatePortal>
   );
 }
 
