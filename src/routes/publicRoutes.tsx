@@ -3,9 +3,9 @@ import { RouteObject } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import Callback from "@/features/auth/routes/Callback";
-import Login from "@/features/auth/routes/Login";
 import Home from "@/features/common/routes/Home";
 
+const Login = lazy(() => import("@/features/auth/routes/Login"));
 const AnimationList = lazy(() => import("@/features/animations/routes/List"));
 const AnimationDetail = lazy(
   () => import("@/features/animations/routes/Detail"),

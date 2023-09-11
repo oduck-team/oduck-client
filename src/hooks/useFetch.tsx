@@ -73,11 +73,11 @@ export default function useFetch<T>(url: string, options?: RequestOptions) {
           getRequestParams(options ?? { method: "GET" }),
         );
 
-        const data = await response.json();
-
         if (response.status >= 500) {
           throw new Error(response.statusText);
         }
+
+        const data = await response.json();
 
         if (response.status >= 400) {
           throw new ApiError(data.message ?? response.statusText);
