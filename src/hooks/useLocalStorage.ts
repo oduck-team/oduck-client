@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function useLocalStorage<T>(key: string, initialValue?: T) {
   const getStorageValue = useCallback(
-    (key: string) => {
+    (key: string): T => {
       const storageValue = window.localStorage.getItem(key);
 
       if (storageValue === null) {
@@ -16,15 +16,25 @@ export default function useLocalStorage<T>(key: string, initialValue?: T) {
 
   const [value, setValue] = useState<T | null>(getStorageValue(key));
 
-  const setStorageValue = (value: T) => {
-    setValue(value);
-    window.localStorage.setItem(key, serialize(value));
-  };
+  const setStorageValue = useCallback(
+    (value: T) => {
+      setValue(value);
+      window.localStorage.setItem(key, serialize(value));
+    },
+    [key],
+  );
 
   const removeStorageValue = () => {
     setValue(null);
     window.localStorage.removeItem(key);
   };
+
+  /**
+   * 초기 값이 있다면 로컬 스토리지에도 초기값을 설정합니다 (side effect)
+   */
+  useEffect(() => {
+    if (value) setStorageValue(value);
+  }, [initialValue, value, setStorageValue]);
 
   return { value, setStorageValue, removeStorageValue } as const;
 }

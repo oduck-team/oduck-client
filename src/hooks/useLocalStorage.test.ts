@@ -1,11 +1,5 @@
-import {
-  screen,
-  fireEvent,
-  cleanup,
-  renderHook,
-  act,
-} from "@testing-library/react";
-import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import { describe, it, expect, beforeEach } from "vitest";
 
 import useLocalStorage from "./useLocalStorage";
 
@@ -21,9 +15,11 @@ describe("hooks/useLocalStorage", () => {
     expect(useLocalStorage).toBeDefined();
   });
 
-  it("초기 값을 가지고 있어야 한다", () => {
+  it("초기 값을 가지고 있어야 한다", async () => {
     const { result } = renderHook(() => useLocalStorage(KEY, TEST_VALUE));
-    expect(result.current.value).toBe(TEST_VALUE);
+
+    expect(result.current.value).toEqual(TEST_VALUE);
+    expect(localStorage.getItem(KEY)).toEqual(JSON.stringify(TEST_VALUE));
   });
 
   it("값이 갱신돼야 한다", () => {
