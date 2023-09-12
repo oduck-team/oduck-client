@@ -1,6 +1,8 @@
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
-import { Suspense, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+
+import useAuth from "@/hooks/useAuth";
 
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
 
@@ -10,6 +12,7 @@ export default function Layout() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const currentPath = location.pathname;
 
@@ -45,11 +48,6 @@ export default function Layout() {
     setIsSidebarVisible(value);
   };
 
-  const handleClickProfile = (e: React.MouseEvent) => {
-    e.preventDefault();
-    //TODO: 로그인 유무에 따른 라우팅 처리
-  };
-
   const handleClickNav = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -72,24 +70,25 @@ export default function Layout() {
     }
   };
 
+  useEffect(() => {
+    handleSidebarVisible(false);
+  }, [location]);
+
   return (
     <>
-      <Suspense fallback={"loading"}>
-        <Outlet />
-        <Sidebar
-          isVisible={isSidebarVisible}
-          // userName={}
-          // userImage={}
-          onClose={() => handleSidebarVisible(false)}
-          onClickProfile={handleClickProfile}
-        />
-        <BottomNavigation
-          title="모바일 네비게이션"
-          activeId={currentPath}
-          onClickItem={handleClickNav}
-          items={bottomNavItems}
-        />
-      </Suspense>
+      <Outlet />
+      <Sidebar
+        isVisible={isSidebarVisible}
+        userName={user.name}
+        userImage={user.imageUrl}
+        onClose={() => handleSidebarVisible(false)}
+      />
+      <BottomNavigation
+        title="모바일 네비게이션"
+        activeId={currentPath}
+        onClickItem={handleClickNav}
+        items={bottomNavItems}
+      />
     </>
   );
 }

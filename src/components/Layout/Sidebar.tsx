@@ -12,7 +12,6 @@ interface SidebarProps {
   userName?: string;
   userImage?: string;
   onClose: () => void;
-  onClickProfile: (e: React.MouseEvent) => void;
 }
 
 export default function Sidebar({
@@ -20,7 +19,6 @@ export default function Sidebar({
   userName,
   userImage,
   onClose,
-  onClickProfile,
 }: SidebarProps) {
   return (
     <Drawer
@@ -42,26 +40,28 @@ export default function Sidebar({
       onClose={onClose}
     >
       <div>
-        <Profile onClick={onClickProfile}>
-          {/* 로그인 */}
-          {userName && (
-            <>
+        {/* 로그인 */}
+        {userName && (
+          <>
+            <Profile to="/profile">
               <Avatar
                 userName={userName ? userName : ""}
                 src={userImage}
                 size="xl"
               />
               <UserName>{userName}</UserName>
-            </>
-          )}
-          {/* 미로그인 */}
-          {!userName && (
-            <>
+            </Profile>
+          </>
+        )}
+        {/* 미로그인 */}
+        {!userName && (
+          <>
+            <Profile to="/login">
               <ProfileCircle height={56} width={56} color="#ccc" />
               <NeedLogin>로그인이 필요해요</NeedLogin>
-            </>
-          )}
-        </Profile>
+            </Profile>
+          </>
+        )}
       </div>
       <Menus />
     </Drawer>

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
-export const Profile = styled.a`
+export const Profile = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;

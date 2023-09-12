@@ -1,23 +1,15 @@
 import { NavArrowLeft } from "iconoir-react";
-import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
-import { useScrollLock } from "@/hooks/useScrollLock";
 
-import useSocialLogin from "../../hooks/useSocialLogin";
+import useLogin from "../../hooks/useLogin";
 
 import SocialGroup from "./SocialGroup";
 import { Header, HeaderContents, Main, Title, LoginSection } from "./style";
 
 export default function Login() {
-  const navigate = useNavigate();
-  useScrollLock(true);
-  const { handleSocialLogin } = useSocialLogin();
-
-  const handleClickBack = () => {
-    navigate(-1);
-  };
+  const { handleClickBack, handleSocialLogin } = useLogin();
 
   return (
     <>
