@@ -1,6 +1,6 @@
 import { Variants } from "framer-motion";
 
-import { useScrollLock } from "@/hooks/useScrollLock";
+import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import AnimatePortal from "../Portal/AnimatePortal";
