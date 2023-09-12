@@ -34,7 +34,7 @@ export default function useLocalStorage<T>(key: string, initialValue?: T) {
    */
   useEffect(() => {
     if (value) setStorageValue(value);
-  }, [initialValue, value, setStorageValue]);
+  }, [value, setStorageValue]);
 
   return { value, setStorageValue, removeStorageValue } as const;
 }
