@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import useFetch from "@/hooks/useFetch";
@@ -6,15 +7,15 @@ import { IAnimation } from "../types";
 
 export function useAnimation() {
   const { id } = useParams();
-  const { data, error, isLoading } = useFetch<IAnimation>(`/animation/${id}`);
+  const { data, error, isLoading, fetcher } = useFetch<IAnimation>();
 
-  if (isNaN(Number(id))) {
-    return {
-      animation: undefined,
-      isAnimationLoading: isLoading,
-      animationError: new Error("Not Found"),
-    };
-  }
+  useEffect(() => {
+    if (isNaN(Number(id))) {
+      return;
+    }
+
+    fetcher(`/animation/${id}`);
+  }, [id, fetcher]);
 
   return {
     animation: data,
