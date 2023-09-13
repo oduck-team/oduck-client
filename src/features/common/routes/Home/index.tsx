@@ -158,13 +158,14 @@ export default function Home() {
 
   const { user, isLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const [isnameModalVisible, setIsNameModalVisible] = useState(false);
+  const [isNameModalVisible, setIsNameModalVisible] = useState(false);
 
   const handlerReviewButtonClick = () => {
     if (isLoggedIn) navigate("/search");
     else navigate("/login");
   };
 
+  // 닉네임 설정을 하지 않은 상태라면 닉네임 설정 모달창 띄움
   useEffect(() => {
     if (isLoggedIn && user.name[14] === "4") {
       setIsNameModalVisible(true);
@@ -174,7 +175,7 @@ export default function Home() {
   return (
     <Container>
       <NameModal
-        isVisible={isnameModalVisible}
+        isVisible={isNameModalVisible}
         onClose={() => setIsNameModalVisible(false)}
       />
       <AnimationCarousel animations={CarouselAni} />
