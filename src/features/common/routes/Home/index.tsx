@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import AnimationCarousel, {
@@ -8,8 +10,10 @@ import AnimationRanking, {
   IRanking,
 } from "@/features/animations/components/AnimationRanking";
 import AnimationSlide from "@/features/animations/components/AnimationSlide";
+import useAuth from "@/hooks/useAuth";
 
 import Discord from "./Discord";
+import NameModal from "./NameModal";
 import RecentReview from "./RecentReview";
 
 export default function Home() {
@@ -152,8 +156,27 @@ export default function Home() {
     CardAni2,
   ];
 
+  const { user, isLoggedIn } = useAuth();
+  const navigate = useNavigate();
+  const [isnameModalVisible, setIsNameModalVisible] = useState(false);
+
+  const handlerReviewButtonClick = () => {
+    if (isLoggedIn) navigate("/search");
+    else navigate("/login");
+  };
+
+  useEffect(() => {
+    if (isLoggedIn && user.name[14] === "4") {
+      setIsNameModalVisible(true);
+    }
+  }, [user, isLoggedIn]);
+
   return (
     <Container>
+      <NameModal
+        isVisible={isnameModalVisible}
+        onClose={() => setIsNameModalVisible(false)}
+      />
       <AnimationCarousel animations={CarouselAni} />
       <AnimationRanking title="이번주 TOP10" contents={RankingAni} />
       <Discord />
@@ -163,7 +186,7 @@ export default function Home() {
       <AnimationSlide title="이불밖을 못 나오게 하는" animations={SlideAni} />
       <Bottom>
         <span>감명 깊게 본 애니를 다른 회원님들과 공유해보세요!</span>
-        <Button name="리뷰" size="lg">
+        <Button name="리뷰" size="lg" onClick={handlerReviewButtonClick}>
           한줄리뷰 남기러가기
         </Button>
       </Bottom>
