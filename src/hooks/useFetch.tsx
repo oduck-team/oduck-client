@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useCallback, useReducer } from "react";
 
 import { BASE_URL } from "@/config";
 import { ApiError } from "@/lib/error";
@@ -21,7 +21,7 @@ export interface RequestOptions extends RequestInit {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 }
 
-export default function useFetch<T>(url: string, options?: RequestOptions) {
+export default function useFetch<T>() {
   const initialState: State<T> = {
     data: undefined,
     error: undefined,
@@ -62,35 +62,32 @@ export default function useFetch<T>(url: string, options?: RequestOptions) {
 
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
-  useEffect(() => {
-    const fetchData = async (url: string, options?: RequestOptions) => {
-      dispatch({ type: "loading" });
+  const fetcher = useCallback(async (url: string, options?: RequestOptions) => {
+    dispatch({ type: "loading" });
 
-      try {
-        const response = await fetch(
-          url,
-          getRequestParams(options ?? { method: "GET" }),
-        );
+    try {
+      const response = await fetch(
+        BASE_URL + url,
+        getRequestParams(options ?? { method: "GET" }),
+      );
 
-        if (response.status >= 500) {
-          throw new Error(response.statusText);
-        }
-
-        const data = await response.json();
-
-        if (response.status >= 400) {
-          throw new ApiError(data.message ?? response.statusText);
-        }
-
-        dispatch({ type: "fetched", payload: data as T });
-      } catch (error) {
-        dispatch({ type: "error", payload: error as Error });
+      if (response.status >= 500) {
+        throw new Error(response.statusText);
       }
-    };
-    fetchData(BASE_URL + url, options);
-  }, [url, options]);
+      const data = await response.json();
 
-  return state;
+      // TODO: 서버 응답 머지시 반영
+      if (response.status >= 400) {
+        throw new ApiError(data.message ?? response.statusText);
+      }
+
+      dispatch({ type: "fetched", payload: data as T });
+    } catch (error) {
+      dispatch({ type: "error", payload: error as Error });
+    }
+  }, []);
+
+  return { ...state, fetcher };
 }
 
 export function getRequestParams(options: RequestOptions) {
