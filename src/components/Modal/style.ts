@@ -22,6 +22,7 @@ const sizes: Record<Size, SerializedStyles> = {
 };
 
 export const Backdrop = styled(BaseBackdrop)`
+  justify-content: center;
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 

@@ -1,9 +1,10 @@
 import { ThemeProvider, Global, css } from "@emotion/react";
 import { IconoirProvider } from "iconoir-react";
+import { Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
 
-import { AuthProvider } from "./contexts";
+import { AuthProvider } from "./contexts/AuthContext";
 import router from "./routes";
 import { theme } from "./styles/theme";
 
@@ -24,7 +25,9 @@ export default function App() {
             `}
           />
           <AuthProvider>
-            <RouterProvider router={router} />
+            <Suspense fallback={"loading"}>
+              <RouterProvider router={router} />
+            </Suspense>
           </AuthProvider>
         </IconoirProvider>
       </ThemeProvider>

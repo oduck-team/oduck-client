@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
 
+import { BASE_URL } from "@/config";
 import { ApiError } from "@/lib/error";
 
 interface State<T> {
@@ -14,8 +15,6 @@ type Action<T> =
   | { type: "loading" }
   | { type: "fetched"; payload: T }
   | { type: "error"; payload: Error };
-
-const BASE_URL = import.meta.env.VITE_BASE_URL as string;
 
 // fetch API RequestInit의 method가 string이므로 오타 방지를 위한 확장 인터페이스
 export interface RequestOptions extends RequestInit {
@@ -73,11 +72,11 @@ export default function useFetch<T>(url: string, options?: RequestOptions) {
           getRequestParams(options ?? { method: "GET" }),
         );
 
-        const data = await response.json();
-
         if (response.status >= 500) {
           throw new Error(response.statusText);
         }
+
+        const data = await response.json();
 
         if (response.status >= 400) {
           throw new ApiError(data.message ?? response.statusText);

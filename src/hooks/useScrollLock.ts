@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useScrollLock(isLock: boolean) {
+export default function useScrollLock(isLock: boolean) {
   useEffect(() => {
     if (isLock) {
       document.body.style.cssText = `
