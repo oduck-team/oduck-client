@@ -1,28 +1,15 @@
+import styled from "@emotion/styled";
 import { Navbar, NavbarProps } from "@mantine/core";
 
 import Menus from "./Menus";
-import { Header } from "./Sidebar.style";
+import Profile from "./Profile";
 
 export default function Sidebar(props: Omit<NavbarProps, "children">) {
   return (
     <Navbar {...props}>
       <Header>
         <h1>관리자 메뉴</h1>
-        {/* TODO: 로고 추가되면 <div/> 로고로 바꾸기 */}
-        <div
-          style={{
-            minWidth: "48px",
-            minHeight: "48px",
-            backgroundColor: "blue",
-            color: "white",
-            borderRadius: "4px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          로고
-        </div>
+        <Profile />
       </Header>
       <Navbar.Section grow>
         <Menus />
@@ -30,3 +17,17 @@ export default function Sidebar(props: Omit<NavbarProps, "children">) {
     </Navbar>
   );
 }
+
+const Header = styled.header`
+  display: flex;
+  gap: 0.5rem;
+  padding-left: 0rem;
+  padding-bottom: 1rem;
+  border-bottom: solid 1px ${({ theme }) => theme.colors.neutral["30"]};
+  overflow: hidden;
+  transition: padding 0.3s;
+
+  & h1 {
+    display: none;
+  }
+`;

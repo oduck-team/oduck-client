@@ -3,6 +3,7 @@ export type Rating = "ALL" | "TWELVE" | "FIFTEEN" | "ADULT";
 export type Status = "ONGOING" | "FINISHED" | "COMING" | "UNKNOWN";
 
 export interface IAnimation {
+  id: number;
   name: string;
   plot: string;
   broadcastType: BroadcastType;
