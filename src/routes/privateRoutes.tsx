@@ -1,10 +1,50 @@
-import { RouteObject } from "react-router-dom";
+import { PropsWithChildren, lazy, useEffect } from "react";
+import { RouteObject, useNavigate } from "react-router-dom";
 
-// import { StrictPropsWithChildren } from "@/types";
+import Layout from "@/components/Layout";
+import useLocalUser from "@/features/auth/hooks/useLocalUser";
+import useAuth from "@/hooks/useAuth";
 
-// function PrivateRoute({ children }: StrictPropsWithChildren) {
-//   // TODO: USER ROLE 확인
-//   return children;
-// }
+const Profile = lazy(() => import("@/features/users/routes/Profile"));
 
-export const privateRoutes: RouteObject[] = [];
+function PrivateRoute({ children }: PropsWithChildren) {
+  const { isLoggedIn, fetchUser } = useAuth();
+  const { localUser } = useLocalUser();
+  const navigate = useNavigate();
+
+  /**
+   * 로컬 스토리지에 유저 정보가 있다면 서버에 유저 정보를 요청합니다
+   * 없다면 로그인 페이지로 이동합니다
+   */
+  useEffect(() => {
+    const handleAuth = () => {
+      if (!localUser) {
+        navigate("/login", { replace: true });
+      }
+
+      fetchUser();
+    };
+    handleAuth();
+  }, [localUser, fetchUser, navigate]);
+
+  if (!isLoggedIn) return null;
+
+  return children;
+}
+
+export const privateRoutes: RouteObject[] = [
+  {
+    path: "",
+    element: (
+      <PrivateRoute>
+        <Layout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+    ],
+  },
+];

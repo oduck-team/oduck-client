@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import Loader from "@/components/Loader";
 import useAuth from "@/hooks/useAuth";
 import useRedirect from "@/hooks/useRedirect";
 
@@ -32,9 +33,7 @@ export default function Callback() {
       handleRedirect();
     }
   });
-
-  // TODO: 로딩 컴포넌트
-  if (redirectUrl) return <>Loading...</>;
+  if (redirectUrl) return <Loader />;
 
   // TODO: 404 컴포넌트
   return <>404</>;

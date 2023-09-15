@@ -5,9 +5,9 @@ import { privateRoutes } from "./privateRoutes";
 import { publicRoutes } from "./publicRoutes";
 
 const router = createBrowserRouter([
-  ...adminRoutes,
-  ...privateRoutes,
   ...publicRoutes,
+  ...privateRoutes,
+  ...adminRoutes,
 ]);
 
 export default router;
