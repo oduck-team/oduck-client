@@ -19,10 +19,7 @@ import QuantityInput from "@/features/admin/common/components/QuantityInput";
 import { BroadcastType, Rating, Status } from "@/features/animations/types";
 import { useUploadImage } from "@/features/files/hooks/useUploadImage";
 
-import {
-  CreateAnimationDto,
-  createAnimation,
-} from "../../apis/createAnimation";
+import useAddAnimation, { AddAnimationDto } from "../../hooks/useAddAnimation";
 
 // input내 요소 배치 순서
 const INPUT_WRAPPER_ORDER: ("label" | "input" | "description" | "error")[] = [
@@ -54,7 +51,7 @@ const BRODCAST_TYPES = [
 ];
 
 export default function AddAnimation() {
-  const [form, setForm] = useState<CreateAnimationDto>({
+  const [form, setForm] = useState<AddAnimationDto>({
     name: "",
     plot: "",
     broadcastType: "TVA",
@@ -67,6 +64,7 @@ export default function AddAnimation() {
     studioNames: [""],
   });
   const { handleUploadImage } = useUploadImage();
+  const { handleAddAnimation } = useAddAnimation();
   const navigate = useNavigate();
 
   const handleUploadThumbnail = async (file: File) => {
@@ -81,8 +79,7 @@ export default function AddAnimation() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await createAnimation(form);
-      console.log(res);
+      const { data, error } = await handleAddAnimation(form);
       navigate("/admin/animations");
     } catch (e) {
       console.log(e);

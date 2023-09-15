@@ -2,8 +2,6 @@ import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import useAuth from "@/hooks/useAuth";
-
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
 
 import Sidebar from "./Sidebar";
@@ -12,7 +10,6 @@ export default function Layout() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const currentPath = location.pathname;
 
@@ -79,8 +76,6 @@ export default function Layout() {
       <Outlet />
       <Sidebar
         isVisible={isSidebarVisible}
-        userName={user.name}
-        userImage={user.imageUrl}
         onClose={() => handleSidebarVisible(false)}
       />
       <BottomNavigation

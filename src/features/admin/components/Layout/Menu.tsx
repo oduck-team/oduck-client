@@ -17,7 +17,7 @@ interface MenuProps {
 export default function Menu({ menu, onClick }: MenuProps) {
   const hasChildrens = Array.isArray(menu.children); // 자식 아이템 소유 여부
   const items = // 자식 아이템 목록
-    (hasChildrens ? menu.children : []).map((item) => (
+    (hasChildrens && menu.children ? menu.children : []).map((item) => (
       <NavLink
         key={item.id}
         component="a"

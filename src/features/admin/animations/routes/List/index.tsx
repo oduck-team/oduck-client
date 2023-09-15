@@ -1,17 +1,14 @@
 import { Badge, Card, Flex, Table, Title } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
-import { getAnimations } from "@/features/animations/apis/getAnimations";
-import { IAnimation, Status } from "@/features/animations/types";
+import { useAnimations } from "@/features/animations/hooks/useAnimations";
+import { Status } from "@/features/animations/types";
 
 export default function AnimationList() {
-  const [animations, setAnimations] = useState<IAnimation[]>([]);
-
-  useEffect(() => {
-    getAnimations().then((data) => setAnimations(data));
-  }, []);
+  const { animations } = useAnimations();
+  const navigate = useNavigate();
 
   const ths = (
     <tr>
@@ -24,7 +21,7 @@ export default function AnimationList() {
     </tr>
   );
 
-  const rows = animations.map((anime, index) => (
+  const rows = animations?.map((anime, index) => (
     <tr key={`${anime.name}${index}`}>
       <td>
         <Flex gap="sm">
@@ -36,8 +33,8 @@ export default function AnimationList() {
           </Button>
         </Flex>
       </td>
-      <td></td>
       <td>{anime.name}</td>
+      <td></td>
       <td>
         <ReleasedBadge isReleased={anime.isReleased} />
       </td>
@@ -55,6 +52,14 @@ export default function AnimationList() {
       <div>조회 섹션</div>
 
       <Card withBorder radius="md" padding="xl">
+        <Flex justify="flex-end" mb="sm">
+          <Button
+            name="애니메이션 등록"
+            onClick={() => navigate("/admin/animations/new")}
+          >
+            등록
+          </Button>
+        </Flex>
         <Table highlightOnHover>
           <thead>{ths}</thead>
           <tbody>{rows}</tbody>

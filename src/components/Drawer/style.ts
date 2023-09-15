@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 
 import BaseBackdrop from "../Backdrop";
 
-import { DrawerProps, Position } from ".";
+import { Position } from "./hooks/useDrawer";
+
+import { DrawerProps } from ".";
 
 const positions: Record<Position, SerializedStyles> = {
   top: css`

@@ -26,7 +26,7 @@ export const publicRoutes: RouteObject[] = [
     element: <Callback />,
   },
   {
-    path: "/",
+    path: "",
     element: <Layout />,
     children: [
       {
@@ -51,10 +51,6 @@ export const publicRoutes: RouteObject[] = [
       },
       {
         path: "/users/:id",
-        element: <Profile />,
-      },
-      {
-        path: "/profile",
         element: <Profile />,
       },
     ],
