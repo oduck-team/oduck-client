@@ -74,9 +74,11 @@ export default function useFetch<T>() {
       if (response.status >= 500) {
         throw new Error(response.statusText);
       }
-      const data = await response.json();
 
-      // TODO: 서버 응답 머지시 반영
+      // handle Unexpected end of JSON
+      const payload = await response.text();
+      const data = payload ? JSON.parse(payload) : {};
+
       if (response.status >= 400) {
         throw new ApiError(data.message ?? response.statusText);
       }
@@ -104,6 +106,8 @@ export function getRequestParams(options: RequestOptions) {
     "Content-Type": "application/json; charset=UTF-8",
     ...params.headers,
   };
+
+  console.log(params);
 
   return params;
 }
