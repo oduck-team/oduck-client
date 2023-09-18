@@ -31,6 +31,31 @@ describe("hooks/useDebounce", () => {
     );
   };
 
+  const AsyncCounter = ({ ms }: { ms: number }) => {
+    const [count, setCount] = useState(0);
+
+    const handleDebounceClick = useDebounce(async () => {
+      console.log("called", Date.now());
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          console.log("done");
+          resolve(undefined);
+        }, 100),
+      );
+      console.log("resolve");
+      setCount((prev) => prev + 1);
+    }, ms);
+
+    return (
+      <div>
+        <span data-testid="async-count">{count}</span>
+        <button data-testid="async-button" onClick={handleDebounceClick}>
+          increase
+        </button>
+      </div>
+    );
+  };
+
   beforeEach(() => {
     vi.useFakeTimers();
   });
@@ -59,7 +84,6 @@ describe("hooks/useDebounce", () => {
     });
 
     await vi.advanceTimersByTimeAsync(TIME - 1);
-
     expect(callback).not.toHaveBeenCalled();
   });
 
@@ -109,6 +133,48 @@ describe("hooks/useDebounce", () => {
 
     expect(Count.innerHTML).toBe("1");
     await vi.advanceTimersByTimeAsync(TIME);
+    expect(Count.innerHTML).toBe("2");
+  });
+
+  it("[비동기] 버튼을 여러번 눌러도 디바운스 시간 내에는 카운터가 1만 증가한다", async () => {
+    render(<AsyncCounter ms={TIME} />);
+    const Button = screen.getByTestId("async-button");
+    const Count = screen.getByTestId("async-count");
+
+    for (let i = 0; i < 10; i++) {
+      fireEvent.click(Button);
+    }
+
+    expect(Count.innerHTML).toBe("0");
+    await vi.advanceTimersByTimeAsync(TIME);
+    await vi.advanceTimersToNextTimerAsync();
+    await vi.advanceTimersToNextTimerAsync();
+    expect(Count.innerHTML).toBe("1");
+  });
+
+  it("[비동기] 디바운스 시간이 지나면 별도의 호출이 된다", async () => {
+    render(<AsyncCounter ms={TIME} />);
+    const Button = screen.getByTestId("async-button");
+    const Count = screen.getByTestId("async-count");
+
+    for (let i = 0; i < 10; i++) {
+      fireEvent.click(Button);
+    }
+
+    expect(Count.innerHTML).toBe("0");
+    await vi.advanceTimersByTimeAsync(TIME + 100);
+    await vi.advanceTimersToNextTimerAsync();
+    await vi.advanceTimersToNextTimerAsync();
+    expect(Count.innerHTML).toBe("1");
+
+    for (let i = 0; i < 10; i++) {
+      fireEvent.click(Button);
+    }
+
+    expect(Count.innerHTML).toBe("1");
+    await vi.advanceTimersByTimeAsync(TIME + 100);
+    await vi.advanceTimersToNextTimerAsync();
+    await vi.advanceTimersToNextTimerAsync();
     expect(Count.innerHTML).toBe("2");
   });
 });
