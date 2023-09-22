@@ -1,33 +1,35 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Rating from "@/components/Rating";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
+import useAuth from "@/hooks/useAuth";
 
-interface ReviewRatingProps {}
+interface ReviewRatingProps {
+  animationId: number;
+}
 
-export default function ReviewRating({}: ReviewRatingProps) {
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const 로그인여부 = false;
+export default function ReviewRating({ animationId }: ReviewRatingProps) {
+  const { isLoggedIn } = useAuth();
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
 
-  // 클릭시 평가하기
+  // TODO: 사용자가 평가한 점수 가져오기
+  console.log(animationId);
+
   const handleRate = (value: number) => {
-    if (!로그인여부) {
-      setIsLoginModalOpen(true);
+    if (!isLoggedIn) {
+      setIsLoginModalVisible(true);
       return;
     }
-    console.log("서버에 요청 ", value);
+    // TODO: 점수 등록 요청하기
+    console.log(value);
   };
-
-  useEffect(() => {
-    // 사용자가 평가한 점수 가져오기
-  }, []);
 
   return (
     <>
       <Rating size="lg" onRate={handleRate} />
       <LoginAlertModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
+        isVisible={isLoginModalVisible}
+        onClose={() => setIsLoginModalVisible(false)}
       />
     </>
   );

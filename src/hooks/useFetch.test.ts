@@ -13,7 +13,7 @@ describe("hooks/useFetch", () => {
   });
 
   afterEach(() => {
-    // mock.mockClear();
+    mockedFetch.mockClear();
   });
 
   it("fetcher가 호출되면 isLoading이여야 한다", async () => {
@@ -24,12 +24,15 @@ describe("hooks/useFetch", () => {
     });
 
     expect(result.current.isLoading).toBe(true);
+    expect(result.current.isError).toBe(false);
+    expect(result.current.isFetched).toBe(false);
   });
 
-  it("응답이 성공적으로 오면 isFetched이여야 한다", async () => {
+  it("응답이 성공적으로 오면 isFetched이여야 하며, data를 갖고있어야한다.", async () => {
+    const mockData = { data: "test" };
     mockedFetch.mockResolvedValueOnce({
       status: 200,
-      json: () => Promise.resolve({ data: "test" }),
+      text: () => Promise.resolve(JSON.stringify(mockData)),
     });
     const { result } = renderHook(() => useFetch<string>());
 
@@ -37,7 +40,27 @@ describe("hooks/useFetch", () => {
       await result.current.fetcher("/test");
     });
 
+    expect(result.current.data).toEqual(mockData);
     expect(result.current.isLoading).toBe(false);
+    expect(result.current.isError).toBe(false);
+    expect(result.current.isFetched).toBe(true);
+  });
+
+  it("응답이 성공적으로 오면 isFetched이여야 하며, body가 비어있다면 data는 빈 객체를 갖고있어야 한다.", async () => {
+    const mockData = undefined;
+    mockedFetch.mockResolvedValueOnce({
+      status: 200,
+      text: () => Promise.resolve(JSON.stringify(mockData)),
+    });
+    const { result } = renderHook(() => useFetch<string>());
+
+    await act(async () => {
+      await result.current.fetcher("/test");
+    });
+
+    expect(result.current.data).toEqual({});
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.isError).toBe(false);
     expect(result.current.isFetched).toBe(true);
   });
 
@@ -51,6 +74,7 @@ describe("hooks/useFetch", () => {
 
     expect(result.current.isLoading).toBe(false);
     expect(result.current.isError).toBe(true);
+    expect(result.current.isFetched).toBe(false);
     expect((result.current.error as ApiError).message).toEqual("Bad Request");
     expect(result.current.error).toBeInstanceOf(ApiError);
   });
