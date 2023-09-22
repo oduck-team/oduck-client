@@ -1,59 +1,70 @@
-import { css } from "@emotion/react";
+import { SerializedStyles, Theme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { StatStyleProps } from "./index";
+import { StatProps, Varient } from "./index";
 
-export const Container = styled.div<StatStyleProps>`
-  width: 100%;
+function getStatStyle(theme: Theme, varient: Varient) {
+  const styles: Record<Varient, SerializedStyles> = {
+    primary: css`
+      box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+      border-radius: 8px;
+      border: 1px solid ${theme.colors.neutral["05"]};
+
+      & .stat-data {
+        color: ${theme.colors.primary["60"]};
+      }
+    `,
+    ghost: css`
+      & .stat-data {
+        color: ${theme.colors.neutral["90"]};
+      }
+    `,
+  };
+
+  return styles[varient];
+}
+
+export const Container = styled.div<Pick<StatProps, "varient">>`
   display: inline-grid;
   grid-auto-flow: column;
-  padding: 8px 24px;
+  justify-items: center;
+  align-items: center;
+  padding: 16px 24px;
   background-color: #fff;
 
-  ${({ primary, theme }) => css`
-    backdrop-filter: ${primary ? "blur(38px)" : ""};
-    box-shadow: ${primary ? "0px 4px 8px 0px rgba(0, 0, 0, 0.08)" : ""};
-    backdrop-filter: blur(38px);
-    border-radius: ${primary ? "4px" : ""};
-    border: ${primary ? `1px solid ${theme.colors.neutral["05"]}` : ""};
-
-    & .stat-data {
-      color: ${primary
-        ? theme.colors.primary["60"]
-        : theme.colors.neutral["90"]};
-    }
-  `}
-`;
-
-export const StatContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Divider = styled.div`
-  width: 1px;
-  height: 55px;
-  margin: 0px 8px;
-  background: ${({ theme }) => theme.colors.neutral["20"]};
+  ${({ theme, varient = "primary" }) => getStatStyle(theme, varient)}
 `;
 
 export const Content = styled.div`
-  width: 100%;
-  display: inline-grid;
+  display: inline-flex;
   flex-direction: column;
-  text-align: center;
-  gap: 8px;
+  align-items: center;
+  width: fit-content;
+  gap: 4px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-left: 1px solid transparent;
+  border-right: 1px solid ${({ theme }) => theme.colors.neutral["10"]};
+
+  &:first-of-type {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+    border: none;
+  }
 `;
 
 export const Title = styled.span`
   ${({ theme }) => theme.typo["body-3-r"]}
+  color: ${({ theme }) => theme.colors.neutral["50"]};
 `;
 
 export const Data = styled.span`
   ${({ theme }) => theme.typo["body-2-m"]}
 `;
 
-export const Text = styled.span`
+export const Description = styled.span`
   ${({ theme }) => theme.typo["micro-r"]}
 `;

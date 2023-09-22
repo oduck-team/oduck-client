@@ -1,58 +1,36 @@
 import { ComponentProps } from "react";
 
-import {
-  Container,
-  StatContainer,
-  Divider,
-  Content,
-  Title,
-  Data,
-  Text,
-} from "./style";
+import { Container, Content, Title, Data, Description } from "./style";
 
 interface StatItemProps {
   title?: string;
   data?: string;
-  text?: string;
+  description?: string;
 }
 
-export interface StatStyleProps {
-  primary?: boolean;
-}
+export type Varient = "primary" | "ghost";
 
-interface StatProps extends StatStyleProps, ComponentProps<"div"> {
+export interface StatProps extends ComponentProps<"div"> {
+  varient?: Varient;
   items: StatItemProps[];
   className?: string;
 }
 
-export default function Stat({ items, primary = false, ...props }: StatProps) {
-  const getItems = ({ items }: StatProps) => {
-    if (items.length === 1) {
-      return (
-        <Content>
-          <Title>{items[0].title}</Title>
-          <Data className="stat-data">{items[0].data}</Data>
-          <Text>{items[0].text}</Text>
-        </Content>
-      );
-    }
-    return items.map((item, idx) => {
-      return (
-        <StatContainer key={idx}>
-          <Content>
-            <Title>{item.title}</Title>
-            <Data className="stat-data">{item.data}</Data>
-            <Text>{item.text}</Text>
-          </Content>
-          {idx < items.length - 1 && <Divider />}
-        </StatContainer>
-      );
-    });
-  };
-
+export default function Stat({
+  items,
+  varient = "primary",
+  ...props
+}: StatProps) {
   return (
-    <Container primary={primary} {...props}>
-      {getItems({ items })}
+    <Container varient={varient} {...props}>
+      {/* TODO: key={idx} 처리 */}
+      {items.map((item, idx) => (
+        <Content key={idx}>
+          {item.title && <Title>{item.title}</Title>}
+          {item.data && <Data className="stat-data">{item.data}</Data>}
+          {item.description && <Description>{item.description}</Description>}
+        </Content>
+      ))}
     </Container>
   );
 }
