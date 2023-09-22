@@ -52,14 +52,14 @@ export default function Hero({ animation }: AnimationHeroProps) {
       </Banner>
       <Actions>
         <Stat
-          type="primary"
+          varient="ghost"
           items={[
-            { title: "별점", data: "★ 4.8" },
+            { title: "별점", data: "★  4.8" },
             { title: "한줄리뷰", data: "111" },
             { title: "덕후", data: "1111" },
             { title: "방영년도", data: "2023" },
           ]}
-          style={{ maxWidth: "600px", margin: "0 auto" }}
+          style={{ margin: "0 auto" }}
         />
         <ReviewRating animationId={animation.id} />
         <BookmarkContainer
