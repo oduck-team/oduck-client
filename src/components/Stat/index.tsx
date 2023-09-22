@@ -8,21 +8,21 @@ interface StatItemProps {
   description?: string;
 }
 
-export type Varient = "primary" | "ghost";
+export type Variant = "primary" | "ghost";
 
 export interface StatProps extends ComponentProps<"div"> {
-  varient?: Varient;
+  variant?: Variant;
   items: StatItemProps[];
   className?: string;
 }
 
 export default function Stat({
   items,
-  varient = "primary",
+  variant = "primary",
   ...props
 }: StatProps) {
   return (
-    <Container varient={varient} {...props}>
+    <Container variant={variant} {...props}>
       {/* TODO: key={idx} 처리 */}
       {items.map((item, idx) => (
         <Content key={idx}>

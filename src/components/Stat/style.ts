@@ -1,10 +1,10 @@
 import { SerializedStyles, Theme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { StatProps, Varient } from "./index";
+import { StatProps, Variant } from "./index";
 
-function getStatStyle(theme: Theme, varient: Varient) {
-  const styles: Record<Varient, SerializedStyles> = {
+function getStatStyle(theme: Theme, varient: Variant) {
+  const styles: Record<Variant, SerializedStyles> = {
     primary: css`
       box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
       border-radius: 8px;
@@ -24,7 +24,7 @@ function getStatStyle(theme: Theme, varient: Varient) {
   return styles[varient];
 }
 
-export const Container = styled.div<Pick<StatProps, "varient">>`
+export const Container = styled.div<Pick<StatProps, "variant">>`
   display: inline-grid;
   grid-auto-flow: column;
   justify-items: center;
@@ -32,7 +32,7 @@ export const Container = styled.div<Pick<StatProps, "varient">>`
   padding: 16px 24px;
   background-color: #fff;
 
-  ${({ theme, varient = "primary" }) => getStatStyle(theme, varient)}
+  ${({ theme, variant = "primary" }) => getStatStyle(theme, variant)}
 `;
 
 export const Content = styled.div`
