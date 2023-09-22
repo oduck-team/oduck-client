@@ -52,7 +52,7 @@ export default function Hero({ animation }: AnimationHeroProps) {
       </Banner>
       <Actions>
         <Stat
-          varient="ghost"
+          varient="primary"
           items={[
             { title: "별점", data: "★  4.8" },
             { title: "한줄리뷰", data: "111" },
