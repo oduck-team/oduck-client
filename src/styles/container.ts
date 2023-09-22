@@ -11,6 +11,14 @@ const maxWidths = Object.entries(breakPoints)
   )
   .join("");
 
+/**
+ * 반응형 container 스타일입니다
+ * 뷰포트의 너비에 따라 max-width가 변경됩니다
+ *
+ * @example styled.div`
+ *    ${({ theme }) => theme.container}
+ * `
+ */
 export const container = css`
   width: 100%;
   ${maxWidths};
