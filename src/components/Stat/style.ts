@@ -67,4 +67,5 @@ export const Data = styled.span`
 
 export const Description = styled.span`
   ${({ theme }) => theme.typo["micro-r"]}
+  color: ${({ theme }) => theme.colors.neutral["50"]};
 `;
