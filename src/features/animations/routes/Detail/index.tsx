@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
+import Loader from "@/components/Loader";
 import SectionDivider from "@/components/SectionDivider";
 
 import { useAnimation } from "../../hooks/useAnimation";
@@ -15,17 +16,17 @@ export default function AnimationDetail() {
   const navigate = useNavigate();
 
   if (isAnimationLoading) {
-    return "로딩중";
+    return <Loader />;
   }
 
   if (animationError) {
     // TODO: 상수 처리
     switch (animationError.message) {
-      case "invalid animation id":
+      case "Not Found":
         return <Container>404</Container>;
-      case "Request failed with status code 500":
-        navigate("/error");
-        break;
+      case "Internal Server Error":
+        navigate("/error", { replace: true });
+        return;
     }
   }
 
