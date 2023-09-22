@@ -4,7 +4,7 @@ import { Colors } from "./colors";
 import { Container } from "./container";
 import { MediaQuery } from "./mediaQuery";
 import { Typography } from "./typography";
-import { ZIndex } from "./z-index";
+import { ZIndex } from "./zIndex";
 
 // Theme 타입에 colors, typo 프로퍼티를 추가하여 확장합니다.
 declare module "@emotion/react" {
