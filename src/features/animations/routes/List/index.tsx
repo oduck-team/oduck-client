@@ -6,9 +6,8 @@ import BottomSheet from "@/components/BottomSheet";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Tabs from "@/components/Tabs";
-
-import AnimationCard from "../components/AnimationCard";
-import { Animation } from "../components/AnimationCarousel";
+import AnimationCard from "@/features/animations/components/AnimationCard";
+import { Animation } from "@/features/animations/components/AnimationCarousel";
 
 export default function AnimationList() {
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
@@ -99,11 +98,6 @@ export default function AnimationList() {
     setFiltered([]);
   };
 
-  const handlerCloseClick = () => {
-    resetFilter();
-    setBottomSheetVisible(false);
-  };
-
   const handlerOkClick = () => {
     // TODO 필터링된 애니 요청
     // BottomSheet 닫기
@@ -111,14 +105,14 @@ export default function AnimationList() {
 
   return (
     <Container>
-      <div style={{ width: "100%", position: "fixed", left: "0" }}>
+      <HeaderContainer>
         <Header>
           <NavArrowLeft />
           애니
           <Filter onClick={() => setBottomSheetVisible(true)} />
         </Header>
         <Tabs items={items} defaultActiveId={1} />
-      </div>
+      </HeaderContainer>
       <Content>
         <AnimationCard size="lg" ani={CardAni} />
         <AnimationCard size="lg" ani={CardAni2} />
@@ -216,7 +210,6 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(num)}
                   styleType="filter"
-                  // size="lg"
                   onClick={() => handlerOptionClick(num)}
                 >
                   {num}
@@ -254,6 +247,13 @@ const Container = styled.div`
   padding-bottom: 66px;
 `;
 
+export const HeaderContainer = styled.div`
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+`;
+
 const Header = styled.div`
   background-color: white;
   width: 100%;
@@ -281,6 +281,7 @@ const Content = styled.div`
 
 const ChipsContiner = styled.div`
   position: relative;
+  padding: 0 24px;
   h3 {
     ${({ theme }) => theme.typo["body-1-m"]};
     margin: 24px 0 8px;
@@ -305,4 +306,6 @@ const OkButton = styled(Button)`
 const ResetButton = styled(Button)`
   padding: 0;
   color: ${({ theme }) => theme.colors["neutral"]["50"]};
+  ${({ theme }) => theme.typo["body-3-r"]};
+  letter-spacing: normal;
 `;
