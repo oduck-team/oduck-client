@@ -52,16 +52,16 @@ export default function Hero({ animation }: AnimationHeroProps) {
       </Banner>
       <Actions>
         <Stat
-          primary
+          varient="primary"
           items={[
-            { title: "별점", data: "4.8" },
+            { title: "별점", data: "★  4.8" },
             { title: "한줄리뷰", data: "111" },
             { title: "덕후", data: "1111" },
             { title: "방영년도", data: "2023" },
           ]}
-          style={{ maxWidth: "600px", margin: "0 auto" }}
+          style={{ margin: "0 auto" }}
         />
-        <ReviewRating />
+        <ReviewRating animationId={animation.id} />
         <BookmarkContainer
           style={{
             width: "100%",
@@ -70,7 +70,7 @@ export default function Hero({ animation }: AnimationHeroProps) {
             borderTop: "solid 1px #F1F1F1",
           }}
         >
-          <BookmarkButton isBookmarked={false} />
+          <BookmarkButton animationId={animation.id} />
         </BookmarkContainer>
       </Actions>
     </Container>
