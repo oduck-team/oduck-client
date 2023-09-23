@@ -249,8 +249,8 @@ const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 100%;
+  max-width: 600px;
   position: fixed;
-  left: 0;
   top: 0;
 `;
 

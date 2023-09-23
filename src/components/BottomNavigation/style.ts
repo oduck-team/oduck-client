@@ -7,6 +7,7 @@ export const Container = styled.nav`
   justify-content: center;
   bottom: 0;
   width: 100%;
+  max-width: 600px;
   height: 66px;
   background-color: white;
   box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.06);
