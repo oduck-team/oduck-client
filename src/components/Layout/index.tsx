@@ -90,7 +90,7 @@ export default function Layout() {
 }
 
 const Container = styled.div`
-  max-width: 600px;
+  max-width: ${({ theme }) => theme.maxWidth};
   width: 100%;
   height: 100%;
   margin: 0 auto;

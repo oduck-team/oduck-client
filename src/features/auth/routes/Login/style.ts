@@ -5,7 +5,7 @@ import ResponsiveContainer from "@/components/ResponsiveContainer";
 export const Header = styled.header`
   position: sticky;
   top: 0;
-  max-width: 600px;
+  max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
 `;
 
