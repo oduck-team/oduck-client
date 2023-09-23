@@ -7,7 +7,7 @@ export const TabTitles = styled.ul`
 `;
 export const TabTitle = styled.li<StyleProps>`
   display: flex;
-  width: 180px;
+  width: 100%;
   padding: 14px 10px;
   justify-content: center;
   align-items: center;

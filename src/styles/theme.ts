@@ -17,4 +17,5 @@ export const theme: Theme = {
   zIndex,
   mq,
   container,
+  maxWidth: "600px", // pc 작업 이전 임시 view max-width
 };

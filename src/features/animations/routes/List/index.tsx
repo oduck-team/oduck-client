@@ -249,8 +249,8 @@ const Container = styled.div`
 
 export const HeaderContainer = styled.div`
   width: 100%;
+  max-width: ${({ theme }) => theme.maxWidth};
   position: fixed;
-  left: 0;
   top: 0;
 `;
 
@@ -268,6 +268,7 @@ const Header = styled.div`
   & > svg {
     width: 24px;
     height: 24px;
+    cursor: pointer;
   }
 `;
 

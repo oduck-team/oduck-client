@@ -22,5 +22,6 @@ declare module "@emotion/react" {
     zIndex: ZIndex;
     mq: MediaQuery;
     container: Container;
+    maxWidth: string;
   }
 }
