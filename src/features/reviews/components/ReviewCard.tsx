@@ -35,7 +35,7 @@ function Animation({ title, image, rating }: AniProps) {
     <AnimationContainer>
       <Image image={image}></Image>
       <InfoContainer>
-        <div>{title}</div>
+        <span>{title}</span>
         <Rating color="primary" value={rating} size="sm" readonly />
       </InfoContainer>
     </AnimationContainer>

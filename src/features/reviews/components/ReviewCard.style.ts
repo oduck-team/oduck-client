@@ -15,9 +15,9 @@ export const Container = styled.div`
 `;
 
 export const AnimationContainer = styled.div`
+  width: 100%;
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  margin-bottom: 8px;
 `;
 
 export const Image = styled.div<ImageProps>`
@@ -25,6 +25,7 @@ export const Image = styled.div<ImageProps>`
   height: 74px;
   border-radius: 4px;
   border: 1px solid #ebebeb;
+  margin-right: 12px;
   ${({ image }) => css`
     background:
       url(${image}),
@@ -36,18 +37,16 @@ export const Image = styled.div<ImageProps>`
 `;
 
 export const InfoContainer = styled.div`
-  width: 231px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  justify-content: space-between;
+  padding-bottom: 2px;
 
-  & > div:first-of-type {
-    width: 231px;
-    ${({ theme }) => theme.typo["body-2-m"]};
+  & > span:first-of-type {
+    ${({ theme }) => theme.typo["body-2-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["70"]};
     letter-spacing: normal;
-    height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-all;
@@ -58,11 +57,9 @@ export const InfoContainer = styled.div`
 `;
 
 export const ContentContainer = styled.article`
-  width: 316px;
   ${({ theme }) => theme.typo["body-2-r"]};
-  color: ${({ theme }) => theme.colors["neutral"]["80"]};
-  letter-spacing: normal;
-  line-height: 140%;
+  color: #4d4c51;
+  margin-bottom: 8px;
 `;
 
 export const SpoilerButtonContainer = styled.button`
