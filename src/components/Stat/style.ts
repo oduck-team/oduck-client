@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import { StatProps, Variant } from "./index";
 
-function getStatStyle(theme: Theme, varient: Variant) {
+function getStatStyle(theme: Theme, variant: Variant) {
   const styles: Record<Variant, SerializedStyles> = {
     primary: css`
       display: inline-grid;
@@ -31,7 +31,7 @@ function getStatStyle(theme: Theme, varient: Variant) {
     `,
   };
 
-  return styles[varient];
+  return styles[variant];
 }
 
 export const Container = styled.div<Pick<StatProps, "variant">>`
