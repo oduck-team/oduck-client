@@ -1,6 +1,14 @@
 import Avatar from "@/components/Avatar";
+import Stat from "@/components/Stat";
 
-import { AvatarContainer, ImageContainer } from "./AboutMe.style";
+import {
+  AvatarContainer,
+  ImageContainer,
+  Introduce,
+  NickName,
+  SeeMoreButton,
+  StatContainer,
+} from "./AboutMe.style";
 import ProfileArt from "./ProfileArt";
 import ProfileButton from "./ProfileButton";
 
@@ -14,6 +22,24 @@ export default function AboutMe() {
           <Avatar userName="FE" size="xl" />
         </AvatarContainer>
       </ImageContainer>
+      <NickName>사용자닉네임</NickName>
+      <Introduce>
+        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
+        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
+        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
+      </Introduce>
+      <SeeMoreButton>더보기</SeeMoreButton>
+      <StatContainer>
+        <Stat
+          variant="ghost"
+          items={[
+            { data: "123", description: "리뷰" },
+            { data: "123", description: "스레드" },
+            { data: "123", description: "좋아요" },
+            { data: "7.1k", description: "포인트" },
+          ]}
+        />
+      </StatContainer>
     </>
   );
 }

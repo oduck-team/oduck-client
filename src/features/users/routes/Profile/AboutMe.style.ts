@@ -39,3 +39,10 @@ export const SeeMoreButton = styled.button`
   background-color: transparent;
   margin-bottom: 8px;
 `;
+
+export const StatContainer = styled.div`
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 18px;
+`;
