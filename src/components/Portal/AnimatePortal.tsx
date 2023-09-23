@@ -31,7 +31,7 @@ export default function AnimatePortal({
   return (
     <Portal>
       <AnimatePresence mode={mode}>
-        {isVisible && <div aria-hidden>{children}</div>}
+        {isVisible && <div>{children}</div>}
       </AnimatePresence>
     </Portal>
   );
