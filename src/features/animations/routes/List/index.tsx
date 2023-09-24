@@ -219,18 +219,26 @@ export default function AnimationList() {
           </ChipsContiner>
         </BottomSheet.Content>
         <BottomSheet.Footer>
-          <ResetButton
-            styleType="text"
-            size="sm"
-            name="초기화"
-            onClick={resetFilter}
-            color="neutral"
-          >
-            필터 초기화
-          </ResetButton>
-          <OkButton name="적용 완료" size="lg" onClick={handlerOkClick}>
-            적용 완료
-          </OkButton>
+          <Actions>
+            <ResetButton
+              styleType="text"
+              size="sm"
+              name="초기화"
+              color="neutral"
+              isBlock
+              onClick={resetFilter}
+            >
+              필터 초기화
+            </ResetButton>
+            <OkButton
+              name="적용 완료"
+              size="lg"
+              isBlock
+              onClick={handlerOkClick}
+            >
+              적용 완료
+            </OkButton>
+          </Actions>
         </BottomSheet.Footer>
       </BottomSheet>
     </Container>
@@ -297,8 +305,14 @@ const Chips = styled.div`
   flex-wrap: wrap;
 `;
 
+const Actions = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+`;
+
 const OkButton = styled(Button)`
-  width: 208px;
   span {
     ${({ theme }) => theme.typo["title-3-m"]};
   }
