@@ -1,74 +1,39 @@
-import { ComponentProps, useState } from "react";
-
+import Avatar from "@/components/Avatar";
 import Rating from "@/components/Rating";
-import { StrictPropsWithChildren } from "@/types";
 
+import ActionBar from "./ActionBar";
 import {
-  ActionsContainer,
-  AnimationContainer,
-  Container,
-  ContentContainer,
-  Image,
-  InfoContainer,
-  SpoilerButtonContainer,
+  CreatorContainer,
+  ReviewCardContainer,
+  Username,
 } from "./ReviewCard.style";
+import ReviewText from "./ReviewText";
 
-interface AniProps {
-  title: string;
-  image: string;
-  rating: number;
+interface ReviewCardProps {
+  review: {
+    user: {
+      nickname: string;
+      image: string;
+    };
+    rating: number;
+    content: string;
+  };
 }
 
 export default function ReviewCard({
-  children,
-  className,
-}: StrictPropsWithChildren<{ className?: string }>) {
-  return <Container className={className}>{children}</Container>;
-}
-
-ReviewCard.Animation = Animation;
-ReviewCard.Content = Content;
-ReviewCard.Actions = Actions;
-
-function Animation({ title, image, rating }: AniProps) {
+  review: { user, content, rating },
+}: ReviewCardProps) {
   return (
-    <AnimationContainer>
-      <Image image={image}></Image>
-      <InfoContainer>
-        <span>{title}</span>
-        <Rating color="primary" value={rating} size="sm" readonly />
-      </InfoContainer>
-    </AnimationContainer>
+    <ReviewCardContainer>
+      <CreatorContainer>
+        <Rating color="secondary" value={rating} size="sm" readonly />
+        <div>
+          <Username>{user.nickname}</Username>
+          <Avatar src={user.image} userName={user.nickname} size="xs" />
+        </div>
+      </CreatorContainer>
+      <ReviewText text={content} />
+      <ActionBar include="common" />
+    </ReviewCardContainer>
   );
-}
-
-function Content({
-  isSpoiler = false,
-  children,
-}: StrictPropsWithChildren<{ isSpoiler?: boolean }>) {
-  const [showContent, setShowContent] = useState(!isSpoiler);
-  return (
-    <ContentContainer>
-      {isSpoiler && !showContent ? (
-        <SpoilerButton onClick={() => setShowContent(true)} />
-      ) : (
-        <>{children}</>
-      )}
-    </ContentContainer>
-  );
-}
-
-function SpoilerButton({ onClick }: { onClick: () => void }) {
-  return (
-    <SpoilerButtonContainer onClick={onClick}>
-      스포일러를 포함한 리뷰에요! <span>리뷰 보기</span>
-    </SpoilerButtonContainer>
-  );
-}
-
-function Actions({
-  children,
-  ...props
-}: StrictPropsWithChildren<ComponentProps<"div">>) {
-  return <ActionsContainer {...props}>{children}</ActionsContainer>;
 }
