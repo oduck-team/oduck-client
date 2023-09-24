@@ -1,11 +1,13 @@
-import Review from "./Review";
+import ReviewCardWithImage from "@/features/reviews/components/ReviewCardWithImage";
+
 import { ListContainer, ReviewTitle } from "./ReviewList.style";
 
 const REVIEW_RIST = [
   {
     animation: {
       title: "레벨 1이지만 유니크 스킬로 최강이 되었습니다",
-      image: "https://url.kr/4gtucf",
+      image:
+        "https://i.namu.wiki/i/v8ca2gF_MPV_L4QZGoN449G29Nt8vy3PtSLKv1T9XwmZBJ8p1GTz3S3Y32sXB-eoGDv5npoGXzpD6fASoQFLwg.webp",
       rating: 10,
     },
     content:
@@ -30,7 +32,7 @@ export default function ReviewList() {
       <ReviewTitle>한줄리뷰</ReviewTitle>
       <ListContainer>
         {REVIEW_RIST.map((review, index) => (
-          <Review key={index} review={review} />
+          <ReviewCardWithImage key={index} review={review} />
         ))}
       </ListContainer>
     </>
