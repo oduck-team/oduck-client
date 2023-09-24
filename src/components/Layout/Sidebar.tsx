@@ -72,7 +72,7 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
 
   return (
     <Drawer
-      position="right"
+      side="right"
       isVisible={isVisible}
       title={
         <Button
@@ -83,10 +83,6 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
           onClick={onClose}
         />
       }
-      style={{
-        borderTopLeftRadius: "20px",
-        borderBottomLeftRadius: "20px",
-      }}
       onClose={onClose}
     >
       <div>
