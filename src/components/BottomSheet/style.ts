@@ -63,7 +63,8 @@ export const Content = styled.div`
   flex: 1;
   flex-direction: column;
   overflow: hidden;
-  padding: 8px 16px 24px;
+  padding-top: 16px;
+  padding-bottom: 24px;
 `;
 
 export const Footer = styled.div`
