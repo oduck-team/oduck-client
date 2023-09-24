@@ -32,7 +32,7 @@ export default function ReviewList() {
       <ReviewTitle>한줄리뷰</ReviewTitle>
       <ListContainer>
         {REVIEW_RIST.map((review, index) => (
-          <ReviewCardWithImage key={index} review={review} />
+          <ReviewCardWithImage key={index} review={review} margin />
         ))}
       </ListContainer>
     </>

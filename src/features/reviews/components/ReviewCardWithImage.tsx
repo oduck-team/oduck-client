@@ -10,7 +10,7 @@ import {
 } from "./ReviewCardWithImage.style";
 import ReviewText from "./ReviewText";
 
-interface ReviwCardWithImage {
+export interface ReviwCardWithImageProps {
   review: {
     animation: {
       title: string;
@@ -20,13 +20,15 @@ interface ReviwCardWithImage {
     content: string;
     createdAt: string;
   };
+  margin?: boolean;
 }
 
 export default function ReviewCardWithImage({
   review: { animation, content, createdAt },
-}: ReviwCardWithImage) {
+  margin,
+}: ReviwCardWithImageProps) {
   return (
-    <ReviewCardWithImageContainer>
+    <ReviewCardWithImageContainer margin={margin}>
       <AnimationConatiner>
         <Image src={animation.image} alt={animation.title} />
         <TitleContainer>

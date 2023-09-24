@@ -1,8 +1,20 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const ReviewCardWithImageContainer = styled.article`
-  padding: 16px;
-  margin: 0 -16px;
+import { ReviwCardWithImageProps } from "./ReviewCardWithImage";
+
+export const ReviewCardWithImageContainer = styled.article<
+  Pick<ReviwCardWithImageProps, "margin">
+>`
+  ${({ margin }) =>
+    margin
+      ? css`
+          margin: 0 -16px;
+          padding: 16px;
+        `
+      : css`
+          padding: 16px 0;
+        `}
   border-top: 2px solid ${({ theme }) => theme.colors.neutral[10]};
 
   &:last-child {
