@@ -4,46 +4,37 @@ import { motion } from "framer-motion";
 
 import BaseBackdrop from "../Backdrop";
 
-import { Position } from "./hooks/useDrawer";
+import { Side } from "./hooks/useDrawer";
 
 import { DrawerProps } from ".";
 
-const positions: Record<Position, SerializedStyles> = {
+const positions: Record<Side, SerializedStyles> = {
   top: css`
     width: 100%;
     height: 470px;
     top: 0;
-    left: 0;
-    box-shadow:
-      0px 5px 15px 0px rgba(0, 0, 0, 0.1),
-      0px 9px 12px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   `,
   bottom: css`
     width: 100%;
     height: 470px;
     bottom: 0;
-    left: 0;
-    box-shadow:
-      0px 5px 15px 0px rgba(0, 0, 0, 0.1),
-      0px 9px 12px 0px rgba(0, 0, 0, 0.15);
+    top: auto;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
   `,
   left: css`
     width: 288px;
     height: 100vh;
-    top: 0;
     left: 0;
-    box-shadow:
-      5px 0px 15px 0px rgba(0, 0, 0, 0.1),
-      9px 0px 12px 0px rgba(0, 0, 0, 0.15);
+    top: 0;
+    box-shadow: 5px 0px 15px 0px rgba(0, 0, 0, 0.1);
   `,
   right: css`
     width: 288px;
     height: 100%;
     top: 0;
     right: 0;
-    box-shadow:
-      -5px 0px 15px 0px rgba(0, 0, 0, 0.1),
-      -9px 0px 12px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: -5px 0px 15px 0px rgba(0, 0, 0, 0.1);
   `,
 };
 
@@ -51,13 +42,14 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.drawer};
 `;
 
-export const Container = styled(motion.div)<Pick<DrawerProps, "position">>`
+export const Container = styled(motion.div)<Pick<DrawerProps, "side">>`
   position: fixed;
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.colors.neutral["05"]};
+  z-index: ${({ theme }) => theme.zIndex.drawer};
 
-  ${({ position }) => positions[position]}
+  ${({ side }) => positions[side]}
 `;
 
 export const Header = styled.div`
