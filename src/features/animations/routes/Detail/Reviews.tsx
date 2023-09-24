@@ -1,9 +1,16 @@
 import Chip from "@/components/Chip";
-import ReviewLikeButton from "@/features/reviews/components/ReviewLikeButton";
-import ReviewMoreButton from "@/features/reviews/components/ReviewMoreButton";
-import ReviewSimpleCard from "@/features/reviews/components/ReviewSimpleCard";
+import ReviewCard from "@/features/reviews/components/ReviewCard";
 
 import { Section } from ".";
+
+const REVIEW_MOCK_DATA = {
+  user: {
+    nickname: "동동동",
+    image: "",
+  },
+  rating: 5,
+  content: "제목이 뭐이리기냐 제목부터 맘에안듬",
+};
 
 export default function Reviews() {
   return (
@@ -38,35 +45,7 @@ export default function Reviews() {
 
       <ul>
         <li>
-          <ReviewSimpleCard>
-            <ReviewSimpleCard.Header rating={5} userId="123" userName="John" />
-            <ReviewSimpleCard.Content isSpoiler={true}>
-              스포일러 스포일러 스포일러 스포일러스포일러 스포일러스포일러
-              스포일러스포일러 스포일러스포일러 스포일러스포일러
-              스포일러스포일러 스포일러스포일러 스포일러스포일러
-              스포일러스포일러 스포일러스포일러 스포일러스포일러
-              스포일러스포일러 스포일러
-            </ReviewSimpleCard.Content>
-            <ReviewSimpleCard.Actions
-              style={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <time dateTime="2023-04-01" style={{ fontSize: "12px" }}>
-                  2023.07.30
-                </time>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px",
-                }}
-              >
-                <ReviewLikeButton isLike={false} count={0} onClick={() => {}} />
-                <ReviewMoreButton />
-              </div>
-            </ReviewSimpleCard.Actions>
-          </ReviewSimpleCard>
+          <ReviewCard review={REVIEW_MOCK_DATA} />
         </li>
       </ul>
     </Section>
