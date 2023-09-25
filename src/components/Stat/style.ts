@@ -40,7 +40,7 @@ export const Container = styled.div<Pick<StatProps, "variant">>`
   ${({ theme, variant = "primary" }) => getStatStyle(theme, variant)}
 `;
 
-function getContentStyle(theme: Theme, varient: Variant) {
+function getContentStyle(theme: Theme, variant: Variant) {
   const styles: Record<Variant, SerializedStyles> = {
     primary: css`
       padding-left: 20px;
@@ -71,7 +71,7 @@ function getContentStyle(theme: Theme, varient: Variant) {
     `,
   };
 
-  return styles[varient];
+  return styles[variant];
 }
 
 export const Content = styled.div<Pick<StatProps, "variant">>`
