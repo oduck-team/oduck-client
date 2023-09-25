@@ -21,6 +21,7 @@ export default function ReviewMoreButton() {
           />
         }
         variant="text"
+        size="sm"
         color="neutral"
       ></Button>
     </IconoirProvider>
