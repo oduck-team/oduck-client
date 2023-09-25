@@ -20,7 +20,7 @@ export default function ReviewMoreButton() {
             color={theme.colors.neutral["50"]}
           />
         }
-        styleType="text"
+        variant="text"
         color="neutral"
       ></Button>
     </IconoirProvider>

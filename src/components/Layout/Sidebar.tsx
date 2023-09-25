@@ -78,7 +78,7 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
         <Button
           icon={<Cancel />}
           name="메뉴 닫기"
-          styleType="text"
+          variant="text"
           color="neutral"
           onClick={onClose}
         />

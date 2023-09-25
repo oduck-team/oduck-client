@@ -4,18 +4,18 @@ import ActionChip from "./ActionChip";
 import FilterChip from "./FilterChip";
 import SelectableChip from "./SelectableChip";
 
-export type ChipType = "action" | "selectable" | "filter";
-export type ChipSize = "sm" | "md" | "lg";
+export type Variant = "action" | "selectable" | "filter";
+export type Size = "sm" | "md" | "lg";
 
 export interface ChipProps extends ComponentProps<"button"> {
-  styleType?: ChipType;
+  variant?: Variant;
   active?: boolean;
   icon?: React.ReactNode;
-  size?: ChipSize;
+  size?: Size;
 }
 // TODO: size를 옵션으로 받기
 export default function Chip({
-  styleType = "action",
+  variant = "action",
   active,
   icon,
   size = "md",
@@ -23,7 +23,7 @@ export default function Chip({
   children,
   onClick,
 }: ChipProps) {
-  if (styleType === "selectable")
+  if (variant === "selectable")
     return (
       <SelectableChip
         size={size}
@@ -34,7 +34,7 @@ export default function Chip({
         {children}
       </SelectableChip>
     );
-  else if (styleType === "filter")
+  else if (variant === "filter")
     return (
       <FilterChip
         size={size}

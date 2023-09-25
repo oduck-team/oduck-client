@@ -22,7 +22,7 @@ export default function Login() {
           <Button
             name="뒤로가기"
             icon={<NavArrowLeft aria-hidden />}
-            styleType="text"
+            variant="text"
             color="neutral"
             onClick={handleClickBack}
           />
