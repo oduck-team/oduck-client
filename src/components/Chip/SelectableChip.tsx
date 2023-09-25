@@ -8,7 +8,7 @@ export default function SelectableChip({
   className,
   children,
   onClick,
-}: Omit<ChipProps, "styleType" | "icon">) {
+}: Omit<ChipProps, "variant" | "icon">) {
   return (
     <Container
       size={size}

@@ -36,7 +36,7 @@ export default function LoginAlertModal({
         <Modal.Actions direction="row">
           <Button
             name="닫기"
-            styleType="solid"
+            variant="solid"
             color="neutral"
             size="lg"
             isBlock
