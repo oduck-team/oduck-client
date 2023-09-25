@@ -5,11 +5,11 @@ import ReviewMoreButton from "./ReviewMoreButton";
 export type Include = "time" | "common";
 
 export interface ActionBarProps {
-  include: Include;
+  include?: Include;
   createdAt?: string;
 }
 export default function ActionBar({
-  include = "time",
+  include = "common",
   createdAt,
 }: ActionBarProps) {
   return (

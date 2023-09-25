@@ -1,22 +1,24 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const ReviewCardContainer = styled.article`
-  padding: 16px;
+import { ReviewCardProps } from "./ReviewCard";
+
+export const ReviewCardContainer = styled.article<
+  Pick<ReviewCardProps, "isBlock">
+>`
+  ${({ isBlock }) =>
+    isBlock
+      ? css`
+          margin: 0 -16px;
+          padding: 16px;
+        `
+      : css`
+          padding: 16px 0;
+        `}
+
   border-top: 2px solid ${({ theme }) => theme.colors.neutral[10]};
 
   &:last-child {
     border-bottom: 2px solid ${({ theme }) => theme.colors.neutral[10]};
   }
-`;
-
-export const CreatorContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-`;
-
-export const Username = styled.span`
-  ${({ theme }) => theme.typo["body-3-r"]}
-  margin-right: 8px;
 `;

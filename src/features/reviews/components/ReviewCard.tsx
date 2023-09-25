@@ -1,39 +1,26 @@
-import Avatar from "@/components/Avatar";
-import Rating from "@/components/Rating";
+import { StrictPropsWithChildren } from "@/types";
 
 import ActionBar from "./ActionBar";
-import {
-  CreatorContainer,
-  ReviewCardContainer,
-  Username,
-} from "./ReviewCard.style";
-import ReviewText from "./ReviewText";
+import Animation from "./Animation";
+import { ReviewCardContainer } from "./ReviewCard.style";
+import ReviewComent from "./ReviewComent";
+import UserRating from "./UserRating";
 
-interface ReviewCardProps {
-  review: {
-    user: {
-      nickname: string;
-      image: string;
-    };
-    rating: number;
-    content: string;
-  };
+export interface ReviewCardProps {
+  /*** isBlock: 위, 아래 border를 양옆에 붙이는 옵션 */
+  isBlock?: boolean;
 }
 
 export default function ReviewCard({
-  review: { user, content, rating },
-}: ReviewCardProps) {
+  isBlock,
+  children,
+}: StrictPropsWithChildren<ReviewCardProps>) {
   return (
-    <ReviewCardContainer>
-      <CreatorContainer>
-        <Rating color="secondary" value={rating} size="sm" readonly />
-        <div>
-          <Username>{user.nickname}</Username>
-          <Avatar src={user.image} userName={user.nickname} size="xs" />
-        </div>
-      </CreatorContainer>
-      <ReviewText text={content} />
-      <ActionBar include="common" />
-    </ReviewCardContainer>
+    <ReviewCardContainer isBlock={isBlock}>{children}</ReviewCardContainer>
   );
 }
+
+ReviewCard.Animation = Animation;
+ReviewCard.UserRating = UserRating;
+ReviewCard.Comment = ReviewComent;
+ReviewCard.ActionBar = ActionBar;

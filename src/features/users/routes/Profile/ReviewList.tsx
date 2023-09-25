@@ -1,4 +1,4 @@
-import ReviewCardWithImage from "@/features/reviews/components/ReviewCardWithImage";
+import ReviewCard from "@/features/reviews/components/ReviewCard";
 
 import { ListContainer, ReviewTitle } from "./ReviewList.style";
 
@@ -10,7 +10,7 @@ const REVIEW_RIST = [
         "https://i.namu.wiki/i/v8ca2gF_MPV_L4QZGoN449G29Nt8vy3PtSLKv1T9XwmZBJ8p1GTz3S3Y32sXB-eoGDv5npoGXzpD6fASoQFLwg.webp",
       rating: 10,
     },
-    content:
+    comment:
       "너무너무 재밌게 안 봤습니다. 애니제목을 왜 이딴식으로 짓는지 이해가 안가네요하하하하하하하하하하하하하하하하하하하하핳아항항핳하아항하하하하아항하아항하아항항",
     createdAt: "2023.07.30",
   },
@@ -21,7 +21,7 @@ const REVIEW_RIST = [
       image: "https://url.kr/4gtucf",
       rating: 3,
     },
-    content: "원피스는 언제 찾아",
+    comment: "원피스는 언제 찾아",
     createdAt: "2023.07.29",
   },
 ];
@@ -32,7 +32,11 @@ export default function ReviewList() {
       <ReviewTitle>한줄리뷰</ReviewTitle>
       <ListContainer>
         {REVIEW_RIST.map((review, index) => (
-          <ReviewCardWithImage key={index} review={review} isBlock />
+          <ReviewCard key={index} isBlock>
+            <ReviewCard.Animation animation={review.animation} />
+            <ReviewCard.Comment text={review.comment} />
+            <ReviewCard.ActionBar include="time" createdAt={review.createdAt} />
+          </ReviewCard>
         ))}
       </ListContainer>
     </>
