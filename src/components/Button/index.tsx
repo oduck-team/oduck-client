@@ -4,14 +4,14 @@ import { theme } from "@/styles/theme";
 
 import { Container, ContentWrapper, IconWrapper, IconButton } from "./style";
 
-export type Style = "solid" | "outline" | "text";
+export type Variant = "solid" | "outline" | "text";
 export type Color = keyof Pick<typeof theme.colors, ColorKeys>;
 type ColorKeys = "primary" | "neutral" | "warn";
 export type Size = "xl" | "lg" | "md" | "sm";
 
 export interface ButtonProps extends ComponentProps<"button"> {
   name: string;
-  styleType?: Style;
+  variant?: Variant;
   color?: Color;
   size?: Size;
   isBlock?: boolean;
@@ -20,7 +20,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
 
 export default function Button({
   name,
-  styleType = "solid",
+  variant = "solid",
   color = "primary",
   size = "md",
   type = "button",
@@ -34,7 +34,7 @@ export default function Button({
     return (
       <IconButton
         aria-label={name}
-        styleType={styleType}
+        variant={variant}
         color={color}
         size={size}
         type={type}
@@ -48,7 +48,7 @@ export default function Button({
   return (
     <Container
       aria-label={name}
-      styleType={styleType}
+      variant={variant}
       color={color}
       size={size}
       type={type}
