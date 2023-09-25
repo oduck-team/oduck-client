@@ -53,6 +53,10 @@ export const publicRoutes: RouteObject[] = [
         path: "/users/:id",
         element: <Profile />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
     ],
   },
   {

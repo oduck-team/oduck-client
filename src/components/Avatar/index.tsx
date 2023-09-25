@@ -1,6 +1,6 @@
 import { Container, UserImage, UserName } from "./style";
 
-export type Size = "xl" | "lg" | "md" | "sm";
+export type Size = "xl" | "lg" | "md" | "sm" | "xs";
 
 export interface AvatarProps {
   userName: string;
