@@ -2,32 +2,6 @@ import styled from "@emotion/styled";
 
 import ResponsiveContainer from "@/components/ResponsiveContainer";
 
-export const Header = styled.header`
-  position: sticky;
-  top: 0;
-  max-width: ${({ theme }) => theme.maxWidth};
-  margin: 0 auto;
-`;
-
-export const HeaderContents = styled.div`
-  ${({ theme }) => theme.container}
-  display: flex;
-  align-items: center;
-  height: 50px;
-  padding: 0 1rem;
-  margin: 0 auto;
-
-  & > h1 {
-    ${({ theme }) => theme.typo["title-3-m"]}
-    margin: 0 auto;
-  }
-
-  & > button {
-    position: absolute;
-    margin-left: 0;
-  }
-`;
-
 export const Main = styled(ResponsiveContainer)`
   position: relative;
   display: flex;

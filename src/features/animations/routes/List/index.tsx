@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
-import { Cancel, Filter, NavArrowLeft } from "iconoir-react";
+import { Cancel, Filter } from "iconoir-react";
 import { useState } from "react";
 
 import BottomSheet from "@/components/BottomSheet";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
+import Header from "@/components/Layout/Header";
 import Tabs from "@/components/Tabs";
 import AnimationCard from "@/features/animations/components/AnimationCard";
 import { Animation } from "@/features/animations/components/AnimationCarousel";
@@ -105,14 +106,16 @@ export default function AnimationList() {
 
   return (
     <Container>
-      <HeaderContainer>
-        <Header>
-          <NavArrowLeft />
-          애니
+      <Header>
+        <Header.Left />
+        <Header.Center>
+          <h1>애니</h1>
+        </Header.Center>
+        <Header.Right>
           <Filter onClick={() => setBottomSheetVisible(true)} />
-        </Header>
-        <Tabs items={items} defaultActiveId={1} />
-      </HeaderContainer>
+        </Header.Right>
+      </Header>
+      <Tabs items={items} defaultActiveId={1} />
       <Content>
         <AnimationCard size="lg" ani={CardAni} />
         <AnimationCard size="lg" ani={CardAni2} />
@@ -254,24 +257,6 @@ export const HeaderContainer = styled.div`
   max-width: ${({ theme }) => theme.maxWidth};
   position: fixed;
   top: 0;
-`;
-
-const Header = styled.div`
-  background-color: white;
-  width: 100%;
-  height: 90px;
-  padding: 40px 16px 0;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  ${({ theme }) => theme.typo["title-3-b"]};
-
-  & > svg {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-  }
 `;
 
 const Content = styled.div`
