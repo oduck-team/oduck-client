@@ -7,11 +7,11 @@ export const ActionBarContainer = styled.div<Pick<ActionBarProps, "include">>`
   ${({ theme }) => theme.typo["body-3-r"]}
   color: #adaeb8;
 
-  ${({ include }) => getActionBarContainerStyle(include)}
+  ${({ include = "common" }) => getActionBarContainerStyle(include)}
 `;
 
 export const ButtonContainer = styled.div<Pick<ActionBarProps, "include">>`
-  ${({ include }) => getButtonContainerStyle(include)}
+  ${({ include = "common" }) => getButtonContainerStyle(include)}
 `;
 
 function getActionBarContainerStyle(include: Include) {
