@@ -1,7 +1,5 @@
 import { Variants } from "framer-motion";
 
-import { StrictPropsWithChildren } from "@/types";
-
 import { Container } from "./style";
 
 const variants: Variants = {
@@ -19,10 +17,10 @@ export default function Backdrop({
   isVisible = true,
   className = "",
   onClick,
-  children,
-}: StrictPropsWithChildren<BackdropProps>) {
+}: BackdropProps) {
   return (
     <Container
+      aria-hidden
       isVisible={isVisible}
       initial="hidden"
       animate="visible"
@@ -31,8 +29,6 @@ export default function Backdrop({
       transition={{ duration: 0.15 }}
       className={className}
       onClick={onClick}
-    >
-      {children}
-    </Container>
+    />
   );
 }

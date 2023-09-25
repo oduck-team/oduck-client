@@ -35,14 +35,11 @@ describe("hooks/useDebounce", () => {
     const [count, setCount] = useState(0);
 
     const handleDebounceClick = useDebounce(async () => {
-      console.log("called", Date.now());
       await new Promise((resolve) =>
         setTimeout(() => {
-          console.log("done");
           resolve(undefined);
         }, 100),
       );
-      console.log("resolve");
       setCount((prev) => prev + 1);
     }, ms);
 

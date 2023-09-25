@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { PropsWithChildren } from "react";
-import { describe, it, expect, vi, afterEach, beforeEach } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 
 import AnimatePortal from "./AnimatePortal";
 
@@ -14,12 +14,6 @@ vi.mock("framer-motion", async () => {
 });
 
 describe("components/portal/AnimatePortal", () => {
-  beforeEach(() => {
-    const element = document.createElement("div");
-    element.id = "modal-root";
-    document.body.appendChild(element);
-  });
-
   afterEach(cleanup);
 
   it("정의되어 있어야 한다", () => {

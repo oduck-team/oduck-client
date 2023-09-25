@@ -33,7 +33,7 @@ const buttonSizes: Record<Size, SerializedStyles> = {
 function getButtonStyle(variant: Variant, color: Color, theme: Theme) {
   const isNeutral = color === "neutral";
   const solidColor = isNeutral
-    ? theme.colors["neutral"]["05"]
+    ? theme.colors["neutral"]["10"]
     : theme.colors[color]["60"];
   const solidPressedColor = isNeutral
     ? theme.colors["neutral"]["30"]

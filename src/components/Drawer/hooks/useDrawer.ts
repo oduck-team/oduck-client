@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-export type Position = "top" | "right" | "bottom" | "left";
+export type Side = "top" | "right" | "bottom" | "left";
 
-export function useDrawer(position: Position, onClose: () => void) {
+export function useDrawer(side: Side, onClose: () => void) {
   const [startX, setStartX] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [startY, setStartY] = useState(0);
@@ -27,7 +27,7 @@ export function useDrawer(position: Position, onClose: () => void) {
 
     let shouldClose = false;
 
-    switch (position) {
+    switch (side) {
       case "right":
         shouldClose = diffX > 50;
         break;

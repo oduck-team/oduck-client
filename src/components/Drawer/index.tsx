@@ -1,18 +1,23 @@
-import { Variants } from "framer-motion";
-
 import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import AnimatePortal from "../Portal/AnimatePortal";
 
-import { useDrawer, Position } from "./hooks/useDrawer";
+import { useDrawer, Side } from "./hooks/useDrawer";
 import { Backdrop, Container, Content, Header } from "./style";
+
+const sides = {
+  top: "translate3d(0,-100%,0)",
+  bottom: "translate3d(0,100%,0)",
+  left: "translate3d(-100%,0,0)",
+  right: "translate3d(100%,0,0)",
+};
 
 export interface DrawerProps {
   title?: React.ReactNode;
   isVisible?: boolean;
   showBackdrop?: boolean;
-  position: Position;
+  side: Side;
   style?: React.CSSProperties;
   className?: string;
   onClose: () => void;
@@ -22,63 +27,44 @@ export default function Drawer({
   title,
   isVisible = false,
   showBackdrop = true,
-  position,
+  side,
   style,
   className = "",
   onClose,
   children,
 }: StrictPropsWithChildren<DrawerProps>) {
   const { handleTouchStart, handleTouchMove, handleTouchEnd } = useDrawer(
-    position,
+    side,
     onClose,
   );
   useScrollLock(isVisible);
 
   return (
     <AnimatePortal isVisible={isVisible}>
-      <Backdrop isVisible={showBackdrop} onClick={onClose}>
-        <Container
-          position={position}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={variants[position]}
-          transition={{
-            type: "springs",
-            tiffness: 300,
-            damping: 30,
-            duration: 0.15,
-          }}
-          className={className}
-          style={style}
-          onClick={(e) => e.stopPropagation()}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          <Header>{title}</Header>
-          <Content>{children}</Content>
-        </Container>
-      </Backdrop>
+      <Backdrop isVisible={showBackdrop} onClick={onClose} />
+      <Container
+        aria-modal={isVisible}
+        role="dialog"
+        side={side}
+        initial={{ transform: sides[side] }}
+        exit={{ transform: sides[side] }}
+        animate={{
+          transform: "translate3d(0,0,0)",
+          transition: {
+            duration: 0.5,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        }}
+        className={className}
+        style={style}
+        onClick={(e) => e.stopPropagation()}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        <Header>{title}</Header>
+        <Content>{children}</Content>
+      </Container>
     </AnimatePortal>
   );
 }
-
-const variants: Record<Position, Variants> = {
-  top: {
-    hidden: { y: "-100%" },
-    visible: { y: "0px" },
-  },
-  bottom: {
-    hidden: { y: "100%" },
-    visible: { y: "0" },
-  },
-  left: {
-    hidden: { x: "-100%" },
-    visible: { x: "0px" },
-  },
-  right: {
-    hidden: { x: "100%" },
-    visible: { x: "0px" },
-  },
-};

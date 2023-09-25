@@ -4,7 +4,7 @@ import { colors } from "./colors";
 import { container } from "./container";
 import { mq } from "./mediaQuery";
 import { typo } from "./typography";
-import { zIndex } from "./z-index";
+import { zIndex } from "./zIndex";
 
 export const theme: Theme = {
   colors: {

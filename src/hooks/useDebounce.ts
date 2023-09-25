@@ -17,14 +17,16 @@ export default function useDebounce<T extends unknown[], R>(
         clearTimeout(timerRef.current);
       }
 
-      timerRef.current = setTimeout(async () => await callback(...args), ms);
+      timerRef.current = setTimeout(() => callback(...args), ms);
     },
     [callback, ms],
   );
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerRef.current);
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     };
   }, []);
 

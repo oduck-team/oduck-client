@@ -3,8 +3,7 @@ import { ComponentProps } from "react";
 
 import Portal from ".";
 
-interface AnimatePortalProps
-  extends Omit<ComponentProps<typeof Portal>, "elementId"> {
+interface AnimatePortalProps extends ComponentProps<typeof Portal> {
   /**
    * children 렌더링 여부
    */
@@ -30,8 +29,10 @@ export default function AnimatePortal({
   children,
 }: AnimatePortalProps) {
   return (
-    <Portal elementId="modal-root">
-      <AnimatePresence mode={mode}>{isVisible && children}</AnimatePresence>
+    <Portal>
+      <AnimatePresence mode={mode}>
+        {isVisible && <div>{children}</div>}
+      </AnimatePresence>
     </Portal>
   );
 }
