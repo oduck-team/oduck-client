@@ -14,7 +14,7 @@ export default function useBottomSheet(
   const dragControls = useDragControls();
   const [height, setHeight] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { height: windowHeight } = useWindowSize();
+  const { height: windowHeight } = useWindowSize(1000);
 
   // 위로 드래그시 bottom sheet 이동 방지
   const handleDrag = (
