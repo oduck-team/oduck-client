@@ -4,6 +4,10 @@ import styled from "@emotion/styled";
 import { AvatarProps, Size } from ".";
 
 const sizes: Record<Size, SerializedStyles> = {
+  xs: css`
+    height: 24px;
+    width: 24px;
+  `,
   sm: css`
     height: 32px;
     width: 32px;
@@ -55,6 +59,7 @@ function getFontStyle(size: Size, theme: Theme) {
     lg: theme.typo["title-1-m"],
     md: theme.typo["body-1-m"],
     sm: theme.typo["body-2-m"],
+    xs: theme.typo["micro-m"],
   };
 
   return css`

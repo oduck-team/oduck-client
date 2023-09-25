@@ -25,7 +25,7 @@ export default function Stat({
     <Container variant={variant} {...props}>
       {/* TODO: key={idx} 처리 */}
       {items.map((item, idx) => (
-        <Content key={idx}>
+        <Content key={idx} variant={variant}>
           {item.title && <Title>{item.title}</Title>}
           {item.data && <Data className="stat-data">{item.data}</Data>}
           {item.description && <Description>{item.description}</Description>}
