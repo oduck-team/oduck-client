@@ -44,8 +44,8 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.span`
-  ${({ theme }) => theme.typo["body-2-m"]}
-  color: #66666e;
+  ${({ theme }) => theme.typo["body-2-m"]};
+  color: ${({ theme }) => theme.colors.neutral[70]};
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
