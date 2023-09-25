@@ -4,10 +4,10 @@ import styled from "@emotion/styled";
 import { ReviwCardWithImageProps } from "./ReviewCardWithImage";
 
 export const ReviewCardWithImageContainer = styled.article<
-  Pick<ReviwCardWithImageProps, "margin">
+  Pick<ReviwCardWithImageProps, "isBlock">
 >`
-  ${({ margin }) =>
-    margin
+  ${({ isBlock }) =>
+    isBlock
       ? css`
           margin: 0 -16px;
           padding: 16px;

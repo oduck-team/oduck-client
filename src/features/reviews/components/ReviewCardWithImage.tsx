@@ -20,15 +20,16 @@ export interface ReviwCardWithImageProps {
     content: string;
     createdAt: string;
   };
-  margin?: boolean;
+  /*** isBlock: 위, 아래 border를 양옆에 붙이는 옵션 */
+  isBlock?: boolean;
 }
 
 export default function ReviewCardWithImage({
   review: { animation, content, createdAt },
-  margin,
+  isBlock,
 }: ReviwCardWithImageProps) {
   return (
-    <ReviewCardWithImageContainer margin={margin}>
+    <ReviewCardWithImageContainer isBlock={isBlock}>
       <AnimationConatiner>
         <Image src={animation.image} alt={animation.title} />
         <TitleContainer>
