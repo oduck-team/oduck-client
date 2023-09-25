@@ -3,13 +3,7 @@ import { createPortal } from "react-dom";
 
 import { StrictPropsWithChildren } from "@/types";
 
-interface PortalProps {
-  elementId?: string;
-}
-
-export default function Portal({
-  children,
-}: StrictPropsWithChildren<PortalProps>) {
+export default function Portal({ children }: StrictPropsWithChildren) {
   const [container, setContainer] = useState<Element | null>(null);
 
   useEffect(() => {
