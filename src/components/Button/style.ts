@@ -1,7 +1,7 @@
 import { SerializedStyles, Theme, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Size, Color, ButtonProps, Style } from ".";
+import { Size, Color, ButtonProps, Variant } from ".";
 
 const buttonSizes: Record<Size, SerializedStyles> = {
   sm: css`
@@ -30,7 +30,7 @@ const buttonSizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
+function getButtonStyle(variant: Variant, color: Color, theme: Theme) {
   const isNeutral = color === "neutral";
   const solidColor = isNeutral
     ? theme.colors["neutral"]["05"]
@@ -38,7 +38,7 @@ function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
   const solidPressedColor = isNeutral
     ? theme.colors["neutral"]["30"]
     : theme.colors[color]["80"];
-  const styles: Record<Style, SerializedStyles> = {
+  const styles: Record<Variant, SerializedStyles> = {
     solid: css`
       color: ${isNeutral ? theme.colors["neutral"]["90"] : "white"};
       background-color: ${solidColor};
@@ -102,7 +102,7 @@ function getButtonStyle(styleType: Style, color: Color, theme: Theme) {
     `,
   };
 
-  return styles[styleType];
+  return styles[variant];
 }
 
 const baseStyle = css`
@@ -114,14 +114,14 @@ const baseStyle = css`
 `;
 
 export const Container = styled.button<
-  Pick<ButtonProps, "styleType" | "color" | "size" | "isBlock">
+  Pick<ButtonProps, "variant" | "color" | "size" | "isBlock">
 >`
   ${baseStyle}
   width: ${({ isBlock }) => (isBlock ? "100%" : "auto")};
 
-  ${({ styleType = "solid", color = "primary", size = "md", theme }) => css`
+  ${({ variant = "solid", color = "primary", size = "md", theme }) => css`
     ${buttonSizes[size]}
-    ${getButtonStyle(styleType, color, theme)}
+    ${getButtonStyle(variant, color, theme)}
   `}
 `;
 
@@ -149,14 +149,14 @@ const iconButtonSizes: Record<Size, SerializedStyles> = {
 };
 
 export const IconButton = styled.button<
-  Pick<ButtonProps, "styleType" | "color" | "size">
+  Pick<ButtonProps, "variant" | "color" | "size">
 >`
   ${baseStyle}
   border-radius: 999px;
 
-  ${({ styleType = "solid", color = "primary", size = "md", theme }) => css`
+  ${({ variant = "solid", color = "primary", size = "md", theme }) => css`
     ${iconButtonSizes[size]}
-    ${getButtonStyle(styleType, color, theme)}
+    ${getButtonStyle(variant, color, theme)}
   `}
 `;
 

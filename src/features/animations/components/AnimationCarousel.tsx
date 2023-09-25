@@ -158,7 +158,7 @@ export default function AnimationCarousel({
       <SlideContainer ref={slideContainerRef}>
         <Button
           name="이전"
-          styleType="text"
+          variant="text"
           color="neutral"
           size="lg"
           icon={<NavArrowLeft />}
@@ -166,7 +166,7 @@ export default function AnimationCarousel({
         ></Button>
         <Button
           name="다음"
-          styleType="text"
+          variant="text"
           color="neutral"
           size="lg"
           icon={<NavArrowRight />}

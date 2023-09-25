@@ -150,7 +150,7 @@ function Searchbar({
         {isButtonVisible && (
           <Button
             name="검색취소"
-            styleType="text"
+            variant="text"
             size="sm"
             style={{
               minWidth: "fit-content",

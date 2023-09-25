@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 
 import { ActionChipProps } from "./ActionChip";
 
-import { ChipSize } from ".";
+import { Size } from ".";
 
-export const Sizes: Record<ChipSize, SerializedStyles> = {
+export const Sizes: Record<Size, SerializedStyles> = {
   sm: css`
     height: 28px;
   `,

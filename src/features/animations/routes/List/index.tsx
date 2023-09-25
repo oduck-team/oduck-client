@@ -132,7 +132,7 @@ export default function AnimationList() {
                   <Chip
                     key={i}
                     active={filtered.includes(item)}
-                    styleType="filter"
+                    variant="filter"
                     onClick={() => handlerOptionClick(item)}
                     icon={<Cancel />}
                   >
@@ -149,7 +149,7 @@ export default function AnimationList() {
                 <Chip
                   key={i}
                   active={filtered.includes(genre)}
-                  styleType="filter"
+                  variant="filter"
                   onClick={() => handlerOptionClick(genre)}
                 >
                   {genre}
@@ -164,7 +164,7 @@ export default function AnimationList() {
                 <Chip
                   key={i}
                   active={filtered.includes(season)}
-                  styleType="filter"
+                  variant="filter"
                   onClick={() => handlerOptionClick(season)}
                 >
                   {season}
@@ -179,7 +179,7 @@ export default function AnimationList() {
                 <Chip
                   key={i}
                   active={filtered.includes(type)}
-                  styleType="filter"
+                  variant="filter"
                   onClick={() => handlerOptionClick(type)}
                 >
                   {type}
@@ -194,7 +194,7 @@ export default function AnimationList() {
                 <Chip
                   key={i}
                   active={filtered.includes(status)}
-                  styleType="filter"
+                  variant="filter"
                   onClick={() => handlerOptionClick(status)}
                 >
                   {status}
@@ -209,7 +209,7 @@ export default function AnimationList() {
                 <Chip
                   key={i}
                   active={filtered.includes(num)}
-                  styleType="filter"
+                  variant="filter"
                   onClick={() => handlerOptionClick(num)}
                 >
                   {num}
@@ -220,7 +220,7 @@ export default function AnimationList() {
         </BottomSheet.Content>
         <BottomSheet.Footer>
           <ResetButton
-            styleType="text"
+            variant="text"
             size="sm"
             name="초기화"
             onClick={resetFilter}

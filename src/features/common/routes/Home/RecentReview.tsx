@@ -20,7 +20,7 @@ export default function RecentReview() {
     <Container>
       <Header>
         <Title>최근 한줄리뷰</Title>
-        <Button name="더보기" styleType="text" size="sm" color="neutral">
+        <Button name="더보기" variant="text" size="sm" color="neutral">
           더보기
         </Button>
       </Header>

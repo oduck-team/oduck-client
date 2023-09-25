@@ -7,9 +7,9 @@ export const Container = styled.span<BadgeProps>`
   padding: 2px 6px;
   border-radius: 999px;
 
-  ${({ color = "primary", styleType, theme }) => css`
-    color: ${styleType === "fill" ? "white" : theme.colors[color]["60"]};
-    background-color: ${styleType === "fill"
+  ${({ color = "primary", variant, theme }) => css`
+    color: ${variant === "fill" ? "white" : theme.colors[color]["60"]};
+    background-color: ${variant === "fill"
       ? theme.colors[color]["60"]
       : "transparent"};
   `}

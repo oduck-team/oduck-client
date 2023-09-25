@@ -2,10 +2,10 @@ import { ComponentProps } from "react";
 
 import { Container } from "./ActionChip.style";
 
-import { ChipSize } from ".";
+import { Size } from ".";
 
 export interface ActionChipProps extends ComponentProps<"button"> {
-  size: ChipSize;
+  size: Size;
 }
 
 export default function ActionChip({

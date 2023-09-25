@@ -28,18 +28,18 @@ export default function Reviews() {
         }}
       >
         <li>
-          <Chip styleType="selectable" active>
+          <Chip variant="selectable" active>
             좋아요순
           </Chip>
         </li>
         <li>
-          <Chip styleType="selectable">최신순</Chip>
+          <Chip variant="selectable">최신순</Chip>
         </li>
         <li>
-          <Chip styleType="selectable">평점 높은 순</Chip>
+          <Chip variant="selectable">평점 높은 순</Chip>
         </li>
         <li>
-          <Chip styleType="selectable">평점 낮은 순</Chip>
+          <Chip variant="selectable">평점 낮은 순</Chip>
         </li>
       </ul>
 

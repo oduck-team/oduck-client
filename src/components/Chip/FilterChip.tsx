@@ -9,7 +9,7 @@ export default function FilterChip({
   className,
   children,
   onClick,
-}: Omit<ChipProps, "styleType">) {
+}: Omit<ChipProps, "variant">) {
   return (
     <Container
       size={size}
