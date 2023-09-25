@@ -9,7 +9,7 @@ const REVIEW_MOCK_DATA = {
     image: "",
   },
   rating: 5,
-  content: "제목이 뭐이리기냐 제목부터 맘에안듬",
+  comment: "제목이 뭐이리기냐 제목부터 맘에안듬",
 };
 
 export default function Reviews() {
@@ -45,7 +45,14 @@ export default function Reviews() {
 
       <ul>
         <li>
-          <ReviewCard review={REVIEW_MOCK_DATA} />
+          <ReviewCard>
+            <ReviewCard.UserRating
+              user={REVIEW_MOCK_DATA.user}
+              rating={REVIEW_MOCK_DATA.rating}
+            />
+            <ReviewCard.Comment text={REVIEW_MOCK_DATA.comment} />
+            <ReviewCard.ActionBar />
+          </ReviewCard>
         </li>
       </ul>
     </Section>

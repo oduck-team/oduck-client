@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import ReviewCardWithImage from "@/features/reviews/components/ReviewCardWithImage";
+import ReviewCard from "@/features/reviews/components/ReviewCard";
 
 import { Header, Container, Title, ReviewConainer } from "./RecentReview.style";
 
@@ -10,7 +10,7 @@ const REVIEW_MOCK_DATA = {
       "https://i.namu.wiki/i/v8ca2gF_MPV_L4QZGoN449G29Nt8vy3PtSLKv1T9XwmZBJ8p1GTz3S3Y32sXB-eoGDv5npoGXzpD6fASoQFLwg.webp",
     rating: 10,
   },
-  content:
+  comment:
     "너무너무 재밌게 안 봤습니다. 애니제목을 왜 이딴식으로 짓는지 이해가 안가네요하하하하하하하하하하하하하하하하하하하하핳아항항핳하아항하하하하아항하아항하아항항",
   createdAt: "2023.07.30",
 };
@@ -25,7 +25,14 @@ export default function RecentReview() {
         </Button>
       </Header>
       <ReviewConainer>
-        <ReviewCardWithImage review={REVIEW_MOCK_DATA} />
+        <ReviewCard>
+          <ReviewCard.Animation animation={REVIEW_MOCK_DATA.animation} />
+          <ReviewCard.Comment text={REVIEW_MOCK_DATA.comment} />
+          <ReviewCard.ActionBar
+            include="time"
+            createdAt={REVIEW_MOCK_DATA.createdAt}
+          />
+        </ReviewCard>
       </ReviewConainer>
     </Container>
   );
