@@ -7,7 +7,6 @@ import Button from "@/components/Button";
 import {
   Container,
   Background,
-  SlideContainer,
   Slides,
   Slide,
   InfoContainer,
@@ -154,41 +153,39 @@ export default function AnimationCarousel({
   }, [currentSlide, width, animationsList.length]);
 
   return (
-    <Container>
-      <SlideContainer ref={slideContainerRef}>
-        <Button
-          name="이전"
-          variant="text"
-          color="neutral"
-          size="lg"
-          icon={<NavArrowLeft />}
-          onClick={goPrev}
-        ></Button>
-        <Button
-          name="다음"
-          variant="text"
-          color="neutral"
-          size="lg"
-          icon={<NavArrowRight />}
-          onClick={goNext}
-        ></Button>
-        <Slides
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchDrag}
-          onTouchEnd={handleTouchEnd}
-          translateValue={translateValue}
-          transitionValue={transitionValue}
-        >
-          {animationsList.map((ani, i) => (
-            <SlideItem ani={ani} key={i} />
-          ))}
-        </Slides>
-        <IndicatorContainer>
-          {[...Array(animations.length)].map((_, i) => (
-            <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
-          ))}
-        </IndicatorContainer>
-      </SlideContainer>
+    <Container ref={slideContainerRef}>
+      <Button
+        name="이전"
+        variant="text"
+        color="neutral"
+        size="lg"
+        icon={<NavArrowLeft />}
+        onClick={goPrev}
+      />
+      <Button
+        name="다음"
+        variant="text"
+        color="neutral"
+        size="lg"
+        icon={<NavArrowRight />}
+        onClick={goNext}
+      />
+      <Slides
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchDrag}
+        onTouchEnd={handleTouchEnd}
+        translateValue={translateValue}
+        transitionValue={transitionValue}
+      >
+        {animationsList.map((ani, i) => (
+          <SlideItem ani={ani} key={i} />
+        ))}
+      </Slides>
+      <IndicatorContainer>
+        {[...Array(animations.length)].map((_, i) => (
+          <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
+        ))}
+      </IndicatorContainer>
       <Background image={animationsList[currentSlide].image}></Background>
     </Container>
   );
