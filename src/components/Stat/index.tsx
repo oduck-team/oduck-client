@@ -21,16 +21,27 @@ export default function Stat({
   variant = "primary",
   ...props
 }: StatProps) {
+  //TODO: data type 정해지면 변경
+  const compactNumber = (data: string) =>
+    Intl.NumberFormat("en-US", {
+      notation: "compact",
+      maximumFractionDigits: 1,
+    }).format(parseInt(data, 10));
+
   return (
     <Container variant={variant} {...props}>
       {/* TODO: key={idx} 처리 */}
-      {items.map((item, idx) => (
-        <Content key={idx} variant={variant}>
-          {item.title && <Title>{item.title}</Title>}
-          {item.data && <Data className="stat-data">{item.data}</Data>}
-          {item.description && <Description>{item.description}</Description>}
-        </Content>
-      ))}
+      {items.map((item, idx) => {
+        return (
+          <Content key={idx} variant={variant}>
+            {item.title && <Title>{item.title}</Title>}
+            {item.data && (
+              <Data className="stat-data">{compactNumber(item.data)}</Data>
+            )}
+            {item.description && <Description>{item.description}</Description>}
+          </Content>
+        );
+      })}
     </Container>
   );
 }

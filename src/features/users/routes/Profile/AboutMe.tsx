@@ -33,10 +33,10 @@ export default function AboutMe() {
         <Stat
           variant="ghost"
           items={[
-            { data: "123", description: "리뷰" },
-            { data: "123", description: "스레드" },
+            { data: "12500", description: "리뷰" },
+            { data: "1000000", description: "스레드" },
             { data: "123", description: "좋아요" },
-            { data: "7.1k", description: "포인트" },
+            { data: "7100", description: "포인트" },
           ]}
         />
       </StatContainer>
