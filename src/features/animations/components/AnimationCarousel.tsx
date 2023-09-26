@@ -124,7 +124,8 @@ export default function AnimationCarousel({
     };
   });
 
-  // 창 크기가 변할 때마다 자연스럽게 가로 길이 재설정
+  // 창 크기가 변할 때마다 자연스럽게 가로 길이 재설정 (PC 환경에서 필요)
+  /*
   useEffect(() => {
     const handleResize = () => {
       if (slideContainerRef.current) {
@@ -139,6 +140,7 @@ export default function AnimationCarousel({
       window.removeEventListener("resize", handleResize);
     };
   }, [currentSlide]);
+  */
 
   // 처음, 마지막 슬라이드일 때 이동
   useEffect(() => {
