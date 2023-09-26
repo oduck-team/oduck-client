@@ -49,9 +49,8 @@ export const Rank = styled.div<RankProps>`
   `}
 `;
 
-export const Container = styled.div`
+export const Container = styled.section`
   width: 100%;
-  padding-left: 16px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -62,6 +61,7 @@ export const Container = styled.div`
   & > h1 {
     ${({ theme }) => theme.typo["title-2-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["100"]};
+    padding-left: 16px;
   }
 `;
 
@@ -77,9 +77,10 @@ export const Content = styled.div`
 
 export const HighlightItemContainer = styled.div`
   position: relative;
-  width: calc(100% - 16px);
+  width: calc(100% - 32px);
   height: 0;
   padding-bottom: 46%;
+  margin: 0 auto;
 `;
 
 export const HighlightItem = styled.div<ItemProps>`
@@ -122,7 +123,7 @@ export const HighlightItem = styled.div<ItemProps>`
 
 export const ItemSlider = styled.div`
   width: 100%;
-  padding-right: 16px;
+  padding: 0 16px;
   height: 139px;
   display: flex;
   gap: 16px;
