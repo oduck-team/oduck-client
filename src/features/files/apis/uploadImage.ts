@@ -1,4 +1,4 @@
-import { getSignedR2Url } from "@/lib/r2";
+import { getSignedR2Url } from "@/libs/r2";
 
 export async function uploadImage(path: string, filename: string, file: File) {
   const signedUrl = await getSignedR2Url(path, filename);

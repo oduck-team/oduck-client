@@ -1,7 +1,7 @@
 import { useCallback, useReducer } from "react";
 
 import { BASE_URL } from "@/config";
-import { ApiError } from "@/lib/error";
+import { ApiError } from "@/libs/error";
 
 interface State<T> {
   data?: T;

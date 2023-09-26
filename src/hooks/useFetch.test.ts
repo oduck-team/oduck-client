@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-import { ApiError } from "@/lib/error";
+import { ApiError } from "@/libs/error";
 
 import useFetch from "./useFetch";
 
