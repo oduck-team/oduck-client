@@ -2,8 +2,10 @@ import axios from "axios";
 
 import { ApiError, BaseError } from "../error";
 
+const DEV_BASE_URL = "/api";
+
 const instance = axios.create({
-  baseURL: import.meta.env.PROD ? "" : "",
+  baseURL: import.meta.env.PROD ? "" : DEV_BASE_URL,
   timeout: 3 * 1000,
 });
 
