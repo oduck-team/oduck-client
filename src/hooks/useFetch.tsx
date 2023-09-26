@@ -21,6 +21,9 @@ export interface RequestOptions extends RequestInit {
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 }
 
+/**
+ * @deprecated `@/libs/api`를 대신 사용하세요
+ */
 export default function useFetch<T>() {
   const initialState: State<T> = {
     data: undefined,
