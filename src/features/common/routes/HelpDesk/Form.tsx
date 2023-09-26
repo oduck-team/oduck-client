@@ -1,9 +1,10 @@
 import { NavArrowLeft } from "iconoir-react";
 
 import Button from "@/components/Button";
+import Header from "@/components/Layout/Header";
 
 import { Content, FormItem, FormTextInput, FormTextarea } from "./Form.style";
-import { Container, Header } from "./Select.style";
+import { Container } from "./Select.style";
 import useForm from "./useForm";
 
 interface Props {
@@ -38,8 +39,12 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
   return (
     <Container>
       <Header>
-        <NavArrowLeft onClick={handlerPrevClick} />
-        {inquiryTypeName}
+        <Header.Left>
+          <NavArrowLeft onClick={handlerPrevClick} />
+        </Header.Left>
+        <Header.Center>
+          <h1>{inquiryTypeName}</h1>
+        </Header.Center>
       </Header>
       <Content>
         <FormItem>
