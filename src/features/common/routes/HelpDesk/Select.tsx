@@ -2,8 +2,9 @@ import { NavArrowLeft } from "iconoir-react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
+import Header from "@/components/Layout/Header";
 
-import { Buttons, Container, Content, Header } from "./Select.style";
+import { Buttons, Container, Content } from "./Select.style";
 
 interface Props {
   inquiryTypeName: string[];
@@ -16,8 +17,10 @@ export default function Select({ inquiryTypeName, onClick }: Props) {
   return (
     <Container>
       <Header>
-        <NavArrowLeft onClick={() => navigate(-1)} />
-        고객센터
+        <Header.Left>
+          <NavArrowLeft onClick={() => navigate(-1)} />
+        </Header.Left>
+        <Header.Center>고객센터</Header.Center>
       </Header>
       <Content>
         <div>

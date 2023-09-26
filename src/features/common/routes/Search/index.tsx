@@ -5,6 +5,7 @@ import { ComponentProps, useState } from "react";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Head from "@/components/Head";
+import Header from "@/components/Layout/Header";
 import AnimationCard from "@/features/animations/components/AnimationCard";
 
 const 최근_많이_검색된 = [
@@ -68,15 +69,19 @@ export default function Search() {
   return (
     <>
       <Head title="오덕 | 검색하기" />
+
       <Container>
+        <Header>
+          <Header.Center style={{ width: "100%" }}>
+            <Searchbar
+              value={searchInputValue}
+              onChange={handleSearchChange}
+              onSearch={handleSearch}
+              onCancel={handleSearchCancel}
+            />
+          </Header.Center>
+        </Header>
         <h1>검색하기</h1>
-        <Searchbar
-          value={searchInputValue}
-          style={{ marginTop: "50px" }}
-          onChange={handleSearchChange}
-          onSearch={handleSearch}
-          onCancel={handleSearchCancel}
-        />
         <Section style={{ marginTop: "32px" }}>
           <h1>최근 많이 검색된</h1>
           <ul
@@ -113,7 +118,6 @@ export default function Search() {
 const Container = styled.main`
   ${({ theme }) => theme.container}
   margin: 0 auto;
-  padding: 0 16px;
 
   & > h1 {
     display: none;
@@ -170,6 +174,7 @@ function Searchbar({
 
 const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
   position: relative;
+  width: 100%;
 
   & > svg {
     position: absolute;
@@ -220,6 +225,8 @@ const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
 `;
 
 const Section = styled.section`
+  padding: 0 16px;
+
   & > h1 {
     ${({ theme }) => theme.typo["title-3-m"]}
     color: ${({ theme }) => theme.colors.neutral["80"]};
