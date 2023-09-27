@@ -12,7 +12,7 @@ import {
   ContentContainer,
 } from "./style";
 
-export type Size = "sm" | "md" | "lg" | "xl";
+export type Size = "default" | "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
   isVisible?: boolean;
@@ -23,7 +23,7 @@ export interface ModalProps {
 
 export default function Modal({
   isVisible = false,
-  size = "sm",
+  size = "default",
   showBackdrop = true,
   onClose,
   children,

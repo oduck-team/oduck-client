@@ -22,7 +22,7 @@ export default function StatModal({
   onClose,
 }: StatModalProps) {
   return (
-    <Modal isVisible={isVisible} onClose={onClose} size="sm">
+    <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
         <ContentContainer>
           {items.map((title, index) => (

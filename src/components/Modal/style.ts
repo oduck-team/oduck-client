@@ -7,6 +7,11 @@ import BaseBackdrop from "../Backdrop";
 import { ModalActionsProps, ModalProps, Size } from "./";
 
 const sizes: Record<Size, SerializedStyles> = {
+  default: css`
+    --side-padding: 32px; // 16px * 2
+    width: calc(100vw - var(--side-padding));
+    max-width: calc(600px - var(--side-padding));
+  `,
   sm: css`
     min-width: 240px;
   `,
@@ -35,9 +40,9 @@ export const Container = styled(motion.div)<Pick<ModalProps, "size">>`
     0px 10px 32px -4px rgba(24, 39, 75, 0.1),
     0px 6px 14px -6px rgba(24, 39, 75, 0.12);
 
-  ${({ size = "sm" }) => css`
+  ${({ size = "default" }) => css`
     ${sizes[size]}
-  `}
+  `};
 `;
 
 export const ContentContainer = styled.div`
