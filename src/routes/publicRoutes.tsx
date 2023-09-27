@@ -3,6 +3,7 @@ import { RouteObject } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import Home from "@/features/common/routes/Home";
+import ProfileEdit from "@/features/users/routes/ProfileEdit";
 
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
@@ -56,6 +57,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/profile/edit",
+        element: <ProfileEdit />,
       },
     ],
   },

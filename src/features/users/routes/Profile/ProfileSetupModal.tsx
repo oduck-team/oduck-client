@@ -1,4 +1,5 @@
 import { Variants } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import AnimatePortal from "@/components/Portal/AnimatePortal";
@@ -14,6 +15,9 @@ export default function ProfileSetupModal({
   isVisible,
   onToggle,
 }: ProfileSetupModalProps) {
+  const navigate = useNavigate();
+  const handleLinkToEditClick = () => navigate("/profile/edit");
+
   return (
     <AnimatePortal isVisible={isVisible}>
       <Backdrop onClick={onToggle} />
@@ -27,7 +31,13 @@ export default function ProfileSetupModal({
         >
           프로필 링크 복사
         </Button>
-        <Button name="프로필 수정" size="lg" variant="solid" color="neutral">
+        <Button
+          name="프로필 수정"
+          size="lg"
+          variant="solid"
+          color="neutral"
+          onClick={handleLinkToEditClick}
+        >
           프로필 수정
         </Button>
         <Button
