@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
@@ -68,15 +68,12 @@ export default function Layout() {
     }
   };
 
-  useEffect(() => {
-    handleSidebarVisible(false);
-  }, [location]);
-
   return (
     <Container>
       <Outlet />
       <Sidebar
         isVisible={isSidebarVisible}
+        onClickItem={() => handleSidebarVisible(false)}
         onClose={() => handleSidebarVisible(false)}
       />
       <BottomNavigation
