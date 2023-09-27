@@ -25,7 +25,7 @@ export default function Form({ setSuccess }: Props) {
     handleTitleChange,
     handleContentChange,
     send,
-  } = useForm({ setSuccess });
+  } = useForm();
 
   return (
     <Container>
@@ -70,7 +70,7 @@ export default function Form({ setSuccess }: Props) {
           size="lg"
           style={{ width: "100%", height: "48px", marginTop: "50px" }}
           name="보내기"
-          onClick={send}
+          onClick={() => send(setSuccess)}
         >
           보내기
         </Button>

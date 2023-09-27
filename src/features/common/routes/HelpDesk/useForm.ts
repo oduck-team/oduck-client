@@ -1,10 +1,6 @@
 import { useState } from "react";
 
-interface Props {
-  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export default function useForm({ setSuccess }: Props) {
+export default function useForm() {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [inquiryContent, setInquiryContent] = useState("");
@@ -52,7 +48,7 @@ export default function useForm({ setSuccess }: Props) {
     setContentError(0);
   };
 
-  const send = () => {
+  const send = (setSuccess: React.Dispatch<React.SetStateAction<boolean>>) => {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     setEmailError(() => {
       if (email === "") return 1;

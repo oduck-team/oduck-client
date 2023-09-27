@@ -36,7 +36,7 @@ export default function HelpDesk() {
     );
   };
 
-  const handlerPrevClick = () => {
+  const handlePrevClick = () => {
     if (inquiryType !== 0) goPrev();
     else navigate(-1);
   };
@@ -48,7 +48,7 @@ export default function HelpDesk() {
         {success && <Success />}
         <Header>
           <Header.Left>
-            <NavArrowLeft onClick={handlerPrevClick} />
+            <NavArrowLeft onClick={handlePrevClick} />
           </Header.Left>
           <Header.Center>{headerTitle}</Header.Center>
         </Header>
