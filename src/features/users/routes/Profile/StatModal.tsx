@@ -25,10 +25,10 @@ export default function StatModal({
     <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
         <ContentContainer>
-          {items.map((title, index) => (
+          {items.map((item, index) => (
             <Section key={index}>
               <Title>{TITLE_LIST[index]}</Title>
-              <Data>{title.data}</Data>
+              <Data>{parseInt(item.data, 10).toLocaleString()}</Data>
             </Section>
           ))}
         </ContentContainer>
