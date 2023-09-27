@@ -7,7 +7,6 @@ import Button from "@/components/Button";
 import {
   Container,
   Background,
-  SlideContainer,
   Slides,
   Slide,
   InfoContainer,
@@ -125,7 +124,8 @@ export default function AnimationCarousel({
     };
   });
 
-  // 창 크기가 변할 때마다 자연스럽게 가로 길이 재설정
+  // 창 크기가 변할 때마다 자연스럽게 가로 길이 재설정 (PC 환경에서 필요)
+  /*
   useEffect(() => {
     const handleResize = () => {
       if (slideContainerRef.current) {
@@ -140,6 +140,7 @@ export default function AnimationCarousel({
       window.removeEventListener("resize", handleResize);
     };
   }, [currentSlide]);
+  */
 
   // 처음, 마지막 슬라이드일 때 이동
   useEffect(() => {
@@ -154,41 +155,39 @@ export default function AnimationCarousel({
   }, [currentSlide, width, animationsList.length]);
 
   return (
-    <Container>
-      <SlideContainer ref={slideContainerRef}>
-        <Button
-          name="이전"
-          variant="text"
-          color="neutral"
-          size="lg"
-          icon={<NavArrowLeft />}
-          onClick={goPrev}
-        ></Button>
-        <Button
-          name="다음"
-          variant="text"
-          color="neutral"
-          size="lg"
-          icon={<NavArrowRight />}
-          onClick={goNext}
-        ></Button>
-        <Slides
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchDrag}
-          onTouchEnd={handleTouchEnd}
-          translateValue={translateValue}
-          transitionValue={transitionValue}
-        >
-          {animationsList.map((ani, i) => (
-            <SlideItem ani={ani} key={i} />
-          ))}
-        </Slides>
-        <IndicatorContainer>
-          {[...Array(animations.length)].map((_, i) => (
-            <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
-          ))}
-        </IndicatorContainer>
-      </SlideContainer>
+    <Container ref={slideContainerRef}>
+      <Button
+        name="이전"
+        variant="text"
+        color="neutral"
+        size="lg"
+        icon={<NavArrowLeft />}
+        onClick={goPrev}
+      />
+      <Button
+        name="다음"
+        variant="text"
+        color="neutral"
+        size="lg"
+        icon={<NavArrowRight />}
+        onClick={goNext}
+      />
+      <Slides
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchDrag}
+        onTouchEnd={handleTouchEnd}
+        translateValue={translateValue}
+        transitionValue={transitionValue}
+      >
+        {animationsList.map((ani, i) => (
+          <SlideItem ani={ani} key={i} />
+        ))}
+      </Slides>
+      <IndicatorContainer>
+        {[...Array(animations.length)].map((_, i) => (
+          <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
+        ))}
+      </IndicatorContainer>
       <Background image={animationsList[currentSlide].image}></Background>
     </Container>
   );
