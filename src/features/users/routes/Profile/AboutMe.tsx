@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Avatar from "@/components/Avatar";
 import Stat from "@/components/Stat";
 
@@ -11,8 +13,19 @@ import {
 } from "./AboutMe.style";
 import ProfileArt from "./ProfileArt";
 import ProfileButton from "./ProfileButton";
+import StatModal from "./StatModal";
+
+const STAT_MOCK_DATA = [
+  { data: "12500", description: "리뷰" },
+  { data: "1000000", description: "스레드" },
+  { data: "123", description: "좋아요" },
+  { data: "7100", description: "포인트" },
+];
 
 export default function AboutMe() {
+  const [isStatModalVisible, setIsStatModalVisible] = useState(false);
+  const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
+
   return (
     <>
       <ImageContainer>
@@ -29,17 +42,15 @@ export default function AboutMe() {
         자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
       </Introduce>
       <SeeMoreButton>더보기</SeeMoreButton>
-      <StatContainer>
-        <Stat
-          variant="ghost"
-          items={[
-            { data: "123", description: "리뷰" },
-            { data: "123", description: "스레드" },
-            { data: "123", description: "좋아요" },
-            { data: "7.1k", description: "포인트" },
-          ]}
-        />
+      <StatContainer onClick={handleStatModalToggle}>
+        <Stat variant="ghost" items={STAT_MOCK_DATA} />
       </StatContainer>
+
+      <StatModal
+        isVisible={isStatModalVisible}
+        onClose={handleStatModalToggle}
+        items={STAT_MOCK_DATA}
+      />
     </>
   );
 }
