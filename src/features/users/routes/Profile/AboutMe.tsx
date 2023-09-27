@@ -25,7 +25,6 @@ const STAT_MOCK_DATA = [
 export default function AboutMe() {
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
-  const StatDataList = STAT_MOCK_DATA.map((item) => item.data);
 
   return (
     <>
@@ -50,7 +49,7 @@ export default function AboutMe() {
       <StatModal
         isVisible={isStatModalVisible}
         onClose={handleStatModalToggle}
-        dataList={StatDataList}
+        items={STAT_MOCK_DATA}
       />
     </>
   );

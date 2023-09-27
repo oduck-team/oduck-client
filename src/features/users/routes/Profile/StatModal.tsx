@@ -5,34 +5,34 @@ import { ContentContainer, Data, Title, Section } from "./StatModal.style";
 
 const TITLE_LIST = ["한줄리뷰", "스레드", "받은 좋아요 수", "포인트"];
 
+interface StatItemProps {
+  data: string;
+  description: string;
+}
+
 interface StatModalProps {
   isVisible: boolean;
-  dataList: string[];
+  items: StatItemProps[];
   onClose: () => void;
 }
 
 export default function StatModal({
   isVisible,
-  dataList,
+  items,
   onClose,
 }: StatModalProps) {
   return (
     <Modal isVisible={isVisible} onClose={onClose} size="sm">
       <Modal.Content>
         <ContentContainer>
-          <Section>
-            {TITLE_LIST.map((title, index) => (
-              <Title key={index}>{title}</Title>
-            ))}
-          </Section>
-          <Section>
-            {dataList.map((data, index) => (
-              <Data key={index}>{parseInt(data).toLocaleString()}</Data>
-            ))}
-          </Section>
+          {items.map((title, index) => (
+            <Section key={index}>
+              <Title>{TITLE_LIST[index]}</Title>
+              <Data>{title.data}</Data>
+            </Section>
+          ))}
         </ContentContainer>
       </Modal.Content>
-
       <Modal.Actions>
         <Button
           variant="text"
