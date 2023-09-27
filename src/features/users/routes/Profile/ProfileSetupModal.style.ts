@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
 import BaseBackdrop from "@/components/Backdrop";
 
@@ -6,7 +7,7 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled(motion.div)`
   --side-padding: 32px;
   --bottom-navigation-height: 66px;
   position: fixed;
