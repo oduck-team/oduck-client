@@ -12,10 +12,14 @@ import {
   ContentContainer,
 } from "./style";
 
-export type Size = "sm" | "md" | "lg" | "xl";
+export type Size = "default" | "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
   isVisible?: boolean;
+  /**
+   * @desc "default"는 viewport width 사이즈를 가집니다.
+   * @desc "sm | md | lg | xl"은 고정 width 사이즈를 가집니다.
+   */
   size?: Size;
   showBackdrop?: boolean;
   onClose: () => void;
@@ -23,7 +27,7 @@ export interface ModalProps {
 
 export default function Modal({
   isVisible = false,
-  size = "sm",
+  size = "default",
   showBackdrop = true,
   onClose,
   children,

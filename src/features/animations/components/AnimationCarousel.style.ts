@@ -14,19 +14,42 @@ interface IndicatorProps {
   active: boolean;
 }
 
-const ellipsis = css`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-all;
-`;
-
 export const Container = styled.div`
   width: 100%;
   height: 545px;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+
+  // arrow button
+  button {
+    ${({ theme }) => theme.mq("md")} {
+      display: block;
+    }
+    display: none;
+    position: absolute;
+    z-index: ${({ theme }) => theme.zIndex.carousel + 1};
+    color: rgba(255, 255, 255, 0.6);
+    top: calc(50% - 15px);
+    left: 16px;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    &:not([disabled]):active {
+      color: rgba(255, 255, 255, 0.9);
+      background: none;
+      border-color: rgba(0, 0, 0, 0);
+    }
+
+    :last-of-type {
+      left: auto;
+      right: 19px;
+    }
+  }
 `;
 
+// blur 이미지 배경
 export const Background = styled.div<SlideProps>`
   width: 100%;
   height: 100%;
@@ -42,46 +65,12 @@ export const Background = styled.div<SlideProps>`
   transform: scale(1.05);
 `;
 
-export const SlideContainer = styled.div`
-  --width: calc(100% - 32px);
-  width: var(--width);
-  height: 442.699px;
-  overflow: hidden;
-  position: absolute;
-  top: 50px;
-  left: calc(50% - (var(--width) / 2));
-  z-index: ${({ theme }) => theme.zIndex.carousel};
-  border-radius: 17px;
-
-  & > button {
-    ${({ theme }) => theme.mq("md")} {
-      display: block;
-    }
-    display: none;
-    position: absolute;
-    z-index: ${({ theme }) => theme.zIndex.carousel + 1};
-    color: rgba(255, 255, 255, 0.6);
-    top: calc(50% - 15px);
-
-    &:hover {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    &:not([disabled]):active {
-      color: rgba(255, 255, 255, 0.9);
-      background: none;
-      border-color: rgba(0, 0, 0, 0);
-    }
-
-    :last-of-type {
-      right: 3px;
-    }
-  }
-`;
-
 export const Slides = styled.div<SlidesProps>`
-  width: calc(100% * 6);
-  height: 100%;
+  width: calc((100% * 6));
+  position: absolute;
+  top: 24px;
+  height: 497px;
+  z-index: ${({ theme }) => theme.zIndex.carousel};
   display: flex;
   touch-action: pan-x;
   transform: ${({ translateValue }) => `translateX(${translateValue}px)`};
@@ -90,7 +79,8 @@ export const Slides = styled.div<SlidesProps>`
 `;
 
 export const Slide = styled.div<SlideProps>`
-  width: calc(100% / 6);
+  width: calc(100% / 6 - 32px);
+  margin: 0 16px 0 16px;
   height: 100%;
   border-radius: 17px;
   ${({ image }) => css`
@@ -102,7 +92,7 @@ export const Slide = styled.div<SlideProps>`
   background-size: cover;
   background-position: center;
   box-shadow: 0px 0px 19px 0px rgba(0, 0, 0, 0.17);
-  padding: 0 16px 42px;
+  padding: 0 16px 46px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -128,10 +118,11 @@ export const Info = styled.div`
 
   & > div:first-of-type {
     width: 100%;
-    ${ellipsis}
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    overflow: hidden;
+
     ${({ theme }) => theme.mq("md")} {
       ${({ theme }) => theme.typo["heading-1"]}
     }
@@ -153,9 +144,10 @@ export const Review = styled.div`
     ${({ theme }) => theme.typo["body-3-r"]}
 
     opacity: 0.9;
-    width: 66.7%; // 논의 필요
-    /* width: 207px; */
-    ${ellipsis}
+    width: 66.7%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
     white-space: nowrap;
   }
 `;
@@ -194,7 +186,7 @@ export const IndicatorContainer = styled.div`
   gap: 6px;
   position: absolute;
   left: calc(50% - 21px);
-  bottom: 20.7px;
+  bottom: 48px;
   z-index: ${({ theme }) => theme.zIndex.carousel + 1};
 `;
 
