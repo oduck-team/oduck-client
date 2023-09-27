@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import BaseBackdrop from "@/components/Backdrop";
+
 export const ButtonContainer = styled.button`
   position: absolute;
   top: 29px;
@@ -26,4 +28,9 @@ export const Dot = styled.span`
   height: 4px;
   background-color: ${({ theme }) => theme.colors.neutral[30]};
   border-radius: 50%;
+`;
+
+export const Backdrop = styled(BaseBackdrop)`
+  /* z-index: 1300; */
+  z-index: ${({ theme }) => theme.zIndex.modal};
 `;
