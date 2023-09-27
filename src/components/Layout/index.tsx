@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
@@ -67,6 +67,10 @@ export default function Layout() {
       }
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Container>
