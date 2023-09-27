@@ -1,25 +1,24 @@
 import { useState } from "react";
 
-// import Backdrop from "@/components/Backdrop";
-
-import { ButtonContainer, Dot, Dots, Backdrop } from "./ProfileButton.style";
+import { ButtonContainer, Dot, Dots } from "./ProfileButton.style";
+import ProfileSetupModal from "./ProfileSetupModal";
 
 export default function ProfileButton() {
-  const [selectButtonModal, setSelectButtonModal] = useState(false);
-  const handleProfileSetToggle = () => setSelectButtonModal((prev) => !prev);
+  const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
+  const handleSetupModalToggle = () => setIsSetupModalOpen((prev) => !prev);
+
   return (
     <>
-      <ButtonContainer onClick={handleProfileSetToggle}>
+      <ButtonContainer onClick={handleSetupModalToggle}>
         <Dots>
           <Dot />
           <Dot />
           <Dot />
         </Dots>
       </ButtonContainer>
-
-      <Backdrop
-        isVisible={selectButtonModal}
-        onClick={handleProfileSetToggle}
+      <ProfileSetupModal
+        isVisible={isSetupModalOpen}
+        onToggle={handleSetupModalToggle}
       />
     </>
   );
