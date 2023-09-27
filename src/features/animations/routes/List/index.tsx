@@ -264,7 +264,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 166px 16px 92px;
+  padding: 24px 16px 92px;
 `;
 
 const ChipsContiner = styled.div`
