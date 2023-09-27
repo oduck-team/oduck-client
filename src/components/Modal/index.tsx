@@ -16,6 +16,10 @@ export type Size = "default" | "sm" | "md" | "lg" | "xl";
 
 export interface ModalProps {
   isVisible?: boolean;
+  /**
+   * @desc "default"는 viewport width 사이즈를 가집니다.
+   * @desc "sm | md | lg | xl"은 고정 width 사이즈를 가집니다.
+   */
   size?: Size;
   showBackdrop?: boolean;
   onClose: () => void;
