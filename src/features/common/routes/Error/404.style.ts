@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-import { Container as Button } from "@/components/Button/style";
+import { Container as BaseButton } from "@/components/Button/style";
 
 export const Container = styled.main`
   display: flex;
@@ -24,8 +24,13 @@ export const ErrorImage = styled.img`
 `;
 
 export const Message = styled.h1`
-  ${({ theme }) => theme.typo["heading-2"]}
+  ${({ theme }) => theme.typo["body-1-r"]}
+  color: ${({ theme }) => theme.colors.neutral["50"]};
   margin: 16px 0;
 `;
 
-export const HomeButton = Button.withComponent(Link);
+const StyledButton = styled(BaseButton)`
+  padding: 0 40px;
+`;
+
+export const HomeButton = StyledButton.withComponent(Link);
