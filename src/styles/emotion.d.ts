@@ -4,10 +4,13 @@ import { Colors } from "./colors";
 import { Container } from "./container";
 import { MediaQuery } from "./mediaQuery";
 import { Typography } from "./typography";
-import { ZIndex } from "./z-index";
+import { ZIndex } from "./zIndex";
 
-// Theme 타입에 colors, typo 프로퍼티를 추가하여 확장합니다.
 declare module "@emotion/react" {
+  /**
+   * emotion의 Theme 타입을 확장합니다
+   * theme:Theme을 사용하는 코드에서 타입 안전성과 코드 자동완성을 제공합니다
+   * */
   export interface Theme {
     colors: {
       primary: Colors["blue"];

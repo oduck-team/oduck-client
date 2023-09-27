@@ -2,15 +2,21 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
+import Header from "@/components/Layout/Header";
 
-import { Container as BaseContainer, Content, Header } from "./Select.style";
+import { Container as BaseContainer, Content } from "./Select.style";
 
 export default function Success() {
   const navigate = useNavigate();
 
   return (
     <Container>
-      <Header>발송 완료</Header>
+      <Header>
+        <Header.Left />
+        <Header.Center>
+          <h1>발송 완료</h1>
+        </Header.Center>
+      </Header>
       <Content>
         <div>
           <h1>문의가 완료되었습니다.</h1>

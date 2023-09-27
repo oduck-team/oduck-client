@@ -32,41 +32,47 @@ export default function Modal({
 
   return (
     <AnimatePortal isVisible={isVisible}>
-      <Backdrop isVisible={showBackdrop} onClick={onClose}>
-        <Container
-          size={size}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={varitends}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {children}
-        </Container>
-      </Backdrop>
+      <Backdrop isVisible={showBackdrop} onClick={onClose} />
+      <Container
+        aria-modal={isVisible}
+        role="dialog"
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={modalVariants}
+        size={size}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {children}
+      </Container>
     </AnimatePortal>
   );
 }
 
-Modal.Content = Content;
-Modal.Actions = Actions;
-
-const varitends: Variants = {
+const modalVariants: Variants = {
   initial: {
     opacity: 0,
-    y: "30%",
-    transition: { duration: 0.3, ease: "easeInOut" },
+    left: "50%",
+    transform: "scale(0.97) translateX(-50%)",
   },
   animate: {
     opacity: 1,
-    y: "0px",
-    transition: { duration: 0.3, ease: "easeInOut" },
+    left: "50%",
+    transform: "scale(1) translateX(-50%)",
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
+    left: "50%",
+    transform: "scale(0.97) translateX(-50%)",
   },
 };
+
+Modal.Content = Content;
+Modal.Actions = Actions;
 
 // =================================== Content ===================================
 /**

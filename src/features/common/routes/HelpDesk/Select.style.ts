@@ -1,28 +1,5 @@
 import styled from "@emotion/styled";
 
-export const Header = styled.div`
-  background-color: white;
-  width: 100%;
-  height: 90px;
-  padding: 40px 16px 0;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  ${({ theme }) => theme.typo["title-3-b"]};
-  color: ${({ theme }) => theme.colors["neutral"]["80"]};
-
-  & > svg {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    left: 17px;
-    color: ${({ theme }) => theme.colors["neutral"]["90"]};
-    cursor: pointer;
-  }
-`;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

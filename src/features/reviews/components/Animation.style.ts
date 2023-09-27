@@ -21,7 +21,7 @@ export const TitleContainer = styled.div`
   padding-bottom: 8px;
 `;
 
-export const Title = styled.span`
+export const Title = styled.h1`
   ${({ theme }) => theme.typo["body-2-m"]};
   color: ${({ theme }) => theme.colors.neutral[70]};
   display: -webkit-box;
