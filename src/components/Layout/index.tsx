@@ -69,14 +69,15 @@ export default function Layout() {
   };
 
   useEffect(() => {
-    handleSidebarVisible(false);
-  }, [location]);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Container>
       <Outlet />
       <Sidebar
         isVisible={isSidebarVisible}
+        onClickItem={() => handleSidebarVisible(false)}
         onClose={() => handleSidebarVisible(false)}
       />
       <BottomNavigation
