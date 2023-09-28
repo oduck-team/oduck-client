@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
+import { isNicknameRegxCheck } from "@/utils/common";
 
 import {
   ButtonContainer,
@@ -27,7 +28,7 @@ export default function EditForm() {
   const handleFormSumbit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isNameRegxCheck(input.name)) {
+    if (isNicknameRegxCheck(input.name)) {
       setWarn(false);
       setMessage("");
     } else {
@@ -36,11 +37,6 @@ export default function EditForm() {
         "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
       );
     }
-  };
-
-  const isNameRegxCheck = (name: string) => {
-    const namePattern = /^(?=.*[a-zA-Z가-힣])[A-Za-z가-힣0-9]{2,10}$/;
-    return namePattern.test(name);
   };
 
   return (
