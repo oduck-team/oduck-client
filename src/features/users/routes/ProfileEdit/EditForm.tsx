@@ -14,7 +14,7 @@ import {
 } from "./EditForm.style";
 
 export default function EditForm() {
-  const { input, status, handleInputChange, handleFormSumbit } = useEditForm();
+  const { form, status, handleInputChange, handleFormSumbit } = useEditForm();
   const navigate = useNavigate();
 
   return (
@@ -25,7 +25,7 @@ export default function EditForm() {
           <TextInput
             required
             name="name"
-            value={input.name}
+            value={form.name}
             maxLength={10}
             message={status.message}
             warn={status.isWarn}
@@ -36,7 +36,7 @@ export default function EditForm() {
           <Title>자기소개</Title>
           <Textarea
             name="description"
-            value={input.description}
+            value={form.description}
             placeholder="자기소개를 적어보세요(최대 100자까지 가능합니다)"
             maxLength={100}
             onChange={(e) => handleInputChange(e)}
