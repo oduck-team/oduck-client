@@ -56,7 +56,7 @@ export const Message = styled.div`
 `;
 
 export const TextInputContainer = styled.div<{ warn?: boolean }>`
-  width: 328px;
+  width: 100%;
   position: relative;
   & > svg {
     position: absolute;
