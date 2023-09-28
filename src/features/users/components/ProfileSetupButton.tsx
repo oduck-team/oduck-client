@@ -1,9 +1,10 @@
 import { useState } from "react";
 
-import { ButtonContainer, Dot, Dots } from "./ProfileButton.style";
-import ProfileSetupModal from "./ProfileSetupModal";
+import ProfileSetupModal from "../routes/Profile/ProfileSetupModal";
 
-export default function ProfileButton() {
+import { ButtonContainer, Dot, Dots } from "./ProfileSetupButton.style";
+
+export default function ProfileSetupButton() {
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
   const handleSetupModalToggle = () => setIsSetupModalOpen((prev) => !prev);
 

@@ -1,7 +1,5 @@
-import Avatar from "@/components/Avatar";
-
-import { AvatarContainer, ImageContainer } from "../Profile/AboutMe.style";
-import ProfileArt from "../Profile/ProfileArt";
+import ProfileAvatar from "../../components/ProfileAvatar";
+import ProfileImageSection from "../../components/ProfileImageSection";
 
 import EditForm from "./EditForm";
 import { ProfileEditContainer } from "./style";
@@ -9,12 +7,13 @@ import { ProfileEditContainer } from "./style";
 export default function ProfileEdit() {
   return (
     <ProfileEditContainer>
-      <ImageContainer>
-        <ProfileArt src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
-        <AvatarContainer>
-          <Avatar userName="FE" size="xl" />
-        </AvatarContainer>
-      </ImageContainer>
+      <ProfileImageSection>
+        <ProfileImageSection.Art src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
+        <ProfileImageSection.ProfileAvatar>
+          <ProfileAvatar.Avatar userName="FE" size="xl" />
+        </ProfileImageSection.ProfileAvatar>
+      </ProfileImageSection>
+
       <EditForm />
     </ProfileEditContainer>
   );
