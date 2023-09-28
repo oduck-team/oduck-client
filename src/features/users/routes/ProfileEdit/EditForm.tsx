@@ -14,7 +14,8 @@ import {
 } from "./EditForm.style";
 
 export default function EditForm() {
-  const { form, status, handleInputChange, handleFormSumbit } = useEditForm();
+  const { form, status, isFormChange, handleInputChange, handleFormSumbit } =
+    useEditForm();
   const navigate = useNavigate();
 
   return (
@@ -47,7 +48,7 @@ export default function EditForm() {
         <Button
           type="submit"
           name="저장"
-          color="primary"
+          color={isFormChange ? "primary" : "neutral"}
           isBlock
           size="lg"
           onClick={handleFormSumbit}

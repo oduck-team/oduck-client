@@ -8,6 +8,7 @@ const NICKNAME_PATTERN_MESSAGE =
 export default function useEditForm() {
   const [form, setForm] = useState({ name: "", description: "" });
   const [status, setStatus] = useState({ isWarn: false, message: "" });
+  const [isFormChange, setIsFormChange] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -18,6 +19,7 @@ export default function useEditForm() {
     if (name === "description" && value.length > 100) return;
 
     setForm((prev) => ({ ...prev, [name]: value }));
+    setIsFormChange(true);
   };
 
   //TODO: 닉네임 중복 검사 추가
@@ -32,5 +34,5 @@ export default function useEditForm() {
     setStatus({ isWarn: false, message: "" });
   };
 
-  return { form, status, handleInputChange, handleFormSumbit };
+  return { form, status, isFormChange, handleInputChange, handleFormSumbit };
 }
