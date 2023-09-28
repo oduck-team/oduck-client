@@ -1,18 +1,8 @@
 import styled from "@emotion/styled";
 
-export const ImageContainer = styled.div`
-  position: relative;
-  margin-bottom: 45px;
-`;
-
-export const AvatarContainer = styled.div`
-  position: absolute;
-  bottom: -40px;
-  left: 16px;
-`;
-
 export const NickName = styled.h3`
   padding: 0 16px;
+  margin-top: 48px;
   ${({ theme }) => theme.typo["title-2-b"]};
   color: ${({ theme }) => theme.colors.neutral[100]};
 `;

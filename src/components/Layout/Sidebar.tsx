@@ -51,18 +51,29 @@ const helpMenuItems: NavItem[] = [
 
 interface SidebarProps {
   isVisible: boolean;
+  onClickItem: () => void;
   onClose: () => void;
 }
 
-export default function Sidebar({ isVisible, onClose }: SidebarProps) {
+export default function Sidebar({
+  isVisible,
+  onClickItem,
+  onClose,
+}: SidebarProps) {
   const { user, isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleClickUserMenu = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
+
     if (!isLoggedIn) navigate("/login", { replace: true });
+
     const foundItem = userMenuItems.find((item) => item.id === id);
-    if (foundItem) navigate(foundItem.to);
+
+    if (foundItem) {
+      onClickItem();
+      navigate(foundItem.to);
+    }
   };
 
   const handleLogout = (_id: string, e: React.MouseEvent) => {
@@ -120,7 +131,7 @@ export default function Sidebar({ isVisible, onClose }: SidebarProps) {
         <Divider />
         <Navigation.Content>
           {helpMenuItems.map((item) => (
-            <Navigation.Item key={item.id} item={item} />
+            <Navigation.Item key={item.id} item={item} onClick={onClickItem} />
           ))}
           {isLoggedIn && (
             <Navigation.Item
