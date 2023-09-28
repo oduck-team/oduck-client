@@ -9,8 +9,10 @@ export default function ProfileEdit() {
     <ProfileEditContainer>
       <ProfileImageSection>
         <ProfileImageSection.Art src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
+        <ProfileImageSection.ArtEditButton />
         <ProfileImageSection.ProfileAvatar>
           <ProfileAvatar.Avatar userName="FE" size="xl" />
+          <ProfileAvatar.AvatarEditButton />
         </ProfileImageSection.ProfileAvatar>
       </ProfileImageSection>
 
