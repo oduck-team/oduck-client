@@ -13,10 +13,12 @@ import {
   Title,
 } from "./EditForm.style";
 
+const NICKNAME_PATTERN_MESSAGE =
+  "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.";
+
 export default function EditForm() {
   const [input, setInput] = useState({ name: "", description: "" });
-  const [warn, setWarn] = useState(false);
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState({ isWarn: false, message: "" });
   const navigate = useNavigate();
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -29,13 +31,9 @@ export default function EditForm() {
     e.preventDefault();
 
     if (isNicknameRegxCheck(input.name)) {
-      setWarn(false);
-      setMessage("");
+      setStatus({ isWarn: false, message: "" });
     } else {
-      setWarn(true);
-      setMessage(
-        "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
-      );
+      setStatus({ isWarn: true, message: NICKNAME_PATTERN_MESSAGE });
     }
   };
 
@@ -49,8 +47,8 @@ export default function EditForm() {
             name="name"
             value={input.name}
             onChange={(e) => handleInputChange(e)}
-            message={message}
-            warn={warn}
+            message={status.message}
+            warn={status.isWarn}
           />
         </div>
         <div>
