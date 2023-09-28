@@ -57,12 +57,12 @@ const modalVariants: Variants = {
   initial: {
     opacity: 0,
     left: "50%",
-    transform: "scale(0.97) translateX(-50%)",
+    transform: "translateY(0) translateX(-50%)",
   },
   animate: {
     opacity: 1,
     left: "50%",
-    transform: "scale(1) translateX(-50%)",
+    transform: "translateY(-30%) translateX(-50%)",
     transition: {
       duration: 0.2,
       ease: "easeInOut",
@@ -71,7 +71,7 @@ const modalVariants: Variants = {
   exit: {
     opacity: 0,
     left: "50%",
-    transform: "scale(0.97) translateX(-50%)",
+    transform: "translateX(-50%)",
   },
 };
 
