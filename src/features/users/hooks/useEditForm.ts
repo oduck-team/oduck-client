@@ -24,12 +24,12 @@ export default function useEditForm() {
   const handleFormSumbit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (isNicknameRegexCheck(form.name)) {
-      setStatus({ isWarn: false, message: "" });
-    } else {
+    if (!isNicknameRegexCheck(form.name)) {
       setStatus({ isWarn: true, message: NICKNAME_PATTERN_MESSAGE });
       return;
     }
+
+    setStatus({ isWarn: false, message: "" });
   };
 
   return { form, status, handleInputChange, handleFormSumbit };
