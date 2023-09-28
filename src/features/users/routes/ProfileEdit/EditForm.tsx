@@ -24,6 +24,10 @@ export default function EditForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
+
+    if (name === "name" && value.length > 10) return;
+    if (name === "description" && value.length > 100) return;
+
     setInput((prev) => ({ ...prev, [name]: value }));
   };
   //TODO: 닉네임 중복 검사 추가
@@ -46,9 +50,10 @@ export default function EditForm() {
             required
             name="name"
             value={input.name}
-            onChange={(e) => handleInputChange(e)}
+            maxLength={10}
             message={status.message}
             warn={status.isWarn}
+            onChange={(e) => handleInputChange(e)}
           />
         </div>
         <div>
