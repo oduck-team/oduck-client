@@ -1,7 +1,7 @@
 declare interface BaseTimeEntity {
   createdAt: string;
   updatedAt: string;
-  deletedAt: string;
+  deletedAt?: string | null;
 }
 
 declare interface Series extends BaseTimeEntity {
@@ -15,7 +15,7 @@ declare type AnimeStatus = "FINISHED" | "ONGOING" | "UPCOMING" | "UNKNOWN";
 
 declare interface Anime extends BaseTimeEntity {
   id: number;
-  series: Series;
+  series?: Series;
   title: string;
   summary: string;
   broadcastType: BroadcastType;
