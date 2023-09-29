@@ -5,6 +5,7 @@ import Textarea from "@/components/TextArea";
 
 import AttractionPoint from "./AttractionPoint";
 import {
+  Title,
   AttractionPointSection,
   AttractionPointList,
   Button,
@@ -111,6 +112,7 @@ export default function ShortReviewModal({
   return (
     <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
+        <Title>한 줄 리뷰 모달</Title>
         <ReviewContentSection>
           <label htmlFor="content">작품에 대한 의견을 남겨주세요</label>
           <Textarea

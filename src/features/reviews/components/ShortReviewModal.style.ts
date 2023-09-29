@@ -2,7 +2,11 @@ import styled from "@emotion/styled";
 
 import BaseButton from "@/components/Button";
 
-export const ReviewContentSection = styled.section`
+export const Title = styled.h1`
+  display: none;
+`;
+
+export const ReviewContentSection = styled.div`
   padding-top: 24px;
 
   & > label {
@@ -15,7 +19,7 @@ export const ReviewContentSection = styled.section`
   }
 `;
 
-export const AttractionPointSection = styled.section`
+export const AttractionPointSection = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 32px;
