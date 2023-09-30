@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-import ProfileSetupModal from "../routes/Profile/ProfileSetupModal";
-
 import {
   ProfileSetupButtonContainer,
   Dot,
   Dots,
 } from "./ProfileSetupButton.style";
+import ProfileSetupModal from "./ProfileSetupModal";
 
 export default function ProfileSetupButton() {
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);

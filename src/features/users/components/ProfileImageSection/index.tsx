@@ -3,8 +3,8 @@ import { StrictPropsWithChildren } from "@/types";
 import ProfileArt from "./ProfileArt";
 import ArtEditButton from "./ProfileArtEditButton";
 import ProfileAvatar from "./ProfileAvatar";
-import { ProfileImageSectionContainer } from "./ProfileImageSection.style";
 import ProfileSetupButton from "./ProfileSetupButton";
+import { ProfileImageSectionContainer } from "./style";
 
 export default function ProfileImageSection({
   children,

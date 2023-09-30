@@ -1,17 +1,12 @@
 import { useState } from "react";
 
 import Stat from "@/components/Stat";
+import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
 
-import ProfileAvatar from "../../components/ProfileAvatar";
-import ProfileImageSection from "../../components/ProfileImageSection";
+import ProfileImageSection from "../../../components/ProfileImageSection";
 
-import {
-  Introduce,
-  NickName,
-  SeeMoreButton,
-  StatContainer,
-} from "./AboutMe.style";
 import StatModal from "./StatModal";
+import { Introduce, NickName, SeeMoreButton, StatContainer } from "./style";
 
 const STAT_MOCK_DATA = [
   { data: "12500", description: "리뷰" },
