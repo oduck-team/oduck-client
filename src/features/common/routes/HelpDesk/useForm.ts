@@ -31,14 +31,16 @@ export default function useForm() {
 
     for (const key in form) {
       setError((prev) => ({ ...prev, [key]: 0 }));
-      if ((form as Record<string, string>)[key].length === 0) {
+      if ((form as Record<string, string>)[key].trim().length === 0) {
         setError((prev) => ({ ...prev, [key]: 1 }));
       } else if (key === "email" && !emailPattern.test(form[key]))
         setError((prev) => ({ ...prev, [key]: 2 }));
     }
 
     const ok =
-      emailPattern.test(form.email) && form.title !== "" && form.content !== "";
+      emailPattern.test(form.email) &&
+      form.title.trim().length !== 0 &&
+      form.content.trim().length !== 0;
 
     if (ok) {
       // TODO: API 요청
