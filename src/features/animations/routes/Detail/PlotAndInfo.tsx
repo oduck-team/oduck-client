@@ -1,18 +1,13 @@
-import { IAnimation } from "../../types";
+// import { IAnimation } from "../../types";
 
 import { Grid, Plot } from "./PlotAndInfo.style";
+import Section from "./Section";
 
-import { Section } from ".";
-
-interface PlotAndInfoProps {
-  animation: IAnimation;
-}
-
-export default function PlotAndInfo({ animation }: PlotAndInfoProps) {
+export default function PlotAndInfo() {
   return (
     <Section>
       <h1>줄거리 및 정보</h1>
-      <Plot isExpanded={true}>{animation.plot}</Plot>
+      <Plot isExpanded={true}>줄거리</Plot>
       <Grid>
         <li>
           <span>작가</span>
@@ -24,7 +19,7 @@ export default function PlotAndInfo({ animation }: PlotAndInfoProps) {
         </li>
         <li>
           <span>제작사</span>
-          <span>{animation.studios.map((studio) => studio.name)}</span>
+          {/* <span>{animation.studios.map((studio) => studio.name)}</span> */}
         </li>
       </Grid>
     </Section>

@@ -2,8 +2,6 @@ import { CDN_URL } from "@/config";
 import BookmarkButton from "@/features/bookmarks/components/BookmarkButton";
 import ReviewRating from "@/features/reviews/components/ReviewRating";
 
-import { IAnimation } from "../../types";
-
 import {
   Container,
   Banner,
@@ -16,12 +14,12 @@ import {
 } from "./Hero.style";
 
 interface AnimationHeroProps {
-  animation: IAnimation;
+  anime: Anime;
 }
 
-export default function Hero({ animation }: AnimationHeroProps) {
+export default function Hero({ anime }: AnimationHeroProps) {
   let rating: string;
-  switch (animation.rating) {
+  switch (anime.rating) {
     case "ADULT":
       rating = "성인";
       break;
@@ -39,13 +37,13 @@ export default function Hero({ animation }: AnimationHeroProps) {
   return (
     <Container>
       <Banner>
-        <Image url={`${CDN_URL}${animation.imageUrl}`}></Image>
+        <Image url={`${CDN_URL}${anime.thumbnail}`}></Image>
         <ImageGradient />
         <Info>
-          <h1>{animation.name}</h1>
+          <h1>{anime.title}</h1>
           <div style={{ width: "100%", paddingTop: "8px" }}>
             <span>
-              판타지 | {animation.episodeNumber}부작 | 완결 | {rating}
+              판타지 | {anime.episodeCount}부작 | 완결 | {rating}
             </span>
           </div>
         </Info>
@@ -61,7 +59,7 @@ export default function Hero({ animation }: AnimationHeroProps) {
           ]}
           style={{ margin: "0 auto" }}
         />
-        <ReviewRating animationId={animation.id} />
+        <ReviewRating animationId={anime.id} />
         <BookmarkContainer
           style={{
             width: "100%",
@@ -70,7 +68,7 @@ export default function Hero({ animation }: AnimationHeroProps) {
             borderTop: "solid 1px #F1F1F1",
           }}
         >
-          <BookmarkButton animationId={animation.id} />
+          <BookmarkButton animationId={anime.id} />
         </BookmarkContainer>
       </Actions>
     </Container>

@@ -7,8 +7,7 @@ import {
   AttractionPointRatio,
   Grid,
 } from "./Ratings.style";
-
-import { Section } from ".";
+import Section from "./Section";
 
 export default function Ratings() {
   return (
