@@ -6,7 +6,7 @@ import BottomSheet from "@/components/BottomSheet";
 import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Header from "@/components/Layout/Header";
-import Tabs from "@/components/Tabs";
+import BaseTabs from "@/components/Tabs";
 import AnimationCard from "@/features/animations/components/AnimationCard";
 import { Animation } from "@/features/animations/components/AnimationCarousel";
 
@@ -89,7 +89,7 @@ export default function AnimationList() {
     "100화 이상",
   ];
 
-  const handlerOptionClick = (item: string) => {
+  const handleOptionClick = (item: string) => {
     if (filtered.includes(item))
       setFiltered([...filtered].filter((a) => a !== item));
     else setFiltered([...filtered, item]);
@@ -99,7 +99,7 @@ export default function AnimationList() {
     setFiltered([]);
   };
 
-  const handlerOkClick = () => {
+  const handleOkClick = () => {
     // TODO 필터링된 애니 요청
     // BottomSheet 닫기
   };
@@ -136,7 +136,7 @@ export default function AnimationList() {
                     key={i}
                     active={filtered.includes(item)}
                     variant="filter"
-                    onClick={() => handlerOptionClick(item)}
+                    onClick={() => handleOptionClick(item)}
                     icon={<Cancel />}
                   >
                     {item}
@@ -153,7 +153,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(genre)}
                   variant="filter"
-                  onClick={() => handlerOptionClick(genre)}
+                  onClick={() => handleOptionClick(genre)}
                 >
                   {genre}
                 </Chip>
@@ -168,7 +168,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(season)}
                   variant="filter"
-                  onClick={() => handlerOptionClick(season)}
+                  onClick={() => handleOptionClick(season)}
                 >
                   {season}
                 </Chip>
@@ -183,7 +183,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(type)}
                   variant="filter"
-                  onClick={() => handlerOptionClick(type)}
+                  onClick={() => handleOptionClick(type)}
                 >
                   {type}
                 </Chip>
@@ -198,7 +198,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(status)}
                   variant="filter"
-                  onClick={() => handlerOptionClick(status)}
+                  onClick={() => handleOptionClick(status)}
                 >
                   {status}
                 </Chip>
@@ -213,7 +213,7 @@ export default function AnimationList() {
                   key={i}
                   active={filtered.includes(num)}
                   variant="filter"
-                  onClick={() => handlerOptionClick(num)}
+                  onClick={() => handleOptionClick(num)}
                 >
                   {num}
                 </Chip>
@@ -232,7 +232,7 @@ export default function AnimationList() {
             >
               필터 초기화
             </ResetButton>
-            <OkButton name="적용 완료" size="lg" onClick={handlerOkClick}>
+            <OkButton name="적용 완료" size="lg" onClick={handleOkClick}>
               적용 완료
             </OkButton>
           </Actions>
@@ -244,19 +244,19 @@ export default function AnimationList() {
 
 const Container = styled.div`
   background-color: white;
-  position: relative;
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   padding-bottom: 66px;
 `;
 
-export const HeaderContainer = styled.div`
-  width: 100%;
-  max-width: ${({ theme }) => theme.maxWidth};
-  position: fixed;
-  top: 0;
+const Tabs = styled(BaseTabs)`
+  ul {
+    width: 100%;
+    max-width: 600px;
+    position: fixed;
+    top: 60px;
+  }
 `;
 
 const Content = styled.div`
@@ -264,7 +264,7 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 24px 16px 92px;
+  padding: 74px 16px 24px;
 `;
 
 const ChipsContiner = styled.div`
@@ -287,11 +287,12 @@ const Chips = styled.div`
 const Actions = styled.div`
   display: flex;
   justify-content: center;
+  gap: 20px;
   align-items: center;
-  gap: 8px;
 `;
 
 const OkButton = styled(Button)`
+  width: 63%;
   span {
     ${({ theme }) => theme.typo["title-3-m"]};
   }
@@ -302,4 +303,6 @@ const ResetButton = styled(Button)`
   color: ${({ theme }) => theme.colors["neutral"]["50"]};
   ${({ theme }) => theme.typo["body-3-r"]};
   letter-spacing: normal;
+  flex-shrink: 0;
+  margin: 0 auto;
 `;

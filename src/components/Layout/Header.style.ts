@@ -23,6 +23,10 @@ export const Contents = styled.div`
   & > div {
     width: calc(100% / 3);
   }
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Left = styled.div`
