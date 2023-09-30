@@ -4,8 +4,8 @@ import Rating from "@/components/Rating";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 import useAuth from "@/hooks/useAuth";
 
-import { ReviewRecommend } from "./ReviewRating.style";
 import ShortReviewModal from "./ShortReviewModal";
+import { ReviewRecommend } from "./style";
 
 interface ReviewRatingProps {
   animationId: number;

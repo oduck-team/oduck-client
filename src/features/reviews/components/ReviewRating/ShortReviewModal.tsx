@@ -3,7 +3,8 @@ import { useState } from "react";
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
 
-import AttractionPoint from "./AttractionPoint";
+import AttractionPoint from "../AttractionPoint";
+
 import {
   Title,
   AttractionPointSection,

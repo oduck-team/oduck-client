@@ -2,8 +2,8 @@ import { StrictPropsWithChildren } from "@/types";
 
 import ActionBar from "./ActionBar";
 import Animation from "./Animation";
-import { ReviewCardContainer } from "./ReviewCard.style";
 import ReviewComent from "./ReviewComent";
+import { ReviewCardContainer } from "./style";
 import UserRating from "./UserRating";
 
 export interface ReviewCardProps {

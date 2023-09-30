@@ -1,6 +1,6 @@
 import { StrictPropsWithChildren } from "@/types";
 
-import { AttractionPointContainer } from "./AttractionPoint.style";
+import { AttractionPointContainer } from "./style";
 
 interface AttractionPointProps {
   name: string;

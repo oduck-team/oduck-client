@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { ReviewCardProps } from "./ReviewCard";
+import { ReviewCardProps } from ".";
 
 export const ReviewCardContainer = styled.article<
   Pick<ReviewCardProps, "isBlock">
