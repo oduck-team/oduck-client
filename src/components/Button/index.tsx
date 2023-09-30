@@ -18,7 +18,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
   name: string;
   icon?: React.ReactNode;
   variant?: Variant;
-  color: Color;
+  color?: Color;
   size?: Size;
   isBlock?: boolean;
 }
