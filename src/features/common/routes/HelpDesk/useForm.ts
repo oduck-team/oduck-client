@@ -6,22 +6,18 @@ export default function useForm() {
 
   const errorMessage = {
     email: ["", "이메일을 입력해 주세요.", "이메일 형식이 올바르지 않습니다."],
-    title: [
-      "",
-      "문의 제목을 입력해 주세요.",
-      "문의 제목을 50자 내로 입력해 주세요.",
-    ],
-    content: [
-      "",
-      "문의 내용을 입력해 주세요.",
-      "문의 내용을 1000자 내로 입력해 주세요.",
-    ],
+    title: ["", "문의 제목을 입력해 주세요."],
+    content: ["", "문의 내용을 입력해 주세요."],
   };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
+
+    if (name === "title" && value.length > 50) return;
+    if (name === "content" && value.length > 1000) return;
+
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -37,22 +33,12 @@ export default function useForm() {
       setError((prev) => ({ ...prev, [key]: 0 }));
       if ((form as Record<string, string>)[key].length === 0) {
         setError((prev) => ({ ...prev, [key]: 1 }));
-      } else {
-        if (key === "email" && !emailPattern.test(form[key]))
-          setError((prev) => ({ ...prev, [key]: 2 }));
-        if (key === "title" && form[key].length > 50)
-          setError((prev) => ({ ...prev, [key]: 2 }));
-        if (key === "content" && form[key].length > 1000)
-          setError((prev) => ({ ...prev, [key]: 2 }));
-      }
+      } else if (key === "email" && !emailPattern.test(form[key]))
+        setError((prev) => ({ ...prev, [key]: 2 }));
     }
 
     const ok =
-      emailPattern.test(form.email) &&
-      form.title !== "" &&
-      form.title.length <= 50 &&
-      form.content !== "" &&
-      form.content.length <= 1000;
+      emailPattern.test(form.email) && form.title !== "" && form.content !== "";
 
     if (ok) {
       // TODO: API 요청
