@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const SpoilerCheckBoxContainer = styled.div`
   display: flex;
   align-items: center;
   ${({ theme }) => theme.typo["micro-m"]}
