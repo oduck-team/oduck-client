@@ -1,7 +1,4 @@
-import { NavArrowLeft } from "iconoir-react";
-
 import Button from "@/components/Button";
-import Header from "@/components/Layout/Header";
 
 import { Content, FormItem, FormTextInput, FormTextarea } from "./Form.style";
 import { Container } from "./Select.style";
@@ -13,7 +10,7 @@ interface Props {
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
+export default function Form({ setSuccess }: Props) {
   const {
     email,
     title,
@@ -28,24 +25,10 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
     handleTitleChange,
     handleContentChange,
     send,
-    resetForm,
-  } = useForm({ setSuccess });
-
-  const handlerPrevClick = () => {
-    goPrev();
-    resetForm();
-  };
+  } = useForm();
 
   return (
     <Container>
-      <Header>
-        <Header.Left>
-          <NavArrowLeft onClick={handlerPrevClick} />
-        </Header.Left>
-        <Header.Center>
-          <h1>{inquiryTypeName}</h1>
-        </Header.Center>
-      </Header>
       <Content>
         <FormItem>
           <h4>보내는 사람</h4>
@@ -87,7 +70,7 @@ export default function Form({ goPrev, inquiryTypeName, setSuccess }: Props) {
           size="lg"
           style={{ width: "100%", height: "48px", marginTop: "50px" }}
           name="보내기"
-          onClick={send}
+          onClick={() => send(setSuccess)}
         >
           보내기
         </Button>
