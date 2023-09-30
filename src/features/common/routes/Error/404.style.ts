@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
-import { Container as BaseButton } from "@/components/Button/style";
+import { ButtonContainer as BaseButton } from "@/components/Button/style";
 
 export const Container = styled.main`
   display: flex;
