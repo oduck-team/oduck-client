@@ -3,15 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
+import useEditForm from "@/features/users/hooks/useEditForm";
 
-import useEditForm from "../../hooks/useEditForm";
-
-import {
-  ButtonContainer,
-  EditFormContainer,
-  Form,
-  Title,
-} from "./EditForm.style";
+import { ButtonContainer, EditFormContainer, Form, Title } from "./style";
 
 export default function EditForm() {
   const { form, status, isFormChange, handleInputChange, handleFormSumbit } =

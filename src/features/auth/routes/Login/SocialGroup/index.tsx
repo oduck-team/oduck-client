@@ -1,6 +1,6 @@
-import { Providers } from "../../types";
+import { Providers } from "@/features/auth/types";
 
-import { SocialGroupContainer, SocialButton } from "./SocialGroup.style";
+import { SocialGroupContainer, SocialButton } from "./style";
 
 interface SocialSite {
   name: string;

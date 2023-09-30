@@ -3,7 +3,7 @@ import { RouteObject } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import Home from "@/features/common/routes/Home";
-import ProfileEdit from "@/features/users/routes/ProfileEdit";
+import ProfileEdit from "@/features/users/routes/Edit";
 
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));

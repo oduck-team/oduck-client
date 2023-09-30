@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import useRedirect from "@/hooks/useRedirect";
 
-import { Text } from "./LoginAlertModal.style";
+import { Text } from "./style";
 
 interface LoginAlertModalProps {
   isVisible: boolean;

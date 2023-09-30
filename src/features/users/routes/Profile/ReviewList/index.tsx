@@ -1,6 +1,6 @@
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { ReviewListContainer, ReviewTitle } from "./ReviewList.style";
+import { ReviewListContainer, ReviewTitle } from "./style";
 
 const REVIEW_RIST = [
   {

@@ -1,7 +1,7 @@
 import Head from "@/components/Head";
 
-import ProfileAvatar from "../../components/ProfileAvatar";
 import ProfileImageSection from "../../components/ProfileImageSection";
+import ProfileAvatar from "../../components/ProfileImageSection/ProfileAvatar";
 
 import EditForm from "./EditForm";
 import { ProfileEditContainer } from "./style";
