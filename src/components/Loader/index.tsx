@@ -1,9 +1,9 @@
-import { Container } from "./style";
+import { LoaderContainer } from "./style";
 
 export default function Loader() {
   return (
-    <Container>
+    <LoaderContainer>
       <img src="/logo/logo.png" alt="로딩중" />
-    </Container>
+    </LoaderContainer>
   );
 }

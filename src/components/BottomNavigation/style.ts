@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const Container = styled.nav`
+export const BottomNavigationContainer = styled.nav`
   position: fixed;
   display: flex;
   justify-content: center;

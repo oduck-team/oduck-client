@@ -2,7 +2,12 @@ import { ComponentProps } from "react";
 
 import { theme } from "@/styles/theme";
 
-import { Container, ContentWrapper, IconWrapper, IconButton } from "./style";
+import {
+  ButtonContainer,
+  ContentWrapper,
+  IconWrapper,
+  IconButtonContainer,
+} from "./style";
 
 export type Variant = "solid" | "outline" | "text";
 export type Color = keyof Pick<typeof theme.colors, ColorKeys>;
@@ -11,11 +16,11 @@ export type Size = "xl" | "lg" | "md" | "sm";
 
 export interface ButtonProps extends ComponentProps<"button"> {
   name: string;
+  icon?: React.ReactNode;
   variant?: Variant;
-  color?: Color;
+  color: Color;
   size?: Size;
   isBlock?: boolean;
-  icon?: React.ReactNode;
 }
 
 export default function Button({
@@ -32,7 +37,7 @@ export default function Button({
   const isIconOnly = icon !== undefined && !children;
   if (isIconOnly) {
     return (
-      <IconButton
+      <IconButtonContainer
         aria-label={name}
         variant={variant}
         color={color}
@@ -41,12 +46,12 @@ export default function Button({
         {...props}
       >
         <IconWrapper>{icon}</IconWrapper>
-      </IconButton>
+      </IconButtonContainer>
     );
   }
 
   return (
-    <Container
+    <ButtonContainer
       aria-label={name}
       variant={variant}
       color={color}
@@ -59,6 +64,6 @@ export default function Button({
         {icon && <IconWrapper>{icon}</IconWrapper>}
         <span>{children}</span>
       </ContentWrapper>
-    </Container>
+    </ButtonContainer>
   );
 }

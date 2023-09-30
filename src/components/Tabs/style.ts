@@ -1,11 +1,9 @@
 import styled from "@emotion/styled";
 
-import { StyleProps } from ".";
-
 export const TabTitles = styled.ul`
   display: flex;
 `;
-export const TabTitle = styled.li<StyleProps>`
+export const TabTitle = styled.li<{ active?: boolean }>`
   display: flex;
   width: 100%;
   padding: 14px 10px;

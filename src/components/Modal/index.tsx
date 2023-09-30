@@ -8,7 +8,7 @@ import AnimatePortal from "../Portal/AnimatePortal";
 import {
   ActionsContainer,
   Backdrop,
-  Container,
+  ModalContainer,
   ContentContainer,
 } from "./style";
 
@@ -37,7 +37,7 @@ export default function Modal({
   return (
     <AnimatePortal isVisible={isVisible}>
       <Backdrop isVisible={showBackdrop} onClick={onClose} />
-      <Container
+      <ModalContainer
         aria-modal={isVisible}
         role="dialog"
         initial="initial"
@@ -48,7 +48,7 @@ export default function Modal({
         onClick={(e) => e.stopPropagation()}
       >
         {children}
-      </Container>
+      </ModalContainer>
     </AnimatePortal>
   );
 }

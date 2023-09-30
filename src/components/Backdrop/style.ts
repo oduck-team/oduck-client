@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import { BackdropProps } from ".";
 
-export const Container = styled(motion.div)<BackdropProps>`
+export const BackdropContainer = styled(motion.div)<BackdropProps>`
   position: fixed;
   display: flex;
   inset: 0;

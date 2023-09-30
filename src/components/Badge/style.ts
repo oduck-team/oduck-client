@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import { BadgeProps } from ".";
 
-export const Container = styled.span<BadgeProps>`
+export const BadgeContainer = styled.span<BadgeProps>`
   padding: 2px 6px;
   border-radius: 999px;
 
@@ -15,7 +15,7 @@ export const Container = styled.span<BadgeProps>`
   `}
 `;
 
-export const DotBadge = styled.span<BadgeProps>`
+export const DotBadgeContainer = styled.span<BadgeProps>`
   display: flex;
   height: 8px;
   min-width: 8px;

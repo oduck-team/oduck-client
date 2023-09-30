@@ -1,25 +1,23 @@
-import { ComponentProps } from "react";
-
 import { theme } from "@/styles/theme";
 
-import { Container, DotBadge } from "./style";
+import { BadgeContainer, DotBadgeContainer } from "./style";
 
 type Variant = "fill" | "inverted";
 type Color = keyof typeof theme.colors;
 
-export interface BadgeProps extends ComponentProps<"span"> {
+export interface BadgeProps {
   /**
    * true일 경우 단순한 점 뱃지 컴포넌트가 됩니다
    */
   isDot?: boolean;
-  variant?: Variant;
-  color?: Color;
   count?: number;
   /**
    * count가 오버플로우로 처리되는 수입니다
    * @default 99
    */
   overflowCount?: number;
+  variant?: Variant;
+  color?: Color;
 }
 
 export default function Badge({
@@ -29,13 +27,13 @@ export default function Badge({
   color = "primary",
   overflowCount = 99,
 }: BadgeProps) {
-  if (isDot) return <DotBadge color={color}></DotBadge>;
+  if (isDot) return <DotBadgeContainer color={color}></DotBadgeContainer>;
 
   const displayCount = count > overflowCount ? `${overflowCount}+` : `${count}`;
 
   return (
-    <Container variant={variant} color={color} aria-label={displayCount}>
+    <BadgeContainer variant={variant} color={color} aria-label={displayCount}>
       {displayCount}
-    </Container>
+    </BadgeContainer>
   );
 }

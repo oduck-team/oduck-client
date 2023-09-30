@@ -1,16 +1,13 @@
 import { IconoirProvider, Check } from "iconoir-react";
 
-import { Container } from "./style";
+import { CheckboxContainer } from "./style";
 
 export type Size = "lg" | "md";
 
-export interface StyleProps {
+export interface CheckBoxProps {
   size?: Size;
   checked?: boolean;
   disabled?: boolean;
-}
-
-interface CheckBoxProps extends StyleProps {
   onClick: () => void;
 }
 
@@ -27,14 +24,14 @@ export default function CheckBox({
         strokeWidth: 2,
       }}
     >
-      <Container
+      <CheckboxContainer
         size={size}
         onClick={onClick}
         checked={checked}
         disabled={disabled}
       >
         {checked && <Check />}
-      </Container>
+      </CheckboxContainer>
     </IconoirProvider>
   );
 }

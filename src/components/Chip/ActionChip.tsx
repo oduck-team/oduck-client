@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { Container } from "./ActionChip.style";
+import { ActionChipContainer } from "./ActionChip.style";
 
 import { Size } from ".";
 
@@ -15,8 +15,8 @@ export default function ActionChip({
   onClick,
 }: ActionChipProps) {
   return (
-    <Container size={size} className={className} onClick={onClick}>
+    <ActionChipContainer size={size} className={className} onClick={onClick}>
       {children}
-    </Container>
+    </ActionChipContainer>
   );
 }

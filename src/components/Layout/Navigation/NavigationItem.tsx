@@ -1,5 +1,6 @@
-import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+
+import { NavigationItemContainer } from "./NavigationItem.style";
 
 export interface NavItem {
   id: string;
@@ -15,7 +16,7 @@ interface NavigationItemProps {
 
 export default function NavigationItem({ item, onClick }: NavigationItemProps) {
   return (
-    <Container>
+    <NavigationItemContainer>
       <Link
         to={item.to}
         onClick={onClick ? (e) => onClick(item.id, e) : undefined}
@@ -23,26 +24,6 @@ export default function NavigationItem({ item, onClick }: NavigationItemProps) {
         {item.icon}
         {item.title}
       </Link>
-    </Container>
+    </NavigationItemContainer>
   );
 }
-
-const Container = styled.li`
-  & > a {
-    ${({ theme }) => theme.typo["body-2-m"]}
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    height: 40px;
-    border-radius: 6px;
-    transition: colors 0.2s;
-
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.neutral["10"]};
-    }
-    &:active {
-      background-color: ${({ theme }) => theme.colors.neutral["20"]};
-    }
-  }
-`;

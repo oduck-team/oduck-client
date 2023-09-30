@@ -4,7 +4,7 @@ import { ComponentProps, useEffect, useRef, useState } from "react";
 import {
   BackStarContainer,
   ColorStarContainer,
-  Container,
+  RatingContainer,
   EventContainer,
   Sizes,
 } from "./style";
@@ -81,7 +81,7 @@ export default function Rating({
   }, [readonly, save, rating, onRate]);
 
   return (
-    <Container size={size} readonly={readonly} style={style}>
+    <RatingContainer size={size} readonly={readonly} style={style}>
       {readonly && <EventContainer />}
       {!readonly && (
         <EventContainer
@@ -106,6 +106,6 @@ export default function Rating({
         <Star />
         <Star />
       </ColorStarContainer>
-    </Container>
+    </RatingContainer>
   );
 }

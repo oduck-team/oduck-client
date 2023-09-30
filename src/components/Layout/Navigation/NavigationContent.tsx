@@ -1,16 +1,9 @@
-import styled from "@emotion/styled";
-
 import { StrictPropsWithChildren } from "@/types";
+
+import { NavigationContentContainer } from "./NavigationContent.style";
 
 export default function NavigationContent({
   children,
 }: StrictPropsWithChildren) {
-  return <Container>{children}</Container>;
+  return <NavigationContentContainer>{children}</NavigationContentContainer>;
 }
-
-const Container = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-`;

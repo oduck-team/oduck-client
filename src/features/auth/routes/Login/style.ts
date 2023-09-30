@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 
-import ResponsiveContainer from "@/components/ResponsiveContainer";
-
-export const Main = styled(ResponsiveContainer)`
+export const Main = styled.main`
+  ${({ theme }) => theme.container}
   position: relative;
   display: flex;
   flex-direction: column;

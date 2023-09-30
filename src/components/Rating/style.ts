@@ -13,7 +13,7 @@ export const Sizes: Record<Size, number> = {
   lg: 36,
 };
 
-export const Container = styled.div<RatingProps>`
+export const RatingContainer = styled.div<RatingProps>`
   --size: ${({ size = "md" }) => Sizes[size] + "px"};
   width: calc(var(--size) * 5);
   position: relative;

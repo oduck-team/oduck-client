@@ -34,7 +34,7 @@ function getStatStyle(theme: Theme, variant: Variant) {
   return styles[variant];
 }
 
-export const Container = styled.div<Pick<StatProps, "variant">>`
+export const StatContainer = styled.div<Pick<StatProps, "variant">>`
   background-color: #fff;
 
   ${({ theme, variant = "primary" }) => getStatStyle(theme, variant)}

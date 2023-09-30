@@ -1,10 +1,10 @@
-import { Container } from "./style";
+import { SectionDividerContainer } from "./style";
 
 export default function SectionDivider() {
   return (
-    <Container>
+    <SectionDividerContainer>
       <span />
       <span />
-    </Container>
+    </SectionDividerContainer>
   );
 }

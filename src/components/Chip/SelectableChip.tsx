@@ -1,4 +1,4 @@
-import { Container } from "./SelectableChip.style";
+import { SelectableChipContainer } from "./SelectableChip.style";
 
 import { ChipProps } from ".";
 
@@ -10,13 +10,13 @@ export default function SelectableChip({
   onClick,
 }: Omit<ChipProps, "variant" | "icon">) {
   return (
-    <Container
+    <SelectableChipContainer
       size={size}
       active={active}
       className={className}
       onClick={onClick}
     >
       {children}
-    </Container>
+    </SelectableChipContainer>
   );
 }

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import BaseBackdrop from "../Backdrop";
 
-import { Side } from "./hooks/useDrawer";
+import { Side } from "./useDrawer";
 
 import { DrawerProps } from ".";
 
@@ -42,7 +42,7 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.drawer};
 `;
 
-export const Container = styled(motion.div)<Pick<DrawerProps, "side">>`
+export const DrawerContainer = styled(motion.div)<Pick<DrawerProps, "side">>`
   position: fixed;
   display: flex;
   flex-direction: column;

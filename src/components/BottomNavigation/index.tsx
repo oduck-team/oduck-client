@@ -1,4 +1,4 @@
-import { Container, Item } from "./style";
+import { BottomNavigationContainer, Item } from "./style";
 
 export interface INavigationItem {
   id: string;
@@ -29,7 +29,7 @@ export default function BottomNavigation({
   onClickItem,
 }: BottomNavigationProps) {
   return (
-    <Container>
+    <BottomNavigationContainer>
       <h1>{title}</h1>
       <ul>
         {items.map((item) => (
@@ -45,6 +45,6 @@ export default function BottomNavigation({
           </li>
         ))}
       </ul>
-    </Container>
+    </BottomNavigationContainer>
   );
 }

@@ -113,7 +113,7 @@ const baseStyle = css`
   text-align: center;
 `;
 
-export const Container = styled.button<
+export const ButtonContainer = styled.button<
   Pick<ButtonProps, "variant" | "color" | "size" | "isBlock">
 >`
   ${baseStyle}
@@ -148,7 +148,7 @@ const iconButtonSizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-export const IconButton = styled.button<
+export const IconButtonContainer = styled.button<
   Pick<ButtonProps, "variant" | "color" | "size">
 >`
   ${baseStyle}

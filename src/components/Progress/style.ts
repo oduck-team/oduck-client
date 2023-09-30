@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { ProgressProps } from ".";
 
-export const Container = styled.div<ProgressProps>(
+export const ProgressContainer = styled.div<ProgressProps>(
   ({ color = "primary", value, height, isRounded, theme }) => ({
     height,
     width: "100%",

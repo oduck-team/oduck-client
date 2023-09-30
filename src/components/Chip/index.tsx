@@ -13,7 +13,7 @@ export interface ChipProps extends ComponentProps<"button"> {
   icon?: React.ReactNode;
   size?: Size;
 }
-// TODO: size를 옵션으로 받기
+
 export default function Chip({
   variant = "action",
   active,
@@ -34,7 +34,8 @@ export default function Chip({
         {children}
       </SelectableChip>
     );
-  else if (variant === "filter")
+
+  if (variant === "filter")
     return (
       <FilterChip
         size={size}

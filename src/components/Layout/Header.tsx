@@ -1,6 +1,6 @@
 import { StrictPropsWithChildren } from "@/types";
 
-import { Center, Container, Contents, Left, Right } from "./Header.style";
+import { Center, HeaderContainer, Contents, Left, Right } from "./Header.style";
 
 /**
  * 공통 헤더 컴포넌트입니다
@@ -8,9 +8,9 @@ import { Center, Container, Contents, Left, Right } from "./Header.style";
  */
 export default function Header({ children }: StrictPropsWithChildren) {
   return (
-    <Container>
+    <HeaderContainer>
       <Contents>{children}</Contents>
-    </Container>
+    </HeaderContainer>
   );
 }
 

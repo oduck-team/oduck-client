@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { HomeSimple, Menu, Search, Tv } from "iconoir-react";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -6,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import BottomNavigation, { INavigationItem } from "../BottomNavigation";
 
 import Sidebar from "./Sidebar";
+import { LayoutContainer } from "./style";
 
 export default function Layout() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -73,7 +73,7 @@ export default function Layout() {
   }, []);
 
   return (
-    <Container>
+    <LayoutContainer>
       <Outlet />
       <Sidebar
         isVisible={isSidebarVisible}
@@ -86,16 +86,9 @@ export default function Layout() {
         onClickItem={handleClickNav}
         items={bottomNavItems}
       />
-    </Container>
+    </LayoutContainer>
   );
 }
-
-const Container = styled.div`
-  max-width: ${({ theme }) => theme.maxWidth};
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-`;
 
 function HomeFill() {
   return (
