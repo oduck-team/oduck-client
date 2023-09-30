@@ -29,7 +29,7 @@ export default function LoginAlertModal({
 
   return (
     <>
-      <Modal isVisible={isVisible} onClose={onClose}>
+      <Modal isVisible={isVisible} size="md" onClose={onClose}>
         <Modal.Content>
           <Text>로그인이 필요해요</Text>
         </Modal.Content>

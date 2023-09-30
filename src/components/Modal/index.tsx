@@ -62,7 +62,7 @@ const modalVariants: Variants = {
   animate: {
     opacity: 1,
     left: "50%",
-    transform: "translateY(-30%) translateX(-50%)",
+    transform: "translateY(-50%) translateX(-50%)",
     transition: {
       duration: 0.2,
       ease: "easeInOut",
