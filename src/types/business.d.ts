@@ -22,7 +22,7 @@ declare interface Anime extends BaseTimeEntity {
   episodeCount: number;
   thumbnail: string;
   year: number;
-  quater: number;
+  quarter: number;
   rating: AnimeRating;
   status: AnimeStatus;
   isReleased: boolean;
