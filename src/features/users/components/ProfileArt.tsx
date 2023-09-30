@@ -1,4 +1,8 @@
-import { Container, CustomImage, DefaultImage } from "./ProfileArt.style";
+import {
+  ProfileArtContainer,
+  CustomImage,
+  DefaultImage,
+} from "./ProfileArt.style";
 
 export interface ProfileArtProps {
   src?: string;
@@ -6,9 +10,9 @@ export interface ProfileArtProps {
 
 export default function ProfileArt({ src }: ProfileArtProps) {
   return (
-    <Container>
+    <ProfileArtContainer>
       {!src && <DefaultImage />}
       {src && <CustomImage src={src} />}
-    </Container>
+    </ProfileArtContainer>
   );
 }

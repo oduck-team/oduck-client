@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const ButtonContainer = styled.button`
+export const ProfileSetupButtonContainer = styled.button`
   position: absolute;
   top: 29px;
   right: 18px;

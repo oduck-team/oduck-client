@@ -1,9 +1,12 @@
-import { Container, PlusCircleIcon } from "./AvatarEditButton.style";
+import {
+  AvatarEditButtonContainer,
+  PlusCircleIcon,
+} from "./AvatarEditButton.style";
 
 export default function AvatarEditButton() {
   return (
-    <Container>
+    <AvatarEditButtonContainer>
       <PlusCircleIcon size={24} color="white" />
-    </Container>
+    </AvatarEditButtonContainer>
   );
 }

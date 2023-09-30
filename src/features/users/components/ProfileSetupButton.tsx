@@ -2,7 +2,11 @@ import { useState } from "react";
 
 import ProfileSetupModal from "../routes/Profile/ProfileSetupModal";
 
-import { ButtonContainer, Dot, Dots } from "./ProfileSetupButton.style";
+import {
+  ProfileSetupButtonContainer,
+  Dot,
+  Dots,
+} from "./ProfileSetupButton.style";
 
 export default function ProfileSetupButton() {
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
@@ -10,13 +14,13 @@ export default function ProfileSetupButton() {
 
   return (
     <>
-      <ButtonContainer onClick={handleSetupModalToggle}>
+      <ProfileSetupButtonContainer onClick={handleSetupModalToggle}>
         <Dots>
           <Dot />
           <Dot />
           <Dot />
         </Dots>
-      </ButtonContainer>
+      </ProfileSetupButtonContainer>
       <ProfileSetupModal
         isVisible={isSetupModalOpen}
         onToggle={handleSetupModalToggle}
