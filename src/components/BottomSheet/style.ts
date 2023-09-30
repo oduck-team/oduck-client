@@ -7,7 +7,9 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.bottomSheet};
 `;
 
-export const Container = styled(motion.div)<{ maxHeight: number | null }>`
+export const BottomSheetContainer = styled(motion.div)<{
+  maxHeight: number | null;
+}>`
   display: flex;
   flex-direction: column;
   position: fixed;

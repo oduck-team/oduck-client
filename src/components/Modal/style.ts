@@ -31,7 +31,7 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 
-export const Container = styled(motion.div)<Pick<ModalProps, "size">>`
+export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
   position: fixed;
   top: 48%;
   left: 50%;

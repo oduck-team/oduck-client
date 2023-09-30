@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { Container, Content, Title, Data, Description } from "./style";
+import { StatContainer, Content, Title, Data, Description } from "./style";
 
 interface StatItemProps {
   title?: string;
@@ -29,7 +29,7 @@ export default function Stat({
     }).format(parseInt(data, 10));
 
   return (
-    <Container variant={variant} {...props}>
+    <StatContainer variant={variant} {...props}>
       {/* TODO: key={idx} 처리 */}
       {items.map((item, idx) => {
         return (
@@ -42,6 +42,6 @@ export default function Stat({
           </Content>
         );
       })}
-    </Container>
+    </StatContainer>
   );
 }

@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import {
   Cancel,
   HeadsetHelp,
@@ -8,7 +7,7 @@ import {
   ProfileCircle,
   Tv,
 } from "iconoir-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useAuth from "@/hooks/useAuth";
 
@@ -18,6 +17,7 @@ import Drawer from "../Drawer";
 
 import Navigation from "./Navigation";
 import { NavItem } from "./Navigation/NavigationItem";
+import { Divider, NeedLogin, Profile, UserName } from "./Sidebar.style";
 
 const userMenuItems: NavItem[] = [
   {
@@ -149,28 +149,3 @@ export default function Sidebar({
     </Drawer>
   );
 }
-
-const Profile = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 10px 0;
-  cursor: pointer;
-`;
-
-const UserName = styled.span`
-  ${({ theme }) => theme.typo["title-2-b"]}
-`;
-
-const NeedLogin = styled.span`
-  ${({ theme }) => theme.typo["title-2-m"]}
-  color: ${({ theme }) => theme.colors.neutral["50"]};
-`;
-
-const Divider = styled.div`
-  margin: 1rem 0;
-  height: 1px;
-  background-color: ${({ theme }) => theme.colors.neutral["30"]};
-`;

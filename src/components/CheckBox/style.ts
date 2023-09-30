@@ -1,7 +1,7 @@
 import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { StyleProps, Size } from ".";
+import { CheckBoxProps, Size } from ".";
 
 const CheckBoxSizes: Record<Size, SerializedStyles> = {
   md: css`
@@ -14,7 +14,9 @@ const CheckBoxSizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-export const Container = styled.button<StyleProps>`
+export const CheckboxContainer = styled.button<
+  Pick<CheckBoxProps, "size" | "checked">
+>`
   ${({ size = "md" }) => css`
     ${CheckBoxSizes[size]}
   `}

@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { TabTitle, TabTitles } from "./style";
 
-export interface StyleProps {
-  active?: boolean;
-}
-
 interface ItemProps {
   id: number;
   title?: string;

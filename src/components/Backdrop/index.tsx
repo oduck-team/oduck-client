@@ -1,6 +1,6 @@
 import { Variants } from "framer-motion";
 
-import { Container } from "./style";
+import { BackdropContainer } from "./style";
 
 const variants: Variants = {
   hidden: { opacity: 0 },
@@ -20,7 +20,7 @@ export default function Backdrop({
   onClick,
 }: BackdropProps) {
   return (
-    <Container
+    <BackdropContainer
       aria-hidden
       isVisible={isVisible}
       initial="hidden"

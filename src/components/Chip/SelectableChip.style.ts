@@ -4,7 +4,9 @@ import { Sizes } from "./ActionChip.style";
 
 import { ChipProps } from ".";
 
-export const Container = styled.button<Omit<ChipProps, "variant" | "icon">>`
+export const SelectableChipContainer = styled.button<
+  Omit<ChipProps, "variant" | "icon">
+>`
   width: fit-content;
   ${({ size = "md" }) => Sizes[size]}
   padding: 6px 10px;

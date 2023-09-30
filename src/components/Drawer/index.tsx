@@ -3,15 +3,15 @@ import { StrictPropsWithChildren } from "@/types";
 
 import AnimatePortal from "../Portal/AnimatePortal";
 
-import { useDrawer, Side } from "./hooks/useDrawer";
-import { Backdrop, Container, Content, Header } from "./style";
+import { Backdrop, DrawerContainer, Content, Header } from "./style";
+import { useDrawer, Side } from "./useDrawer";
 
 const sides = {
   top: "translate3d(0,-100%,0)",
   bottom: "translate3d(0,100%,0)",
   left: "translate3d(-100%,0,0)",
   right: "translate3d(100%,0,0)",
-};
+} as const;
 
 export interface DrawerProps {
   title?: React.ReactNode;
@@ -42,7 +42,7 @@ export default function Drawer({
   return (
     <AnimatePortal isVisible={isVisible}>
       <Backdrop isVisible={showBackdrop} onClick={onClose} />
-      <Container
+      <DrawerContainer
         aria-modal={isVisible}
         role="dialog"
         side={side}
@@ -64,7 +64,7 @@ export default function Drawer({
       >
         <Header>{title}</Header>
         <Content>{children}</Content>
-      </Container>
+      </DrawerContainer>
     </AnimatePortal>
   );
 }

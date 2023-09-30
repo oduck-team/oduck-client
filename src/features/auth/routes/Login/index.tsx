@@ -32,7 +32,7 @@ export default function Login() {
           <h1>로그인</h1>
         </Header.Center>
       </Header>
-      <Main htmlType={"main"}>
+      <Main>
         <Title>
           회원가입 없이 <br /> 빠르게 <span>덕질</span>을 <br />
           시작해 보세요!

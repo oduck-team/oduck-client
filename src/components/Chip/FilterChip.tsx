@@ -1,4 +1,4 @@
-import { Container } from "./FilterChip.style";
+import { FilterChipContainer } from "./FilterChip.style";
 
 import { ChipProps } from ".";
 
@@ -11,7 +11,7 @@ export default function FilterChip({
   onClick,
 }: Omit<ChipProps, "variant">) {
   return (
-    <Container
+    <FilterChipContainer
       size={size}
       active={active}
       icon={icon}
@@ -20,6 +20,6 @@ export default function FilterChip({
     >
       <span>{children}</span>
       {icon && icon}
-    </Container>
+    </FilterChipContainer>
   );
 }

@@ -17,7 +17,7 @@ export const Sizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-export const Container = styled.button<ActionChipProps>`
+export const ActionChipContainer = styled.button<ActionChipProps>`
   width: fit-content;
   ${({ size = "md" }) => Sizes[size]}
   padding: 8px 16px;

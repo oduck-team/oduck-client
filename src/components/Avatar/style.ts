@@ -26,7 +26,7 @@ const sizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-export const Container = styled.span<Pick<AvatarProps, "size">>`
+export const AvatarContainer = styled.span<Pick<AvatarProps, "size">>`
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 import { theme } from "@/styles/theme";
 
-import { Container } from "./style";
+import { ProgressContainer } from "./style";
 
 export interface ProgressProps extends ComponentProps<"div"> {
   max?: number;
@@ -23,7 +23,7 @@ export default function Progress({
   ...props
 }: ProgressProps) {
   return (
-    <Container
+    <ProgressContainer
       value={value}
       color={color}
       height={height}
@@ -36,6 +36,6 @@ export default function Progress({
         aria-valuemin={min}
         aria-valuenow={value}
       ></div>
-    </Container>
+    </ProgressContainer>
   );
 }

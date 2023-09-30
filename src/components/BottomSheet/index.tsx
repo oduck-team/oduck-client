@@ -4,15 +4,15 @@ import { StrictPropsWithChildren } from "@/types";
 
 import AnimatePortal from "../Portal/AnimatePortal";
 
-import useBottomSheet from "./hooks/useBottomSheet";
 import {
   Backdrop,
-  Container,
+  BottomSheetContainer,
   Content,
   Footer,
   Handlebar,
   Scroll,
 } from "./style";
+import useBottomSheet from "./useBottomSheet";
 
 interface BottomSheetProps {
   showBackdrop?: boolean;
@@ -50,7 +50,7 @@ export default function BottomSheet({
   return (
     <AnimatePortal isVisible={isVisible}>
       <Backdrop isVisible={showBackdrop} onClick={onClose} />
-      <Container
+      <BottomSheetContainer
         ref={containerRef}
         aria-modal={isVisible}
         role="dialog"
@@ -91,7 +91,7 @@ export default function BottomSheet({
         />
         <Scroll>{RestChildren}</Scroll>
         {Footer}
-      </Container>
+      </BottomSheetContainer>
     </AnimatePortal>
   );
 }
