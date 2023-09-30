@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const ProfileArtContainer = styled.div`
   height: 160px;
 `;
 

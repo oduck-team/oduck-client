@@ -1,6 +1,6 @@
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { ListContainer, ReviewTitle } from "./ReviewList.style";
+import { ReviewListContainer, ReviewTitle } from "./ReviewList.style";
 
 const REVIEW_RIST = [
   {
@@ -30,7 +30,7 @@ export default function ReviewList() {
   return (
     <>
       <ReviewTitle>한줄리뷰</ReviewTitle>
-      <ListContainer>
+      <ReviewListContainer>
         {REVIEW_RIST.map((review, index) => (
           <ReviewCard key={index} isBlock>
             <ReviewCard.Animation animation={review.animation} />
@@ -38,7 +38,7 @@ export default function ReviewList() {
             <ReviewCard.ActionBar include="time" createdAt={review.createdAt} />
           </ReviewCard>
         ))}
-      </ListContainer>
+      </ReviewListContainer>
     </>
   );
 }

@@ -4,7 +4,9 @@ import { colors } from "@/styles/colors";
 
 import { ReviewLikeButtonProps } from "./ReviewLikeButton";
 
-export const Container = styled.button<Pick<ReviewLikeButtonProps, "isLike">>`
+export const ReviewLikeButtonContainer = styled.button<
+  Pick<ReviewLikeButtonProps, "isLike">
+>`
   display: flex;
   align-items: center;
   padding: 2px 0;

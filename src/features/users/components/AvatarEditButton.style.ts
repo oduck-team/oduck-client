@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { PlusCircle } from "@phosphor-icons/react";
 
-export const Container = styled.div`
+export const AvatarEditButtonContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;

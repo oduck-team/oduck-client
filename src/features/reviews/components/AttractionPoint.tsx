@@ -1,6 +1,6 @@
 import { StrictPropsWithChildren } from "@/types";
 
-import { Container } from "./AttractionPoint.style";
+import { AttractionPointContainer } from "./AttractionPoint.style";
 
 interface AttractionPointProps {
   name: string;
@@ -18,7 +18,7 @@ export default function AttractionPoint({
   children,
 }: StrictPropsWithChildren<AttractionPointProps>) {
   return (
-    <Container htmlFor={name} isChecked={isChecked}>
+    <AttractionPointContainer htmlFor={name} isChecked={isChecked}>
       <input
         type="checkbox"
         name={name}
@@ -27,6 +27,6 @@ export default function AttractionPoint({
         onChange={onChagne}
       />
       {children}
-    </Container>
+    </AttractionPointContainer>
   );
 }

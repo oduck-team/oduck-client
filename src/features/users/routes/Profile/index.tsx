@@ -1,12 +1,12 @@
 import AboutMe from "./AboutMe";
 import ReviewList from "./ReviewList";
-import { Container } from "./style";
+import { ProfileContainer } from "./style";
 
 export default function Profile() {
   return (
-    <Container>
+    <ProfileContainer>
       <AboutMe />
       <ReviewList />
-    </Container>
+    </ProfileContainer>
   );
 }

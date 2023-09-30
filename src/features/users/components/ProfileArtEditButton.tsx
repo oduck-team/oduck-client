@@ -1,9 +1,12 @@
-import { Container, PlusCircleIcon } from "./ProfileArtEditButton.style";
+import {
+  ArtEditButtonContainer,
+  PlusCircleIcon,
+} from "./ProfileArtEditButton.style";
 
 export default function ArtEditButton() {
   return (
-    <Container>
+    <ArtEditButtonContainer>
       <PlusCircleIcon size={24} color="white" />
-    </Container>
+    </ArtEditButtonContainer>
   );
 }

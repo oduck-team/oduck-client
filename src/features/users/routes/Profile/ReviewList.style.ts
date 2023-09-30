@@ -6,6 +6,6 @@ export const ReviewTitle = styled.h4`
   padding: 0 16px;
 `;
 
-export const ListContainer = styled.div`
+export const ReviewListContainer = styled.div`
   padding: 0 16px;
 `;

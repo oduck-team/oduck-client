@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.label<{ isChecked: boolean }>`
+export const AttractionPointContainer = styled.label<{ isChecked: boolean }>`
   ${({ theme }) => theme.typo["body-3-r"]}
   display: flex;
   align-items: center;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.ul`
+export const SocialGroupContainer = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;

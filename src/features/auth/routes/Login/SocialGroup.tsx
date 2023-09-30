@@ -1,6 +1,6 @@
 import { Providers } from "../../types";
 
-import { Container, SocialButton } from "./SocialGroup.style";
+import { SocialGroupContainer, SocialButton } from "./SocialGroup.style";
 
 interface SocialSite {
   name: string;
@@ -36,7 +36,7 @@ interface SocialGroupProps {
 
 export default function SocialGroup({ onClick }: SocialGroupProps) {
   return (
-    <Container>
+    <SocialGroupContainer>
       {socialSites.map((socialSite) => (
         <li key={socialSite.name}>
           <SocialButton
@@ -51,7 +51,7 @@ export default function SocialGroup({ onClick }: SocialGroupProps) {
           </SocialButton>
         </li>
       ))}
-    </Container>
+    </SocialGroupContainer>
   );
 }
 
