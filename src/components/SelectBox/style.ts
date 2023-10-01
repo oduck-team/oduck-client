@@ -46,5 +46,6 @@ export const CaretIcon = styled(CaretDown)`
   right: 14px;
   top: 50%;
   transform: translateY(-50%);
+  pointer-events: none;
   color: ${({ theme }) => theme.colors.neutral[50]};
 `;
