@@ -7,6 +7,7 @@ interface Option {
 
 export interface SelectBoxProps {
   options: Option[];
+  /** option이 선택되면 SelectBox의 border 색상 변경 옵션 */
   selected: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
