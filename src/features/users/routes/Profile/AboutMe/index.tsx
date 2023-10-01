@@ -15,6 +15,8 @@ const STAT_MOCK_DATA = [
   { data: "7100", description: "포인트" },
 ];
 
+const USER_MOCK_DATA = { isMine: false };
+
 export default function AboutMe() {
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
@@ -23,7 +25,9 @@ export default function AboutMe() {
     <>
       <ProfileImageSection>
         <ProfileImageSection.Art src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
-        <ProfileImageSection.ProfileSetupButton />
+        <ProfileImageSection.ProfileSetupButton
+          isMine={USER_MOCK_DATA.isMine}
+        />
         <ProfileImageSection.ProfileAvatar>
           <ProfileAvatar.Avatar userName="FE" size="xl" />
         </ProfileImageSection.ProfileAvatar>

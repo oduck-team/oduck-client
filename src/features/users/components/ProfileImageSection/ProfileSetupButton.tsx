@@ -7,7 +7,13 @@ import {
 } from "./ProfileSetupButton.style";
 import ProfileSetupModal from "./ProfileSetupModal";
 
-export default function ProfileSetupButton() {
+interface ProfileSetupButtonProps {
+  isMine: boolean;
+}
+
+export default function ProfileSetupButton({
+  isMine,
+}: ProfileSetupButtonProps) {
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
   const handleSetupModalToggle = () => setIsSetupModalOpen((prev) => !prev);
 
@@ -21,8 +27,9 @@ export default function ProfileSetupButton() {
         </Dots>
       </ProfileSetupButtonContainer>
       <ProfileSetupModal
-        isVisible={isSetupModalOpen}
-        onToggle={handleSetupModalToggle}
+        isSetupModalVisible={isSetupModalOpen}
+        isMine={isMine}
+        onSetupModalToggle={handleSetupModalToggle}
       />
     </>
   );
