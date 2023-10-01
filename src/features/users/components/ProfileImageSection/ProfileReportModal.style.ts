@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4px;
+  margin-bottom: 12px;
 `;
 
 export const Title = styled.h4`
