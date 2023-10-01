@@ -49,7 +49,7 @@ export const Rank = styled.div<RankProps>`
   `}
 `;
 
-export const Container = styled.section`
+export const AnimationRankingContainer = styled.section`
   width: 100%;
   display: inline-flex;
   flex-direction: column;

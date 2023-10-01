@@ -2,7 +2,7 @@ import { Star } from "iconoir-react";
 import { Link } from "react-router-dom";
 
 import {
-  Container,
+  AnimationCardContainer,
   Image,
   InfoContainer,
   Rating,
@@ -18,7 +18,7 @@ export default function AnimationCard({
   size?: "md" | "lg";
 }) {
   return (
-    <Container size={size}>
+    <AnimationCardContainer size={size}>
       <Link to={`/animations/${ani.id}`}>
         <Image image={ani.image} size={size} />
         <InfoContainer size={size}>
@@ -29,6 +29,6 @@ export default function AnimationCard({
           </Rating>
         </InfoContainer>
       </Link>
-    </Container>
+    </AnimationCardContainer>
   );
 }
