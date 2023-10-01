@@ -1,7 +1,12 @@
 import Button from "@/components/Button";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { Header, Container, Title, ReviewConainer } from "./RecentReview.style";
+import {
+  Header,
+  RecentReviewContainer,
+  Title,
+  ReviewConainer,
+} from "./RecentReview.style";
 
 const REVIEW_MOCK_DATA = {
   animation: {
@@ -17,7 +22,7 @@ const REVIEW_MOCK_DATA = {
 
 export default function RecentReview() {
   return (
-    <Container>
+    <RecentReviewContainer>
       <Header>
         <Title>최근 한줄리뷰</Title>
         <Button name="더보기" variant="text" size="sm" color="neutral">
@@ -34,6 +39,6 @@ export default function RecentReview() {
           />
         </ReviewCard>
       </ReviewConainer>
-    </Container>
+    </RecentReviewContainer>
   );
 }

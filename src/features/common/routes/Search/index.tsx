@@ -70,7 +70,7 @@ export default function Search() {
     <>
       <Head title="오덕 | 검색하기" />
 
-      <Container>
+      <SearchContainer>
         <Header>
           <Header.Center style={{ width: "100%" }}>
             <Searchbar
@@ -110,12 +110,12 @@ export default function Search() {
             ))}
           </ul>
         </Section>
-      </Container>
+      </SearchContainer>
     </>
   );
 }
 
-const Container = styled.main`
+const SearchContainer = styled.main`
   ${({ theme }) => theme.container}
   margin: 0 auto;
 

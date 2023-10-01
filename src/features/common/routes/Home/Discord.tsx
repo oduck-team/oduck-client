@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export default function Discord() {
   return (
-    <Container>
+    <DiscordContainer>
       <div>
         <span>오덕&nbsp;</span>
         <span>Discord</span>
@@ -22,11 +22,11 @@ export default function Discord() {
           fill="white"
         />
       </svg>
-    </Container>
+    </DiscordContainer>
   );
 }
 
-const Container = styled.div`
+const DiscordContainer = styled.div`
   width: calc(100% - 32px);
   height: 80px;
   margin: 0 auto;

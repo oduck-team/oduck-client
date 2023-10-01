@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -13,7 +12,6 @@ import AnimationSlide from "@/features/animations/components/AnimationSlide";
 import useAuth from "@/hooks/useAuth";
 
 import Discord from "./Discord";
-import NameModal from "./NameModal";
 import RecentReview from "./RecentReview";
 
 export default function Home() {
@@ -156,28 +154,16 @@ export default function Home() {
     CardAni2,
   ];
 
-  const { user, isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const [isNameModalVisible, setIsNameModalVisible] = useState(false);
 
   const handlerReviewButtonClick = () => {
     if (isLoggedIn) navigate("/search");
     else navigate("/login");
   };
 
-  // 닉네임 설정을 하지 않은 상태라면 닉네임 설정 모달창 띄움
-  useEffect(() => {
-    if (isLoggedIn && user.name[14] === "4") {
-      setIsNameModalVisible(true);
-    }
-  }, [user, isLoggedIn]);
-
   return (
-    <Container>
-      <NameModal
-        isVisible={isNameModalVisible}
-        onClose={() => setIsNameModalVisible(false)}
-      />
+    <HomeContainer>
       <AnimationCarousel animations={CarouselAni} />
       <AnimationRanking title="이번주 TOP10" contents={RankingAni} />
       <Discord />
@@ -191,11 +177,11 @@ export default function Home() {
           한줄리뷰 남기러가기
         </Button>
       </Bottom>
-    </Container>
+    </HomeContainer>
   );
 }
 
-const Container = styled.div`
+const HomeContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
