@@ -14,25 +14,55 @@ const CheckBoxSizes: Record<Size, SerializedStyles> = {
   `,
 };
 
-export const CheckboxContainer = styled.button<
-  Pick<CheckBoxProps, "size" | "checked">
->`
-  ${({ size = "md" }) => css`
-    ${CheckBoxSizes[size]}
-  `}
-  border-radius: 2px;
-  background: ${({ checked, theme }) =>
-    checked ? theme.colors.primary["60"] : "#ffffff"};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border: ${({ checked, theme }) =>
-    !checked ? `1px solid ${theme.colors.neutral["30"]}` : "none"};
+export const CheckboxContainer = styled.div<Pick<CheckBoxProps, "size">>`
+  position: relative;
+
+  & > input[type="checkbox"] {
+    border-radius: 2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+
+    ${({ size = "md" }) => css`
+      ${CheckBoxSizes[size]}
+    `}
+  }
+
+  & > svg {
+    ${({ size = "md" }) => css`
+      ${CheckBoxSizes[size]}
+    `}
+  }
+`;
+
+export const Input = styled.input`
+  position: absolute;
+  margin: 0;
+  background-color: ${({ theme }) => theme.colors.neutral["30"]};
+  border: 1px solid ${({ theme }) => theme.colors.neutral["30"]};
 
   &:disabled {
     background: ${({ theme }) => theme.colors.neutral["30"]};
     cursor: not-allowed;
+  }
+
+  &:checked {
+    background-color: ${({ theme }) => theme.colors.primary["60"]};
+    border: none;
+  }
+
+  & + svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: auto;
+    pointer-events: none;
+    scale: 0.9;
+    opacity: 0;
+  }
+
+  &:checked + svg {
+    opacity: 1;
   }
 `;
