@@ -1,7 +1,7 @@
 import Chip from "@/components/Chip";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { Section } from ".";
+import { Section } from "./Reviews.style";
 
 const REVIEW_MOCK_DATA = {
   user: {
@@ -14,7 +14,7 @@ const REVIEW_MOCK_DATA = {
 
 export default function Reviews() {
   return (
-    <Section style={{ paddingBottom: "200px" }}>
+    <Section>
       <h1>한 줄 리뷰</h1>
       <p style={{ marginTop: "8px", marginBottom: "8px" }}>
         총 1,120명이 리뷰를 남겨 주셨어요
