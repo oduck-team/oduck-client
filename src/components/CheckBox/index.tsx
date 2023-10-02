@@ -1,6 +1,6 @@
-import { IconoirProvider, Check } from "iconoir-react";
+import { Check } from "@phosphor-icons/react";
 
-import { CheckboxContainer } from "./style";
+import { CheckboxContainer, Input } from "./style";
 
 export type Size = "lg" | "md";
 
@@ -8,30 +8,26 @@ export interface CheckBoxProps {
   size?: Size;
   checked?: boolean;
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
+  onChange?: (value: boolean) => void;
 }
 
 export default function CheckBox({
   disabled = false,
-  checked = false,
+  checked,
   onClick,
-  size,
+  onChange,
+  size = "md",
 }: CheckBoxProps) {
   return (
-    <IconoirProvider
-      iconProps={{
-        color: `${disabled ? "#9D9D9E" : "#ffffff"}`,
-        strokeWidth: 2,
-      }}
-    >
-      <CheckboxContainer
-        size={size}
-        onClick={onClick}
+    <CheckboxContainer size={size} onClick={onClick}>
+      <Input
+        type="checkbox"
         checked={checked}
         disabled={disabled}
-      >
-        {checked && <Check />}
-      </CheckboxContainer>
-    </IconoirProvider>
+        onChange={onChange ? (e) => onChange(e.target.checked) : undefined}
+      />
+      <Check aria-hidden color="#fff" weight="bold" />
+    </CheckboxContainer>
   );
 }
