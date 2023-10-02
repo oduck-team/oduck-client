@@ -16,6 +16,9 @@ const CheckBoxSizes: Record<Size, SerializedStyles> = {
 
 export const CheckboxContainer = styled.div<Pick<CheckBoxProps, "size">>`
   position: relative;
+  ${({ size = "md" }) => css`
+    ${CheckBoxSizes[size]}
+  `}
 
   & > input[type="checkbox"] {
     border-radius: 2px;
