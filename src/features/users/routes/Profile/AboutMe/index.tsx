@@ -9,10 +9,10 @@ import StatModal from "./StatModal";
 import { Introduce, NickName, SeeMoreButton, StatContainer } from "./style";
 
 const STAT_MOCK_DATA = [
-  { data: "12500", description: "리뷰" },
-  { data: "1000000", description: "스레드" },
-  { data: "123", description: "좋아요" },
-  { data: "7100", description: "포인트" },
+  { data: 12500, description: "리뷰" },
+  { data: 1000000, description: "스레드" },
+  { data: 123, description: "좋아요" },
+  { data: 7100, description: "포인트" },
 ];
 
 const USER_MOCK_DATA = { isMine: false };

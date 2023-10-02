@@ -6,7 +6,7 @@ import { ContentContainer, Data, Title, Section } from "./StatModal.style";
 const TITLE_LIST = ["한줄리뷰", "스레드", "받은 좋아요 수", "포인트"];
 
 interface StatItemProps {
-  data: string;
+  data: number;
   description: string;
 }
 
@@ -26,9 +26,9 @@ export default function StatModal({
       <Modal.Content>
         <ContentContainer>
           {items.map((item, index) => (
-            <Section key={index}>
+            <Section key={item.description}>
               <Title>{TITLE_LIST[index]}</Title>
-              <Data>{parseInt(item.data, 10).toLocaleString()}</Data>
+              <Data>{item.data.toLocaleString()}</Data>
             </Section>
           ))}
         </ContentContainer>
