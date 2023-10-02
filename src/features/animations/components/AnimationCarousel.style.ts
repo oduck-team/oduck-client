@@ -14,7 +14,7 @@ interface IndicatorProps {
   active: boolean;
 }
 
-export const Container = styled.div`
+export const AnimationCarouselContainer = styled.div`
   width: 100%;
   height: 545px;
   position: relative;

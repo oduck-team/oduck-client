@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import Header from "@/components/Layout/Header";
 
-import { Container as BaseContainer, Content } from "./Select.style";
+import { SelectContainer as BaseContainer, Content } from "./Select.style";
 
 export default function Success() {
   const navigate = useNavigate();
 
   return (
-    <Container>
+    <SuccessContainer>
       <Header>
         <Header.Left />
         <Header.Center>
@@ -34,10 +34,10 @@ export default function Success() {
           홈으로
         </Button>
       </Content>
-    </Container>
+    </SuccessContainer>
   );
 }
 
-const Container = styled(BaseContainer)`
+const SuccessContainer = styled(BaseContainer)`
   width: 100%;
 `;

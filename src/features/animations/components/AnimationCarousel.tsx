@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 
 import {
-  Container,
+  AnimationCarouselContainer,
   Background,
   Slides,
   Slide,
@@ -155,7 +155,7 @@ export default function AnimationCarousel({
   }, [currentSlide, width, animationsList.length]);
 
   return (
-    <Container ref={slideContainerRef}>
+    <AnimationCarouselContainer ref={slideContainerRef}>
       <Button
         name="이전"
         variant="text"
@@ -189,7 +189,7 @@ export default function AnimationCarousel({
         ))}
       </IndicatorContainer>
       <Background image={animationsList[currentSlide].image}></Background>
-    </Container>
+    </AnimationCarouselContainer>
   );
 }
 

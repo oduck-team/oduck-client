@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;

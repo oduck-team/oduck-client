@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 
-import { Buttons, Container, Content } from "./Select.style";
+import { Buttons, SelectContainer, Content } from "./Select.style";
 
 interface Props {
   inquiryTypeName: string[];
@@ -9,7 +9,7 @@ interface Props {
 
 export default function Select({ inquiryTypeName, onClick }: Props) {
   return (
-    <Container>
+    <SelectContainer>
       <Content>
         <div>
           <h1>어떤 문제를 해결해 드릴까요?</h1>
@@ -29,6 +29,6 @@ export default function Select({ inquiryTypeName, onClick }: Props) {
           ))}
         </Buttons>
       </Content>
-    </Container>
+    </SelectContainer>
   );
 }

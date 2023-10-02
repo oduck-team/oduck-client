@@ -44,7 +44,7 @@ export default function HelpDesk() {
   return (
     <>
       <Head title="오덕 | 고객센터" />
-      <Container>
+      <HelpDeskContainer>
         {success && <Success />}
         <Header>
           <Header.Left>
@@ -61,12 +61,12 @@ export default function HelpDesk() {
             setSuccess={setSuccess}
           />
         </Slide>
-      </Container>
+      </HelpDeskContainer>
     </>
   );
 }
 
-const Container = styled.div`
+const HelpDeskContainer = styled.div`
   width: 100%;
   height: 100%;
   padding-bottom: 66px;
