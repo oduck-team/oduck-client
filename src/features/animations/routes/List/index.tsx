@@ -105,7 +105,7 @@ export default function AnimationList() {
   };
 
   return (
-    <Container>
+    <AnimationListContainer>
       <Header>
         <Header.Left />
         <Header.Center>
@@ -238,11 +238,11 @@ export default function AnimationList() {
           </Actions>
         </BottomSheet.Footer>
       </BottomSheet>
-    </Container>
+    </AnimationListContainer>
   );
 }
 
-const Container = styled.div`
+const AnimationListContainer = styled.div`
   background-color: white;
   width: 100%;
   display: flex;

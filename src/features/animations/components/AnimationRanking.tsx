@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   HighlightItem,
   HighlightItemContainer,
-  Container,
+  AnimationRankingContainer,
   Content,
   Rank,
   ItemSlider,
@@ -44,7 +44,7 @@ export default function AnimationRanking({
   }, [contents, currentIndex]);
 
   return (
-    <Container>
+    <AnimationRankingContainer>
       <h1>{title}</h1>
       <Content>
         <HighlightItemContainer>
@@ -72,6 +72,6 @@ export default function AnimationRanking({
           ))}
         </ItemSlider>
       </Content>
-    </Container>
+    </AnimationRankingContainer>
   );
 }
