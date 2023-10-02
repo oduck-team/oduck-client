@@ -1,12 +1,12 @@
-import styled from "@emotion/styled";
-import { Search as SearchIcon } from "iconoir-react";
-import { ComponentProps, useState } from "react";
+import { useState } from "react";
 
-import Button from "@/components/Button";
 import Chip from "@/components/Chip";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
 import AnimationCard from "@/features/animations/components/AnimationCard";
+
+import Searchbar from "./Searchbar";
+import { SearchContainer, Section } from "./style";
 
 const 최근_많이_검색된 = [
   "판타지",
@@ -114,122 +114,3 @@ export default function Search() {
     </>
   );
 }
-
-const SearchContainer = styled.main`
-  ${({ theme }) => theme.container}
-  margin: 0 auto;
-
-  & > h1 {
-    display: none;
-  }
-`;
-
-interface SearchbarProps extends ComponentProps<"div"> {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
-  onCancel: () => void;
-}
-
-function Searchbar({
-  value,
-  onChange,
-  onSearch,
-  onCancel,
-  ...props
-}: SearchbarProps) {
-  const isButtonVisible = value.length > 0;
-  return (
-    <SearchbarContainer isButtonVisible={isButtonVisible} {...props}>
-      <SearchIcon height={20} width={20} />
-      <form action="/search" onSubmit={onSearch}>
-        <label htmlFor="search">검색</label>
-        <input
-          id="search"
-          type="text"
-          placeholder="검색어를 입력해주세요"
-          value={value}
-          onChange={onChange}
-        />
-        {isButtonVisible && (
-          <Button
-            name="검색취소"
-            variant="text"
-            size="sm"
-            style={{
-              minWidth: "fit-content",
-              marginLeft: "8px",
-              paddingLeft: "0",
-              paddingRight: 0,
-            }}
-            onClick={onCancel}
-          >
-            취소
-          </Button>
-        )}
-      </form>
-    </SearchbarContainer>
-  );
-}
-
-const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
-  position: relative;
-  width: 100%;
-
-  & > svg {
-    position: absolute;
-    top: 10px;
-    left: 8px;
-    color: ${({ theme }) => theme.colors.neutral["60"]};
-  }
-
-  & form {
-    display: flex;
-    align-items: center;
-  }
-
-  & label {
-    display: none;
-  }
-
-  & input[type="text"] {
-    display: inline-flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    padding-left: 36px;
-    padding-right: 16px;
-    background-color: ${({ theme }) => theme.colors.neutral["10"]};
-    border: none;
-    border-radius: 5px;
-
-    /* Chrome, Firefox, Opera, Safari 10.1+ */
-    ::placeholder {
-      color: ${({ theme }) => theme.colors.neutral["50"]};
-    }
-
-    /* Internet Explorer 10-11 */
-    :-ms-input-placeholder {
-      color: ${({ theme }) => theme.colors.neutral["50"]};
-    }
-
-    /* Microsoft Edge */
-    ::-ms-input-placeholder {
-      color: ${({ theme }) => theme.colors.neutral["50"]};
-    }
-
-    &:focus {
-      outline: none;
-    }
-  }
-`;
-
-const Section = styled.section`
-  padding: 0 16px;
-
-  & > h1 {
-    ${({ theme }) => theme.typo["title-3-m"]}
-    color: ${({ theme }) => theme.colors.neutral["80"]};
-    margin-bottom: 8px;
-  }
-`;

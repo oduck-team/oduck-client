@@ -1,8 +1,9 @@
 import Button from "@/components/Button";
+import useForm from "@/features/common/hooks/useForm";
 
-import { Content, FormItem, FormTextInput, FormTextarea } from "./Form.style";
-import { SelectContainer as FormContainer } from "./Select.style";
-import useForm from "./useForm";
+import { SelectContainer as FormContainer } from "../Select/style";
+
+import { Content, FormItem, FormTextInput, FormTextarea } from "./style";
 
 interface Props {
   goPrev: () => void;

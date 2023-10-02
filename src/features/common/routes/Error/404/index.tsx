@@ -4,7 +4,7 @@ import {
   ErrorImage,
   Message,
   HomeButton,
-} from "./404.style";
+} from "./style";
 
 export default function NotFound() {
   return (

@@ -1,12 +1,7 @@
 import Button from "@/components/Button";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import {
-  Header,
-  RecentReviewContainer,
-  Title,
-  ReviewConainer,
-} from "./RecentReview.style";
+import { Header, RecentReviewContainer, Title, ReviewConainer } from "./style";
 
 const REVIEW_MOCK_DATA = {
   animation: {
