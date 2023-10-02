@@ -15,7 +15,7 @@ import {
   IndicatorContainer,
   Rating,
   Review,
-} from "./AnimationCarousel.style";
+} from "./style";
 
 export interface Animation {
   id: string;

@@ -1,6 +1,7 @@
-import AnimationCard from "./AnimationCard";
-import { Animation } from "./AnimationCarousel";
-import { CardSlider, AnimationSlideContainer } from "./AnimationSlide.style";
+import AnimationCard from "../AnimationCard";
+import { Animation } from "../AnimationCarousel";
+
+import { CardSlider, AnimationSlideContainer } from "./style";
 
 interface AnimationSlideProps {
   title: string;

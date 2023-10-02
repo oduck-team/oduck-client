@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 
-import { Buttons, SelectContainer, Content } from "./Select.style";
+import { Buttons, SelectContainer, Content } from "./style";
 
 interface Props {
   inquiryTypeName: string[];

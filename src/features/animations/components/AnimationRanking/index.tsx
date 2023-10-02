@@ -12,7 +12,7 @@ import {
   SliderItem,
   SliderItemImage,
   SliderItemRating,
-} from "./AnimationRanking.style";
+} from "./style";
 
 // 임시 정의
 export interface IRanking {
