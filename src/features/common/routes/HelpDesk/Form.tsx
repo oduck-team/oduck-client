@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
 
 import { Content, FormItem, FormTextInput, FormTextarea } from "./Form.style";
-import { Container } from "./Select.style";
+import { SelectContainer as FormContainer } from "./Select.style";
 import useForm from "./useForm";
 
 interface Props {
@@ -14,7 +14,7 @@ export default function Form({ setSuccess }: Props) {
   const { form, error, handleInputChange, errorMessage, send } = useForm();
 
   return (
-    <Container>
+    <FormContainer>
       <Content>
         <FormItem>
           <h4>보내는 사람</h4>
@@ -64,6 +64,6 @@ export default function Form({ setSuccess }: Props) {
           보내기
         </Button>
       </Content>
-    </Container>
+    </FormContainer>
   );
 }

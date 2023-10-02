@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { ButtonContainer as BaseButton } from "@/components/Button/style";
 
-export const Container = styled.main`
+export const NotFoundContainer = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;

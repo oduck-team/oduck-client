@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.section`
+export const RecentReviewContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;

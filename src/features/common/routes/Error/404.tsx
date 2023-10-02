@@ -1,5 +1,5 @@
 import {
-  Container,
+  NotFoundContainer,
   Content,
   ErrorImage,
   Message,
@@ -8,7 +8,7 @@ import {
 
 export default function NotFound() {
   return (
-    <Container>
+    <NotFoundContainer>
       <Content>
         <div>
           <ErrorImage src="/logo/logo-empty.png" alt="error" />
@@ -20,6 +20,6 @@ export default function NotFound() {
           </HomeButton>
         </div>
       </Content>
-    </Container>
+    </NotFoundContainer>
   );
 }

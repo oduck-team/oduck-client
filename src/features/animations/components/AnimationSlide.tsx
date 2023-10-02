@@ -1,6 +1,6 @@
 import AnimationCard from "./AnimationCard";
 import { Animation } from "./AnimationCarousel";
-import { CardSlider, Container } from "./AnimationSlide.style";
+import { CardSlider, AnimationSlideContainer } from "./AnimationSlide.style";
 
 interface AnimationSlideProps {
   title: string;
@@ -12,13 +12,13 @@ export default function AnimationSlide({
   animations,
 }: AnimationSlideProps) {
   return (
-    <Container>
+    <AnimationSlideContainer>
       <h1>{title}</h1>
       <CardSlider>
         {animations.map((ani, i) => (
           <AnimationCard ani={ani} key={i} />
         ))}
       </CardSlider>
-    </Container>
+    </AnimationSlideContainer>
   );
 }
