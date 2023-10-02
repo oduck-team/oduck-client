@@ -1,12 +1,12 @@
 import {
-  Cancel,
-  HeadsetHelp,
-  LogOut,
-  Megaphone,
-  PeopleTag,
-  ProfileCircle,
-  Tv,
-} from "iconoir-react";
+  Headset,
+  MegaphoneSimple,
+  SignOut,
+  TelevisionSimple,
+  User,
+  UserCircle,
+  X,
+} from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 
 import useAuth from "@/hooks/useAuth";
@@ -24,13 +24,13 @@ const userMenuItems: NavItem[] = [
     id: "profile",
     title: "프로필",
     to: "/profile",
-    icon: <PeopleTag />,
+    icon: <User />,
   },
   {
     id: "bookmark",
     title: "입덕 애니",
     to: "/my-animations",
-    icon: <Tv />,
+    icon: <TelevisionSimple />,
   },
 ];
 
@@ -39,13 +39,13 @@ const helpMenuItems: NavItem[] = [
     id: "notice",
     title: "공지사항",
     to: "/notices",
-    icon: <Megaphone />,
+    icon: <MegaphoneSimple />,
   },
   {
     id: "helpdesk",
     title: "고객센터",
     to: "/helpdesk",
-    icon: <HeadsetHelp />,
+    icon: <Headset />,
   },
 ];
 
@@ -87,7 +87,7 @@ export default function Sidebar({
       isVisible={isVisible}
       title={
         <Button
-          icon={<Cancel />}
+          icon={<X />}
           name="메뉴 닫기"
           variant="text"
           color="neutral"
@@ -112,7 +112,7 @@ export default function Sidebar({
         {!isLoggedIn && (
           <>
             <Profile to="/login">
-              <ProfileCircle height={56} width={56} color="#ccc" />
+              <UserCircle size={56} weight="fill" color="#ccc" />
               <NeedLogin>로그인이 필요해요</NeedLogin>
             </Profile>
           </>
@@ -139,7 +139,7 @@ export default function Sidebar({
                 id: "logout",
                 title: "로그아웃",
                 to: "/logout",
-                icon: <LogOut />,
+                icon: <SignOut />,
               }}
               onClick={handleLogout}
             ></Navigation.Item>

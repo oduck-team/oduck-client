@@ -1,4 +1,4 @@
-import { NavArrowLeft } from "iconoir-react";
+import { CaretLeft } from "@phosphor-icons/react";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
@@ -22,7 +22,7 @@ export default function Login() {
         <Header.Left>
           <Button
             name="뒤로가기"
-            icon={<NavArrowLeft aria-hidden />}
+            icon={<CaretLeft aria-hidden />}
             variant="text"
             color="neutral"
             onClick={handleClickBack}

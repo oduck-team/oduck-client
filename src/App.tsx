@@ -1,5 +1,5 @@
 import { ThemeProvider, Global, css } from "@emotion/react";
-import { IconoirProvider } from "iconoir-react";
+import { IconContext } from "@phosphor-icons/react";
 import { Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { RouterProvider } from "react-router-dom";
@@ -14,9 +14,9 @@ export default function App() {
   return (
     <HelmetProvider>
       <ThemeProvider theme={theme}>
-        <IconoirProvider
-          iconProps={{
-            strokeWidth: 1.5,
+        <IconContext.Provider
+          value={{
+            size: 24,
           }}
         >
           <Global
@@ -37,7 +37,7 @@ export default function App() {
               <RouterProvider router={router} />
             </Suspense>
           </AuthProvider>
-        </IconoirProvider>
+        </IconContext.Provider>
       </ThemeProvider>
     </HelmetProvider>
   );

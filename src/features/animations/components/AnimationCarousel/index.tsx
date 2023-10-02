@@ -1,4 +1,4 @@
-import { NavArrowLeft, NavArrowRight, Star } from "iconoir-react";
+import { CaretLeft, CaretRight, Star } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -161,7 +161,7 @@ export default function AnimationCarousel({
         variant="text"
         color="neutral"
         size="lg"
-        icon={<NavArrowLeft />}
+        icon={<CaretLeft />}
         onClick={goPrev}
       />
       <Button
@@ -169,7 +169,7 @@ export default function AnimationCarousel({
         variant="text"
         color="neutral"
         size="lg"
-        icon={<NavArrowRight />}
+        icon={<CaretRight />}
         onClick={goNext}
       />
       <Slides
@@ -203,7 +203,7 @@ function SlideItem({ ani }: { ani: Animation }) {
           <Review>
             <span>{ani.review}</span>
             <Rating>
-              <Star />
+              <Star weight="fill" />
               <span> {ani.rating}</span>
             </Rating>
           </Review>

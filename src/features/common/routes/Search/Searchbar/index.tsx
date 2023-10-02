@@ -1,4 +1,4 @@
-import { Search as SearchIcon } from "iconoir-react";
+import { MagnifyingGlass } from "@phosphor-icons/react";
 import { ComponentProps } from "react";
 
 import Button from "@/components/Button";
@@ -22,7 +22,7 @@ export default function Searchbar({
   const isButtonVisible = value.length > 0;
   return (
     <SearchbarContainer isButtonVisible={isButtonVisible} {...props}>
-      <SearchIcon height={20} width={20} />
+      <MagnifyingGlass size={20} />
       <form action="/search" onSubmit={onSearch}>
         <label htmlFor="search">검색</label>
         <input

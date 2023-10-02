@@ -1,4 +1,4 @@
-import { Filter as FilterIcon } from "iconoir-react";
+import { SlidersHorizontal } from "@phosphor-icons/react";
 
 import Header from "@/components/Layout/Header";
 import AnimationCard from "@/features/animations/components/AnimationCard";
@@ -8,6 +8,7 @@ import { useFilterAnimations } from "../../hooks/useFilterAnimations";
 
 import Filter from "./Filter";
 import { AnimationListContainer, Tabs, Content } from "./style";
+import Button from "@/components/Button";
 
 export default function AnimationList() {
   const {
@@ -61,7 +62,13 @@ export default function AnimationList() {
           <h1>애니</h1>
         </Header.Center>
         <Header.Right>
-          <FilterIcon onClick={bottomSheetOpen} />
+          <Button
+            name="필터"
+            icon={<SlidersHorizontal />}
+            variant="text"
+            color="neutral"
+            onClick={bottomSheetOpen}
+          ></Button>
         </Header.Right>
       </Header>
       <Tabs items={TabItems} defaultActiveId={1} />
