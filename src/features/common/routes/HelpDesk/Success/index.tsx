@@ -1,10 +1,11 @@
-import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Header from "@/components/Layout/Header";
 
-import { SelectContainer as BaseContainer, Content } from "./Select.style";
+import { Content } from "../Select/style";
+
+import { SuccessContainer } from "./style";
 
 export default function Success() {
   const navigate = useNavigate();
@@ -37,7 +38,3 @@ export default function Success() {
     </SuccessContainer>
   );
 }
-
-const SuccessContainer = styled(BaseContainer)`
-  width: 100%;
-`;

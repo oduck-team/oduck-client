@@ -1,14 +1,15 @@
 import { Star } from "iconoir-react";
 import { Link } from "react-router-dom";
 
+import { Animation } from "../AnimationCarousel";
+
 import {
   AnimationCardContainer,
   Image,
   InfoContainer,
   Rating,
   Title,
-} from "./AnimationCard.style";
-import { Animation } from "./AnimationCarousel";
+} from "./style";
 
 export default function AnimationCard({
   ani,
