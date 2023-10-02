@@ -52,9 +52,9 @@ export default function Hero({ anime }: AnimationHeroProps) {
         <Stat
           variant="primary"
           items={[
-            { title: "별점", data: "★  4.8" },
-            { title: "한줄리뷰", data: "111" },
-            { title: "덕후", data: "1111" },
+            { title: "별점", data: `★ 4.8` },
+            { title: "한줄리뷰", data: 111 },
+            { title: "덕후", data: 1111 },
             { title: "방영년도", data: "2023" },
           ]}
           style={{ margin: "0 auto" }}

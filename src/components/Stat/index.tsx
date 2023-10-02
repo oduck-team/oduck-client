@@ -4,7 +4,7 @@ import { StatContainer, Content, Title, Data, Description } from "./style";
 
 interface StatItemProps {
   title?: string;
-  data?: string;
+  data?: number | string;
   description?: string;
 }
 
@@ -21,19 +21,20 @@ export default function Stat({
   variant = "primary",
   ...props
 }: StatProps) {
-  //TODO: data type 정해지면 변경
-  const compactNumber = (data: string) =>
-    Intl.NumberFormat("en-US", {
+  const compactNumber = (data: string | number) => {
+    if (typeof data === "string") return data;
+
+    return Intl.NumberFormat("en-US", {
       notation: "compact",
       maximumFractionDigits: 1,
-    }).format(parseInt(data, 10));
+    }).format(data);
+  };
 
   return (
     <StatContainer variant={variant} {...props}>
-      {/* TODO: key={idx} 처리 */}
-      {items.map((item, idx) => {
+      {items.map((item) => {
         return (
-          <Content key={idx} variant={variant}>
+          <Content key={item.title} variant={variant}>
             {item.title && <Title>{item.title}</Title>}
             {item.data && (
               <Data className="stat-data">{compactNumber(item.data)}</Data>
