@@ -36,4 +36,5 @@ export const ReportSucessMessage = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  z-index: ${({ theme }) => theme.zIndex.modal};
 `;
