@@ -51,7 +51,6 @@ export const Message = styled.div`
 
 export const TextareaContainer = styled.div`
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
 `;
