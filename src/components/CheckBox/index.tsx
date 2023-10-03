@@ -6,14 +6,16 @@ export type Size = "lg" | "md";
 
 export interface CheckBoxProps {
   size?: Size;
-  checked?: boolean;
+  name: string;
+  checked: boolean;
   disabled?: boolean;
   onClick?: () => void;
-  onChange?: (value: boolean) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function CheckBox({
   disabled = false,
+  name,
   checked,
   onClick,
   onChange,
@@ -23,9 +25,10 @@ export default function CheckBox({
     <CheckboxContainer size={size} onClick={onClick}>
       <Input
         type="checkbox"
+        name={name}
         checked={checked}
         disabled={disabled}
-        onChange={onChange ? (e) => onChange(e.target.checked) : undefined}
+        onChange={onChange}
       />
       <Check aria-hidden color="#fff" weight="bold" />
     </CheckboxContainer>
