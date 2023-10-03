@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 import BaseBackdrop from "../Backdrop";
 
-import { ModalActionsProps, ModalProps, Size } from "./";
+import { ModalProps, Size } from "./";
 
 const sizes: Record<Size, SerializedStyles> = {
   default: css`
@@ -46,20 +46,4 @@ export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
   ${({ size = "default" }) => css`
     ${sizes[size]}
   `};
-`;
-
-export const ContentContainer = styled.div`
-  padding: 16px 24px 12px 24px;
-`;
-
-export const ActionsContainer = styled.div<
-  Pick<ModalActionsProps, "direction">
->`
-  display: flex;
-  gap: 8px;
-  padding: 8px 16px 16px 16px;
-
-  ${({ direction = "row" }) => css`
-    flex-direction: ${direction === "row" ? "row" : "column"};
-  `}
 `;

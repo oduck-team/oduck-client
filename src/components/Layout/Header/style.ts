@@ -28,20 +28,3 @@ export const Contents = styled.div`
     cursor: pointer;
   }
 `;
-
-export const Left = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const Center = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Right = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: end;
-`;
