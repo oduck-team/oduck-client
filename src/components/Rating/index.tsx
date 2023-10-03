@@ -1,4 +1,4 @@
-import { Star } from "iconoir-react";
+import { Star } from "@phosphor-icons/react";
 import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import {
@@ -93,18 +93,18 @@ export default function Rating({
         />
       )}
       <BackStarContainer>
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
       </BackStarContainer>
       <ColorStarContainer width={rating * 10} color={color}>
-        <Star />
-        <Star />
-        <Star />
-        <Star />
-        <Star />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
+        <Star weight="fill" />
       </ColorStarContainer>
     </RatingContainer>
   );

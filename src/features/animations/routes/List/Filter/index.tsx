@@ -1,4 +1,4 @@
-import { Cancel } from "iconoir-react";
+import { X } from "@phosphor-icons/react";
 
 import BottomSheet from "@/components/BottomSheet";
 import Chip from "@/components/Chip";
@@ -46,7 +46,7 @@ export default function Filter({
                   active={filtered.includes(item)}
                   variant="filter"
                   onClick={() => handleOptionClick(item)}
-                  icon={<Cancel />}
+                  icon={<X weight="bold" />}
                 >
                   {item}
                 </Chip>

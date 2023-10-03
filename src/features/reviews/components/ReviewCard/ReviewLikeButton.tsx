@@ -1,4 +1,4 @@
-import { Heart } from "iconoir-react";
+import { Heart } from "@phosphor-icons/react";
 
 import { ReviewLikeButtonContainer } from "./ReviewLikeButton.style";
 

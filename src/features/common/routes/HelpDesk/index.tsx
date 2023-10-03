@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { NavArrowLeft } from "iconoir-react";
+import { CaretLeft } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -48,7 +48,7 @@ export default function HelpDesk() {
         {success && <Success />}
         <Header>
           <Header.Left>
-            <NavArrowLeft onClick={handlePrevClick} />
+            <CaretLeft onClick={handlePrevClick} />
           </Header.Left>
           <Header.Center>{headerTitle}</Header.Center>
         </Header>

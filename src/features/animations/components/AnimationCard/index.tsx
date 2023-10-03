@@ -1,4 +1,4 @@
-import { Star } from "iconoir-react";
+import { Star } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
 import { Animation } from "../AnimationCarousel";
@@ -25,7 +25,7 @@ export default function AnimationCard({
         <InfoContainer size={size}>
           <Title>{ani.title}</Title>
           <Rating>
-            <Star />
+            <Star weight="fill" />
             <span> {ani.rating}</span>
           </Rating>
         </InfoContainer>

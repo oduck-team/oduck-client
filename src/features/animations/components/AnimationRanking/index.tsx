@@ -1,4 +1,4 @@
-import { Star } from "iconoir-react";
+import { Star } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -56,7 +56,7 @@ export default function AnimationRanking({
             <h3>{contents[currentIndex].genre}</h3>
             <h2>{contents[currentIndex].title}</h2>
             <SliderItemRating>
-              <Star />
+              <Star weight="fill" />
               <span>{contents[currentIndex].rating}</span>
             </SliderItemRating>
           </HighlightItem>
