@@ -19,7 +19,9 @@ const USER_MOCK_DATA = { isMine: false };
 
 export default function AboutMe() {
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
+  const [isSeeMore, setIsSeeMore] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
+  const handleSeeMoreButtonToggle = () => setIsSeeMore((prev) => !prev);
 
   return (
     <>
@@ -34,12 +36,14 @@ export default function AboutMe() {
       </ProfileImageSection>
 
       <NickName>사용자닉네임</NickName>
-      <Introduce>
+      <Introduce isSeeMore={isSeeMore}>
         자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
         자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
         자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
       </Introduce>
-      <SeeMoreButton>더보기</SeeMoreButton>
+      <SeeMoreButton onClick={handleSeeMoreButtonToggle}>
+        {isSeeMore ? "접기" : "더보기"}
+      </SeeMoreButton>
 
       <StatContainer onClick={handleStatModalToggle}>
         <Stat variant="ghost" items={STAT_MOCK_DATA} />
