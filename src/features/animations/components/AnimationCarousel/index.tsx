@@ -36,6 +36,7 @@ export default function AnimationCarousel({
   const [translateValue, setTranslateValue] = useState(0); // 슬라이드 이동(translate)를 위해 사용
   const [transitionValue, setTransitionValue] = useState(0); // 슬라이드 이동 transition 값
   const touchStartX = useRef<number | null>(null); // 터치 start 좌표 값
+  const [diffX, setDiffX] = useState(0); // 터치 시작과 터치 종료 사이 좌표 거리
   const slideContainerRef = useRef<HTMLDivElement | null>(null); // 슬라이드 박스 가로 길이 측정에 사용됨
   const [width, setWidth] = useState<number | null>(null); // 슬라이드 박스 가로 길이
 
@@ -61,21 +62,23 @@ export default function AnimationCarousel({
     setTransitionValue(0);
     const touchCurrentX = e.touches[0].clientX;
     const diff = touchCurrentX - touchStartX.current;
+    setDiffX((prev) => prev + diff);
     setTranslateValue(translateValue + diff);
     touchStartX.current = touchCurrentX;
   };
 
   const handleTouchEnd = () => {
+    let newIndex = 0;
     if (width) {
       setTransitionValue(0.5);
-      const newIndex = Math.min(
-        Math.max(Math.round(-translateValue / width), 0),
-        animationsList.length - 1,
-      );
+      if (diffX > 20) newIndex = currentSlide - 1;
+      else if (diffX < -20) newIndex = currentSlide + 1;
+      else newIndex = currentSlide;
       setCurrentSlide(newIndex);
       setTranslateValue(width * -newIndex);
     }
     touchStartX.current = null;
+    setDiffX(0);
   };
 
   // 처음, 마지막 슬라이드일 때 수행
