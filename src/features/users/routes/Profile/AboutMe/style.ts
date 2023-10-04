@@ -8,15 +8,15 @@ export const NickName = styled.h3`
   color: ${({ theme }) => theme.colors.neutral[100]};
 `;
 
-export const Introduce = styled.p<{ isSeeMore: boolean }>`
+export const Introduce = styled.p<{ isReadMore: boolean }>`
   ${({ theme }) => theme.typo["body-2-r"]};
   color: ${({ theme }) => theme.colors.neutral[70]};
   width: 100%;
   margin-bottom: 4px;
   padding: 0 16px;
 
-  ${({ isSeeMore }) =>
-    !isSeeMore &&
+  ${({ isReadMore }) =>
+    isReadMore &&
     css`
       overflow: hidden;
       display: -webkit-box;
