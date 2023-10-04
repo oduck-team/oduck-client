@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 
-export const TabTitles = styled.ul`
+export const TabsContainer = styled.ul`
   display: flex;
 `;
-export const TabTitle = styled.li<{ active?: boolean }>`
+
+export const Tab = styled.li<{ active?: boolean }>`
   display: flex;
   width: 100%;
   padding: 14px 10px;

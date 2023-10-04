@@ -1,6 +1,8 @@
 import { SlidersHorizontal } from "@phosphor-icons/react";
 
+import Button from "@/components/Button";
 import Header from "@/components/Layout/Header";
+import { TabItem } from "@/components/Tabs";
 import AnimationCard from "@/features/animations/components/AnimationCard";
 import { Animation } from "@/features/animations/components/AnimationCarousel";
 
@@ -8,7 +10,21 @@ import { useFilterAnimations } from "../../hooks/useFilterAnimations";
 
 import Filter from "./Filter";
 import { AnimationListContainer, Tabs, Content } from "./style";
-import Button from "@/components/Button";
+
+const TabItems: TabItem[] = [
+  {
+    id: "latest",
+    title: "최신순",
+  },
+  {
+    id: "reviewCounts",
+    title: "리뷰순",
+  },
+  {
+    id: "ratings",
+    title: "평점순",
+  },
+];
 
 export default function AnimationList() {
   const {
@@ -21,24 +37,6 @@ export default function AnimationList() {
     resetFilter,
     handleOkClick,
   } = useFilterAnimations();
-
-  const TabItems = [
-    {
-      id: 1,
-      title: "최신순",
-      url: "/animations",
-    },
-    {
-      id: 2,
-      title: "리뷰순",
-      url: "?sort=review",
-    },
-    {
-      id: 3,
-      title: "평점순",
-      url: "?sort=rating",
-    },
-  ];
 
   const CardAni: Omit<Animation, "review"> = {
     id: "234567",
@@ -71,7 +69,7 @@ export default function AnimationList() {
           ></Button>
         </Header.Right>
       </Header>
-      <Tabs items={TabItems} defaultActiveId={1} />
+      <Tabs items={TabItems} defaultActiveId={"latest"} />
       <Content>
         <AnimationCard size="lg" ani={CardAni} />
         <AnimationCard size="lg" ani={CardAni2} />
