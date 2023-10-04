@@ -7,7 +7,7 @@ import Rating from "@/components/Rating";
 import SnackBar from "@/components/SnackBar";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import DropDownModal from "@/features/users/components/DropDownModal";
-import useDropDownModal from "@/features/users/components/DropDownModal/hooks/useDropDownModal";
+import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
 
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import DropDownModal from "../DropDownModal";
-import useDropDownModal from "../DropDownModal/hooks/useDropDownModal";
+import useDropDownModal from "../DropDownModal/useDropDownModal";
 
 import ProfileReportModal from "./ProfileReportModal";
 import {
