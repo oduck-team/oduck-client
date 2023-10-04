@@ -24,7 +24,7 @@ interface TabsProps {
   /**
    * tab 변경시 실행될 콜백
    */
-  onChagne?: (value: string) => void;
+  onChange?: (value: string) => void;
 }
 
 export default function Tabs({
@@ -32,15 +32,15 @@ export default function Tabs({
   items,
   style,
   className = "",
-  onChagne,
+  onChange,
 }: TabsProps) {
   const [currentId, setCurrentId] = useState(defaultActiveId ?? items[0].id);
 
   const handleClick = (value: string) => {
     setCurrentId(value);
 
-    if (onChagne) {
-      onChagne(value);
+    if (onChange) {
+      onChange(value);
     }
   };
 
