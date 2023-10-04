@@ -1,52 +1,62 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-import { TabTitle, TabTitles } from "./style";
+import { TabsContainer, Tab } from "./style";
 
-interface ItemProps {
-  id: number;
+export interface TabItem {
+  /**
+   * tab item unique ID
+   */
+  id: string;
+  /**
+   * tab item 제목
+   */
   title?: string;
-  children?: React.ReactNode;
-  url?: string;
-  onClick?: () => void;
 }
 
 interface TabsProps {
-  defaultActiveId?: number;
-  items: ItemProps[];
+  /**
+   * 기본 활성화될 tab item ID
+   */
+  defaultActiveId?: string;
+  items: TabItem[];
   style?: React.CSSProperties;
   className?: string;
+  /**
+   * tab 변경시 실행될 콜백
+   */
+  onChagne?: (value: string) => void;
 }
 
 export default function Tabs({
-  defaultActiveId = 1,
+  defaultActiveId,
   items,
   style,
   className = "",
+  onChagne,
 }: TabsProps) {
-  const [tabIndex, setTabIndex] = useState<number>(defaultActiveId - 1);
-  const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState(defaultActiveId ?? items[0].id);
 
-  const handleClick = (v: ItemProps) => {
-    if (v.url) navigate(v.url);
-    if (v.onClick) v.onClick();
-    setTabIndex(v.id - 1);
+  const handleClick = (value: string) => {
+    setCurrentId(value);
+
+    if (onChagne) {
+      onChagne(value);
+    }
   };
 
   return (
-    <div style={style} className={className}>
-      <TabTitles>
-        {items.map((v, idx) => (
-          <TabTitle
-            key={idx}
-            onClick={() => handleClick(v)}
-            active={idx === tabIndex}
+    <>
+      <TabsContainer style={style} className={className}>
+        {items.map((item) => (
+          <Tab
+            key={item.id}
+            onClick={() => handleClick(item.id)}
+            active={item.id === currentId}
           >
-            {v.title}
-          </TabTitle>
+            {item.title}
+          </Tab>
         ))}
-      </TabTitles>
-      <div>{items[tabIndex].children}</div>
-    </div>
+      </TabsContainer>
+    </>
   );
 }
