@@ -26,15 +26,15 @@ export default function ProfileReportModal({
   isVisible,
   onClose,
 }: ProfileReportModalProps) {
-  const { isSnackBarOpen, openSnackBar, removeSnackBarAfter } = useSnackBar();
+  const { snackBarRef, showSnackBar } = useSnackBar();
+
   const [selected, setSelected] = useState(OPTION[0].value);
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSelected(e.target.value);
   const handleReportSumbit = () => {
     onClose();
-    openSnackBar();
+    showSnackBar();
     setSelected(OPTION[0].value);
-    removeSnackBarAfter(2000);
   };
 
   return (
@@ -74,7 +74,7 @@ export default function ProfileReportModal({
           </Button>
         </Modal.Actions>
       </Modal>
-      {isSnackBarOpen && <SnackBar text="신고가 접수되었습니다" />}
+      <SnackBar ref={snackBarRef} text="신고가 접수되었습니다" />
     </>
   );
 }
