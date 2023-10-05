@@ -13,6 +13,7 @@ const AnimationDetail = lazy(
 );
 const Search = lazy(() => import("@/features/common/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
+const NoticeList = lazy(() => import("@/features/notices/routes/List"));
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const NotFound = lazy(() => import("@/features/common/routes/Error/404"));
 const ServerError = lazy(() => import("@/features/common/routes/Error/500"));
@@ -49,6 +50,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: "/helpdesk",
         element: <HelpDesk />,
+      },
+      {
+        path: "/notices",
+        element: <NoticeList />,
       },
       {
         path: "/users/:id",
