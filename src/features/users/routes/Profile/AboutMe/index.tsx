@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Stat from "@/components/Stat";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
+import useIntroduceReadMore from "@/features/users/hooks/useIntroduceReadMore";
 
 import ProfileImageSection from "../../../components/ProfileImageSection";
 
@@ -14,10 +15,17 @@ const STAT_MOCK_DATA = [
   { data: 123, description: "좋아요" },
   { data: 7100, description: "포인트" },
 ];
-
 const USER_MOCK_DATA = { isMine: false };
+const INTRODUCE_MOCK_DATA =
+  "자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개";
 
 export default function AboutMe() {
+  const {
+    isReadMore,
+    isShowReadMoreButton,
+    getIntroduceText,
+    handleSeeMoreButtonToggle,
+  } = useIntroduceReadMore(INTRODUCE_MOCK_DATA);
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
 
@@ -34,12 +42,13 @@ export default function AboutMe() {
       </ProfileImageSection>
 
       <NickName>사용자닉네임</NickName>
-      <Introduce>
-        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
-        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
-        자기소개가 들어갈 자리! 자기소개가 들어갈 자리! 자기소개가 들어갈 자리!
-      </Introduce>
-      <SeeMoreButton>더보기</SeeMoreButton>
+      <Introduce isReadMore={isReadMore}>{getIntroduceText}</Introduce>
+
+      {isShowReadMoreButton && (
+        <SeeMoreButton onClick={handleSeeMoreButtonToggle}>
+          {isReadMore ? "더보기" : "접기"}
+        </SeeMoreButton>
+      )}
 
       <StatContainer onClick={handleStatModalToggle}>
         <Stat variant="ghost" items={STAT_MOCK_DATA} />
