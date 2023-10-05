@@ -11,12 +11,10 @@ export const AnimationListContainer = styled.div`
 `;
 
 export const Tabs = styled(BaseTabs)`
-  ul {
-    width: 100%;
-    max-width: 600px;
-    position: fixed;
-    top: 60px;
-  }
+  width: 100%;
+  max-width: 600px;
+  position: sticky;
+  top: 60px;
 `;
 
 export const Content = styled.div`
@@ -24,5 +22,5 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 74px 16px 24px;
+  padding: 24px 16px;
 `;
