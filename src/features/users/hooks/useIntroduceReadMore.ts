@@ -30,5 +30,11 @@ export default function useIntroduceReadMore(text: string) {
 }
 
 function setTextLimitByBrowserWidth() {
-  return window.innerWidth >= 500 ? 80 : 50;
+  let textLimit;
+
+  if (window.innerWidth >= 500) textLimit = 80;
+  else if (window.innerWidth > 320) textLimit = 50;
+  else textLimit = 30;
+
+  return textLimit;
 }
