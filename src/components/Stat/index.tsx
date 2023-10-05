@@ -32,9 +32,9 @@ export default function Stat({
 
   return (
     <StatContainer variant={variant} {...props}>
-      {items.map((item) => {
+      {items.map((item, index) => {
         return (
-          <Content key={item.title} variant={variant}>
+          <Content key={index} variant={variant}>
             {item.title && <Title>{item.title}</Title>}
             {item.data && (
               <Data className="stat-data">{compactNumber(item.data)}</Data>
