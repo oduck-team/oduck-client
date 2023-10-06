@@ -36,7 +36,7 @@ export const AttractionPointSection = styled.div`
   }
 
   & span {
-    color: ${({ theme }) => theme.colors.secondary["70"]};
+    color: ${({ theme }) => theme.colors.primary["60"]};
   }
 `;
 

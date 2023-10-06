@@ -24,5 +24,5 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  padding: 74px 16px 24px;
+  padding: 24px 16px;
 `;

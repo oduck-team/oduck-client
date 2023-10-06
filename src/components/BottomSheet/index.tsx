@@ -79,7 +79,7 @@ export default function BottomSheet({
         dragConstraints={{ top: 0, bottom: 0 }}
         dragListener={false}
         dragControls={dragControls}
-        dragElastic={0.2} // 외부 제약을 허용하는 조건(제약 범위를 벗어날수록 돌아가려는 움직임의 정도)
+        dragElastic={0.5} // 외부 제약을 허용하는 조건(제약 범위를 벗어날수록 돌아가려는 움직임의 정도)
         onDrag={handleDrag}
         onDragEnd={handleDragEnd}
         onClick={(e) => e.stopPropagation()}

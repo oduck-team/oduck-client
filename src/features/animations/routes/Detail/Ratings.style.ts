@@ -1,5 +1,28 @@
 import styled from "@emotion/styled";
 
+export const AverageRatings = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+`;
+
+export const AverageRatingsOverview = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+
+  & > span {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -1.6px;
+
+    & > svg {
+      color: ${({ theme }) => theme.colors.secondary["50"]};
+    }
+  }
+`;
+
 export const AttractionPoint = styled.div`
   display: flex;
   flex-direction: column;
