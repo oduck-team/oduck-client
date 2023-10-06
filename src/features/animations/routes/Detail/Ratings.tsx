@@ -1,7 +1,11 @@
+import { Star } from "@phosphor-icons/react";
+
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
 
 import {
+  AverageRatings,
+  AverageRatingsOverview,
   AttractionPoint,
   AttractionPointLabel,
   AttractionPointRatio,
@@ -13,17 +17,13 @@ export default function Ratings() {
   return (
     <Section>
       <h1>평점</h1>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "center", gap: "8px" }}>
-          <span style={{ fontSize: "32px" }}>😆</span>
-          <span style={{ fontSize: "32px", fontWeight: "bold" }}>4.2</span>
-        </div>
+      <AverageRatings>
+        <AverageRatingsOverview>
+          <span>
+            <Star size={36} weight="fill" />
+          </span>
+          <span>4.2</span>
+        </AverageRatingsOverview>
         <Rating
           readonly
           style={{
@@ -32,7 +32,7 @@ export default function Ratings() {
             marginLeft: "auto",
           }}
         />
-      </div>
+      </AverageRatings>
 
       <AttractionPoint>
         <h2>입덕포인트</h2>
