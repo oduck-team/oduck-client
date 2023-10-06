@@ -4,7 +4,7 @@ export const AttractionPointContainer = styled.label<{ isChecked: boolean }>`
   ${({ theme }) => theme.typo["body-3-r"]}
   display: flex;
   align-items: center;
-  height: 32px;
+  height: 40px;
   padding-left: 16px;
   background-color: ${({ theme, isChecked }) =>
     isChecked ? theme.colors.primary["50"] : theme.colors.neutral["05"]};
