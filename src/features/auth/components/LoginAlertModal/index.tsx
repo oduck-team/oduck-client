@@ -7,14 +7,10 @@ import useRedirect from "@/hooks/useRedirect";
 import { Text } from "./style";
 
 interface LoginAlertModalProps {
-  isVisible: boolean;
   onClose: () => void;
 }
 
-export default function LoginAlertModal({
-  isVisible,
-  onClose,
-}: LoginAlertModalProps) {
+export default function LoginAlertModal({ onClose }: LoginAlertModalProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const { setRedirect } = useRedirect();
@@ -29,7 +25,7 @@ export default function LoginAlertModal({
 
   return (
     <>
-      <Modal isVisible={isVisible} size="md" onClose={onClose}>
+      <Modal size="md" onClose={onClose}>
         <Modal.Content>
           <Text>로그인이 필요해요</Text>
         </Modal.Content>

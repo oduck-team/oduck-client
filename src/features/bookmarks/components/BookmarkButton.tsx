@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import Button from "@/components/Button";
@@ -59,10 +60,12 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
       >
         {isBookmarked ? "입덕한 애니" : "입덕하기"}
       </Button>
-      <LoginAlertModal
-        isVisible={isLoginModalVisible}
-        onClose={() => setIsLoginModalVisible(false)}
-      />
+
+      <AnimatePresence>
+        {isLoginModalVisible && (
+          <LoginAlertModal onClose={() => setIsLoginModalVisible(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
