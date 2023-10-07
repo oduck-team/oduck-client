@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import Rating from "@/components/Rating";
@@ -42,15 +43,23 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
         </ReviewRecommend>
       )}
       {hasReviewed && "TODO: 사용자 리뷰 렌더링 "}
-      <ShortReviewModal
-        isVisible={isReviewModalVisible}
-        onClose={() => setIsReviewModalVisible(false)}
-        onReview={() => setIsReviewModalVisible(false)}
-      />
-      <LoginAlertModal
-        isVisible={isLoginModalVisible}
-        onClose={() => setIsLoginModalVisible(false)}
-      />
+
+      <AnimatePresence>
+        {isReviewModalVisible && (
+          <ShortReviewModal
+            key="ShortReviewModal"
+            onClose={() => setIsReviewModalVisible(false)}
+            onReview={() => setIsReviewModalVisible(false)}
+          />
+        )}
+
+        {isLoginModalVisible && (
+          <LoginAlertModal
+            key="LoginAlertModal"
+            onClose={() => setIsLoginModalVisible(false)}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

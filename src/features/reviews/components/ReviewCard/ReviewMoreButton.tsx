@@ -97,23 +97,25 @@ export default function ReviewMoreButton() {
             </DropDownModal.Button>
           </DropDownModal>
         )}
-      </AnimatePresence>
 
-      {/* <ShortReviewModal
-        isVisible={isReviewModalVisible}
-        onClose={() => setIsReviewModalVisible(false)}
-        onReview={() => setIsReviewModalVisible(false)}
-        userReviewData={USER_MOCK_REVIEW_DATA}
-      >
-        <MyRating>내 별점</MyRating>
-        <RatingContainer>
-          <Rating
-            size="lg"
-            onRate={handleRate}
-            value={USER_MOCK_REVIEW_DATA.score}
-          />
-        </RatingContainer>
-      </ShortReviewModal> */}
+        {isReviewModalVisible && (
+          <ShortReviewModal
+            key="ShortReviewModal"
+            onClose={() => setIsReviewModalVisible(false)}
+            onReview={() => setIsReviewModalVisible(false)}
+            userReviewData={USER_MOCK_REVIEW_DATA}
+          >
+            <MyRating>내 별점</MyRating>
+            <RatingContainer>
+              <Rating
+                size="lg"
+                onRate={handleRate}
+                value={USER_MOCK_REVIEW_DATA.score}
+              />
+            </RatingContainer>
+          </ShortReviewModal>
+        )}
+      </AnimatePresence>
 
       <SnackBar ref={snackBarRef} text="신고가 접수되었습니다" />
     </>
