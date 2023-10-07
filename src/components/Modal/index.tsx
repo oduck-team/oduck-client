@@ -3,8 +3,6 @@ import { Variants } from "framer-motion";
 import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
-import AnimatePortal from "../Portal/AnimatePortal";
-
 import ModalActions from "./ModalActions";
 import ModalContent from "./ModalContent";
 import { Backdrop, ModalContainer } from "./style";
@@ -32,7 +30,7 @@ export default function Modal({
   useScrollLock(isVisible);
 
   return (
-    <AnimatePortal isVisible={isVisible}>
+    <>
       <Backdrop isVisible={showBackdrop} onClick={onClose} />
       <ModalContainer
         aria-modal={isVisible}
@@ -46,7 +44,7 @@ export default function Modal({
       >
         {children}
       </ModalContainer>
-    </AnimatePortal>
+    </>
   );
 }
 
