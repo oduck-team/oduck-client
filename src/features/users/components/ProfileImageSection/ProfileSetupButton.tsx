@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -61,10 +62,11 @@ export default function ProfileSetupButton({
           {isMine ? "프로필 수정" : "신고하기"}
         </DropDownModal.Button>
       </DropDownModal>
-      <ProfileReportModal
-        isVisible={isReportModalOpen}
-        onClose={handleReportModalToggle}
-      />
+      <AnimatePresence>
+        {isReportModalOpen && (
+          <ProfileReportModal onClose={handleReportModalToggle} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
