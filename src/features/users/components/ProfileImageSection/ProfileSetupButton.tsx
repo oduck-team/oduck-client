@@ -38,33 +38,40 @@ export default function ProfileSetupButton({
           <Dot />
         </Dots>
       </ProfileSetupButtonContainer>
-      <DropDownModal
-        isVisible={isDropDownModalOpen}
-        onDropDownModalToggle={handleDropDownModalToggle}
-      >
-        <DropDownModal.Button
-          name="프로필 링크 복사"
-          size="lg"
-          variant="solid"
-          color="neutral"
-        >
-          프로필 링크 복사
-        </DropDownModal.Button>
-        <DropDownModal.Button
-          name={isMine ? "프로필 수정" : "신고하기"}
-          size="lg"
-          variant="solid"
-          color="neutral"
-          onClick={() =>
-            isMine ? handleLinkToEditClick() : handleReportClick()
-          }
-        >
-          {isMine ? "프로필 수정" : "신고하기"}
-        </DropDownModal.Button>
-      </DropDownModal>
+
       <AnimatePresence>
+        {isDropDownModalOpen && (
+          <DropDownModal
+            key="DropDownModal"
+            onDropDownModalToggle={handleDropDownModalToggle}
+          >
+            <DropDownModal.Button
+              name="프로필 링크 복사"
+              size="lg"
+              variant="solid"
+              color="neutral"
+            >
+              프로필 링크 복사
+            </DropDownModal.Button>
+            <DropDownModal.Button
+              name={isMine ? "프로필 수정" : "신고하기"}
+              size="lg"
+              variant="solid"
+              color="neutral"
+              onClick={() =>
+                isMine ? handleLinkToEditClick() : handleReportClick()
+              }
+            >
+              {isMine ? "프로필 수정" : "신고하기"}
+            </DropDownModal.Button>
+          </DropDownModal>
+        )}
+
         {isReportModalOpen && (
-          <ProfileReportModal onClose={handleReportModalToggle} />
+          <ProfileReportModal
+            key="ProfileReportModal"
+            onClose={handleReportModalToggle}
+          />
         )}
       </AnimatePresence>
     </>

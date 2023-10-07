@@ -1,23 +1,21 @@
 import { Variants } from "framer-motion";
 
 import Button from "@/components/Button";
-import AnimatePortal from "@/components/Portal/AnimatePortal";
+import Portal from "@/components/Portal";
 import { StrictPropsWithChildren } from "@/types";
 
 import { ButtonContainer, Backdrop } from "./style";
 
 export interface DropDownModalProps {
-  isVisible: boolean;
   onDropDownModalToggle: () => void;
 }
 
 export default function DropDownModal({
-  isVisible,
   onDropDownModalToggle,
   children,
 }: StrictPropsWithChildren<DropDownModalProps>) {
   return (
-    <AnimatePortal isVisible={isVisible}>
+    <Portal>
       <Backdrop onClick={onDropDownModalToggle} />
       {/* 애니메이션 props: variants, animate, exit */}
       <ButtonContainer variants={variants} animate="animate" exit="exit">
@@ -32,7 +30,7 @@ export default function DropDownModal({
           취소
         </Button>
       </ButtonContainer>
-    </AnimatePortal>
+    </Portal>
   );
 }
 
