@@ -11,18 +11,13 @@ interface StatItemProps {
 }
 
 interface StatModalProps {
-  isVisible: boolean;
   items: StatItemProps[];
   onClose: () => void;
 }
 
-export default function StatModal({
-  isVisible,
-  items,
-  onClose,
-}: StatModalProps) {
+export default function StatModal({ items, onClose }: StatModalProps) {
   return (
-    <Modal isVisible={isVisible} onClose={onClose}>
+    <Modal onClose={onClose}>
       <Modal.Content>
         <ContentContainer>
           {items.map((item, index) => (

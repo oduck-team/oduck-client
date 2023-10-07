@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import Stat from "@/components/Stat";
@@ -53,11 +54,11 @@ export default function AboutMe() {
       <StatContainer onClick={handleStatModalToggle}>
         <Stat variant="ghost" items={STAT_MOCK_DATA} />
       </StatContainer>
-      <StatModal
-        isVisible={isStatModalVisible}
-        onClose={handleStatModalToggle}
-        items={STAT_MOCK_DATA}
-      />
+      <AnimatePresence>
+        {isStatModalVisible && (
+          <StatModal onClose={handleStatModalToggle} items={STAT_MOCK_DATA} />
+        )}
+      </AnimatePresence>
     </>
   );
 }
