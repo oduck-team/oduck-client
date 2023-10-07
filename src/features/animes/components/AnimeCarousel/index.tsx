@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 
 import {
-  AnimationCarouselContainer,
+  AnimeCarouselContainer,
   Background,
   Slides,
   Slide,
@@ -17,21 +17,16 @@ import {
   Review,
 } from "./style";
 
-export interface Animation {
-  id: string;
-  title: string;
-  image: string;
+// TODO: 임시
+export interface AnimeWithReview extends Anime {
   review: string;
-  rating: number;
 }
 
-interface AnimationCarouselProps {
-  animations: Animation[];
+interface AnimeCarouselProps {
+  animes: AnimeWithReview[];
 }
 
-export default function AnimationCarousel({
-  animations,
-}: AnimationCarouselProps) {
+export default function AnimeCarousel({ animes }: AnimeCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(1); // 현재 슬라이드 인덱스
   const [translateValue, setTranslateValue] = useState(0); // 슬라이드 이동(translate)를 위해 사용
   const [transitionValue, setTransitionValue] = useState(0); // 슬라이드 이동 transition 값
@@ -44,11 +39,11 @@ export default function AnimationCarousel({
   const SLIDE_AUTO_INTERVAL = 5000;
 
   // 무한 캐러셀을 위한 배열 확장
-  const animationsList = [
+  const animeList = [
     // animations[animations.length - 1],
-    animations.at(-1) as Animation,
-    ...animations,
-    animations[0],
+    animes.at(-1) as AnimeWithReview,
+    ...animes,
+    animes[0],
   ];
 
   // 모바일 이벤트
@@ -92,7 +87,7 @@ export default function AnimationCarousel({
 
   // 다음 슬라이드 이동
   const goNext = () => {
-    if (currentSlide < animationsList.length - 1 && width) {
+    if (currentSlide < animeList.length - 1 && width) {
       setTransitionValue(0.5);
       setTranslateValue(width * -(currentSlide + 1));
       setCurrentSlide((prev) => prev + 1);
@@ -148,17 +143,17 @@ export default function AnimationCarousel({
   // 처음, 마지막 슬라이드일 때 이동
   useEffect(() => {
     if (width) {
-      if (currentSlide === animationsList.length - 1) {
+      if (currentSlide === animeList.length - 1) {
         goTo(width, 1);
       }
       if (currentSlide === 0) {
-        goTo(width, animationsList.length - 2);
+        goTo(width, animeList.length - 2);
       }
     }
-  }, [currentSlide, width, animationsList.length]);
+  }, [currentSlide, width, animeList.length]);
 
   return (
-    <AnimationCarouselContainer ref={slideContainerRef}>
+    <AnimeCarouselContainer ref={slideContainerRef}>
       <Button
         name="이전"
         variant="text"
@@ -182,32 +177,35 @@ export default function AnimationCarousel({
         translateValue={translateValue}
         transitionValue={transitionValue}
       >
-        {animationsList.map((ani, i) => (
-          <SlideItem ani={ani} key={i} />
+        {animeList.map((anime, i) => (
+          <SlideItem anime={anime} key={i} />
         ))}
       </Slides>
       <IndicatorContainer>
-        {[...Array(animations.length)].map((_, i) => (
+        {[...Array(animes.length)].map((_, i) => (
           <Indicator active={currentSlide - 1 === i} key={i}></Indicator>
         ))}
       </IndicatorContainer>
-      <Background image={animationsList[currentSlide].image}></Background>
-    </AnimationCarouselContainer>
+      <Background image={animeList[currentSlide].thumbnail}></Background>
+    </AnimeCarouselContainer>
   );
 }
 
-function SlideItem({ ani }: { ani: Animation }) {
+function SlideItem({ anime }: { anime: AnimeWithReview }) {
   const navigate = useNavigate();
   return (
-    <Slide image={ani.image} onClick={() => navigate(`/animations/${ani.id}`)}>
+    <Slide
+      image={anime.thumbnail}
+      onClick={() => navigate(`/animes/${anime.id}`)}
+    >
       <InfoContainer>
         <Info>
-          <div>{ani.title}</div>
+          <div>{anime.title}</div>
           <Review>
-            <span>{ani.review}</span>
+            <span>{anime.review}</span>
             <Rating>
               <Star weight="fill" />
-              <span> {ani.rating}</span>
+              <span> {anime.rating}</span>
             </Rating>
           </Review>
         </Info>

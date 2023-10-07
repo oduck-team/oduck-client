@@ -1,5 +1,3 @@
-// import { IAnimation } from "../../types";
-
 import { Grid, Plot } from "./PlotAndInfo.style";
 import Section from "./Section";
 

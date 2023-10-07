@@ -9,7 +9,7 @@ interface ImageProps extends CardProps {
   image: string;
 }
 
-export const AnimationCardContainer = styled.div<CardProps>`
+export const AnimeCardContainer = styled.div<CardProps>`
   width: ${({ size = "md" }) => (size === "md" ? `160px` : `100%`)};
   flex-shrink: 0;
   & > a {

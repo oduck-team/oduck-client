@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
 
-export const AnimationDetailContainer = styled.main`
+export const AnimeDetailContainer = styled.main`
   height: 100%;
 `;

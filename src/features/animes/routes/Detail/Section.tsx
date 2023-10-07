@@ -1,4 +1,5 @@
 import { StrictPropsWithChildren } from "@/types";
+
 import { SectionContainer } from "./Section.style";
 
 /**

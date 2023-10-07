@@ -1,7 +1,7 @@
 import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Rating } from "../AnimationCarousel/style";
+import { Rating } from "../AnimeCarousel/style";
 
 interface ItemProps {
   readonly image: string;
@@ -49,7 +49,7 @@ export const Rank = styled.div<RankProps>`
   `}
 `;
 
-export const AnimationRankingContainer = styled.section`
+export const AnimeRankingContainer = styled.section`
   width: 100%;
   display: inline-flex;
   flex-direction: column;

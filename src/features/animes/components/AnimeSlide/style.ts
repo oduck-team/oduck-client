@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const AnimationSlideContainer = styled.section`
+export const AnimeSlideContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
