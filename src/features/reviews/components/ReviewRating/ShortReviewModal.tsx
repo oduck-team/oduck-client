@@ -25,14 +25,12 @@ interface MOCK_USER_REVIEW_DATA {
 }
 
 interface ShortReviewModalProps {
-  isVisible: boolean;
   onClose: () => void;
   onReview: () => void;
   userReviewData?: MOCK_USER_REVIEW_DATA;
 }
 
 export default function ShortReviewModal({
-  isVisible,
   onClose,
   onReview,
   userReviewData,
@@ -126,7 +124,7 @@ export default function ShortReviewModal({
   // };
 
   return (
-    <Modal isVisible={isVisible} onClose={onClose}>
+    <Modal onClose={onClose}>
       <Modal.Content>
         <Title>한 줄 리뷰 모달</Title>
         {children}

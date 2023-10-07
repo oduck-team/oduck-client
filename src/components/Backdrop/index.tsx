@@ -13,7 +13,10 @@ export interface BackdropProps {
   onClick: () => void;
 }
 
-/** AnimatePortal 컴포넌트로 감싸서 사용 */
+/**
+ * @desc 1. < AnimatePortal > 컴포넌트와 함께 사용
+ * @desc 2. < AnimatePresence > + <Portal> 컴포넌트와 함께 사용
+ * */
 export default function Backdrop({
   isVisible = true,
   className = "",

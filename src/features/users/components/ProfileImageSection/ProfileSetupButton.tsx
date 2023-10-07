@@ -1,3 +1,4 @@
+import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -37,34 +38,42 @@ export default function ProfileSetupButton({
           <Dot />
         </Dots>
       </ProfileSetupButtonContainer>
-      <DropDownModal
-        isVisible={isDropDownModalOpen}
-        onDropDownModalToggle={handleDropDownModalToggle}
-      >
-        <DropDownModal.Button
-          name="프로필 링크 복사"
-          size="lg"
-          variant="solid"
-          color="neutral"
-        >
-          프로필 링크 복사
-        </DropDownModal.Button>
-        <DropDownModal.Button
-          name={isMine ? "프로필 수정" : "신고하기"}
-          size="lg"
-          variant="solid"
-          color="neutral"
-          onClick={() =>
-            isMine ? handleLinkToEditClick() : handleReportClick()
-          }
-        >
-          {isMine ? "프로필 수정" : "신고하기"}
-        </DropDownModal.Button>
-      </DropDownModal>
-      <ProfileReportModal
-        isVisible={isReportModalOpen}
-        onClose={handleReportModalToggle}
-      />
+
+      <AnimatePresence>
+        {isDropDownModalOpen && (
+          <DropDownModal
+            key="DropDownModal"
+            onDropDownModalToggle={handleDropDownModalToggle}
+          >
+            <DropDownModal.Button
+              name="프로필 링크 복사"
+              size="lg"
+              variant="solid"
+              color="neutral"
+            >
+              프로필 링크 복사
+            </DropDownModal.Button>
+            <DropDownModal.Button
+              name={isMine ? "프로필 수정" : "신고하기"}
+              size="lg"
+              variant="solid"
+              color="neutral"
+              onClick={() =>
+                isMine ? handleLinkToEditClick() : handleReportClick()
+              }
+            >
+              {isMine ? "프로필 수정" : "신고하기"}
+            </DropDownModal.Button>
+          </DropDownModal>
+        )}
+
+        {isReportModalOpen && (
+          <ProfileReportModal
+            key="ProfileReportModal"
+            onClose={handleReportModalToggle}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

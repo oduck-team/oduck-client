@@ -18,28 +18,26 @@ const OPTION = [
 ];
 
 interface ProfileReportModalProps {
-  isVisible: boolean;
   onClose: () => void;
 }
 
 export default function ProfileReportModal({
-  isVisible,
   onClose,
 }: ProfileReportModalProps) {
   const { snackBarRef, showSnackBar } = useSnackBar();
-
   const [selected, setSelected] = useState(OPTION[0].value);
+
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSelected(e.target.value);
   const handleReportSumbit = () => {
     onClose();
     showSnackBar();
-    setSelected(OPTION[0].value);
   };
 
   return (
     <>
-      <Modal isVisible={isVisible} onClose={onClose}>
+      <Modal onClose={onClose}>
+        {/* <Modal isVisible={isVisible} onClose={onClose}> */}
         <Modal.Content>
           <Header>
             <Title>신고하기</Title>
