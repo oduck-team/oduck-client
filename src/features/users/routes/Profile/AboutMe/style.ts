@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const NickName = styled.h3`
@@ -7,16 +8,21 @@ export const NickName = styled.h3`
   color: ${({ theme }) => theme.colors.neutral[100]};
 `;
 
-export const Introduce = styled.p`
+export const Introduce = styled.p<{ isReadMore: boolean }>`
   ${({ theme }) => theme.typo["body-2-r"]};
   color: ${({ theme }) => theme.colors.neutral[70]};
   width: 100%;
   margin-bottom: 4px;
   padding: 0 16px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+
+  ${({ isReadMore }) =>
+    isReadMore &&
+    css`
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    `}
 `;
 
 export const SeeMoreButton = styled.button`
@@ -28,6 +34,7 @@ export const SeeMoreButton = styled.button`
   padding: 0 16px;
   background-color: transparent;
   margin-bottom: 8px;
+  cursor: pointer;
 `;
 
 export const StatContainer = styled.div`

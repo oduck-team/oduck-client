@@ -3,7 +3,7 @@ import { useState } from "react";
 import Chip from "@/components/Chip";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
-import AnimationCard from "@/features/animations/components/AnimationCard";
+import AnimeCard from "@/features/animes/components/AnimeCard";
 
 import Searchbar from "./Searchbar";
 import { SearchContainer, Section } from "./style";
@@ -21,30 +21,26 @@ const 최근_많이_검색된 = [
 
 const 이런_애니_어떠세요 = [
   {
-    id: "123456",
+    id: 1,
     title: "주술회전",
-    image: "https://url.kr/lo4miy",
-    rating: 4.8,
+    thumbnail: "https://url.kr/lo4miy",
   },
   {
-    id: "12345",
+    id: 3,
     title: "주술회전",
-    image: "https://url.kr/lo4miy",
-    rating: 4.8,
+    thumbnail: "https://url.kr/lo4miy",
   },
   {
-    id: "1234",
+    id: 4,
     title: "주술회전",
-    image: "https://url.kr/lo4miy",
-    rating: 4.8,
+    thumbnail: "https://url.kr/lo4miy",
   },
   {
-    id: "1234",
+    id: 3,
     title: "주술회전",
-    image: "https://url.kr/lo4miy",
-    rating: 4.8,
+    thumbnail: "https://url.kr/lo4miy",
   },
-];
+] as Anime[];
 
 export default function Search() {
   const [searchInputValue, setSearchInputValue] = useState(""); // 사용자가 입력하는 검색어
@@ -103,9 +99,9 @@ export default function Search() {
         <Section style={{ marginTop: "32px" }}>
           <h1>이런 애니는 어떠세요?</h1>
           <ul style={{ display: "flex", gap: "32px 8px", flexWrap: "wrap" }}>
-            {이런_애니_어떠세요.map((ani) => (
-              <li key={ani.id}>
-                <AnimationCard ani={ani} />
+            {이런_애니_어떠세요.map((anime) => (
+              <li key={anime.id}>
+                <AnimeCard anime={anime} />
               </li>
             ))}
           </ul>

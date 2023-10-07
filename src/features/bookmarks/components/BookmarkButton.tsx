@@ -9,23 +9,23 @@ import useAddBookmark from "../hooks/useAddBookmark";
 // import useRemoveBookmark from "../hooks/useRemoveBookmark";
 
 interface BookmarkButtonProps {
-  animationId: number;
+  animeId: number;
 }
 
-export default function BookmarkButton({ animationId }: BookmarkButtonProps) {
+export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const { error: addError, addBookmark } = useAddBookmark();
   //const { error: removeError, removeBookmark } = useRemoveBookmark();
   const { isLoggedIn } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const isBookmarked = true; // TODO: API
 
-  const handleDebounceAddBookmark = useDebounce(async (animationId: number) => {
+  const handleDebounceAddBookmark = useDebounce(async (animeId: number) => {
     if (!isLoggedIn) {
       setIsLoginModalVisible(true);
       return;
     }
     try {
-      await addBookmark(animationId);
+      await addBookmark(animeId);
       console.log("addBookmark");
     } catch (e) {
       console.log("try catch");
@@ -55,7 +55,7 @@ export default function BookmarkButton({ animationId }: BookmarkButtonProps) {
         isBlock
         color={isBookmarked ? "primary" : "neutral"}
         style={{ fontSize: "14px" }}
-        onClick={() => handleDebounceAddBookmark(animationId)}
+        onClick={() => handleDebounceAddBookmark(animeId)}
       >
         {isBookmarked ? "입덕한 애니" : "입덕하기"}
       </Button>

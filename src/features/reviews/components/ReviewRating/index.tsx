@@ -8,10 +8,10 @@ import ShortReviewModal from "./ShortReviewModal";
 import { ReviewRecommend } from "./style";
 
 interface ReviewRatingProps {
-  animationId: number;
+  animeId: number;
 }
 
-export default function ReviewRating({ animationId }: ReviewRatingProps) {
+export default function ReviewRating({ animeId }: ReviewRatingProps) {
   const hasEvaluated = true; // dev용 변수
   const hasReviewed = true; // dev용 변수
 
@@ -20,7 +20,7 @@ export default function ReviewRating({ animationId }: ReviewRatingProps) {
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
   // TODO: 사용자가 평가한 점수 가져오기
-  console.log(animationId);
+  console.log(animeId);
 
   const handleRate = (value: number) => {
     if (!isLoggedIn) {

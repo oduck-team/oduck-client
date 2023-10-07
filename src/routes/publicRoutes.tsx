@@ -7,10 +7,8 @@ import ProfileEdit from "@/features/users/routes/Edit";
 
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
-const AnimationList = lazy(() => import("@/features/animations/routes/List"));
-const AnimationDetail = lazy(
-  () => import("@/features/animations/routes/Detail"),
-);
+const AnimeList = lazy(() => import("@/features/animes/routes/List"));
+const AnimeDetail = lazy(() => import("@/features/animes/routes/Detail"));
 const Search = lazy(() => import("@/features/common/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
 const NoticeList = lazy(() => import("@/features/notices/routes/List"));
@@ -36,12 +34,12 @@ export const publicRoutes: RouteObject[] = [
         element: <Home />,
       },
       {
-        path: "/animations",
-        element: <AnimationList />,
+        path: "/animes",
+        element: <AnimeList />,
       },
       {
-        path: "/animations/:id",
-        element: <AnimationDetail />,
+        path: "/animes/:id",
+        element: <AnimeDetail />,
       },
       {
         path: "/search",

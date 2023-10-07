@@ -27,6 +27,7 @@ export const ToggleButton = styled.button`
   justify-content: center;
   background-color: transparent;
   border: none;
+  color: ${({ theme }) => theme.colors.neutral["90"]};
   cursor: pointer;
 `;
 

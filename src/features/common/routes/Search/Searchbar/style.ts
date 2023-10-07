@@ -21,6 +21,7 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
   }
 
   & input[type="text"] {
+    ${({ theme }) => theme.typo["body-2-m"]}
     display: inline-flex;
     align-items: center;
     height: 40px;

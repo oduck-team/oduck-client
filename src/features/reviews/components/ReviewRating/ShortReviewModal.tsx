@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { PropsWithChildren, useState } from "react";
 
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
@@ -14,25 +14,38 @@ import {
 } from "./ShortReviewModal.style";
 import SpoilerCheckBox from "./SpoilerCheckBox";
 
+interface MOCK_USER_REVIEW_DATA {
+  content: string;
+  isSpoiler: boolean;
+  character: boolean;
+  art: boolean;
+  story: boolean;
+  voiceActing: boolean;
+  sound: boolean;
+}
+
 interface ShortReviewModalProps {
   isVisible: boolean;
   onClose: () => void;
   onReview: () => void;
+  userReviewData?: MOCK_USER_REVIEW_DATA;
 }
 
 export default function ShortReviewModal({
   isVisible,
   onClose,
   onReview,
-}: ShortReviewModalProps) {
+  userReviewData,
+  children,
+}: PropsWithChildren<ShortReviewModalProps>) {
   const [form, setForm] = useState({
-    content: "",
-    isSpoiler: false,
-    character: false,
-    art: false,
-    story: false,
-    voiceActing: false,
-    sound: false,
+    content: userReviewData?.content ?? "",
+    isSpoiler: userReviewData?.isSpoiler ?? false,
+    character: userReviewData?.character ?? false,
+    art: userReviewData?.art ?? false,
+    story: userReviewData?.story ?? false,
+    voiceActing: userReviewData?.voiceActing ?? false,
+    sound: userReviewData?.sound ?? false,
   });
 
   const attractionPoints = [
@@ -87,6 +100,7 @@ export default function ShortReviewModal({
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -95,6 +109,7 @@ export default function ShortReviewModal({
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
+
     setForm((prev) => ({
       ...prev,
       [name]: checked,
@@ -114,14 +129,20 @@ export default function ShortReviewModal({
     <Modal isVisible={isVisible} onClose={onClose}>
       <Modal.Content>
         <Title>한 줄 리뷰 모달</Title>
+        {children}
         <ReviewContentSection>
           <label htmlFor="content">작품에 대한 의견을 남겨주세요</label>
           <Textarea
-            id="content"
+            name="content"
             placeholder="최대 100자 까지 입력 가능해요"
             onChange={handleTextInputChange}
+            value={form.content}
           />
-          <SpoilerCheckBox />
+          <SpoilerCheckBox
+            name="isSpoiler"
+            checked={form.isSpoiler}
+            onChange={handleCheckboxChange}
+          />
         </ReviewContentSection>
         <AttractionPointSection>
           <label htmlFor="attraction-point">
