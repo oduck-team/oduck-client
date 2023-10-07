@@ -23,7 +23,7 @@ export interface ModalProps {
 }
 
 export default function Modal({
-  isVisible = false,
+  isVisible = true,
   size = "default",
   showBackdrop = true,
   onClose,
