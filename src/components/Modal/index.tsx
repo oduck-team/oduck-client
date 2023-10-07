@@ -22,6 +22,7 @@ export interface ModalProps {
   onClose: () => void;
 }
 
+/** @desc < AnimatePresence > 컴포넌트로 감싸서 사용해주세요. */
 export default function Modal({
   isVisible = true,
   size = "default",
