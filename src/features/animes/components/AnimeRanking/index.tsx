@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   HighlightItem,
   HighlightItemContainer,
-  AnimationRankingContainer,
+  AnimeRankingContainer,
   Content,
   Rank,
   ItemSlider,
@@ -15,24 +15,21 @@ import {
 } from "./style";
 
 // 임시 정의
-export interface IRanking {
+export interface Ranking {
   id: string;
   title: string;
-  image: string;
+  thumbnail: string;
   genre: string;
   rank: number;
   rating: number;
 }
 
-interface AnimationRankingProps {
+interface AnimeRankingProps {
   title: string;
-  contents: IRanking[];
+  contents: Ranking[];
 }
 
-export default function AnimationRanking({
-  title,
-  contents,
-}: AnimationRankingProps) {
+export default function AnimeRanking({ title, contents }: AnimeRankingProps) {
   const navgiate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [list, setList] = useState(
@@ -44,13 +41,13 @@ export default function AnimationRanking({
   }, [contents, currentIndex]);
 
   return (
-    <AnimationRankingContainer>
+    <AnimeRankingContainer>
       <h1>{title}</h1>
       <Content>
         <HighlightItemContainer>
           <HighlightItem
-            image={contents[currentIndex].image}
-            onClick={() => navgiate(`/animations/${currentIndex}`)}
+            image={contents[currentIndex].thumbnail}
+            onClick={() => navgiate(`/animes/${currentIndex}`)}
           >
             <Rank size="lg">{contents[currentIndex].rank}</Rank>
             <h3>{contents[currentIndex].genre}</h3>
@@ -64,7 +61,7 @@ export default function AnimationRanking({
         <ItemSlider>
           {list.map((ani, i) => (
             <SliderItem key={i} onClick={() => setCurrentIndex(ani.rank - 1)}>
-              <SliderItemImage image={ani.image}>
+              <SliderItemImage image={ani.thumbnail}>
                 <Rank>{ani.rank}</Rank>
               </SliderItemImage>
               <div>{ani.title}</div>
@@ -72,6 +69,6 @@ export default function AnimationRanking({
           ))}
         </ItemSlider>
       </Content>
-    </AnimationRankingContainer>
+    </AnimeRankingContainer>
   );
 }

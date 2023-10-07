@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import BaseTabs from "@/components/Tabs";
 
-export const AnimationListContainer = styled.div`
+export const AnimeListContainer = styled.div`
   background-color: white;
   width: 100%;
   display: flex;

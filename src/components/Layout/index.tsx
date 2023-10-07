@@ -29,10 +29,10 @@ export default function Layout() {
       label: "홈",
     },
     {
-      id: "/animations",
-      to: "/animations",
+      id: "/animes",
+      to: "/animes",
       icon:
-        currentPath === "/animations" ? (
+        currentPath === "/animes" ? (
           <TelevisionSimple weight="fill" />
         ) : (
           <TelevisionSimple />

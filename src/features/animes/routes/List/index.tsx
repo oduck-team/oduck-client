@@ -3,13 +3,13 @@ import { SlidersHorizontal } from "@phosphor-icons/react";
 import Button from "@/components/Button";
 import Header from "@/components/Layout/Header";
 import { TabItem } from "@/components/Tabs";
-import AnimationCard from "@/features/animations/components/AnimationCard";
-import { Animation } from "@/features/animations/components/AnimationCarousel";
+import AnimeCard from "@/features/animes/components/AnimeCard";
 
-import { useFilterAnimations } from "../../hooks/useFilterAnimations";
+import { getAnimeMock } from "../../api/mock";
+import useFilterAnimes from "../../hooks/useFilterAnimes";
 
 import Filter from "./Filter";
-import { AnimationListContainer, Tabs, Content } from "./style";
+import { AnimeListContainer, Tabs, Content } from "./style";
 
 const TabItems: TabItem[] = [
   {
@@ -26,7 +26,7 @@ const TabItems: TabItem[] = [
   },
 ];
 
-export default function AnimationList() {
+export default function AnimeList() {
   const {
     bottomSheetVisible,
     bottomSheetOpen,
@@ -36,24 +36,10 @@ export default function AnimationList() {
     handleOptionClick,
     resetFilter,
     handleOkClick,
-  } = useFilterAnimations();
-
-  const CardAni: Omit<Animation, "review"> = {
-    id: "234567",
-    title: "원피스",
-    image: "https://url.kr/2y9rgl",
-    rating: 4.8,
-  };
-  const CardAni2: Omit<Animation, "review"> = {
-    id: "234568",
-    title:
-      "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
-    image: "https://url.kr/2y9rgl",
-    rating: 4.5,
-  };
+  } = useFilterAnimes();
 
   return (
-    <AnimationListContainer>
+    <AnimeListContainer>
       <Header>
         <Header.Left />
         <Header.Center>
@@ -71,10 +57,10 @@ export default function AnimationList() {
       </Header>
       <Tabs items={TabItems} defaultActiveId={"latest"} />
       <Content>
-        <AnimationCard size="lg" ani={CardAni} />
-        <AnimationCard size="lg" ani={CardAni2} />
-        <AnimationCard size="lg" ani={CardAni} />
-        <AnimationCard size="lg" ani={CardAni2} />
+        <AnimeCard size="lg" anime={getAnimeMock()} />
+        <AnimeCard size="lg" anime={getAnimeMock()} />
+        <AnimeCard size="lg" anime={getAnimeMock()} />
+        <AnimeCard size="lg" anime={getAnimeMock()} />
       </Content>
       <Filter
         isVisible={bottomSheetVisible}
@@ -85,6 +71,6 @@ export default function AnimationList() {
         resetFilter={resetFilter}
         handleOkClick={handleOkClick}
       />
-    </AnimationListContainer>
+    </AnimeListContainer>
   );
 }

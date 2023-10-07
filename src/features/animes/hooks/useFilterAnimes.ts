@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useFilterAnimations() {
+export default function useFilterAnimes() {
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
   const [filtered, setFiltered] = useState<string[]>([]); // 선택한 필터 옵션

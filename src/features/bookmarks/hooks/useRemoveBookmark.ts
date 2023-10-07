@@ -3,8 +3,8 @@ import useFetch from "@/hooks/useFetch";
 export default function useRemoveBookmark() {
   const { data, error, isLoading, isFetched, isError, fetcher } = useFetch();
 
-  const removeBookmark = async (animationId: number) => {
-    fetcher(`/bookmarks/${animationId}`, {
+  const removeBookmark = async (animeId: number) => {
+    fetcher(`/bookmarks/${animeId}`, {
       method: "DELETE",
     });
   };

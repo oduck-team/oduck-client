@@ -13,11 +13,11 @@ import {
   BookmarkContainer,
 } from "./Hero.style";
 
-interface AnimationHeroProps {
+interface HeroProps {
   anime: Anime;
 }
 
-export default function Hero({ anime }: AnimationHeroProps) {
+export default function Hero({ anime }: HeroProps) {
   let rating: string;
   switch (anime.rating) {
     case "ADULT":
@@ -59,7 +59,7 @@ export default function Hero({ anime }: AnimationHeroProps) {
           ]}
           style={{ margin: "0 auto" }}
         />
-        <ReviewRating animationId={anime.id} />
+        <ReviewRating animeId={anime.id} />
         <BookmarkContainer
           style={{
             width: "100%",
@@ -68,7 +68,7 @@ export default function Hero({ anime }: AnimationHeroProps) {
             borderTop: "solid 1px #F1F1F1",
           }}
         >
-          <BookmarkButton animationId={anime.id} />
+          <BookmarkButton animeId={anime.id} />
         </BookmarkContainer>
       </Actions>
     </Container>

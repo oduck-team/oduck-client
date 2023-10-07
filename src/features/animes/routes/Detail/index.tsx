@@ -11,9 +11,9 @@ import Hero from "./Hero";
 import PlotAndInfo from "./PlotAndInfo";
 import Ratings from "./Ratings";
 import Reviews from "./Reviews";
-import { AnimationDetailContainer } from "./style";
+import { AnimeDetailContainer } from "./style";
 
-export default function AnimationDetail() {
+export default function AnimeDetail() {
   // const { animation, isAnimationLoading, animationError } = useAnimation();
   // const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function AnimationDetail() {
 
   if (anime)
     return (
-      <AnimationDetailContainer>
+      <AnimeDetailContainer>
         <Hero anime={anime} />
         <SectionDivider />
 
@@ -49,6 +49,6 @@ export default function AnimationDetail() {
 
         {/* 리뷰 목록 */}
         <Reviews />
-      </AnimationDetailContainer>
+      </AnimeDetailContainer>
     );
 }
