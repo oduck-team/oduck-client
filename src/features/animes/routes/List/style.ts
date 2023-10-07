@@ -11,12 +11,10 @@ export const AnimeListContainer = styled.div`
 `;
 
 export const Tabs = styled(BaseTabs)`
-  ul {
-    width: 100%;
-    max-width: 600px;
-    position: fixed;
-    top: 60px;
-  }
+  width: 100%;
+  max-width: 600px;
+  position: sticky;
+  top: 60px;
 `;
 
 export const Content = styled.div`
