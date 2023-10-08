@@ -21,7 +21,7 @@ interface State {
   id?: PortalID;
   /** snackBar list */
   snackBars: SnackBar[];
-  /** snackBar on, off 디스패치 */
+  /** snackBar 추가, 제거 디스패치 */
   dispatch: SnackBarDispatch;
 }
 
@@ -34,6 +34,12 @@ interface SnackBarContextProviderProps {
 
 export const SnackBarContext = createContext<State | null>(null);
 
+/**
+ * @desc: position default: "bottom"
+ * @desc: duration default: 2
+ * @desc: option을 재정의 할 수 있습니다.
+ * @example option={{ position: "top", duration: 10, zIndex: 9999 }}
+ */
 export function SnackBarContextProvider({
   id,
   option,

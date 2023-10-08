@@ -20,7 +20,7 @@ export default function App() {
             size: 24,
           }}
         >
-          <SnackBarContextProvider option={{ position: "bottom" }}>
+          <SnackBarContextProvider>
             <Global
               styles={css`
                 body {

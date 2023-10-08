@@ -19,7 +19,7 @@ export interface SnackBarProps extends SnackbarPublicProps {
 export default function SnackBar({
   id,
   message,
-  duration = 10,
+  duration = 2,
   position = "bottom",
   onClose,
 }: SnackBarProps) {

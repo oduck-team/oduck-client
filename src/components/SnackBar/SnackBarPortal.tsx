@@ -26,6 +26,7 @@ export default function SnackBarPortal({
   const [loaded, setLoaded] = useState(false);
   const theme = useTheme();
 
+  // <div id="snackBar-portal" /> 생성
   useEffect(() => {
     const div = document.createElement("div");
     div.setAttribute("role", "log");
