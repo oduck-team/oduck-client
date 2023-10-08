@@ -1,23 +1,43 @@
-import { forwardRef } from "react";
+import { useMemo, useState } from "react";
 
 import { SnackBarContainer } from "./style";
+import useInterval from "./useInterval";
 
-interface SnackBarProps {
-  text: string;
+export interface SnackbarPublicProps {
+  /**
+   * 0: infinity
+   * 1 ~ : for the given time, snackbar appears and disappears
+   * */
+  duration?: number;
 }
 
-//TODO: SnackBar animation 변경
-const SnackBar = forwardRef(
-  ({ text }: SnackBarProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-    // const [isPresent, safeToRemove] = usePresence();
-    // useEffect(() => {
-    //   !isPresent && setTimeout(safeToRemove, 2000);
-    // }, [isPresent, safeToRemove]);
+export interface SnackBarProps extends SnackbarPublicProps {
+  id: string;
+  message: string;
+  onClose?: (id: string) => void;
+}
 
-    return <SnackBarContainer ref={ref}>{text}</SnackBarContainer>;
-  },
-);
+export default function SnackBar({
+  id,
+  message,
+  duration = 2,
+  onClose,
+}: SnackBarProps) {
+  const [remainSeconds, setRemainSeconds] = useState<number>(duration * 1000);
+  const onCloseSnackbar = () => onClose?.(id);
 
-SnackBar.displayName = "SnackBar";
+  const interval = useMemo(
+    () => (remainSeconds >= 0 ? 100 : null),
+    [remainSeconds],
+  );
+  useInterval(() => {
+    setRemainSeconds(remainSeconds - 100);
+    if (remainSeconds === 0) {
+      onCloseSnackbar();
+    }
+  }, interval);
 
-export default SnackBar;
+  return (
+    <SnackBarContainer onClick={onCloseSnackbar}>{message}</SnackBarContainer>
+  );
+}
