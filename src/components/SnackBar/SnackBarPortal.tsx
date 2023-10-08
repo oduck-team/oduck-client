@@ -34,12 +34,11 @@ export default function SnackBarPortal({
       : theme.zIndex.modal.toString();
     div.id = portalId;
     div.style.position = "fixed";
-    div.style.backgroundColor = "#DFEVDV";
     div.style.left = "50%";
     div.style.transform = "translateX(-50%)";
 
     if (position === "top") {
-      div.style.top = "74px";
+      div.style.top = "16px";
     }
 
     if (position === "bottom") {
@@ -65,6 +64,7 @@ export default function SnackBarPortal({
       {orderByCreatedAt.map((snackBarLocalOptions) => (
         <SnackBar
           key={snackBarLocalOptions.id}
+          position={position}
           onClose={onCloseSnackBar}
           {...snackBarGlobalOptions}
           {...snackBarLocalOptions}

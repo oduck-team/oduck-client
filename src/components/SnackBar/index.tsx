@@ -3,10 +3,11 @@ import { useMemo, useState } from "react";
 import { SnackBarContainer } from "./style";
 import useInterval from "./useInterval";
 
+export type Position = "top" | "bottom";
 export interface SnackbarPublicProps {
   /**snackBar 지속시간 */
   duration?: number;
-  position?: "top" | "bottom";
+  position?: Position;
 }
 
 export interface SnackBarProps extends SnackbarPublicProps {
@@ -18,7 +19,7 @@ export interface SnackBarProps extends SnackbarPublicProps {
 export default function SnackBar({
   id,
   message,
-  duration = 2,
+  duration = 10,
   position = "bottom",
   onClose,
 }: SnackBarProps) {
@@ -29,6 +30,7 @@ export default function SnackBar({
     () => (remainSeconds >= 0 ? 100 : null),
     [remainSeconds],
   );
+
   useInterval(() => {
     setRemainSeconds(remainSeconds - 100);
     if (remainSeconds === 0) {
@@ -37,6 +39,8 @@ export default function SnackBar({
   }, interval);
 
   return (
-    <SnackBarContainer onClick={onCloseSnackbar}>{message}</SnackBarContainer>
+    <SnackBarContainer onClick={onCloseSnackbar} position={position}>
+      {message}
+    </SnackBarContainer>
   );
 }
