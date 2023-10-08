@@ -1,43 +1,29 @@
-import { useRef } from "react";
+import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-type Position = "bottom" | "top";
+import { ActionType } from "@/contexts/SnackBarContainerReducer";
+import { SnackBarContext } from "@/contexts/SnackBarContext";
+
+import { SnackBarProps } from ".";
 
 export default function useSnackBar() {
-  const snackBarRef = useRef<HTMLDivElement>(null);
-  const showSnackBar = (position: Position = "bottom") =>
-    snackBarRef.current?.animate(keyframes(position), options);
+  const context = useContext(SnackBarContext);
 
+  if (!context) return null;
   return {
-    snackBarRef,
-    showSnackBar,
+    on: (options: Omit<SnackBarProps, "id" | "position">) => {
+      context.dispatch({
+        type: ActionType.ADD,
+        payload: { options: { ...options, id: uuidv4() } },
+      });
+    },
+    off: (id: string) => {
+      context.dispatch({
+        type: ActionType.REMOVE,
+        payload: { id },
+      });
+    },
+    length: context.snackBars.length,
+    list: context.snackBars,
   };
 }
-
-const keyframes = (position: Position) => [
-  {
-    [position]: `${position === "bottom" ? "66px" : "16px"}`,
-    opacity: 0,
-    visibility: "visible",
-    offset: 0,
-  },
-  {
-    [position]: `${position === "bottom" ? "74px" : "24px"}`,
-    opacity: 1,
-    offset: 0.2,
-  },
-  {
-    [position]: `${position === "bottom" ? "74px" : "24px"}`,
-    opacity: 1,
-    offset: 0.8,
-  },
-  {
-    [position]: `${position === "bottom" ? "66px" : "16px"}`,
-    opacity: 0,
-    offset: 1,
-  },
-];
-
-const options = {
-  duration: 2000,
-  easing: "linear",
-};
