@@ -4,11 +4,9 @@ import { SnackBarContainer } from "./style";
 import useInterval from "./useInterval";
 
 export interface SnackbarPublicProps {
-  /**
-   * 0: infinity
-   * 1 ~ : for the given time, snackbar appears and disappears
-   * */
+  /**snackBar 지속시간 */
   duration?: number;
+  position?: "top" | "bottom";
 }
 
 export interface SnackBarProps extends SnackbarPublicProps {
@@ -21,6 +19,7 @@ export default function SnackBar({
   id,
   message,
   duration = 2,
+  position = "bottom",
   onClose,
 }: SnackBarProps) {
   const [remainSeconds, setRemainSeconds] = useState<number>(duration * 1000);

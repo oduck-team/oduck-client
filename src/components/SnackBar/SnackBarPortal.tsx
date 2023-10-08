@@ -13,14 +13,13 @@ export interface SnackBarPortalProps extends SnackbarPublicProps {
   onCloseSnackBar?: (id: string) => void;
   zIndex?: string | number;
   snackBars?: SnackBarItem[];
-  position?: "top" | "bottom";
 }
 
 export default function SnackBarPortal({
   portalId = "snackBar-portal",
   onCloseSnackBar,
   zIndex,
-  position,
+  position = "bottom",
   snackBars = [],
   ...snackBarGlobalOptions
 }: SnackBarPortalProps) {
