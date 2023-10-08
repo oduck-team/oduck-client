@@ -117,8 +117,6 @@ export default function ReviewMoreButton() {
           </ShortReviewModal>
         )}
       </AnimatePresence>
-
-      {/* <SnackBar ref={snackBarRef} text="신고가 접수되었습니다" /> */}
     </>
   );
 }
