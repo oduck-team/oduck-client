@@ -2,8 +2,9 @@ import { useTheme } from "@emotion/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { SnackBar as SnackBarItem } from "@/contexts/SnackBarContainerReducer";
 import { PortalID } from "@/contexts/SnackBarContext";
+
+import { SnackBar as SnackBarItem } from "./snackBarReducer";
 
 import SnackBar, { SnackbarPublicProps } from ".";
 

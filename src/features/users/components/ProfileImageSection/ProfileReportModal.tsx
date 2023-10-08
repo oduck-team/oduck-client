@@ -30,7 +30,7 @@ export default function ProfileReportModal({
     setSelected(e.target.value);
   const handleReportSumbit = () => {
     onClose();
-    snackBar?.on({ message: "신고가 접수되었습니다." });
+    snackBar?.open({ message: "신고가 접수되었습니다." });
   };
 
   return (

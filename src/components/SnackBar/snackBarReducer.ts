@@ -16,10 +16,7 @@ export type Action =
 
 export const initialState: SnackBar[] = [];
 
-export function snackBarContainerReducer(
-  state: SnackBar[],
-  action: Action,
-): SnackBar[] {
+export function snackBarReducer(state: SnackBar[], action: Action): SnackBar[] {
   switch (action.type) {
     case ActionType.ADD:
       return [...state, action.payload.options];

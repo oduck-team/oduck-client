@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-import { ActionType } from "@/contexts/SnackBarContainerReducer";
+import { ActionType } from "@/components/SnackBar/snackBarReducer";
 import { SnackBarContext } from "@/contexts/SnackBarContext";
 
 import { SnackBarProps } from ".";
@@ -11,13 +11,13 @@ export default function useSnackBar() {
 
   if (!context) return null;
   return {
-    on: (options: Omit<SnackBarProps, "id" | "position">) => {
+    open: (options: Omit<SnackBarProps, "id" | "position">) => {
       context.dispatch({
         type: ActionType.ADD,
         payload: { options: { ...options, id: uuidv4() } },
       });
     },
-    off: (id: string) => {
+    close: (id: string) => {
       context.dispatch({
         type: ActionType.REMOVE,
         payload: { id },

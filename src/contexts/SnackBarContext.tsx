@@ -10,8 +10,8 @@ import {
   ActionType,
   SnackBar,
   initialState,
-  snackBarContainerReducer,
-} from "./SnackBarContainerReducer";
+  snackBarReducer,
+} from "../components/SnackBar/snackBarReducer";
 
 type SnackBarDispatch = Dispatch<Action>;
 
@@ -28,6 +28,7 @@ interface State {
 interface SnackBarContextProviderProps {
   /** snackBar portal unique id */
   id?: PortalID;
+  /** portal option */
   option?: Omit<SnackBarPortalProps, "snackBars">;
 }
 
@@ -38,10 +39,7 @@ export function SnackBarContextProvider({
   option,
   children,
 }: StrictPropsWithChildren<SnackBarContextProviderProps>) {
-  const [snackBars, dispatch] = useReducer(
-    snackBarContainerReducer,
-    initialState,
-  );
+  const [snackBars, dispatch] = useReducer(snackBarReducer, initialState);
 
   const handleCloseSnackBar = (id: string) =>
     dispatch({ type: ActionType.REMOVE, payload: { id } });
