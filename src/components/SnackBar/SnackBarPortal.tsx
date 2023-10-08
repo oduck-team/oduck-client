@@ -9,7 +9,7 @@ import SnackBar, { SnackbarPublicProps } from ".";
 
 export interface SnackBarPortalProps extends SnackbarPublicProps {
   portalId?: PortalID;
-  off?: (id: string) => void;
+  onCloseSnackBar?: (id: string) => void;
   zIndex?: string | number;
   snackBars?: SnackBarItem[];
   position?: "top" | "bottom";
@@ -17,7 +17,7 @@ export interface SnackBarPortalProps extends SnackbarPublicProps {
 
 export default function SnackBarPortal({
   portalId = "snackBar-portal",
-  off,
+  onCloseSnackBar,
   zIndex,
   position,
   snackBars = [],
@@ -65,7 +65,7 @@ export default function SnackBarPortal({
       {orderByCreatedAt.map((snackBarLocalOptions) => (
         <SnackBar
           key={snackBarLocalOptions.id}
-          onClose={off}
+          onClose={onCloseSnackBar}
           {...snackBarGlobalOptions}
           {...snackBarLocalOptions}
         />

@@ -43,7 +43,7 @@ export function SnackBarContextProvider({
     initialState,
   );
 
-  const off = (id: string) =>
+  const handleCloseSnackBar = (id: string) =>
     dispatch({ type: ActionType.REMOVE, payload: { id } });
 
   return (
@@ -52,7 +52,7 @@ export function SnackBarContextProvider({
       <SnackBarPortal
         portalId={id}
         snackBars={snackBars}
-        off={off}
+        onCloseSnackBar={handleCloseSnackBar}
         {...option}
       />
     </SnackBarContext.Provider>
