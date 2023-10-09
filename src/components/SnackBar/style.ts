@@ -17,6 +17,7 @@ export const SnackBarContainer = styled.div<Pick<SnackBarProps, "position">>`
   border-radius: 8px;
   z-index: ${({ theme }) => theme.zIndex.modal};
   margin-bottom: 4px;
+  cursor: pointer;
 
   ${({ position = "bottom" }) => css`
     animation: ${getAnimation(position)} 0.3s;
