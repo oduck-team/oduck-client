@@ -7,6 +7,7 @@ import { RouterProvider } from "react-router-dom";
 import DeferredComponent from "./components/DeferredComponent";
 import Loader from "./components/Loader";
 import { AuthProvider } from "./contexts/AuthContext";
+import { SnackBarContextProvider } from "./contexts/SnackBarContext";
 import router from "./routes";
 import { theme } from "./styles/theme";
 
@@ -19,24 +20,26 @@ export default function App() {
             size: 24,
           }}
         >
-          <Global
-            styles={css`
-              body {
-                color: ${theme.colors.neutral["90"]};
-              }
-            `}
-          />
-          <AuthProvider>
-            <Suspense
-              fallback={
-                <DeferredComponent>
-                  <Loader />
-                </DeferredComponent>
-              }
-            >
-              <RouterProvider router={router} />
-            </Suspense>
-          </AuthProvider>
+          <SnackBarContextProvider>
+            <Global
+              styles={css`
+                body {
+                  color: ${theme.colors.neutral["90"]};
+                }
+              `}
+            />
+            <AuthProvider>
+              <Suspense
+                fallback={
+                  <DeferredComponent>
+                    <Loader />
+                  </DeferredComponent>
+                }
+              >
+                <RouterProvider router={router} />
+              </Suspense>
+            </AuthProvider>
+          </SnackBarContextProvider>
         </IconContext.Provider>
       </ThemeProvider>
     </HelmetProvider>

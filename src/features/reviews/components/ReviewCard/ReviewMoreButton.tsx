@@ -5,7 +5,6 @@ import { useState } from "react";
 
 import Button from "@/components/Button";
 import Rating from "@/components/Rating";
-import SnackBar from "@/components/SnackBar";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import DropDownModal from "@/features/users/components/DropDownModal";
 import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
@@ -14,7 +13,7 @@ import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
 import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
-const USER_MOCK_DATA = { isMine: true };
+const USER_MOCK_DATA = { isMine: false };
 const USER_MOCK_REVIEW_DATA = {
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
@@ -29,7 +28,7 @@ const USER_MOCK_REVIEW_DATA = {
 export default function ReviewMoreButton() {
   const theme = useTheme();
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
-  const { snackBarRef, showSnackBar } = useSnackBar();
+  const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
   const handleReviewEditClick = () => {
     handleDropDownModalToggle();
@@ -46,11 +45,13 @@ export default function ReviewMoreButton() {
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
   const handleReviewSpoilerReport = () => {
     handleDropDownModalToggle();
-    showSnackBar();
+    snackBar.open({ message: "신고가 접수되었습니다." });
   };
   const handleReviewEtcReport = () => {
     handleDropDownModalToggle();
-    showSnackBar();
+    snackBar.open({
+      message: "신고가 접수되었습니다.",
+    });
   };
 
   return (
@@ -116,8 +117,6 @@ export default function ReviewMoreButton() {
           </ShortReviewModal>
         )}
       </AnimatePresence>
-
-      <SnackBar ref={snackBarRef} text="신고가 접수되었습니다" />
     </>
   );
 }

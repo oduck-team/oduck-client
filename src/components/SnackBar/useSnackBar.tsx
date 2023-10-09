@@ -1,43 +1,41 @@
-import { useRef } from "react";
+import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-type Position = "bottom" | "top";
+import { ActionType } from "@/components/SnackBar/snackBarReducer";
+import { SnackBarContext } from "@/contexts/SnackBarContext";
 
+import { SnackBarProps } from ".";
+
+/**
+ * @example
+ * const snackBar = useSnackBar();
+ * snackBar.open({ message: "신고가 접수되었습니다." });
+ */
 export default function useSnackBar() {
-  const snackBarRef = useRef<HTMLDivElement>(null);
-  const showSnackBar = (position: Position = "bottom") =>
-    snackBarRef.current?.animate(keyframes(position), options);
+  const context = useContext(SnackBarContext);
 
+  if (!context)
+    throw new Error(
+      "useSnackBar must be used within a SnackBarContextProvider",
+    );
   return {
-    snackBarRef,
-    showSnackBar,
+    /**
+     * @desc duration을 재정의 할 수 있습니다.
+     * @example snackBar.open({ message: "신고가 접수되었습니다.", duration: 10 });
+     */
+    open: (options: Omit<SnackBarProps, "id" | "position">) => {
+      context.dispatch({
+        type: ActionType.ADD,
+        payload: { options: { ...options, id: uuidv4() } },
+      });
+    },
+    close: (id: string) => {
+      context.dispatch({
+        type: ActionType.REMOVE,
+        payload: { id },
+      });
+    },
+    length: context.snackBars.length,
+    list: context.snackBars,
   };
 }
-
-const keyframes = (position: Position) => [
-  {
-    [position]: `${position === "bottom" ? "66px" : "16px"}`,
-    opacity: 0,
-    visibility: "visible",
-    offset: 0,
-  },
-  {
-    [position]: `${position === "bottom" ? "74px" : "24px"}`,
-    opacity: 1,
-    offset: 0.2,
-  },
-  {
-    [position]: `${position === "bottom" ? "74px" : "24px"}`,
-    opacity: 1,
-    offset: 0.8,
-  },
-  {
-    [position]: `${position === "bottom" ? "66px" : "16px"}`,
-    opacity: 0,
-    offset: 1,
-  },
-];
-
-const options = {
-  duration: 2000,
-  easing: "linear",
-};

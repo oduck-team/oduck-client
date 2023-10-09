@@ -4,7 +4,6 @@ import { useState } from "react";
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import SelectBox from "@/components/SelectBox";
-import SnackBar from "@/components/SnackBar";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 
 import { CloseButton, Header, Title } from "./ProfileReportModal.style";
@@ -24,20 +23,19 @@ interface ProfileReportModalProps {
 export default function ProfileReportModal({
   onClose,
 }: ProfileReportModalProps) {
-  const { snackBarRef, showSnackBar } = useSnackBar();
+  const snackBar = useSnackBar();
   const [selected, setSelected] = useState(OPTION[0].value);
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setSelected(e.target.value);
   const handleReportSumbit = () => {
     onClose();
-    showSnackBar();
+    snackBar.open({ message: "신고가 접수되었습니다." });
   };
 
   return (
     <>
       <Modal onClose={onClose}>
-        {/* <Modal isVisible={isVisible} onClose={onClose}> */}
         <Modal.Content>
           <Header>
             <Title>신고하기</Title>
@@ -72,7 +70,6 @@ export default function ProfileReportModal({
           </Button>
         </Modal.Actions>
       </Modal>
-      <SnackBar ref={snackBarRef} text="신고가 접수되었습니다" />
     </>
   );
 }
