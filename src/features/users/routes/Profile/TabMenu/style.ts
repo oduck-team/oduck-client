@@ -27,3 +27,8 @@ export const TabButton = styled.button<{ selected: MENU; text: MENU }>`
       border-bottom: 2px solid ${theme.colors.primary[60]};
     `}
 `;
+
+export const ContentContainer = styled.div`
+  padding: 0 16px;
+  border-top: 2px solid ${({ theme }) => theme.colors.neutral["05"]};
+`;

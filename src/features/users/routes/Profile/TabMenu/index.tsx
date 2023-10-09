@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import BookmarkList from "./BookmarkList";
 import ReviewList from "./ReviewList";
-import { Tab, TabButton } from "./style";
+import { ContentContainer, Tab, TabButton } from "./style";
 
 const REVIEW_MENU = "한줄리뷰";
 const BOOKMARK_MENU = "입덕애니";
@@ -32,8 +32,10 @@ export default function TabMenu() {
           </TabButton>
         ))}
       </Tab>
-      {selectedMenu === "한줄리뷰" && <ReviewList />}
-      {selectedMenu === "입덕애니" && <BookmarkList />}
+      <ContentContainer>
+        {selectedMenu === "한줄리뷰" && <ReviewList />}
+        {selectedMenu === "입덕애니" && <BookmarkList />}
+      </ContentContainer>
     </>
   );
 }

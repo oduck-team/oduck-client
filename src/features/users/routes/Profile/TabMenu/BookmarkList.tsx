@@ -1,5 +1,4 @@
 import BookmarkCard from "./BookmarkCard";
-import { BookmarkListContainer } from "./BookmarkList.style";
 
 const BOOKMARK_RIST = [
   {
@@ -21,10 +20,10 @@ const BOOKMARK_RIST = [
 
 export default function BookmarkList() {
   return (
-    <BookmarkListContainer>
+    <>
       {BOOKMARK_RIST.map((bookmark, index) => (
         <BookmarkCard key={index} bookmark={bookmark} />
       ))}
-    </BookmarkListContainer>
+    </>
   );
 }
