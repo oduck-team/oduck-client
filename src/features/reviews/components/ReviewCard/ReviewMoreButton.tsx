@@ -45,11 +45,11 @@ export default function ReviewMoreButton() {
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
   const handleReviewSpoilerReport = () => {
     handleDropDownModalToggle();
-    snackBar?.open({ message: "신고가 접수되었습니다." });
+    snackBar.open({ message: "신고가 접수되었습니다." });
   };
   const handleReviewEtcReport = () => {
     handleDropDownModalToggle();
-    snackBar?.open({
+    snackBar.open({
       message: "신고가 접수되었습니다.",
     });
   };

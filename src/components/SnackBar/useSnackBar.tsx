@@ -9,16 +9,19 @@ import { SnackBarProps } from ".";
 /**
  * @example
  * const snackBar = useSnackBar();
- * snackBar?.open({ message: "신고가 접수되었습니다." });
+ * snackBar.open({ message: "신고가 접수되었습니다." });
  */
 export default function useSnackBar() {
   const context = useContext(SnackBarContext);
 
-  if (!context) return null;
+  if (!context)
+    throw new Error(
+      "useSnackBar must be used within a SnackBarContextProvider",
+    );
   return {
     /**
      * @desc duration을 재정의 할 수 있습니다.
-     * @example snackBar?.open({ message: "신고가 접수되었습니다.", duration: 10 });
+     * @example snackBar.open({ message: "신고가 접수되었습니다.", duration: 10 });
      */
     open: (options: Omit<SnackBarProps, "id" | "position">) => {
       context.dispatch({
