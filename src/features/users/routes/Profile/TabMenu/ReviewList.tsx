@@ -1,7 +1,5 @@
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { ReviewListContainer } from "./ReviewList.style";
-
 const REVIEW_RIST = [
   {
     animation: {
@@ -29,15 +27,13 @@ const REVIEW_RIST = [
 export default function ReviewList() {
   return (
     <>
-      <ReviewListContainer>
-        {REVIEW_RIST.map((review, index) => (
-          <ReviewCard key={index} isBlock>
-            <ReviewCard.Animation animation={review.animation} />
-            <ReviewCard.Comment text={review.comment} />
-            <ReviewCard.ActionBar include="time" createdAt={review.createdAt} />
-          </ReviewCard>
-        ))}
-      </ReviewListContainer>
+      {REVIEW_RIST.map((review, index) => (
+        <ReviewCard key={index} isBlock isBorderTop={false}>
+          <ReviewCard.Animation animation={review.animation} />
+          <ReviewCard.Comment text={review.comment} />
+          <ReviewCard.ActionBar include="time" createdAt={review.createdAt} />
+        </ReviewCard>
+      ))}
     </>
   );
 }

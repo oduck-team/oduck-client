@@ -1,24 +1,40 @@
-import { css } from "@emotion/react";
+import { css, Theme } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { ReviewCardProps } from ".";
 
 export const ReviewCardContainer = styled.article<
-  Pick<ReviewCardProps, "isBlock">
+  Pick<ReviewCardProps, "isBlock" | "isBorderTop">
 >`
-  ${({ isBlock }) =>
-    isBlock
-      ? css`
-          margin: 0 -16px;
-          padding: 16px;
-        `
-      : css`
-          padding: 16px 0;
-        `}
+  border-bottom: 2px solid ${({ theme }) => theme.colors.neutral[10]};
 
-  border-top: 2px solid ${({ theme }) => theme.colors.neutral[10]};
-
-  &:last-child {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.neutral[10]};
-  }
+  ${({ theme, isBlock = false, isBorderTop = true }) =>
+    getStyle(theme, isBlock, isBorderTop)}
 `;
+
+function getStyle(theme: Theme, isBlock: boolean, isBorderTop: boolean) {
+  let isBlockStyle;
+  let isBorderTopStyle;
+
+  if (isBlock) {
+    isBlockStyle = `
+      margin: 0 -16px;
+      padding: 16px;
+    `;
+  } else {
+    isBlockStyle = `
+      padding: 16px 0;
+    `;
+  }
+
+  if (isBorderTop) {
+    isBorderTopStyle = `
+      border-top: 2px solid ${theme.colors.neutral[10]};
+    `;
+  }
+
+  return css`
+    ${isBlockStyle};
+    ${isBorderTopStyle};
+  `;
+}
