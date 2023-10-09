@@ -1,6 +1,6 @@
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { ReviewListContainer, ReviewTitle } from "./style";
+import { ReviewListContainer } from "./ReviewList.style";
 
 const REVIEW_RIST = [
   {
@@ -29,7 +29,6 @@ const REVIEW_RIST = [
 export default function ReviewList() {
   return (
     <>
-      <ReviewTitle>한줄리뷰</ReviewTitle>
       <ReviewListContainer>
         {REVIEW_RIST.map((review, index) => (
           <ReviewCard key={index} isBlock>

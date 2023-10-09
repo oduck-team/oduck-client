@@ -1,12 +1,12 @@
 import AboutMe from "./AboutMe";
-import ReviewList from "./ReviewList";
 import { ProfileContainer } from "./style";
+import TabMenu from "./TabMenu";
 
 export default function Profile() {
   return (
     <ProfileContainer>
       <AboutMe />
-      <ReviewList />
+      <TabMenu />
     </ProfileContainer>
   );
 }
