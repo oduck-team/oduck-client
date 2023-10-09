@@ -11,6 +11,14 @@ export const DiscordContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 0 18px;
+  cursor: pointer;
+  transition: opacity 0.13s;
+
+  & > a:hover {
+    & > svg {
+      scale: 1.1;
+    }
+  }
 
   span {
     ${({ theme }) => theme.typo["title-2-b"]};
@@ -26,16 +34,17 @@ export const DiscordContainer = styled.div`
     color: ${({ theme }) => theme.colors["neutral"]["10"]};
   }
 
-  & > p {
+  & p {
     ${({ theme }) => theme.typo["body-3-r"]};
     color: ${({ theme }) => theme.colors["neutral"]["20"]};
   }
 
-  & > svg {
+  & svg {
     width: 29px;
     height: 22px;
     position: absolute;
     top: 29px;
     right: 30px;
+    transition: scale 0.13s;
   }
 `;
