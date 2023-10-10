@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import BookmarkList from "./BookmarkList";
 import ReviewList from "./ReviewList";
+import SortBar from "./SortBar";
 import { ContentContainer, Tab, TabButton } from "./style";
 
 const REVIEW_MENU = "한줄리뷰";
@@ -33,6 +34,7 @@ export default function TabMenu() {
         ))}
       </Tab>
       <ContentContainer>
+        <SortBar menu={selectedMenu} />
         {selectedMenu === "한줄리뷰" && <ReviewList />}
         {selectedMenu === "입덕애니" && <BookmarkList />}
       </ContentContainer>
