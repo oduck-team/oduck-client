@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import BookmarkList from "./BookmarkList";
 import ReviewList from "./ReviewList";
@@ -15,8 +16,14 @@ const TAB_BUTTONS = [
 export type MENU = typeof REVIEW_MENU | typeof BOOKMARK_MENU;
 
 export default function TabMenu() {
+  const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState<MENU>(REVIEW_MENU);
   const handleTabMenuClick = (text: MENU) => setSelectedMenu(text);
+
+  useEffect(() => {
+    if (!location.state) return;
+    setSelectedMenu(BOOKMARK_MENU);
+  }, [location.state]);
 
   return (
     <>
