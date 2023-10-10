@@ -76,16 +76,16 @@ export default function useSortBar(menu: MENU) {
       id,
       isDESC,
       text: isDESC ? text.desc : text.asc,
-      state: prev.state.map((item) => {
-        if (item.id === id) {
+      state: prev.state.map((button) => {
+        if (button.id === id) {
           return {
-            ...item,
+            ...button,
             text: isDESC ? text.desc : text.asc,
             isDESC,
           };
         }
 
-        return item;
+        return button;
       }),
     }));
   };
