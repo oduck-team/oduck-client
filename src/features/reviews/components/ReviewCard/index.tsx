@@ -7,16 +7,21 @@ import { ReviewCardContainer } from "./style";
 import UserRating from "./UserRating";
 
 export interface ReviewCardProps {
-  /*** isBlock: 위, 아래 border를 양옆에 붙이는 옵션 */
+  /** side-padding(16px)만큼 width를 늘리는 옵션 */
   isBlock?: boolean;
+  /** border top을 생기게 하는 옵션 */
+  isBorderTop?: boolean;
 }
 
 export default function ReviewCard({
   isBlock,
+  isBorderTop = true,
   children,
 }: StrictPropsWithChildren<ReviewCardProps>) {
   return (
-    <ReviewCardContainer isBlock={isBlock}>{children}</ReviewCardContainer>
+    <ReviewCardContainer isBlock={isBlock} isBorderTop={isBorderTop}>
+      {children}
+    </ReviewCardContainer>
   );
 }
 

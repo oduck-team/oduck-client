@@ -8,6 +8,7 @@ import {
   X,
 } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 import useAuth from "@/hooks/useAuth";
 
@@ -29,7 +30,7 @@ const userMenuItems: NavItem[] = [
   {
     id: "bookmark",
     title: "입덕 애니",
-    to: "/my-animations",
+    to: "/profile",
     icon: <TelevisionSimple />,
   },
 ];
@@ -72,7 +73,13 @@ export default function Sidebar({
 
     if (foundItem) {
       onClickItem();
-      navigate(foundItem.to);
+      if (foundItem.id === "bookmark") {
+        navigate(foundItem.to, {
+          state: `bookmark ${uuidv4()}`,
+        });
+      } else {
+        navigate(foundItem.to);
+      }
     }
   };
 
