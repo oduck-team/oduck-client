@@ -42,4 +42,5 @@ export const StatContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
   margin-bottom: 18px;
+  cursor: pointer;
 `;
