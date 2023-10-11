@@ -4,6 +4,17 @@ declare interface BaseTimeEntity {
   deletedAt?: string | null;
 }
 
+declare type Provider = "kakao" | "google" | "naver";
+declare type UserRole = "GUEST" | "ROLE" | "ADMIN";
+
+declare interface User extends BaseTimeEntity {
+  name: string;
+  memberId: number;
+  imageUrl?: string;
+  point: number;
+  role: Role | null;
+}
+
 declare interface Series extends BaseTimeEntity {
   id: number;
   title: string;
