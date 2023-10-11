@@ -7,29 +7,30 @@ import {
   useCallback,
 } from "react";
 
-import { BASE_URL } from "@/config";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
-import { IUser, Providers } from "@/features/auth/types";
+import { getAuthStatus } from "@/features/auth/api/getAuthStatus";
+import { socialLogin } from "@/features/auth/api/socialLogin";
+import { logout as logoutRequeset } from "@/features/auth/api/logout";
 
 interface AuthState {
-  user: IUser;
+  user: User;
   isLoggedIn: boolean;
 }
 
 interface AuthAction {
   fetchUser: () => Promise<void>;
-  socialLogin: (provider: Providers) => void;
+  socialLogin: (provider: Provider) => void;
   logout: () => Promise<void>;
 }
 
-const DEFAULT_USER: IUser = {
+const DEFAULT_USER: User = {
   name: "",
   memberId: 0,
   imageUrl: "",
   point: 0,
   role: null,
   createdAt: "",
-  updateAt: "",
+  updatedAt: "",
 } as const;
 
 const AuthContext = createContext<AuthState & AuthAction>({
@@ -44,28 +45,12 @@ export default AuthContext;
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const { localUser, setLocalUser, removeLocalUser } = useLocalUser();
-  const [user, setUser] = useState<IUser>(localUser ?? DEFAULT_USER);
+  const [user, setUser] = useState<User>(localUser ?? DEFAULT_USER);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const fetchUser = async () => {
-    const result = await fetch(BASE_URL + "/auth/status", {
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
-      credentials: "include",
-    });
-
-    if (!result.ok) {
-      throw new Error(result.statusText);
-    }
-
-    const data = await result.json();
-    return data as IUser;
-  };
-
-  const handleFetchUser = useCallback(async () => {
+  const fetchUser = useCallback(async () => {
     try {
-      const user = await fetchUser();
+      const user = await getAuthStatus();
       setUser(user);
       setLocalUser(user);
       setIsLoggedIn(true);
@@ -76,34 +61,26 @@ export function AuthProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const handleSocialLogin = (provider: Providers) => {
-    window.location.href = `${BASE_URL}/auth/${provider}/login`;
-  };
-
-  const handleLogout = useCallback(async () => {
-    await fetch("/auth/logout", {
-      method: "DELETE",
-    });
+  const logout = useCallback(async () => {
+    logoutRequeset();
     setUser(DEFAULT_USER);
     removeLocalUser();
     setIsLoggedIn(false);
   }, [removeLocalUser]);
 
   useEffect(() => {
-    if (localUser) {
-      handleFetchUser();
-    }
+    fetchUser();
   }, []);
 
   const value = useMemo<AuthState & AuthAction>(
     () => ({
       user,
       isLoggedIn,
-      fetchUser: handleFetchUser,
-      socialLogin: handleSocialLogin,
-      logout: handleLogout,
+      fetchUser,
+      socialLogin,
+      logout,
     }),
-    [user, isLoggedIn, handleFetchUser, handleLogout],
+    [user, isLoggedIn, fetchUser, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

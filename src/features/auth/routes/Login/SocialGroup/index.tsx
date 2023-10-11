@@ -1,10 +1,8 @@
-import { Providers } from "@/features/auth/types";
-
 import { SocialGroupContainer, SocialButton } from "./style";
 
 interface SocialSite {
   name: string;
-  provider: Providers;
+  provider: Provider;
   primaryColor: string;
   icon: React.ReactNode;
 }
@@ -31,7 +29,7 @@ const socialSites: SocialSite[] = [
 ];
 
 interface SocialGroupProps {
-  onClick: (provider: Providers) => void;
+  onClick: (provider: Provider) => void;
 }
 
 export default function SocialGroup({ onClick }: SocialGroupProps) {
