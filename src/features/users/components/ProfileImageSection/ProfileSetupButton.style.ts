@@ -21,6 +21,7 @@ export const Dots = styled.div`
 `;
 
 export const Dot = styled.span`
+  flex-shrink: 0;
   display: block;
   width: 4px;
   height: 4px;

@@ -42,7 +42,7 @@ DropDownModal.Button = Button;
 const variants: Variants = {
   animate: {
     opacity: 1,
-    bottom: [32, 66],
+    bottom: [4, 12],
     transition: {
       duration: 0.2,
       ease: "easeInOut",
@@ -50,6 +50,6 @@ const variants: Variants = {
   },
   exit: {
     opacity: 0,
-    bottom: 32,
+    bottom: 4,
   },
 };

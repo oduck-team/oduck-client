@@ -19,7 +19,6 @@ export const ButtonContainer = styled(motion.div)`
   width: calc(100vw - var(--side-padding));
   max-width: calc(600px - var(--side-padding));
   gap: 8px;
-  margin-bottom: 8px;
   z-index: ${({ theme }) => theme.zIndex.modal};
 
   & > button {
