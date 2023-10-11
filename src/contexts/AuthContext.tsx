@@ -8,6 +8,7 @@ import {
 } from "react";
 
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
+import useSnackBar from "@/components/SnackBar/useSnackBar";
 import { getAuthStatus } from "@/features/auth/api/getAuthStatus";
 import { socialLogin } from "@/features/auth/api/socialLogin";
 import { logout as logoutRequeset } from "@/features/auth/api/logout";
@@ -47,6 +48,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const { localUser, setLocalUser, removeLocalUser } = useLocalUser();
   const [user, setUser] = useState<User>(localUser ?? DEFAULT_USER);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const snackbar = useSnackBar();
 
   const fetchUser = useCallback(async () => {
     try {
@@ -63,6 +65,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const logout = useCallback(async () => {
     logoutRequeset();
+    snackbar.open({ message: "로그아웃 되었어요" });
     setUser(DEFAULT_USER);
     removeLocalUser();
     setIsLoggedIn(false);
