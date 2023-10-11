@@ -3,7 +3,7 @@ import Modal from "@/components/Modal";
 
 import { ContentContainer, Data, Title, Section } from "./StatModal.style";
 
-const TITLE_LIST = ["한줄리뷰", "스레드", "받은 좋아요 수", "포인트"];
+const TITLE_LIST = ["한줄리뷰", "입덕애니", "받은 좋아요 수", "포인트"];
 
 interface StatItemProps {
   data: number;
