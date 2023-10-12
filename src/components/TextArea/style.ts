@@ -4,21 +4,24 @@ import styled from "@emotion/styled";
 import { TextareaBoxProps } from ".";
 
 export const TextareaBox = styled.textarea<TextareaBoxProps>`
-  ${({ warn = false, theme }) => css`
+  ${({ warn = false, theme, negativeMargin }) => css`
     ${theme.typo["body-2-r"]};
+    width: 114.4%;
+    margin-bottom: ${negativeMargin}px;
+    padding: 0.6rem 1.16rem;
+    font-size: 16px;
+    transform: scale(0.875);
+    transform-origin: left top;
     display: flex;
-    width: 100%;
-    height: calc(100% - 19px);
-    padding: 0.5rem 1rem;
     justify-content: space-between;
     align-items: center;
     flex-shrink: 0;
     background-color: white;
     color: ${theme.colors["neutral"]["90"]};
-    border-radius: 6px;
+    border-radius: 7px;
     border: 1px solid
       ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
-    transition: all 0.2s;
+    transition: border 0.2s;
     resize: none;
 
     &::placeholder {
@@ -45,8 +48,8 @@ export const Message = styled.div`
     color: ${theme.colors["warn"]["40"]};
     width: fit-content;
     margin: 4px 0px 0px 8px;
+    flex-shrink: 0;
   `}
-  flex-shrink: 0;
 `;
 
 export const TextareaContainer = styled.div`

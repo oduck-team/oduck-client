@@ -6,10 +6,17 @@ import { TextInputBoxProps } from ".";
 export const TextInputBox = styled.input<TextInputBoxProps>`
   ${({ warn = false, hasIcon = false, disabled = false, theme }) => css`
     ${theme.typo["body-2-r"]};
+    width: 114.4%;
+    height: 45.76px;
+    font-size: 16px; // 겉보기엔 14px
+    transform: scale(0.875);
+    transform-origin: left top;
+    padding: ${hasIcon ? `0 1rem 0 calc(1.16rem + 20px)` : `0 1.16rem`};
+    margin-bottom: -6px;
+    border-radius: 7px;
     display: flex;
-    width: 100%;
-    height: 40px;
-    padding: ${hasIcon ? `0 1rem 0 calc(1rem + 20px)` : `0 1rem`};
+    border: 1px solid
+      ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
 
     justify-content: space-between;
     align-items: center;
@@ -18,9 +25,6 @@ export const TextInputBox = styled.input<TextInputBoxProps>`
     color: ${!disabled
       ? theme.colors["neutral"]["90"]
       : theme.colors["neutral"]["50"]};
-    border-radius: 6px;
-    border: 1px solid
-      ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
     transition: all 0.2s;
 
     &::placeholder {
@@ -57,14 +61,16 @@ export const Message = styled.div`
 
 export const TextInputContainer = styled.div<{ warn?: boolean }>`
   width: 100%;
+  height: fit-content;
   position: relative;
   & > svg {
     position: absolute;
-    top: 10px;
+    top: 10px; // icon height=20 기준
     left: 10px;
     color: ${({ warn = false, theme }) =>
       warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["50"]};
     transition: all 0.2s;
+    z-index: 1; // 없으면 보이지 않음
   }
 
   &:focus-within {
