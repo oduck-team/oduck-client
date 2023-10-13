@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 import {
   CaretIcon,
@@ -7,6 +7,8 @@ import {
   Select,
   SelectBoxContainer,
 } from "./style";
+
+type Direction = typeof ARROW_UP | typeof ARROW_DOWN;
 
 const ARROW_UP = "ArrowUp";
 const ARROW_DOWN = "ArrowDown";
@@ -32,52 +34,73 @@ export default function SelectBox({
   const [listVisible, setListVisible] = useState(false);
   const cursor = useRef(0);
   const selectBoxtRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const handleListToggle = () => setListVisible((prev) => !prev);
   const handleOptionClick = (value: string, text: string) => {
     onChange(value, text);
     handleListToggle();
   };
 
-  useEffect(() => {
-    const selectBoxEl = selectBoxtRef.current;
+  const scrollToSelectedOption = useCallback(
+    (direction: Direction) => {
+      if (direction === "ArrowDown") {
+        cursor.current === 0
+          ? listRef.current?.scrollTo({ top: 0 })
+          : listRef.current?.scrollBy({ top: 32 });
+        return;
+      }
 
-    const downHandler = (e: KeyboardEvent) => {
+      if (direction === "ArrowUp") {
+        cursor.current === options.length - 1
+          ? listRef.current?.scrollTo({
+              top: listRef.current?.childElementCount * 32,
+            })
+          : listRef.current?.scrollBy({ top: -32 });
+        return;
+      }
+    },
+    [options.length],
+  );
+
+  const keyHandler = useCallback(
+    (e: KeyboardEvent) => {
       if (e.key === ARROW_DOWN) {
         cursor.current =
           cursor.current < options.length - 1 ? cursor.current + 1 : 0;
 
         onChange(options[cursor.current].value, options[cursor.current].text);
+        scrollToSelectedOption(e.key);
+        return;
       }
-    };
 
-    const upHandler = (e: KeyboardEvent) => {
       if (e.key === ARROW_UP) {
         cursor.current =
           cursor.current > 0 ? cursor.current - 1 : options.length - 1;
 
         onChange(options[cursor.current].value, options[cursor.current].text);
+        scrollToSelectedOption(e.key);
+        return;
       }
-    };
 
-    const enterHandler = (e: KeyboardEvent) => {
       if (e.key === ENTER) {
         onChange(options[cursor.current].value, options[cursor.current].text);
         handleListToggle();
+        return;
       }
-    };
+    },
+    [onChange, options, scrollToSelectedOption],
+  );
 
+  useEffect(() => {
+    const selectBoxEl = selectBoxtRef.current;
     if (listVisible) {
-      selectBoxEl?.addEventListener("keydown", downHandler);
-      selectBoxEl?.addEventListener("keydown", upHandler);
-      selectBoxEl?.addEventListener("keyup", enterHandler);
+      selectBoxEl?.addEventListener("keydown", keyHandler);
     }
 
     return () => {
-      selectBoxEl?.removeEventListener("keydown", downHandler);
-      selectBoxEl?.removeEventListener("keydown", upHandler);
-      selectBoxEl?.removeEventListener("keyup", enterHandler);
+      selectBoxEl?.removeEventListener("keydown", keyHandler);
     };
-  }, [listVisible, onChange, options]);
+  }, [keyHandler, listVisible]);
 
   return (
     <SelectBoxContainer ref={selectBoxtRef} tabIndex={0}>
@@ -87,7 +110,7 @@ export default function SelectBox({
       </Select>
 
       {listVisible && (
-        <DropDownList>
+        <DropDownList ref={listRef}>
           {options.map(({ value, text }, index) => (
             <Option
               key={value}
