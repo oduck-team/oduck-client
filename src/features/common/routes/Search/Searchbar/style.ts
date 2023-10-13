@@ -9,6 +9,7 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
     top: 10px;
     left: 8px;
     color: ${({ theme }) => theme.colors.neutral["60"]};
+    z-index: 10;
   }
 
   & form {
@@ -24,10 +25,16 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
     ${({ theme }) => theme.typo["body-2-m"]}
     display: inline-flex;
     align-items: center;
-    height: 40px;
-    width: 100%;
-    padding-left: 36px;
-    padding-right: 16px;
+    flex-shrink: 0;
+    --scale: 1.1429;
+    width: calc(100% * var(--scale));
+    height: calc(40px * var(--scale));
+    font-size: 16px;
+    transform: scale(0.875);
+    transform-origin: left top;
+    padding-left: calc(36px * var(--scale));
+    padding-right: calc(16px * var(--scale));
+    margin-bottom: calc(40px - 40px * var(--scale));
     background-color: ${({ theme }) => theme.colors.neutral["10"]};
     border: none;
     border-radius: 5px;
