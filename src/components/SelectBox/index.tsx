@@ -45,18 +45,18 @@ export default function SelectBox({
   const scrollToSelectedOption = useCallback(
     (direction: Direction) => {
       if (direction === "ArrowDown") {
-        cursor.current === 0
-          ? listRef.current?.scrollTo({ top: 0 })
-          : listRef.current?.scrollBy({ top: 32 });
+        cursor.current >= 6
+          ? listRef.current?.scrollBy({ top: 32 })
+          : listRef.current?.scrollTo({ top: 0 });
         return;
       }
 
       if (direction === "ArrowUp") {
-        cursor.current === options.length - 1
-          ? listRef.current?.scrollTo({
+        cursor.current <= options.length - 1 - 6
+          ? listRef.current?.scrollBy({ top: -32 })
+          : listRef.current?.scrollTo({
               top: listRef.current?.childElementCount * 32,
-            })
-          : listRef.current?.scrollBy({ top: -32 });
+            });
         return;
       }
     },
