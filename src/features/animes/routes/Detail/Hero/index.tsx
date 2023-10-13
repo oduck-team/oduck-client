@@ -11,7 +11,7 @@ import {
   Actions,
   Stat,
   BookmarkContainer,
-} from "./Hero.style";
+} from "./style";
 
 interface HeroProps {
   anime: Anime;

@@ -6,7 +6,7 @@ import { ReviewCardProps } from ".";
 export const ReviewCardContainer = styled.article<
   Pick<ReviewCardProps, "isBlock" | "isBorderTop">
 >`
-  border-bottom: 2px solid ${({ theme }) => theme.colors.neutral[10]};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[10]};
 
   ${({ theme, isBlock = false, isBorderTop = true }) =>
     getStyle(theme, isBlock, isBorderTop)}
@@ -29,7 +29,7 @@ function getStyle(theme: Theme, isBlock: boolean, isBorderTop: boolean) {
 
   if (isBorderTop) {
     isBorderTopStyle = `
-      border-top: 2px solid ${theme.colors.neutral[10]};
+      border-top: 1px solid ${theme.colors.neutral[10]};
     `;
   }
 

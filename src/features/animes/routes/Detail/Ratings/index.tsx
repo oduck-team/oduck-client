@@ -3,6 +3,8 @@ import { Star } from "@phosphor-icons/react";
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
 
+import Section from "../Section";
+
 import {
   AverageRatings,
   AverageRatingsOverview,
@@ -10,8 +12,7 @@ import {
   AttractionPointLabel,
   AttractionPointRatio,
   Grid,
-} from "./Ratings.style";
-import Section from "./Section";
+} from "./style";
 
 export default function Ratings() {
   return (

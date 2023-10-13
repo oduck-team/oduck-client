@@ -27,7 +27,8 @@ export const AttractionPoint = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 24px;
+  margin-bottom: 8px;
 
   & > h2 {
     margin: 0 auto;
