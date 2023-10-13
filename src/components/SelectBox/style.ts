@@ -6,6 +6,7 @@ import { SelectBoxProps } from ".";
 
 export const SelectBoxContainer = styled.div`
   position: relative;
+  outline: none;
 `;
 
 export const Select = styled.div<Pick<SelectBoxProps, "selected">>`
@@ -60,7 +61,7 @@ export const DropDownList = styled.ul`
   overflow-y: scroll;
 `;
 
-export const Option = styled.li`
+export const Option = styled.li<{ index: number; cursor: number }>`
   color: ${({ theme }) => theme.colors.neutral[90]};
   ${({ theme }) => theme.typo["body-2-r"]}
   padding: 5px 13px 5px 5px;
@@ -70,6 +71,12 @@ export const Option = styled.li`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  ${({ theme, index, cursor }) =>
+    index === cursor &&
+    css`
+      background-color: ${theme.colors.neutral[10]};
+    `}
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.neutral[10]};
