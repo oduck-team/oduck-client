@@ -6,12 +6,13 @@ import { TextareaBoxProps } from ".";
 export const TextareaBox = styled.textarea<TextareaBoxProps>`
   ${({ warn = false, theme, negativeMargin }) => css`
     ${theme.typo["body-2-r"]};
-    width: 114.4%;
-    margin-bottom: ${negativeMargin}px;
-    padding: 0.6rem 1.16rem;
+    --scale: 1.1429;
+    width: calc(100% * var(--scale));
     font-size: 16px;
     transform: scale(0.875);
     transform-origin: left top;
+    padding: 0.6rem 1.16rem;
+    margin-bottom: ${negativeMargin}px;
     display: flex;
     justify-content: space-between;
     align-items: center;

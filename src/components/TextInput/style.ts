@@ -6,13 +6,14 @@ import { TextInputBoxProps } from ".";
 export const TextInputBox = styled.input<TextInputBoxProps>`
   ${({ warn = false, hasIcon = false, disabled = false, theme }) => css`
     ${theme.typo["body-2-r"]};
-    width: 114.4%;
-    height: 45.76px;
-    font-size: 16px; // 겉보기엔 14px
+    --scale: 1.1429;
+    width: calc(100% * var(--scale));
+    height: calc(40px * var(--scale));
+    font-size: 16px;
     transform: scale(0.875);
     transform-origin: left top;
     padding: ${hasIcon ? `0 1rem 0 calc(1.16rem + 20px)` : `0 1.16rem`};
-    margin-bottom: -6px;
+    margin-bottom: calc(40px - 40px * var(--scale));
     border-radius: 7px;
     display: flex;
     border: 1px solid
