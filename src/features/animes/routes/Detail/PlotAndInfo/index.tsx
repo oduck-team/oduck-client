@@ -1,5 +1,6 @@
-import { Grid, Plot } from "./PlotAndInfo.style";
-import Section from "./Section";
+import Section from "../Section";
+
+import { Grid, Plot } from "./style";
 
 export default function PlotAndInfo() {
   return (

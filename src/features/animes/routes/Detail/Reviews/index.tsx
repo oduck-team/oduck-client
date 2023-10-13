@@ -1,7 +1,7 @@
 import Chip from "@/components/Chip";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { Section } from "./Reviews.style";
+import { Section } from "./style";
 
 const REVIEW_MOCK_DATA = {
   user: {
@@ -24,7 +24,6 @@ export default function Reviews() {
           display: "flex",
           gap: "4px",
           paddingBottom: "16px",
-          borderBottom: "1px solid #F1F1F1",
         }}
       >
         <li>
