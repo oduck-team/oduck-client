@@ -36,8 +36,9 @@ export default function SelectBox({
   const selectBoxtRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const handleListToggle = () => setListVisible((prev) => !prev);
-  const handleOptionClick = (value: string, text: string) => {
+  const handleOptionClick = (value: string, text: string, index: number) => {
     onChange(value, text);
+    cursor.current = index;
     handleListToggle();
   };
 
@@ -116,7 +117,7 @@ export default function SelectBox({
               key={value}
               index={index}
               cursor={cursor.current}
-              onClick={() => handleOptionClick(value, text)}
+              onClick={() => handleOptionClick(value, text, index)}
             >
               {text}
             </Option>
