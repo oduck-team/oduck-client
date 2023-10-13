@@ -7,11 +7,11 @@ import {
   useCallback,
 } from "react";
 
-import useLocalUser from "@/features/auth/hooks/useLocalUser";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import { getAuthStatus } from "@/features/auth/api/getAuthStatus";
-import { socialLogin } from "@/features/auth/api/socialLogin";
 import { logout as logoutRequeset } from "@/features/auth/api/logout";
+import { socialLogin } from "@/features/auth/api/socialLogin";
+import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
 interface AuthState {
   user: User;

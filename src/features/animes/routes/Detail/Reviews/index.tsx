@@ -1,7 +1,7 @@
 import Chip from "@/components/Chip";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
-import { Section } from "./Reviews.style";
+import { Section, TotalReviews } from "./style";
 
 const REVIEW_MOCK_DATA = {
   user: {
@@ -16,15 +16,12 @@ export default function Reviews() {
   return (
     <Section>
       <h1>한 줄 리뷰</h1>
-      <p style={{ marginTop: "8px", marginBottom: "8px" }}>
-        총 1,120명이 리뷰를 남겨 주셨어요
-      </p>
+      <TotalReviews>총 1,120명이 리뷰를 남겨 주셨어요</TotalReviews>
       <ul
         style={{
           display: "flex",
           gap: "4px",
           paddingBottom: "16px",
-          borderBottom: "1px solid #F1F1F1",
         }}
       >
         <li>
