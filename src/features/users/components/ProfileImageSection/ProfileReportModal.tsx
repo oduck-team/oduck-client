@@ -14,6 +14,17 @@ const OPTION = [
     text: "부적절한 닉네임/자기소개",
   },
   { value: "기타 신고", text: "기타 신고" },
+  {
+    value:
+      "텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1",
+    text: "텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1텍스트1",
+  },
+  { value: "2", text: "2" },
+  { value: "텍스트3", text: "텍스트3" },
+  { value: "텍스트4", text: "텍스트4" },
+  { value: "텍스트5", text: "텍스트5" },
+  { value: "텍스트6", text: "텍스트6" },
+  { value: "텍스트7", text: "텍스트7" },
 ];
 
 interface ProfileReportModalProps {
@@ -24,10 +35,14 @@ export default function ProfileReportModal({
   onClose,
 }: ProfileReportModalProps) {
   const snackBar = useSnackBar();
-  const [selected, setSelected] = useState(OPTION[0].value);
+  const [selected, setSelected] = useState({
+    value: OPTION[0].value,
+    text: OPTION[0].text,
+  });
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
-    setSelected(e.target.value);
+  const handleSelectChange = (value: string, text: string) =>
+    setSelected({ value, text });
+
   const handleReportSumbit = () => {
     onClose();
     snackBar.open({ message: "신고가 접수되었습니다." });
