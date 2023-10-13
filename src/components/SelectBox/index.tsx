@@ -100,6 +100,13 @@ export default function SelectBox({
     [onChange, options, scrollToSelectedOption],
   );
 
+  const closeList = (e: MouseEvent) => {
+    const selectBoxEl = selectBoxtRef.current;
+    if (selectBoxEl && !selectBoxEl.contains(e.target as Node)) {
+      setListVisible(false);
+    }
+  };
+
   useEffect(() => {
     const selectBoxEl = selectBoxtRef.current;
     if (listVisible) {
@@ -125,6 +132,13 @@ export default function SelectBox({
 
       setPosition("bottom");
     }
+  }, [listVisible]);
+
+  useEffect(() => {
+    if (!listVisible) return;
+
+    document.addEventListener("click", closeList);
+    return () => document.removeEventListener("click", closeList);
   }, [listVisible]);
 
   return (
