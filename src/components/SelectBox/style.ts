@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { CaretDown } from "@phosphor-icons/react";
 
-import { SelectBoxProps } from ".";
+import { Position, SelectBoxProps } from ".";
 
 export const SHOW_MAX_OPTION = 6;
 export const OPTION_HEIGHT = 32;
@@ -50,10 +50,10 @@ export const CaretIcon = styled(CaretDown)`
   color: ${({ theme }) => theme.colors.neutral[50]};
 `;
 
-export const DropDownList = styled.ul`
+export const DropDownList = styled.ul<{ position: Position }>`
   --padding: 8px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
-  border: 1px solid ${({ theme }) => theme.colors.neutral["05"]};
+  border: 1px solid ${({ theme }) => theme.colors.neutral[40]};
   border-radius: 6px;
   background-color: #fff;
   padding: var(--padding);
@@ -65,6 +65,16 @@ export const DropDownList = styled.ul`
     (${OPTION_HEIGHT}px * ${SHOW_MAX_OPTION}) + (var(--padding) * 2)
   );
   overflow-y: scroll;
+  z-index: ${({ theme }) => theme.zIndex.modal};
+
+  ${({ position }) =>
+    position === "top" &&
+    css`
+      top: calc(
+        -1 * ((${OPTION_HEIGHT}px * ${SHOW_MAX_OPTION}) + (var(--padding) * 2) +
+              4px)
+      );
+    `}
 `;
 
 export const Option = styled.li<{ index: number; cursor: number }>`

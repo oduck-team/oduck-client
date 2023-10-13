@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
+import useScrollLock from "@/hooks/useScrollLock";
+
 import {
   CaretIcon,
   DropDownList,
@@ -15,6 +17,8 @@ type Direction = typeof ARROW_UP | typeof ARROW_DOWN;
 const ARROW_UP = "ArrowUp";
 const ARROW_DOWN = "ArrowDown";
 const ENTER = "Enter";
+
+export type Position = "bottom" | "top";
 
 interface Option {
   value: string;
@@ -34,6 +38,8 @@ export default function SelectBox({
   onChange,
 }: SelectBoxProps) {
   const [listVisible, setListVisible] = useState(false);
+  useScrollLock(listVisible);
+  const [position, setPosition] = useState<Position>("bottom");
   const cursor = useRef(0);
   const selectBoxtRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
@@ -105,6 +111,22 @@ export default function SelectBox({
     };
   }, [keyHandler, listVisible]);
 
+  useEffect(() => {
+    if (listVisible) {
+      const windowHeight = window.innerHeight;
+      const listHeight = listRef.current?.offsetHeight ?? 0;
+      const selectBoxPosition =
+        selectBoxtRef.current?.getBoundingClientRect().bottom ?? 0;
+
+      if (windowHeight - selectBoxPosition < listHeight) {
+        setPosition("top");
+        return;
+      }
+
+      setPosition("bottom");
+    }
+  }, [listVisible]);
+
   return (
     <SelectBoxContainer ref={selectBoxtRef} tabIndex={0}>
       <Select selected={selected} onClick={handleListToggle}>
@@ -113,7 +135,7 @@ export default function SelectBox({
       </Select>
 
       {listVisible && (
-        <DropDownList ref={listRef}>
+        <DropDownList ref={listRef} position={position}>
           {options.map(({ value, text }, index) => (
             <Option
               key={value}
