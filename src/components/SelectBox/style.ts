@@ -2,7 +2,9 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { CaretDown } from "@phosphor-icons/react";
 
-import { Position, SelectBoxProps } from ".";
+import { Position } from "./useSelectBox";
+
+import { SelectBoxProps } from ".";
 
 export const SHOW_MAX_OPTION = 6;
 export const OPTION_HEIGHT = 32;
