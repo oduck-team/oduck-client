@@ -3,7 +3,9 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import {
   CaretIcon,
   DropDownList,
+  OPTION_HEIGHT,
   Option,
+  SHOW_MAX_OPTION,
   Select,
   SelectBoxContainer,
 } from "./style";
@@ -45,17 +47,17 @@ export default function SelectBox({
   const scrollToSelectedOption = useCallback(
     (direction: Direction) => {
       if (direction === "ArrowDown") {
-        cursor.current >= 6
-          ? listRef.current?.scrollBy({ top: 32 })
+        cursor.current >= SHOW_MAX_OPTION
+          ? listRef.current?.scrollBy({ top: OPTION_HEIGHT })
           : listRef.current?.scrollTo({ top: 0 });
         return;
       }
 
       if (direction === "ArrowUp") {
-        cursor.current <= options.length - 1 - 6
-          ? listRef.current?.scrollBy({ top: -32 })
+        cursor.current <= options.length - 1 - SHOW_MAX_OPTION
+          ? listRef.current?.scrollBy({ top: -OPTION_HEIGHT })
           : listRef.current?.scrollTo({
-              top: listRef.current?.childElementCount * 32,
+              top: listRef.current?.childElementCount * OPTION_HEIGHT,
             });
         return;
       }

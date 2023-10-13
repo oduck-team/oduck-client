@@ -4,6 +4,9 @@ import { CaretDown } from "@phosphor-icons/react";
 
 import { SelectBoxProps } from ".";
 
+export const SHOW_MAX_OPTION = 6;
+export const OPTION_HEIGHT = 32;
+
 export const SelectBoxContainer = styled.div`
   position: relative;
   outline: none;
@@ -48,16 +51,19 @@ export const CaretIcon = styled(CaretDown)`
 `;
 
 export const DropDownList = styled.ul`
+  --padding: 8px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
   border: 1px solid ${({ theme }) => theme.colors.neutral["05"]};
   border-radius: 6px;
   background-color: #fff;
-  padding: 8px;
+  padding: var(--padding);
   position: absolute;
   top: calc(40px + 2px);
   left: 0px;
   width: 100%;
-  max-height: calc((32px * 6) + 16px); // option height * 개수 + 위 아래 padding
+  max-height: calc(
+    (${OPTION_HEIGHT}px * ${SHOW_MAX_OPTION}) + (var(--padding) * 2)
+  );
   overflow-y: scroll;
 `;
 
@@ -66,8 +72,8 @@ export const Option = styled.li<{ index: number; cursor: number }>`
   ${({ theme }) => theme.typo["body-2-r"]}
   padding: 5px 13px 5px 5px;
   border-radius: 6px;
-  height: 32px; // option height
-  max-height: 32px;
+  height: ${OPTION_HEIGHT}px;
+  max-height: ${OPTION_HEIGHT}px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
