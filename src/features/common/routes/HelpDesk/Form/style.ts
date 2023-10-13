@@ -42,8 +42,8 @@ export const FormTextInput = styled(TextInput)`
 
 export const FormTextarea = styled(Textarea)`
   width: calc(100% - 81px);
-  height: 233px;
   & > textarea {
+    height: calc(233px * 1.1429);
     border-radius: 12px;
   }
 `;
