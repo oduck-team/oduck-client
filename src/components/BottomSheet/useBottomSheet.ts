@@ -63,18 +63,7 @@ export default function useBottomSheet(
     } else {
       setHeight(contentHeight);
     }
-  }, [isVisible]);
-
-  // 모바일 pull to refresh를 막아줍니다
-  useEffect(() => {
-    if (isVisible) {
-      document.body.style.overflow = "hidden";
-    } else {
-      setTimeout(() => {
-        document.body.style.overflow = "";
-      }, 200);
-    }
-  }, [isVisible]);
+  }, [isVisible, windowHeight]);
 
   return {
     animationControls,
