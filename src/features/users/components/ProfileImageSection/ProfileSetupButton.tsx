@@ -2,6 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Portal from "@/components/Portal";
+
 import DropDownModal from "../DropDownModal";
 import useDropDownModal from "../DropDownModal/useDropDownModal";
 
@@ -10,6 +12,7 @@ import {
   ProfileSetupButtonContainer,
   Dot,
   Dots,
+  Backdrop,
 } from "./ProfileSetupButton.style";
 
 interface ProfileSetupButtonProps {
@@ -28,6 +31,10 @@ export default function ProfileSetupButton({
     handleDropDownModalToggle();
     handleReportModalToggle();
   };
+  const handleBackdropClick = () => {
+    if (isDropDownModalOpen) handleDropDownModalToggle();
+    if (isReportModalOpen) handleReportModalToggle();
+  };
 
   return (
     <>
@@ -40,32 +47,38 @@ export default function ProfileSetupButton({
       </ProfileSetupButtonContainer>
 
       <AnimatePresence>
-        {isDropDownModalOpen && (
-          <DropDownModal
-            key="DropDownModal"
-            onDropDownModalToggle={handleDropDownModalToggle}
-          >
-            <DropDownModal.Button
-              name="프로필 링크 복사"
-              size="lg"
-              variant="solid"
-              color="neutral"
+        <Portal>
+          {(isDropDownModalOpen || isReportModalOpen) && (
+            <Backdrop onClick={handleBackdropClick} />
+          )}
+
+          {isDropDownModalOpen && (
+            <DropDownModal
+              key="DropDownModal"
+              onDropDownModalToggle={handleDropDownModalToggle}
             >
-              프로필 링크 복사
-            </DropDownModal.Button>
-            <DropDownModal.Button
-              name={isMine ? "프로필 수정" : "신고하기"}
-              size="lg"
-              variant="solid"
-              color="neutral"
-              onClick={() =>
-                isMine ? handleLinkToEditClick() : handleReportClick()
-              }
-            >
-              {isMine ? "프로필 수정" : "신고하기"}
-            </DropDownModal.Button>
-          </DropDownModal>
-        )}
+              <DropDownModal.Button
+                name="프로필 링크 복사"
+                size="lg"
+                variant="solid"
+                color="neutral"
+              >
+                프로필 링크 복사
+              </DropDownModal.Button>
+              <DropDownModal.Button
+                name={isMine ? "프로필 수정" : "신고하기"}
+                size="lg"
+                variant="solid"
+                color="neutral"
+                onClick={() =>
+                  isMine ? handleLinkToEditClick() : handleReportClick()
+                }
+              >
+                {isMine ? "프로필 수정" : "신고하기"}
+              </DropDownModal.Button>
+            </DropDownModal>
+          )}
+        </Portal>
 
         {isReportModalOpen && (
           <ProfileReportModal
