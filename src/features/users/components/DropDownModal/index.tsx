@@ -2,7 +2,6 @@ import { Variants } from "framer-motion";
 
 import Button from "@/components/Button";
 import Portal from "@/components/Portal";
-import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import { ButtonContainer, Backdrop } from "./style";
@@ -15,8 +14,6 @@ export default function DropDownModal({
   onDropDownModalToggle,
   children,
 }: StrictPropsWithChildren<DropDownModalProps>) {
-  useScrollLock(true);
-
   return (
     <Portal>
       <Backdrop onClick={onDropDownModalToggle} />

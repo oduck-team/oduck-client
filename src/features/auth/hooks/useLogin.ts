@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import useAuth from "@/hooks/useAuth";
 import useRedirect from "@/hooks/useRedirect";
-import useScrollLock from "@/hooks/useScrollLock";
 
 export default function useLogin() {
   const { isLoggedIn, socialLogin } = useAuth();
   const { redirectUrl, setRedirect } = useRedirect();
   const navigate = useNavigate();
-  useScrollLock(true);
 
   const handleClickBack = () => {
     navigate(-1);

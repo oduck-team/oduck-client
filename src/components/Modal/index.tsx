@@ -1,6 +1,5 @@
 import { Variants } from "framer-motion";
 
-import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import Portal from "../Portal";
@@ -30,8 +29,6 @@ export default function Modal({
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
-  useScrollLock(isVisible);
-
   return (
     <Portal>
       <Backdrop isVisible={showBackdrop} onClick={onClose} />

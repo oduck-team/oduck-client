@@ -1,5 +1,7 @@
 import { Variants } from "framer-motion";
 
+import useScrollLock from "@/hooks/useScrollLock";
+
 import { BackdropContainer } from "./style";
 
 const variants: Variants = {
@@ -22,6 +24,8 @@ export default function Backdrop({
   className = "",
   onClick,
 }: BackdropProps) {
+  useScrollLock(isVisible);
+
   return (
     <BackdropContainer
       aria-hidden

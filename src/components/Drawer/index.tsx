@@ -1,4 +1,3 @@
-import useScrollLock from "@/hooks/useScrollLock";
 import { StrictPropsWithChildren } from "@/types";
 
 import AnimatePortal from "../Portal/AnimatePortal";
@@ -37,7 +36,6 @@ export default function Drawer({
     side,
     onClose,
   );
-  useScrollLock(isVisible);
 
   return (
     <AnimatePortal isVisible={isVisible}>
