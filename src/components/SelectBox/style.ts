@@ -55,7 +55,7 @@ export const CaretIcon = styled(CaretDown)`
 export const DropDownList = styled.ul<{ position: Position }>`
   --padding: 8px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
-  border: 1px solid ${({ theme }) => theme.colors.neutral[40]};
+  border: 1px solid ${({ theme }) => theme.colors.neutral[20]};
   border-radius: 6px;
   background-color: #fff;
   padding: var(--padding);
