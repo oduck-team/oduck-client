@@ -4,16 +4,19 @@ export default function useScrollLock(isLock: boolean) {
   useEffect(() => {
     if (isLock) {
       document.body.style.cssText = `
-        position: fixed; 
-        top: -${window.scrollY}px;
-        overflow-y: auto;
-        width: 100%;`;
-
-      return () => {
-        const scrollY = document.body.style.top;
-        document.body.style.cssText = "";
-        window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      position: fixed;
+      top: -${window.scrollY}px;
+      overflow-y: ${
+        window.innerWidth - document.body.clientWidth > 0 ? "scroll" : "hidden"
       };
+      width: 100%;
+      `;
     }
+
+    return () => {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = "";
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    };
   }, [isLock]);
 }
