@@ -1,6 +1,13 @@
-import { CaretIcon, Option, Select, SelectBoxContainer } from "./style";
+import {
+  CaretIcon,
+  DropDownList,
+  Option,
+  Select,
+  SelectBoxContainer,
+} from "./style";
+import useSelectBox from "./useSelectBox";
 
-interface Option {
+export interface Option {
   value: string;
   text: string;
 }
@@ -8,8 +15,8 @@ interface Option {
 export interface SelectBoxProps {
   options: Option[];
   /** option이 선택되면 SelectBox의 border 색상 변경 옵션 */
-  selected: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  selected: Option;
+  onChange: (value: string, text: string) => void;
 }
 
 export default function SelectBox({
@@ -17,16 +24,37 @@ export default function SelectBox({
   selected,
   onChange,
 }: SelectBoxProps) {
+  const {
+    selectBoxtRef,
+    listRef,
+    listVisible,
+    position,
+    cursor,
+    handleListToggle,
+    handleOptionClick,
+  } = useSelectBox(options, onChange);
+
   return (
-    <SelectBoxContainer>
-      <Select selected={selected} onChange={(e) => onChange(e)}>
-        {options.map(({ value, text }) => (
-          <Option key={value} value={value}>
-            {text}
-          </Option>
-        ))}
+    <SelectBoxContainer ref={selectBoxtRef} tabIndex={0}>
+      <Select selected={selected} onClick={handleListToggle}>
+        {selected.text}
+        <CaretIcon size={18} />
       </Select>
-      <CaretIcon size={18} />
+
+      {listVisible && (
+        <DropDownList ref={listRef} position={position}>
+          {options.map(({ value, text }, index) => (
+            <Option
+              key={value}
+              index={index}
+              cursor={cursor.current}
+              onClick={() => handleOptionClick(value, text, index)}
+            >
+              {text}
+            </Option>
+          ))}
+        </DropDownList>
+      )}
     </SelectBoxContainer>
   );
 }
