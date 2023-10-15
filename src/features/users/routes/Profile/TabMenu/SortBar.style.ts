@@ -22,6 +22,7 @@ export const Button = styled.button`
 
 export const ButtonText = styled.span`
   ${({ theme }) => theme.typo["body-2-r"]}
+  color: ${({ theme }) => theme.colors.neutral[80]};
   margin-right: 4px;
 `;
 
