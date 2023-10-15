@@ -33,7 +33,7 @@ export const Backdrop = styled(BaseBackdrop)`
 
 export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
   position: fixed;
-  top: 48%;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 8px;
@@ -42,6 +42,8 @@ export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
     0px 10px 32px -4px rgba(24, 39, 75, 0.1),
     0px 6px 14px -6px rgba(24, 39, 75, 0.12);
   z-index: ${({ theme }) => theme.zIndex.modal};
+  max-height: calc(100vh - 16px);
+  overflow-y: auto;
 
   ${({ size = "default" }) => css`
     ${sizes[size]}
