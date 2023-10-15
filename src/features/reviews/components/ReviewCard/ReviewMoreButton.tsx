@@ -3,7 +3,7 @@ import { DotsThree } from "@phosphor-icons/react";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-import AnimateBackdropPortal from "@/components/Backdrop/AnimateBackdropPortal";
+import BackdropPortal from "@/components/Backdrop/BackdropPortal";
 import Button from "@/components/Button";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
@@ -76,7 +76,7 @@ export default function ReviewMoreButton() {
 
       <AnimatePresence>
         {(isDropDownModalOpen || isReviewModalVisible) && (
-          <AnimateBackdropPortal onClick={handleBackdropClick} />
+          <BackdropPortal onClick={handleBackdropClick} />
         )}
 
         {isDropDownModalOpen && (

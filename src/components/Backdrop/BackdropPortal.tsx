@@ -1,12 +1,12 @@
 import Portal from "../Portal";
 
-import { Backdrop } from "./AnimateBackropPortal.style";
+import { Backdrop } from "./BackropPortal.style";
 
 interface AnimationBackdropPortalProps {
   onClick: () => void;
 }
 
-export default function AnimateBackdropPortal({
+export default function BackdropPortal({
   onClick,
 }: AnimationBackdropPortalProps) {
   return (

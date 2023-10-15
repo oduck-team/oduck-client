@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AnimateBackdropPortal from "@/components/Backdrop/AnimateBackdropPortal";
+import BackdropPortal from "@/components/Backdrop/BackdropPortal";
 
 import DropDownModal from "../DropDownModal";
 import useDropDownModal from "../DropDownModal/useDropDownModal";
@@ -47,7 +47,7 @@ export default function ProfileSetupButton({
 
       <AnimatePresence>
         {(isDropDownModalOpen || isReportModalOpen) && (
-          <AnimateBackdropPortal onClick={handleBackdropClick} />
+          <BackdropPortal onClick={handleBackdropClick} />
         )}
 
         {isDropDownModalOpen && (
