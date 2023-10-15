@@ -16,7 +16,7 @@ const STAT_MOCK_DATA = [
   { data: 123, description: "좋아요" },
   { data: 7100, description: "포인트" },
 ];
-const USER_MOCK_DATA = { isMine: false };
+const USER_MOCK_DATA = { isMine: true };
 const INTRODUCE_MOCK_DATA =
   "자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개";
 

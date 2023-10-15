@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import Button from "@/components/Button";
+import Portal from "@/components/Portal";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import DropDownModal from "@/features/users/components/DropDownModal";
@@ -11,9 +12,9 @@ import useDropDownModal from "@/features/users/components/DropDownModal/useDropD
 
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
-import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
+import { Backdrop, MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
-const USER_MOCK_DATA = { isMine: false };
+const USER_MOCK_DATA = { isMine: true };
 const USER_MOCK_REVIEW_DATA = {
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
@@ -30,9 +31,12 @@ export default function ReviewMoreButton() {
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+  const handleReviewModalToggle = () =>
+    setIsReviewModalVisible((prev) => !prev);
   const handleReviewEditClick = () => {
     handleDropDownModalToggle();
-    setIsReviewModalVisible(true);
+    handleReviewModalToggle();
+    // setIsReviewModalVisible(true);
   };
   const handleRate = (value: number) => {
     // if (!isLoggedIn) {
@@ -54,6 +58,11 @@ export default function ReviewMoreButton() {
     });
   };
 
+  const handleBackdropClick = () => {
+    if (isDropDownModalOpen) handleDropDownModalToggle();
+    if (isReviewModalVisible) handleReviewModalToggle();
+  };
+
   return (
     <>
       <Button
@@ -65,39 +74,45 @@ export default function ReviewMoreButton() {
         onClick={handleDropDownModalToggle}
       />
       <AnimatePresence>
-        {isDropDownModalOpen && (
-          <DropDownModal
-            key="DropDownModal"
-            onDropDownModalToggle={handleDropDownModalToggle}
-          >
-            <DropDownModal.Button
-              name={USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
-              size="lg"
-              variant="solid"
-              color="neutral"
-              onClick={() =>
-                USER_MOCK_DATA.isMine
-                  ? handleReviewEditClick()
-                  : handleReviewSpoilerReport()
-              }
+        <Portal>
+          {(isDropDownModalOpen || isReviewModalVisible) && (
+            <Backdrop onClick={handleBackdropClick} />
+          )}
+
+          {isDropDownModalOpen && (
+            <DropDownModal
+              key="DropDownModal"
+              onDropDownModalToggle={handleDropDownModalToggle}
             >
-              {USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
-            </DropDownModal.Button>
-            <DropDownModal.Button
-              name={USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
-              size="lg"
-              variant="solid"
-              color="neutral"
-              onClick={() =>
-                USER_MOCK_DATA.isMine
-                  ? handleReviewDeleteClick()
-                  : handleReviewEtcReport()
-              }
-            >
-              {USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
-            </DropDownModal.Button>
-          </DropDownModal>
-        )}
+              <DropDownModal.Button
+                name={USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+                size="lg"
+                variant="solid"
+                color="neutral"
+                onClick={() =>
+                  USER_MOCK_DATA.isMine
+                    ? handleReviewEditClick()
+                    : handleReviewSpoilerReport()
+                }
+              >
+                {USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+              </DropDownModal.Button>
+              <DropDownModal.Button
+                name={USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+                size="lg"
+                variant="solid"
+                color="neutral"
+                onClick={() =>
+                  USER_MOCK_DATA.isMine
+                    ? handleReviewDeleteClick()
+                    : handleReviewEtcReport()
+                }
+              >
+                {USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+              </DropDownModal.Button>
+            </DropDownModal>
+          )}
+        </Portal>
 
         {isReviewModalVisible && (
           <ShortReviewModal
