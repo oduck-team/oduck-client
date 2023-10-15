@@ -3,8 +3,8 @@ import { DotsThree } from "@phosphor-icons/react";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
+import AnimateBackdropPortal from "@/components/Backdrop/AnimateBackdropPortal";
 import Button from "@/components/Button";
-import Portal from "@/components/Portal";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import DropDownModal from "@/features/users/components/DropDownModal";
@@ -12,7 +12,7 @@ import useDropDownModal from "@/features/users/components/DropDownModal/useDropD
 
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
-import { Backdrop, MyRating, RatingContainer } from "./ReviewMoreButton.style";
+import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
 const USER_MOCK_DATA = { isMine: true };
 const USER_MOCK_REVIEW_DATA = {
@@ -74,65 +74,63 @@ export default function ReviewMoreButton() {
         onClick={handleDropDownModalToggle}
       />
 
-      <Portal>
-        <AnimatePresence>
-          {(isDropDownModalOpen || isReviewModalVisible) && (
-            <Backdrop onClick={handleBackdropClick} />
-          )}
+      <AnimatePresence>
+        {(isDropDownModalOpen || isReviewModalVisible) && (
+          <AnimateBackdropPortal onClick={handleBackdropClick} />
+        )}
 
-          {isDropDownModalOpen && (
-            <DropDownModal
-              key="DropDownModal"
-              onDropDownModalToggle={handleDropDownModalToggle}
+        {isDropDownModalOpen && (
+          <DropDownModal
+            key="DropDownModal"
+            onDropDownModalToggle={handleDropDownModalToggle}
+          >
+            <DropDownModal.Button
+              name={USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+              size="lg"
+              variant="solid"
+              color="neutral"
+              onClick={() =>
+                USER_MOCK_DATA.isMine
+                  ? handleReviewEditClick()
+                  : handleReviewSpoilerReport()
+              }
             >
-              <DropDownModal.Button
-                name={USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
-                size="lg"
-                variant="solid"
-                color="neutral"
-                onClick={() =>
-                  USER_MOCK_DATA.isMine
-                    ? handleReviewEditClick()
-                    : handleReviewSpoilerReport()
-                }
-              >
-                {USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
-              </DropDownModal.Button>
-              <DropDownModal.Button
-                name={USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
-                size="lg"
-                variant="solid"
-                color="neutral"
-                onClick={() =>
-                  USER_MOCK_DATA.isMine
-                    ? handleReviewDeleteClick()
-                    : handleReviewEtcReport()
-                }
-              >
-                {USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
-              </DropDownModal.Button>
-            </DropDownModal>
-          )}
+              {USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+            </DropDownModal.Button>
+            <DropDownModal.Button
+              name={USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+              size="lg"
+              variant="solid"
+              color="neutral"
+              onClick={() =>
+                USER_MOCK_DATA.isMine
+                  ? handleReviewDeleteClick()
+                  : handleReviewEtcReport()
+              }
+            >
+              {USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+            </DropDownModal.Button>
+          </DropDownModal>
+        )}
 
-          {isReviewModalVisible && (
-            <ShortReviewModal
-              key="ShortReviewModal"
-              onClose={() => setIsReviewModalVisible(false)}
-              onReview={() => setIsReviewModalVisible(false)}
-              userReviewData={USER_MOCK_REVIEW_DATA}
-            >
-              <MyRating>내 별점</MyRating>
-              <RatingContainer>
-                <Rating
-                  size="lg"
-                  onRate={handleRate}
-                  value={USER_MOCK_REVIEW_DATA.score}
-                />
-              </RatingContainer>
-            </ShortReviewModal>
-          )}
-        </AnimatePresence>
-      </Portal>
+        {isReviewModalVisible && (
+          <ShortReviewModal
+            key="ShortReviewModal"
+            onClose={() => setIsReviewModalVisible(false)}
+            onReview={() => setIsReviewModalVisible(false)}
+            userReviewData={USER_MOCK_REVIEW_DATA}
+          >
+            <MyRating>내 별점</MyRating>
+            <RatingContainer>
+              <Rating
+                size="lg"
+                onRate={handleRate}
+                value={USER_MOCK_REVIEW_DATA.score}
+              />
+            </RatingContainer>
+          </ShortReviewModal>
+        )}
+      </AnimatePresence>
     </>
   );
 }
