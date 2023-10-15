@@ -11,6 +11,7 @@ const AnimeList = lazy(() => import("@/features/animes/routes/List"));
 const AnimeDetail = lazy(() => import("@/features/animes/routes/Detail"));
 const Search = lazy(() => import("@/features/common/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
+const EmailTerms = lazy(() => import("@/features/common/routes/Terms"));
 const NoticeList = lazy(() => import("@/features/notices/routes/List"));
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const NotFound = lazy(() => import("@/features/common/routes/Error/404"));
@@ -48,6 +49,10 @@ export const publicRoutes: RouteObject[] = [
       {
         path: "/helpdesk",
         element: <HelpDesk />,
+      },
+      {
+        path: "/terms/email",
+        element: <EmailTerms />,
       },
       {
         path: "/notices",
