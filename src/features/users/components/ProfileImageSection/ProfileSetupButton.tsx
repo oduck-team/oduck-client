@@ -46,8 +46,8 @@ export default function ProfileSetupButton({
         </Dots>
       </ProfileSetupButtonContainer>
 
-      <AnimatePresence>
-        <Portal>
+      <Portal>
+        <AnimatePresence>
           {(isDropDownModalOpen || isReportModalOpen) && (
             <Backdrop onClick={handleBackdropClick} />
           )}
@@ -78,15 +78,15 @@ export default function ProfileSetupButton({
               </DropDownModal.Button>
             </DropDownModal>
           )}
-        </Portal>
 
-        {isReportModalOpen && (
-          <ProfileReportModal
-            key="ProfileReportModal"
-            onClose={handleReportModalToggle}
-          />
-        )}
-      </AnimatePresence>
+          {isReportModalOpen && (
+            <ProfileReportModal
+              key="ProfileReportModal"
+              onClose={handleReportModalToggle}
+            />
+          )}
+        </AnimatePresence>
+      </Portal>
     </>
   );
 }

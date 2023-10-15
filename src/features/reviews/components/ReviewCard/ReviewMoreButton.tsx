@@ -73,8 +73,9 @@ export default function ReviewMoreButton() {
         color="neutral"
         onClick={handleDropDownModalToggle}
       />
-      <AnimatePresence>
-        <Portal>
+
+      <Portal>
+        <AnimatePresence>
           {(isDropDownModalOpen || isReviewModalVisible) && (
             <Backdrop onClick={handleBackdropClick} />
           )}
@@ -112,26 +113,26 @@ export default function ReviewMoreButton() {
               </DropDownModal.Button>
             </DropDownModal>
           )}
-        </Portal>
 
-        {isReviewModalVisible && (
-          <ShortReviewModal
-            key="ShortReviewModal"
-            onClose={() => setIsReviewModalVisible(false)}
-            onReview={() => setIsReviewModalVisible(false)}
-            userReviewData={USER_MOCK_REVIEW_DATA}
-          >
-            <MyRating>내 별점</MyRating>
-            <RatingContainer>
-              <Rating
-                size="lg"
-                onRate={handleRate}
-                value={USER_MOCK_REVIEW_DATA.score}
-              />
-            </RatingContainer>
-          </ShortReviewModal>
-        )}
-      </AnimatePresence>
+          {isReviewModalVisible && (
+            <ShortReviewModal
+              key="ShortReviewModal"
+              onClose={() => setIsReviewModalVisible(false)}
+              onReview={() => setIsReviewModalVisible(false)}
+              userReviewData={USER_MOCK_REVIEW_DATA}
+            >
+              <MyRating>내 별점</MyRating>
+              <RatingContainer>
+                <Rating
+                  size="lg"
+                  onRate={handleRate}
+                  value={USER_MOCK_REVIEW_DATA.score}
+                />
+              </RatingContainer>
+            </ShortReviewModal>
+          )}
+        </AnimatePresence>
+      </Portal>
     </>
   );
 }
