@@ -44,6 +44,7 @@ export const Input = styled.input`
   margin: 0;
   background-color: ${({ theme }) => theme.colors.neutral["30"]};
   border: 1px solid ${({ theme }) => theme.colors.neutral["30"]};
+  cursor: pointer;
 
   &:disabled {
     background: ${({ theme }) => theme.colors.neutral["30"]};
