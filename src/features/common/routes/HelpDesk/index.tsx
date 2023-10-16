@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { CaretLeft } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -8,6 +7,7 @@ import Header from "@/components/Layout/Header";
 
 import Form from "./Form";
 import Select from "./Select";
+import { HelpDeskContainer, Slide } from "./style";
 import Success from "./Success";
 
 export default function HelpDesk() {
@@ -65,18 +65,3 @@ export default function HelpDesk() {
     </>
   );
 }
-
-const HelpDeskContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  padding-bottom: 66px;
-  overflow: hidden;
-`;
-
-const Slide = styled.div<{ translateX?: number }>`
-  width: 200%;
-  height: calc(100% - 60px);
-  display: flex;
-  transform: ${({ translateX = 0 }) => `translateX(${translateX}%)`};
-  transition: all 0.3s;
-`;
