@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
+
 import Button from "@/components/Button";
+import CheckBox from "@/components/CheckBox";
 import useForm from "@/features/common/hooks/useForm";
 
 import { SelectContainer as FormContainer } from "../Select/style";
 
-import { Content, FormItem, FormTextInput, FormTextarea } from "./style";
+import { Content, FormItem, FormTextInput, FormTextarea, Terms } from "./style";
 
 interface Props {
   goPrev: () => void;
@@ -55,13 +58,13 @@ export default function Form({ setSuccess }: Props) {
             required
           />
         </FormItem>
-        <p style={{ marginTop: "30px" }}>개인 정보 처리 및 약관 동의</p>
-        <Button
-          size="lg"
-          style={{ width: "100%", height: "48px", marginTop: "50px" }}
-          name="보내기"
-          onClick={() => send(setSuccess)}
-        >
+        <Terms>
+          <CheckBox id="agree" name="agree" checked onChange={() => {}} />
+          <label htmlFor="agree">
+            개인정보 처리 및 <Link to="/terms/email">이용 약관 동의</Link>
+          </label>
+        </Terms>
+        <Button size="lg" name="보내기" onClick={() => send(setSuccess)}>
           보내기
         </Button>
       </Content>

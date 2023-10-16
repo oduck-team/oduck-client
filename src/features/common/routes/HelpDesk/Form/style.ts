@@ -19,6 +19,17 @@ export const Content = styled.div`
     flex-shrink: 0;
     margin-bottom: -8px;
   }
+
+  a {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+  }
+
+  button {
+    width: 100%;
+    height: 48px;
+    margin-top: 50px;
+  }
 `;
 
 export const FormItem = styled.div<{ textarea?: boolean }>`
@@ -45,5 +56,20 @@ export const FormTextarea = styled(Textarea)`
   & > textarea {
     height: calc(233px * 1.1429);
     border-radius: 12px;
+  }
+`;
+
+export const Terms = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  margin-top: 30px;
+  padding-left: 6px;
+
+  label {
+    ${({ theme }) => theme.typo["body-2-r"]};
+    cursor: pointer;
   }
 `;
