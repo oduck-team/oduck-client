@@ -6,6 +6,7 @@ export type Size = "lg" | "md";
 
 export interface CheckBoxProps {
   size?: Size;
+  id?: string;
   name: string;
   checked: boolean;
   disabled?: boolean;
@@ -15,6 +16,7 @@ export interface CheckBoxProps {
 
 export default function CheckBox({
   disabled = false,
+  id = "",
   name,
   checked,
   onClick,
@@ -25,6 +27,7 @@ export default function CheckBox({
     <CheckboxContainer size={size} onClick={onClick}>
       <Input
         type="checkbox"
+        id={id}
         name={name}
         checked={checked}
         disabled={disabled}
