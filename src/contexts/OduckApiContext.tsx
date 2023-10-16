@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
-import Profile from "@/api/profile";
-import ProfileDev from "@/api/profileDev";
+import Profile from "@/features/users/api/profile";
+import ProfileDev from "@/features/users/api/profileDev";
 import { StrictPropsWithChildren } from "@/types";
 
 interface API {
