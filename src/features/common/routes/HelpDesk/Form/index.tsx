@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -9,13 +10,25 @@ import { SelectContainer as FormContainer } from "../Select/style";
 import { Content, FormItem, FormTextInput, FormTextarea, Terms } from "./style";
 
 interface Props {
-  goPrev: () => void;
-  inquiryTypeName: string;
+  inquiryType: number;
   setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Form({ setSuccess }: Props) {
-  const { form, error, handleInputChange, errorMessage, send } = useForm();
+export default function Form({ inquiryType, setSuccess }: Props) {
+  const {
+    form,
+    agree,
+    error,
+    handleInputChange,
+    handleAgreeChange,
+    errorMessage,
+    send,
+    resetForm,
+  } = useForm();
+
+  useEffect(() => {
+    if (inquiryType === 0) resetForm();
+  }, [inquiryType, resetForm]);
 
   return (
     <FormContainer>
@@ -59,7 +72,12 @@ export default function Form({ setSuccess }: Props) {
           />
         </FormItem>
         <Terms>
-          <CheckBox id="agree" name="agree" checked onChange={() => {}} />
+          <CheckBox
+            id="agree"
+            name="agree"
+            checked={agree}
+            onChange={handleAgreeChange}
+          />
           <label htmlFor="agree">
             개인정보 처리 및 <Link to="/terms/email">이용 약관 동의</Link>
           </label>
