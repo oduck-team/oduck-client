@@ -3,6 +3,7 @@ import { DotsThree } from "@phosphor-icons/react";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
+import BackdropPortal from "@/components/Backdrop/BackdropPortal";
 import Button from "@/components/Button";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
@@ -13,7 +14,7 @@ import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
 import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
-const USER_MOCK_DATA = { isMine: false };
+const USER_MOCK_DATA = { isMine: true };
 const USER_MOCK_REVIEW_DATA = {
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
@@ -30,9 +31,12 @@ export default function ReviewMoreButton() {
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+  const handleReviewModalToggle = () =>
+    setIsReviewModalVisible((prev) => !prev);
   const handleReviewEditClick = () => {
     handleDropDownModalToggle();
-    setIsReviewModalVisible(true);
+    handleReviewModalToggle();
+    // setIsReviewModalVisible(true);
   };
   const handleRate = (value: number) => {
     // if (!isLoggedIn) {
@@ -54,6 +58,11 @@ export default function ReviewMoreButton() {
     });
   };
 
+  const handleBackdropClick = () => {
+    if (isDropDownModalOpen) handleDropDownModalToggle();
+    if (isReviewModalVisible) handleReviewModalToggle();
+  };
+
   return (
     <>
       <Button
@@ -64,7 +73,12 @@ export default function ReviewMoreButton() {
         color="neutral"
         onClick={handleDropDownModalToggle}
       />
+
       <AnimatePresence>
+        {(isDropDownModalOpen || isReviewModalVisible) && (
+          <BackdropPortal onClick={handleBackdropClick} />
+        )}
+
         {isDropDownModalOpen && (
           <DropDownModal
             key="DropDownModal"

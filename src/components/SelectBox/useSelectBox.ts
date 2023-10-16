@@ -19,7 +19,6 @@ export default function useSelectBox(
   onChange: (value: string, text: string) => void,
 ) {
   const [listVisible, setListVisible] = useState(false);
-  useScrollLock(listVisible);
   const [position, setPosition] = useState<Position>("bottom");
   const cursor = useRef(0);
   const selectBoxtRef = useRef<HTMLDivElement>(null);
@@ -30,6 +29,8 @@ export default function useSelectBox(
     cursor.current = index;
     handleListToggle();
   };
+
+  useScrollLock(listVisible);
 
   const scrollToSelectedOption = useCallback(
     (direction: Direction) => {
