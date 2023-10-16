@@ -2,7 +2,8 @@ import { get } from "@/libs/api";
 
 export default class Profile {
   async getProfile(name: string) {
-    // FIXME: /members/${name}
+    console.log(name);
+    // FIXME: /members/${name}, log 제거
     return await get(`/members/${"faberjoo"}`);
   }
 }
