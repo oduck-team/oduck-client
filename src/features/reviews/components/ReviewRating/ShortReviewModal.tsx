@@ -124,7 +124,7 @@ export default function ShortReviewModal({
   // };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} showBackdrop={false}>
       <Modal.Content>
         <Title>한 줄 리뷰 모달</Title>
         {children}

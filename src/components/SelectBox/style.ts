@@ -68,6 +68,7 @@ export const DropDownList = styled.ul<{ position: Position }>`
   );
   overflow-y: scroll;
   z-index: ${({ theme }) => theme.zIndex.modal};
+  overscroll-behavior-y: contain;
 
   ${({ position }) =>
     position === "top" &&

@@ -2,6 +2,8 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import BackdropPortal from "@/components/Backdrop/BackdropPortal";
+
 import DropDownModal from "../DropDownModal";
 import useDropDownModal from "../DropDownModal/useDropDownModal";
 
@@ -28,6 +30,10 @@ export default function ProfileSetupButton({
     handleDropDownModalToggle();
     handleReportModalToggle();
   };
+  const handleBackdropClick = () => {
+    if (isDropDownModalOpen) handleDropDownModalToggle();
+    if (isReportModalOpen) handleReportModalToggle();
+  };
 
   return (
     <>
@@ -40,6 +46,10 @@ export default function ProfileSetupButton({
       </ProfileSetupButtonContainer>
 
       <AnimatePresence>
+        {(isDropDownModalOpen || isReportModalOpen) && (
+          <BackdropPortal onClick={handleBackdropClick} />
+        )}
+
         {isDropDownModalOpen && (
           <DropDownModal
             key="DropDownModal"
