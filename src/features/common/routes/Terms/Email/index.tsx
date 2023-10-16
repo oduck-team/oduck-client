@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Header from "@/components/Layout/Header";
 
-import { TermsContainer } from "./style";
+import { EmailTermsContainer } from "./style";
 
 export default function EmailTerms() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function EmailTerms() {
         <Header.Center>개인정보 수집 및 이용 동의</Header.Center>
         <Header.Right />
       </Header>
-      <TermsContainer>
+      <EmailTermsContainer>
         <p>
           오덕은 사용자들의 문의를 처리하기 위해 다음과 같이 개인정보를 수집 및
           이용하며, 문의 답변 외에 사용하지 않고 사용자 정보 보호에 최선을
@@ -43,7 +43,7 @@ export default function EmailTerms() {
             </p>
           </li>
         </ul>
-      </TermsContainer>
+      </EmailTermsContainer>
     </>
   );
 }

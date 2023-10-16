@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const TermsContainer = styled.div`
+export const EmailTermsContainer = styled.div`
   width: 100%;
   padding: 16px 16px 0;
   color: ${({ theme }) => theme.colors["neutral"]["80"]};
