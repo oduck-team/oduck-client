@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import Button from "@/components/Button";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/features/auth/hooks/useAuth";
 import useDebounce from "@/hooks/useDebounce";
 
 import useAddBookmark from "../hooks/useAddBookmark";
