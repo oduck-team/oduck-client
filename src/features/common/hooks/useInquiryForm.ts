@@ -3,7 +3,7 @@ import { useContext } from "react";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import { HelpDeskContext } from "@/contexts/HelpDeskContext";
 
-export default function useForm() {
+export default function useInquiryForm() {
   const {
     form,
     agree,

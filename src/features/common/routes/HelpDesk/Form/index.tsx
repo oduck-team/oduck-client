@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Button from "@/components/Button";
 import CheckBox from "@/components/CheckBox";
-import useForm from "@/features/common/hooks/useForm";
+import useInquiryForm from "@/features/common/hooks/useInquiryForm";
 
 import { SelectContainer as FormContainer } from "../Select/style";
 
@@ -24,7 +24,7 @@ export default function Form({ inquiryType, setSuccess }: Props) {
     errorMessage,
     send,
     resetForm,
-  } = useForm();
+  } = useInquiryForm();
 
   useEffect(() => {
     if (inquiryType === 0) resetForm();
