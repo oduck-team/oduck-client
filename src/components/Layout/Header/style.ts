@@ -20,8 +20,12 @@ export const Contents = styled.div`
   padding: 0 16px;
   margin: 0 auto;
 
-  & > div {
+  & > div:not(:nth-of-type(2)) {
     width: calc(100% / 3);
+  }
+
+  & > div:nth-of-type(2) {
+    min-width: calc(100% / 3);
   }
 
   svg {
