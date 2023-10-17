@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import Head from "@/components/Head";
 import Loader from "@/components/Loader";
+import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
-import useAuth from "@/hooks/useAuth";
 
 import AboutMe from "./AboutMe";
 import { ProfileContainer } from "./style";

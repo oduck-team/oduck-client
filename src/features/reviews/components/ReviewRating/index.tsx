@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Rating from "@/components/Rating";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/features/auth/hooks/useAuth";
 
 import ShortReviewModal from "./ShortReviewModal";
 import { ReviewRecommend } from "./style";
