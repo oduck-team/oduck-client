@@ -7,9 +7,14 @@ import useEditForm from "@/features/users/hooks/useEditForm";
 
 import { ButtonContainer, EditFormContainer, Form, Title } from "./style";
 
-export default function EditForm() {
+interface EditFromProps {
+  name: string;
+  description: string;
+}
+
+export default function EditForm({ name, description }: EditFromProps) {
   const { form, status, isFormChange, handleInputChange, handleFormSumbit } =
-    useEditForm();
+    useEditForm(name, description);
   const navigate = useNavigate();
 
   return (

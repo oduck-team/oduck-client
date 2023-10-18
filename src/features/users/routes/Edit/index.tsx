@@ -1,4 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
+
 import Head from "@/components/Head";
+import Loader from "@/components/Loader";
+import useAuth from "@/features/auth/hooks/useAuth";
+import { useApi } from "@/hooks/useApi";
 
 import ProfileImageSection from "../../components/ProfileImageSection";
 import ProfileAvatar from "../../components/ProfileImageSection/ProfileAvatar";
@@ -7,19 +12,39 @@ import EditForm from "./EditForm";
 import { ProfileEditContainer } from "./style";
 
 export default function ProfileEdit() {
-  return (
-    <ProfileEditContainer>
-      <Head title="오덕 | 프로필 수정" />
-      <ProfileImageSection>
-        <ProfileImageSection.Art src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
-        <ProfileImageSection.ArtEditButton />
-        <ProfileImageSection.ProfileAvatar>
-          <ProfileAvatar.Avatar userName="FE" size="xl" />
-          <ProfileAvatar.AvatarEditButton />
-        </ProfileImageSection.ProfileAvatar>
-      </ProfileImageSection>
+  const {
+    user: { name },
+  } = useAuth();
+  const { profile } = useApi();
+  const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
+    profile.getProfile(name),
+  );
 
-      <EditForm />
-    </ProfileEditContainer>
+  if (isLoading) return <Loader />;
+  return (
+    <>
+      {userProfile && (
+        <ProfileEditContainer>
+          <Head title="오덕 | 프로필 수정" />
+          <ProfileImageSection>
+            <ProfileImageSection.Art src={userProfile.backgroundImage} />
+            <ProfileImageSection.ArtEditButton />
+            <ProfileImageSection.ProfileAvatar>
+              <ProfileAvatar.Avatar
+                src={userProfile?.thumbnail}
+                userName="FE"
+                size="xl"
+              />
+              <ProfileAvatar.AvatarEditButton />
+            </ProfileImageSection.ProfileAvatar>
+          </ProfileImageSection>
+
+          <EditForm
+            name={userProfile.name}
+            description={userProfile.description}
+          />
+        </ProfileEditContainer>
+      )}
+    </>
   );
 }

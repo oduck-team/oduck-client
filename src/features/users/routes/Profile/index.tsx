@@ -14,15 +14,11 @@ export default function Profile() {
     user: { name },
   } = useAuth();
   const { profile } = useApi();
-  const {
-    isLoading,
-    error,
-    data: userProfile,
-  } = useQuery(["profile", name], () => profile.getProfile(name));
-  console.log(userProfile);
+  const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
+    profile.getProfile(name),
+  );
 
   if (isLoading) return <Loader />;
-  if (error) return <span>오류발생</span>;
   return (
     <>
       {userProfile && (

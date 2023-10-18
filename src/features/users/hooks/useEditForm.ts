@@ -5,8 +5,8 @@ import { isNicknameRegexCheck } from "@/utils/common";
 const NICKNAME_PATTERN_MESSAGE =
   "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.";
 
-export default function useEditForm() {
-  const [form, setForm] = useState({ name: "", description: "" });
+export default function useEditForm(name: string, description: string) {
+  const [form, setForm] = useState({ name: name, description: description });
   const [status, setStatus] = useState({ isWarn: false, message: "" });
   const [isFormChange, setIsFormChange] = useState(false);
 
