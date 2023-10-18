@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const AnimationConatiner = styled.div`
+export const AnimeConatiner = styled.div`
   display: flex;
   margin-bottom: 8px;
 `;

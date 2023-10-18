@@ -2,7 +2,7 @@ import ReviewCard from "@/features/reviews/components/ReviewCard";
 
 const REVIEW_RIST = [
   {
-    animation: {
+    anime: {
       title: "레벨 1이지만 유니크 스킬로 최강이 되었습니다",
       image:
         "https://i.namu.wiki/i/v8ca2gF_MPV_L4QZGoN449G29Nt8vy3PtSLKv1T9XwmZBJ8p1GTz3S3Y32sXB-eoGDv5npoGXzpD6fASoQFLwg.webp",
@@ -13,7 +13,7 @@ const REVIEW_RIST = [
     createdAt: "2023.07.30",
   },
   {
-    animation: {
+    anime: {
       title:
         "아주 긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴긴 제목을 가지고 있는 애니메이션",
       image: "https://url.kr/4gtucf",
@@ -33,7 +33,7 @@ export default function ReviewList({ isMine }: ReviewListProps) {
     <>
       {REVIEW_RIST.map((review, index) => (
         <ReviewCard key={index} isBlock isBorderTop={false}>
-          <ReviewCard.Animation animation={review.animation} />
+          <ReviewCard.Anime anime={review.anime} />
           <ReviewCard.Comment text={review.comment} />
           <ReviewCard.ActionBar
             include="time"

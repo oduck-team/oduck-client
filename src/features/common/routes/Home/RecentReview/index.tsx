@@ -26,11 +26,12 @@ export default function RecentReview() {
       </Header>
       <ReviewConainer>
         <ReviewCard>
-          <ReviewCard.Animation animation={REVIEW_MOCK_DATA.animation} />
+          <ReviewCard.Anime anime={REVIEW_MOCK_DATA.animation} />
           <ReviewCard.Comment text={REVIEW_MOCK_DATA.comment} />
           <ReviewCard.ActionBar
             include="time"
             createdAt={REVIEW_MOCK_DATA.createdAt}
+            isMine={false} // TODO: isMine 판별
           />
         </ReviewCard>
       </ReviewConainer>

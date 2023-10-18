@@ -1,28 +1,28 @@
 import Rating from "@/components/Rating";
 
 import {
-  AnimationConatiner,
+  AnimeConatiner,
   Image,
   Title,
   TitleContainer,
 } from "./Animation.style";
 
-interface AnimationProps {
-  animation: {
+interface AnimeProps {
+  anime: {
     title: string;
     image: string;
     rating: number;
   };
 }
 
-export default function Animation({ animation }: AnimationProps) {
+export default function Anime({ anime }: AnimeProps) {
   return (
-    <AnimationConatiner>
-      <Image src={animation.image} alt={animation.title} />
+    <AnimeConatiner>
+      <Image src={anime.image} alt={anime.title} />
       <TitleContainer>
-        <Title>{animation.title}</Title>
-        <Rating color="primary" value={animation.rating} size="sm" readonly />
+        <Title>{anime.title}</Title>
+        <Rating color="primary" value={anime.rating} size="sm" readonly />
       </TitleContainer>
-    </AnimationConatiner>
+    </AnimeConatiner>
   );
 }
