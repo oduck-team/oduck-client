@@ -8,10 +8,8 @@ import {
 } from "react";
 
 import useSnackBar from "@/components/SnackBar/useSnackBar";
-import { getAuthStatus } from "@/features/auth/api/getAuthStatus";
-import { logout as logoutRequeset } from "@/features/auth/api/logout";
-import { socialLogin } from "@/features/auth/api/socialLogin";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
+import { useApi } from "@/hooks/useApi";
 
 interface AuthState {
   user: User;
@@ -45,6 +43,7 @@ const AuthContext = createContext<AuthState & AuthAction>({
 export default AuthContext;
 
 export function AuthProvider({ children }: PropsWithChildren) {
+  const { authApi } = useApi();
   const { localUser, setLocalUser, removeLocalUser } = useLocalUser();
   const [user, setUser] = useState<User>(localUser ?? DEFAULT_USER);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -52,7 +51,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const fetchUser = useCallback(async () => {
     try {
-      const user = await getAuthStatus();
+      const user = await authApi.getStatus();
       setUser(user);
       setLocalUser(user);
       setIsLoggedIn(true);
@@ -61,15 +60,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
       removeLocalUser();
       setIsLoggedIn(false);
     }
-  }, []);
+  }, [authApi, removeLocalUser, setLocalUser]);
 
   const logout = useCallback(async () => {
-    logoutRequeset();
+    authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
     setUser(DEFAULT_USER);
     removeLocalUser();
     setIsLoggedIn(false);
-  }, [removeLocalUser]);
+  }, [authApi, removeLocalUser]);
 
   useEffect(() => {
     fetchUser();
@@ -80,10 +79,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
       user,
       isLoggedIn,
       fetchUser,
-      socialLogin,
+      socialLogin: authApi.socialLogin,
       logout,
     }),
-    [user, isLoggedIn, fetchUser, logout],
+    [user, isLoggedIn, authApi.socialLogin, fetchUser, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

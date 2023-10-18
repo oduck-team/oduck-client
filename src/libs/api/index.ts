@@ -1,7 +1,8 @@
 import axios from "axios";
 
-import { ApiError, BaseError } from "../error";
 import { BASE_URL } from "@/config";
+
+import { ApiError, BaseError } from "../error";
 
 const instance = axios.create({
   baseURL: BASE_URL,

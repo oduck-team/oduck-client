@@ -2,8 +2,8 @@ import { PropsWithChildren, lazy, useEffect } from "react";
 import { RouteObject, useNavigate } from "react-router-dom";
 
 import Layout from "@/components/Layout";
+import useAuth from "@/features/auth/hooks/useAuth";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
-import useAuth from "@/hooks/useAuth";
 
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 

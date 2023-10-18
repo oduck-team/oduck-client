@@ -1,4 +1,5 @@
 import { CaretLeft } from "@phosphor-icons/react";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
@@ -10,7 +11,12 @@ import SocialGroup from "./SocialGroup";
 import { Main, Title, LoginSection } from "./style";
 
 export default function Login() {
-  const { handleClickBack, handleSocialLogin } = useLogin();
+  const { handleSocialLogin } = useLogin();
+  const navigate = useNavigate();
+
+  const handleClickBack = () => {
+    navigate(-1);
+  };
 
   return (
     <>

@@ -9,7 +9,7 @@ import AnimeRanking, {
   Ranking,
 } from "@/features/animes/components/AnimeRanking";
 import AnimeSlide from "@/features/animes/components/AnimeSlide";
-import useAuth from "@/hooks/useAuth";
+import useAuth from "@/features/auth/hooks/useAuth";
 
 import Discord from "./Discord";
 import RecentReview from "./RecentReview";

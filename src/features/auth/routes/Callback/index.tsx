@@ -1,14 +1,12 @@
 import { useEffect } from "react";
 
 import Loader from "@/components/Loader";
-import useAuth from "@/hooks/useAuth";
 import useRedirect from "@/hooks/useRedirect";
 
+import useAuth from "../../hooks/useAuth";
 import useLocalUser from "../../hooks/useLocalUser";
 
-/**
- * 소셜 로그인 후 리다이렉트되는 컴포넌트
- */
+/** @description 소셜 로그인 후 리다이렉트되는 페이지 컴포넌트 */
 export default function Callback() {
   const { fetchUser } = useAuth();
   const { localUser } = useLocalUser();

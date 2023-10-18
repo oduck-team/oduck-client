@@ -8,9 +8,9 @@ import { RouterProvider } from "react-router-dom";
 
 import DeferredComponent from "./components/DeferredComponent";
 import Loader from "./components/Loader";
-import { AuthProvider } from "./contexts/AuthContext";
 import { OduckApiProvider } from "./contexts/OduckApiContext";
 import { SnackBarContextProvider } from "./contexts/SnackBarContext";
+import { AuthProvider } from "./features/auth/contexts/AuthContext";
 import { queryClient } from "./libs/react-query";
 import router from "./routes";
 import { theme } from "./styles/theme";
