@@ -1,10 +1,5 @@
 import { useState } from "react";
 
-import { isNicknameRegexCheck } from "@/utils/common";
-
-const NICKNAME_PATTERN_MESSAGE =
-  "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.";
-
 export default function useEditForm(name: string, description: string) {
   const [form, setForm] = useState({ name: name, description: description });
   const [status, setStatus] = useState({ isWarn: false, message: "" });
@@ -27,7 +22,11 @@ export default function useEditForm(name: string, description: string) {
     e.preventDefault();
 
     if (!isNicknameRegexCheck(form.name)) {
-      setStatus({ isWarn: true, message: NICKNAME_PATTERN_MESSAGE });
+      setStatus({
+        isWarn: true,
+        message:
+          "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
+      });
       return;
     }
 
@@ -35,4 +34,9 @@ export default function useEditForm(name: string, description: string) {
   };
 
   return { form, status, isFormChange, handleInputChange, handleFormSumbit };
+}
+
+function isNicknameRegexCheck(nickname: string) {
+  const namePattern = /^(?=.*[a-zA-Z가-힣])[A-Za-z가-힣0-9]{2,10}$/;
+  return namePattern.test(nickname);
 }
