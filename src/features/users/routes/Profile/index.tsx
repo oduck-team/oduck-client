@@ -34,7 +34,7 @@ export default function Profile() {
           />
           <ProfileContainer>
             <AboutMe profile={userProfile} />
-            <TabMenu />
+            <TabMenu isMine={userProfile.isMine} />
           </ProfileContainer>
         </>
       )}

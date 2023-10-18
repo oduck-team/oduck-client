@@ -14,7 +14,6 @@ import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
 import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
-const USER_MOCK_DATA = { isMine: true };
 const USER_MOCK_REVIEW_DATA = {
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
@@ -26,7 +25,11 @@ const USER_MOCK_REVIEW_DATA = {
   sound: true,
 };
 
-export default function ReviewMoreButton() {
+interface ReviewMoreButtonProps {
+  isMine: boolean;
+}
+
+export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
   const theme = useTheme();
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
   const snackBar = useSnackBar();
@@ -85,30 +88,26 @@ export default function ReviewMoreButton() {
             onDropDownModalToggle={handleDropDownModalToggle}
           >
             <DropDownModal.Button
-              name={USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+              name={isMine ? "수정하기" : "스포일러 신고"}
               size="lg"
               variant="solid"
               color="neutral"
               onClick={() =>
-                USER_MOCK_DATA.isMine
-                  ? handleReviewEditClick()
-                  : handleReviewSpoilerReport()
+                isMine ? handleReviewEditClick() : handleReviewSpoilerReport()
               }
             >
-              {USER_MOCK_DATA.isMine ? "수정하기" : "스포일러 신고"}
+              {isMine ? "수정하기" : "스포일러 신고"}
             </DropDownModal.Button>
             <DropDownModal.Button
-              name={USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+              name={isMine ? "삭제하기" : "기타 신고"}
               size="lg"
               variant="solid"
               color="neutral"
               onClick={() =>
-                USER_MOCK_DATA.isMine
-                  ? handleReviewDeleteClick()
-                  : handleReviewEtcReport()
+                isMine ? handleReviewDeleteClick() : handleReviewEtcReport()
               }
             >
-              {USER_MOCK_DATA.isMine ? "삭제하기" : "기타 신고"}
+              {isMine ? "삭제하기" : "기타 신고"}
             </DropDownModal.Button>
           </DropDownModal>
         )}

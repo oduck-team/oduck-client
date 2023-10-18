@@ -15,7 +15,11 @@ const TAB_BUTTONS = [
 
 export type MENU = typeof REVIEW_MENU | typeof BOOKMARK_MENU;
 
-export default function TabMenu() {
+interface TabMenuProps {
+  isMine: boolean;
+}
+
+export default function TabMenu({ isMine }: TabMenuProps) {
   const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState<MENU>(REVIEW_MENU);
   const handleTabMenuClick = (text: MENU) => setSelectedMenu(text);
@@ -42,7 +46,7 @@ export default function TabMenu() {
       </Tab>
       <ContentContainer>
         <SortBar menu={selectedMenu} />
-        {selectedMenu === "한줄리뷰" && <ReviewList />}
+        {selectedMenu === "한줄리뷰" && <ReviewList isMine={isMine} />}
         {selectedMenu === "입덕애니" && <BookmarkList />}
       </ContentContainer>
     </>

@@ -24,14 +24,22 @@ const REVIEW_RIST = [
   },
 ];
 
-export default function ReviewList() {
+interface ReviewListProps {
+  isMine: boolean;
+}
+
+export default function ReviewList({ isMine }: ReviewListProps) {
   return (
     <>
       {REVIEW_RIST.map((review, index) => (
         <ReviewCard key={index} isBlock isBorderTop={false}>
           <ReviewCard.Animation animation={review.animation} />
           <ReviewCard.Comment text={review.comment} />
-          <ReviewCard.ActionBar include="time" createdAt={review.createdAt} />
+          <ReviewCard.ActionBar
+            include="time"
+            createdAt={review.createdAt}
+            isMine={isMine}
+          />
         </ReviewCard>
       ))}
     </>
