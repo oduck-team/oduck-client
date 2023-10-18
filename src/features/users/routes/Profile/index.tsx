@@ -17,20 +17,27 @@ export default function Profile() {
   const {
     isLoading,
     error,
-    data: user,
+    data: userProfile,
   } = useQuery(["profile", name], () => profile.getProfile(name));
-  console.log(user);
+  console.log(userProfile);
 
   if (isLoading) return <Loader />;
-  if (error) return <span>error</span>;
+  if (error) return <span>오류발생</span>;
   return (
     <>
-      {/* FIXME: 내 프로필 -> 내 프로필, 다른 사용자 프로필 -> 닉네임*/}
-      <Head title="오덕 | OOO" />
-      <ProfileContainer>
-        <AboutMe />
-        <TabMenu />
-      </ProfileContainer>
+      {userProfile && (
+        <>
+          <Head
+            title={`오덕 | ${
+              userProfile.isMine ? "내 프로필" : userProfile.name
+            }`}
+          />
+          <ProfileContainer>
+            <AboutMe profile={userProfile} />
+            <TabMenu />
+          </ProfileContainer>
+        </>
+      )}
     </>
   );
 }

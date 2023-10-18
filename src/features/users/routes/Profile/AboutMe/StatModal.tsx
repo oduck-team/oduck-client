@@ -5,13 +5,13 @@ import { ContentContainer, Data, Title, Section } from "./StatModal.style";
 
 const TITLE_LIST = ["한줄리뷰", "입덕애니", "받은 좋아요 수", "포인트"];
 
-interface StatItemProps {
+interface StatItem {
   data: number;
   description: string;
 }
 
 interface StatModalProps {
-  items: StatItemProps[];
+  items: StatItem[];
   onClose: () => void;
 }
 
