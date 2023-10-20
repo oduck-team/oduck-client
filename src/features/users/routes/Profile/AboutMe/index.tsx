@@ -10,39 +10,40 @@ import ProfileImageSection from "../../../components/ProfileImageSection";
 import StatModal from "./StatModal";
 import { Introduce, NickName, SeeMoreButton, StatContainer } from "./style";
 
-const STAT_MOCK_DATA = [
-  { data: 12500, description: "리뷰" },
-  { data: 1000000, description: "입덕애니" },
-  { data: 123, description: "좋아요" },
-  { data: 7100, description: "포인트" },
-];
-const USER_MOCK_DATA = { isMine: true };
-const INTRODUCE_MOCK_DATA =
-  "자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개자기소개";
+interface AboutMeProps {
+  profile: Profile;
+}
 
-export default function AboutMe() {
+export default function AboutMe({
+  profile: { activity, backgroundImage, description, isMine, name, thumbnail },
+}: AboutMeProps) {
   const {
     isReadMore,
     isShowReadMoreButton,
     getIntroduceText,
     handleSeeMoreButtonToggle,
-  } = useIntroduceReadMore(INTRODUCE_MOCK_DATA);
+  } = useIntroduceReadMore(description);
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
+
+  const statItemList = [
+    { description: "리뷰", data: activity.reviews },
+    { description: "입덕애니", data: activity.bookmarks },
+    { description: "좋아요", data: activity.likes },
+    { description: "포인트", data: activity.point },
+  ];
 
   return (
     <>
       <ProfileImageSection>
-        <ProfileImageSection.Art src="https://newsimg.sedaily.com/2023/07/16/29S5JPWPBV_1.jpeg" />
-        <ProfileImageSection.ProfileSetupButton
-          isMine={USER_MOCK_DATA.isMine}
-        />
+        <ProfileImageSection.Art src={backgroundImage} />
+        <ProfileImageSection.ProfileSetupButton isMine={isMine} />
         <ProfileImageSection.ProfileAvatar>
-          <ProfileAvatar.Avatar userName="FE" size="xl" />
+          <ProfileAvatar.Avatar src={thumbnail} userName={name} size="xl" />
         </ProfileImageSection.ProfileAvatar>
       </ProfileImageSection>
 
-      <NickName>사용자닉네임</NickName>
+      <NickName>{name}</NickName>
       <Introduce isReadMore={isReadMore}>{getIntroduceText}</Introduce>
 
       {isShowReadMoreButton && (
@@ -52,11 +53,11 @@ export default function AboutMe() {
       )}
 
       <StatContainer onClick={handleStatModalToggle}>
-        <Stat variant="ghost" items={STAT_MOCK_DATA} />
+        <Stat variant="ghost" items={statItemList} />
       </StatContainer>
       <AnimatePresence>
         {isStatModalVisible && (
-          <StatModal onClose={handleStatModalToggle} items={STAT_MOCK_DATA} />
+          <StatModal onClose={handleStatModalToggle} items={statItemList} />
         )}
       </AnimatePresence>
     </>

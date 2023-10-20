@@ -14,23 +14,26 @@ export default function Profile() {
     user: { name },
   } = useAuth();
   const { profile } = useApi();
-  const {
-    isLoading,
-    error,
-    data: user,
-  } = useQuery(["profile", name], () => profile.getProfile(name));
-  console.log(user);
+  const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
+    profile.getProfile(name),
+  );
 
   if (isLoading) return <Loader />;
-  if (error) return <span>error</span>;
   return (
     <>
-      {/* FIXME: 내 프로필 -> 내 프로필, 다른 사용자 프로필 -> 닉네임*/}
-      <Head title="오덕 | OOO" />
-      <ProfileContainer>
-        <AboutMe />
-        <TabMenu />
-      </ProfileContainer>
+      {userProfile && (
+        <>
+          <Head
+            title={`오덕 | ${
+              userProfile.isMine ? "내 프로필" : userProfile.name
+            }`}
+          />
+          <ProfileContainer>
+            <AboutMe profile={userProfile} />
+            <TabMenu isMine={userProfile.isMine} />
+          </ProfileContainer>
+        </>
+      )}
     </>
   );
 }

@@ -15,6 +15,20 @@ declare interface User extends BaseTimeEntity {
   role: Role | null;
 }
 
+declare interface Profile {
+  name: string;
+  description: string;
+  backgroundImage: string;
+  thumbnail: string;
+  activity: {
+    reviews: number;
+    bookmarks: number;
+    likes: number;
+    point: number;
+  };
+  isMine: boolean;
+}
+
 declare interface Series extends BaseTimeEntity {
   id: number;
   title: string;

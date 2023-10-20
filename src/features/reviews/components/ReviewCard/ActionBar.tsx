@@ -5,10 +5,12 @@ import ReviewMoreButton from "./ReviewMoreButton";
 export type Include = "time" | "common";
 
 export interface ActionBarProps {
+  isMine: boolean;
   include?: Include;
   createdAt?: string;
 }
 export default function ActionBar({
+  isMine,
   include = "common",
   createdAt,
 }: ActionBarProps) {
@@ -17,7 +19,7 @@ export default function ActionBar({
       {include === "time" && <time>{createdAt}</time>}
       <ButtonContainer include={include}>
         <ReviewLikeButton isLike={false} count={0} onClick={() => {}} />
-        <ReviewMoreButton />
+        <ReviewMoreButton isMine={isMine} />
       </ButtonContainer>
     </ActionBarContainer>
   );

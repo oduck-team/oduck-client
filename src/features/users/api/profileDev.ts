@@ -1,7 +1,7 @@
 import profileMock from "./mock/profile.json";
 
-export default class ProfileDev {
-  async getProfile() {
+export default class ProfileDevApi {
+  async getProfile(): Promise<Profile> {
     return profileMock;
   }
 }

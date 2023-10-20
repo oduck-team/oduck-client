@@ -48,7 +48,8 @@ export default function Reviews() {
               rating={REVIEW_MOCK_DATA.rating}
             />
             <ReviewCard.Comment text={REVIEW_MOCK_DATA.comment} />
-            <ReviewCard.ActionBar />
+            {/* TODO: isMine 판별 */}
+            <ReviewCard.ActionBar isMine={false} />
           </ReviewCard>
         </li>
       </ul>
