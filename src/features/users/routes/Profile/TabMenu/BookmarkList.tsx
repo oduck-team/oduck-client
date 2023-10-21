@@ -1,3 +1,11 @@
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useRef } from "react";
+
+import Loader from "@/components/Loader";
+import useAuth from "@/features/auth/hooks/useAuth";
+import { useApi } from "@/hooks/useApi";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+
 import BookmarkCard from "./BookmarkCard";
 
 const BOOKMARK_RIST = [
@@ -19,11 +27,44 @@ const BOOKMARK_RIST = [
 ];
 
 export default function BookmarkList() {
+  const targetRef = useRef(null);
+  const {
+    user: { memberId },
+  } = useAuth();
+  const { profile } = useApi();
+  const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ["bookmarks", memberId],
+    ({ pageParam }) => profile.getBookmark(memberId, pageParam),
+    {
+      getNextPageParam: (lastPage) => {
+        return lastPage.lastId === -1 ? undefined : lastPage.lastId;
+      },
+      select: (data) => ({
+        pages: data.pages.flatMap((page) => page.items),
+        pageParams: data.pageParams,
+      }),
+    },
+  );
+
+  useIntersectionObserver({
+    target: targetRef,
+    onIntersect: fetchNextPage,
+    enabled: hasNextPage,
+  });
+
+  console.log(data);
   return (
     <>
       {BOOKMARK_RIST.map((bookmark, index) => (
         <BookmarkCard key={index} bookmark={bookmark} />
       ))}
+
+      <div
+        ref={targetRef}
+        style={{ backgroundColor: "hotpink", height: "15px" }}
+      ></div>
+
+      {isLoading && <Loader />}
     </>
   );
 }
