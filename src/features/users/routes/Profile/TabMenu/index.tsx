@@ -36,10 +36,11 @@ export default function TabMenu({ isMine }: TabMenuProps) {
   } = useAuth();
   const { profile } = useApi();
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
-    ["bookmarks", memberId],
-    ({ pageParam }) => profile.getBookmark(memberId, pageParam),
+    [selectedMenu, memberId, selected.id, selected.isDESC],
+    ({ pageParam }) =>
+      profile.getBookmark(memberId, pageParam, selectedMenu, selected),
     {
-      getNextPageParam: (lastPage) => lastPage.lastId || undefined,
+      getNextPageParam: (lastPage) => lastPage.cursor || undefined,
       select: (data) => ({
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,
