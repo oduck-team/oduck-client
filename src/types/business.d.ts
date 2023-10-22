@@ -29,6 +29,15 @@ declare interface Profile {
   isMine: boolean;
 }
 
+declare interface Bookmark {
+  animeId: number;
+  title: string;
+  thumbnail: string;
+  createdAt: string;
+  avgScore: number;
+  myScore: number;
+}
+
 declare interface Series extends BaseTimeEntity {
   id: number;
   title: string;

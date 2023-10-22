@@ -16,6 +16,12 @@ export const Image = styled.img`
   margin-right: 8px;
 `;
 
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
 export const Title = styled.h4`
   ${({ theme }) => theme.typo["body-2-r"]}
   margin-bottom: 8px;
@@ -29,7 +35,6 @@ export const RatingContainer = styled.div`
   ${({ theme }) => theme.typo["body-3-m"]}
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
 `;
 
 export const ScoreContainer = styled.div`
@@ -71,7 +76,7 @@ export const MyScore = styled.span`
   color: ${({ theme }) => theme.colors.primary[60]};
 `;
 
-export const Date = styled.time`
+export const CreatedDate = styled.time`
   ${({ theme }) => theme.typo["body-3-r"]}
   color: ${({ theme }) => theme.colors.neutral[40]}
 `;

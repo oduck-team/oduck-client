@@ -1,3 +1,5 @@
+import { SortById } from "@/features/users/hooks/useSortBar";
+
 import { ArrowsDownIcon, ArrowsUpIcon } from "./Icons";
 import { Button, ButtonText } from "./SheetButton.style";
 
@@ -7,22 +9,22 @@ export interface TextSortBy {
 }
 
 interface State {
-  id: string;
+  id: SortById;
   text: string;
   isDESC: boolean;
 }
 
 interface Select {
-  id: string;
+  id: SortById;
   text: string;
   state: State[];
 }
 
 interface SheetButtonProps {
-  id: string;
+  id: SortById;
   text: TextSortBy;
   selected: Select;
-  onClick: (isDESC: boolean, id: string, text: TextSortBy) => void;
+  onClick: (isDESC: boolean, id: SortById, text: TextSortBy) => void;
 }
 
 export default function SheetButton({
