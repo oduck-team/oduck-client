@@ -1,5 +1,12 @@
 import { get } from "@/libs/api";
 
+export interface BookmarkPage {
+  items: Bookmark[];
+  hasNext: boolean;
+  lastId: number;
+  size: number;
+}
+
 export default class ProfileApi {
   async getProfile(name: string): Promise<Profile> {
     console.log(name);
@@ -7,7 +14,10 @@ export default class ProfileApi {
     return await get(`/members/${"faberjoo"}`);
   }
 
-  async getBookmark(memberId: number, pageParam: number) {
+  async getBookmark(
+    memberId: number,
+    pageParam: number,
+  ): Promise<BookmarkPage> {
     // FIXME: /members/${memberId}, size, log 제거
     console.log(memberId);
     const url =
