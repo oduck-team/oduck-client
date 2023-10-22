@@ -9,11 +9,12 @@ export default class ProfileDevApi {
     return profileMock;
   }
 
-  async getBookmark(_: number, pageParam: number): Promise<BookmarkPage> {
+  async getBookmark(_: number, pageParam: string): Promise<BookmarkPage> {
+    // 입덕 최신 순 정렬
     switch (pageParam) {
-      case 21:
+      case "2023-10-03T21:05:31.859":
         return bookmarkMock2;
-      case 11:
+      case "2023-09-21T21:05:31.859":
         return bookmarkMock1;
       default:
         return bookmarkMock3;

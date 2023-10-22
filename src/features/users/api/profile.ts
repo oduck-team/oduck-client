@@ -3,7 +3,7 @@ import { get } from "@/libs/api";
 export interface BookmarkPage {
   items: Bookmark[];
   hasNext: boolean;
-  lastId: number;
+  lastId: string;
   size: number;
 }
 
@@ -16,10 +16,11 @@ export default class ProfileApi {
 
   async getBookmark(
     memberId: number,
-    pageParam: number,
+    pageParam: string,
   ): Promise<BookmarkPage> {
     // FIXME: /members/${memberId}, size, log 제거
     console.log(memberId);
+
     const url =
       pageParam === undefined
         ? `/members/${"26"}/bookmarks?size=2`

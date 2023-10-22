@@ -18,9 +18,7 @@ export default function BookmarkList() {
     ["bookmarks", memberId],
     ({ pageParam }) => profile.getBookmark(memberId, pageParam),
     {
-      getNextPageParam: (lastPage) => {
-        return lastPage.lastId === -1 ? undefined : lastPage.lastId;
-      },
+      getNextPageParam: (lastPage) => lastPage.lastId || undefined,
       select: (data) => ({
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,

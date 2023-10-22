@@ -6,7 +6,7 @@
       "thumbnail": "http://qwer",
       "avgScore": 9,
       "myScore": -1,
-      "createdAt": "2023-10-12T21:05:31.859"
+      "createdAt": "2023-10-02T21:05:31.859"
     },
     {
       "animeId": 19,
@@ -14,7 +14,7 @@
       "thumbnail": "http://zxcv.com",
       "avgScore": 9,
       "myScore": 2,
-      "createdAt": "2023-10-11T21:05:31.859"
+      "createdAt": "2023-10-01T21:05:31.859"
     },
     {
       "animeId": 18,
@@ -22,7 +22,7 @@
       "thumbnail": "http://asdf.com",
       "avgScore": 9,
       "myScore": 1,
-      "createdAt": "2023-10-10T21:05:31.859"
+      "createdAt": "2023-09-28T21:05:31.859"
     },
     {
       "animeId": 17,
@@ -30,7 +30,7 @@
       "thumbnail": "http://qwer",
       "avgScore": 9,
       "myScore": -1,
-      "createdAt": "2023-10-12T21:05:31.859"
+      "createdAt": "2023-09-27T21:05:31.859"
     },
     {
       "animeId": 16,
@@ -38,7 +38,7 @@
       "thumbnail": "http://zxcv.com",
       "avgScore": 9,
       "myScore": 2,
-      "createdAt": "2023-10-11T21:05:31.859"
+      "createdAt": "2023-09-26T21:05:31.859"
     },
     {
       "animeId": 15,
@@ -46,7 +46,7 @@
       "thumbnail": "http://asdf.com",
       "avgScore": 9,
       "myScore": 1,
-      "createdAt": "2023-10-10T21:05:31.859"
+      "createdAt": "2023-09-25T21:05:31.859"
     },
     {
       "animeId": 14,
@@ -54,7 +54,7 @@
       "thumbnail": "http://qwer",
       "avgScore": 9,
       "myScore": -1,
-      "createdAt": "2023-10-12T21:05:31.859"
+      "createdAt": "2023-09-24T21:05:31.859"
     },
     {
       "animeId": 13,
@@ -62,7 +62,7 @@
       "thumbnail": "http://zxcv.com",
       "avgScore": 9,
       "myScore": 2,
-      "createdAt": "2023-10-11T21:05:31.859"
+      "createdAt": "2023-09-23T21:05:31.859"
     },
     {
       "animeId": 12,
@@ -70,7 +70,7 @@
       "thumbnail": "http://asdf.com",
       "avgScore": 9,
       "myScore": 1,
-      "createdAt": "2023-10-10T21:05:31.859"
+      "createdAt": "2023-09-22T21:05:31.859"
     },
     {
       "animeId": 11,
@@ -78,10 +78,10 @@
       "thumbnail": "http://asdf.com",
       "avgScore": 9,
       "myScore": 1,
-      "createdAt": "2023-10-10T21:05:31.859"
+      "createdAt": "2023-09-21T21:05:31.859"
     }
   ],
   "size": 10,
   "hasNext": true,
-  "lastId": 11
+  "lastId": "2023-09-21T21:05:31.859"
 }
