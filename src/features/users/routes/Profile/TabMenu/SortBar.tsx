@@ -1,8 +1,10 @@
+import { useState } from "react";
+
 import BottomSheet from "@/components/BottomSheet";
-import useSortBar from "@/features/users/hooks/useSortBar";
+import { ButtonType, SelectedSort } from "@/features/users/hooks/useSortBar";
 
 import { ArrowsDownIcon, ArrowsUpIcon } from "./Icons";
-import SheetButton from "./SheetButton";
+import SheetButton, { TextSortBy } from "./SheetButton";
 import {
   Button,
   ButtonText,
@@ -11,25 +13,27 @@ import {
   SortBarContainer,
 } from "./SortBar.style";
 
-import { MENU } from ".";
-
 interface SortBarProps {
-  menu: MENU;
+  count: number;
+  selected: SelectedSort;
+  BUTTONS: ButtonType[];
+  onClick: (isDESC: boolean, id: string, text: TextSortBy) => void;
 }
 
-export default function SortBar({ menu }: SortBarProps) {
-  const {
-    selected,
-    isBottomSheetVisible,
-    SHEET_BUTTONS,
-    handleSortClick,
-    handleBottomSheetToggle,
-  } = useSortBar(menu);
+export default function SortBar({
+  count,
+  selected,
+  BUTTONS,
+  onClick,
+}: SortBarProps) {
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
+  const handleBottomSheetToggle = () =>
+    setIsBottomSheetVisible((prev) => !prev);
 
   return (
     <>
       <SortBarContainer>
-        <Count>32개의 애니가 있어요</Count>
+        <Count>{count}개의 애니가 있어요</Count>
         <Button type="button" onClick={handleBottomSheetToggle}>
           <ButtonText>{selected.text}</ButtonText>
           {selected.isDESC ? <ArrowsDownIcon /> : <ArrowsUpIcon />}
@@ -42,13 +46,13 @@ export default function SortBar({ menu }: SortBarProps) {
       >
         <BottomSheet.Content>
           <SheetTitle>정렬기준</SheetTitle>
-          {SHEET_BUTTONS.map((button) => (
+          {BUTTONS.map((button) => (
             <SheetButton
               key={button.id}
               id={button.id}
               text={button.text}
               selected={selected}
-              onClick={handleSortClick}
+              onClick={onClick}
             />
           ))}
         </BottomSheet.Content>

@@ -18,8 +18,26 @@ const TITLE_ASC = "제목 오름차순";
 const BOOKMARK_DESC = "입덕 최신 순"; // <-> CREATE_DESC
 const BOOKMARK_ASC = "입덕 오래된 순"; // <-> CREATE_ASC
 
+export interface SelectedSort {
+  id: string;
+  isDESC: boolean;
+  text: string;
+  state: {
+    id: string;
+    text: string;
+    isDESC: boolean;
+  }[];
+}
+
+export interface ButtonType {
+  id: string;
+  text: {
+    asc: string;
+    desc: string;
+  };
+}
+
 export default function useSortBar(menu: MENU) {
-  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const [selected, setSelected] = useState({
     id: CREATE_BY,
     isDESC: true,
@@ -67,9 +85,6 @@ export default function useSortBar(menu: MENU) {
     },
   ];
 
-  const handleBottomSheetToggle = () =>
-    setIsBottomSheetVisible((prev) => !prev);
-
   const handleSortClick = (isDESC: boolean, id: string, text: TextSortBy) => {
     setSelected((prev) => ({
       ...prev,
@@ -107,9 +122,7 @@ export default function useSortBar(menu: MENU) {
 
   return {
     selected,
-    isBottomSheetVisible,
     SHEET_BUTTONS,
     handleSortClick,
-    handleBottomSheetToggle,
   };
 }
