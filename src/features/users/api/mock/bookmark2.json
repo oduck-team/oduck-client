@@ -1,0 +1,87 @@
+{
+  "items": [
+    {
+      "animeId": 20,
+      "title": "건담 더블오 20",
+      "thumbnail": "http://qwer",
+      "avgScore": 9,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 19,
+      "title": "스파이 패밀리 19",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 9,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 18,
+      "title": "강연금 18",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 9,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 17,
+      "title": "건담 더블오 17",
+      "thumbnail": "http://qwer",
+      "avgScore": 9,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 16,
+      "title": "스파이 패밀리 16",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 9,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 15,
+      "title": "강연금 15",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 9,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 14,
+      "title": "건담 더블오 14",
+      "thumbnail": "http://qwer",
+      "avgScore": 9,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 13,
+      "title": "스파이 패밀리 13",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 9,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 12,
+      "title": "강연금 12",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 9,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 11,
+      "title": "강연금 11",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 9,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    }
+  ],
+  "size": 10,
+  "hasNext": true,
+  "lastId": 11
+}

@@ -1,0 +1,87 @@
+{
+  "items": [
+    {
+      "animeId": 30,
+      "title": "건담 더블오 30 건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30건담 더블오 30",
+      "thumbnail": "http://qwer",
+      "avgScore": 10,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 29,
+      "title": "스파이 패밀리 29",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 10,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 28,
+      "title": "강연금 28",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 10,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 27,
+      "title": "건담 더블오 27",
+      "thumbnail": "http://qwer",
+      "avgScore": 10,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 26,
+      "title": "스파이 패밀리 26",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 10,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 25,
+      "title": "강연금 25",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 10,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 24,
+      "title": "건담 더블오 24",
+      "thumbnail": "http://qwer",
+      "avgScore": 10,
+      "myScore": -1,
+      "createdAt": "2023-10-12T21:05:31.859"
+    },
+    {
+      "animeId": 23,
+      "title": "스파이 패밀리 23",
+      "thumbnail": "http://zxcv.com",
+      "avgScore": 10,
+      "myScore": 2,
+      "createdAt": "2023-10-11T21:05:31.859"
+    },
+    {
+      "animeId": 22,
+      "title": "강연금 22",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 10,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    },
+    {
+      "animeId": 21,
+      "title": "강연금 21",
+      "thumbnail": "http://asdf.com",
+      "avgScore": 10,
+      "myScore": 1,
+      "createdAt": "2023-10-10T21:05:31.859"
+    }
+  ],
+  "size": 10,
+  "hasNext": true,
+  "lastId": 21
+}
