@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { MENU } from "../routes/Profile/TabMenu";
 import { TextSortBy } from "../routes/Profile/TabMenu/SheetButton";
 
+export type SortById = typeof CREATE_BY | typeof RATING_BY | typeof TITLE_BY;
+
 const CREATE_BY = "등록 순";
 const RATING_BY = "별점 순";
 const TITLE_BY = "제목 순";
@@ -19,18 +21,18 @@ const BOOKMARK_DESC = "입덕 최신 순"; // <-> CREATE_DESC
 const BOOKMARK_ASC = "입덕 오래된 순"; // <-> CREATE_ASC
 
 export interface SelectedSort {
-  id: string;
+  id: SortById;
   isDESC: boolean;
   text: string;
   state: {
-    id: string;
+    id: SortById;
     text: string;
     isDESC: boolean;
   }[];
 }
 
 export interface ButtonType {
-  id: string;
+  id: SortById;
   text: {
     asc: string;
     desc: string;
@@ -38,7 +40,7 @@ export interface ButtonType {
 }
 
 export default function useSortBar(menu: MENU) {
-  const [selected, setSelected] = useState({
+  const [selected, setSelected] = useState<SelectedSort>({
     id: CREATE_BY,
     isDESC: true,
     text: CREATE_DESC,
@@ -61,7 +63,7 @@ export default function useSortBar(menu: MENU) {
     ],
   });
 
-  const SHEET_BUTTONS = [
+  const SHEET_BUTTONS: ButtonType[] = [
     {
       id: RATING_BY,
       text: {
@@ -85,7 +87,7 @@ export default function useSortBar(menu: MENU) {
     },
   ];
 
-  const handleSortClick = (isDESC: boolean, id: string, text: TextSortBy) => {
+  const handleSortClick = (isDESC: boolean, id: SortById, text: TextSortBy) => {
     setSelected((prev) => ({
       ...prev,
       id,

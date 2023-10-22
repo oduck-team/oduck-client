@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 import BottomSheet from "@/components/BottomSheet";
-import { ButtonType, SelectedSort } from "@/features/users/hooks/useSortBar";
+import {
+  ButtonType,
+  SelectedSort,
+  SortById,
+} from "@/features/users/hooks/useSortBar";
 
 import { ArrowsDownIcon, ArrowsUpIcon } from "./Icons";
 import SheetButton, { TextSortBy } from "./SheetButton";
@@ -17,7 +21,7 @@ interface SortBarProps {
   count: number;
   selected: SelectedSort;
   BUTTONS: ButtonType[];
-  onClick: (isDESC: boolean, id: string, text: TextSortBy) => void;
+  onClick: (isDESC: boolean, id: SortById, text: TextSortBy) => void;
 }
 
 export default function SortBar({
