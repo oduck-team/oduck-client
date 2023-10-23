@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { TextSize } from "./ReviewComent";
 
-export const ReviewComentContainer = styled.p<{ textSize: TextSize }>`
+export const ReviewComentContainer = styled.div<{ textSize: TextSize }>`
   ${({ theme }) => theme.typo["body-2-r"]}
   ${({ theme }) => theme.colors.neutral[80]}
   display: -webkit-box;
