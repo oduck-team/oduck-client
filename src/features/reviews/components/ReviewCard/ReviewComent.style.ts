@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Comment = styled.p`
+export const ReviewComentContainer = styled.p`
   ${({ theme }) => theme.typo["body-2-r"]}
   ${({ theme }) => theme.colors.neutral[80]}
   display: -webkit-box;
