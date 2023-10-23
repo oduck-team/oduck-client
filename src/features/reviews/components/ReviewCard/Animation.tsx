@@ -10,18 +10,18 @@ import {
 interface AnimeProps {
   anime: {
     title: string;
-    image: string;
-    rating: number;
+    thumbnail: string;
+    avgScore: number;
   };
 }
 
 export default function Anime({ anime }: AnimeProps) {
   return (
     <AnimeConatiner>
-      <Image src={anime.image} alt={anime.title} />
+      <Image src={anime.thumbnail} alt={anime.title} />
       <TitleContainer>
         <Title>{anime.title}</Title>
-        <Rating color="primary" value={anime.rating} size="sm" readonly />
+        <Rating color="primary" value={anime.avgScore} size="sm" readonly />
       </TitleContainer>
     </AnimeConatiner>
   );

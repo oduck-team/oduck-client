@@ -67,6 +67,11 @@ export default function TabMenu({ isMine }: TabMenuProps) {
     },
   );
 
+  const listCount =
+    selectedMenu === "입덕애니"
+      ? bookmarks?.pages.length
+      : reviews?.pages.length;
+
   useEffect(() => {
     if (!location.state) return;
     setSelectedMenu(BOOKMARK_MENU);
@@ -89,7 +94,7 @@ export default function TabMenu({ isMine }: TabMenuProps) {
       </Tab>
       <ContentContainer>
         <SortBar
-          count={bookmarks?.pages.length ?? 0}
+          count={listCount ?? 0}
           selected={selected}
           BUTTONS={SHEET_BUTTONS}
           onClick={handleSortClick}

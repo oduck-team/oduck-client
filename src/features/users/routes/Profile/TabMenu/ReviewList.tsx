@@ -36,11 +36,17 @@ export default function ReviewList({
       {list.map((review) => (
         <ReviewCard key={review.animeId} isBlock isBorderTop={false}>
           <ReviewCard.Anime anime={review.anime} />
-          <ReviewCard.Comment text={review.comment} />
+          <ReviewCard.Comment
+            text={review.comment}
+            isSpoiler={review.isSpoiler}
+          />
           <ReviewCard.ActionBar
             include="time"
             createdAt={review.createdAt}
+            isTimeAgo={false}
             isMine={isMine}
+            isLike={review.isLike}
+            likeCount={review.likeCount}
           />
         </ReviewCard>
       ))}
