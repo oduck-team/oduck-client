@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { MENU } from ".";
+import { MENU } from "@/features/users/hooks/useTabMenu";
 
 export const Tab = styled.div`
   display: flex;
