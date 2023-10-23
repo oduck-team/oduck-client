@@ -32,10 +32,3 @@ export const ContentContainer = styled.div`
   padding: 0 16px;
   border-top: 2px solid ${({ theme }) => theme.colors.neutral["05"]};
 `;
-
-export const Target = styled.div`
-  position: relative;
-  top: -15px;
-  background-color: transparent;
-  height: 15px;
-`;
