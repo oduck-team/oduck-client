@@ -10,5 +10,5 @@ export const ReviewComentContainer = styled.p<{ textSize: TextSize }>`
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
 
-  ${({ theme, textSize }) => textSize === "sm" && theme.typo["body-3-m"]}
+  ${({ theme, textSize }) => textSize === "sm" && theme.typo["body-3-r"]}
 `;
