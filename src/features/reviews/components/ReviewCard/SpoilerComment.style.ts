@@ -13,10 +13,12 @@ export const SpoilerCommentContainer = styled.div`
 `;
 
 export const Info = styled.span`
+  ${({ theme }) => theme.typo["body-3-r"]}
   color: ${({ theme }) => theme.colors.neutral["50"]};
 `;
 
 export const Button = styled.button`
+  ${({ theme }) => theme.typo["body-3-r"]}
   color: ${({ theme }) => theme.colors.neutral["80"]};
   background-color: transparent;
   border: none;

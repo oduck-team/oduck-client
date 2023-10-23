@@ -53,6 +53,7 @@ export default function Reviews() {
             />
             <ReviewCard.Comment
               text={REVIEW_MOCK_DATA.comment}
+              textSize="sm"
               isSpoiler={REVIEW_MOCK_DATA.isSpoiler}
             />
             {/* TODO: isMine 판별 */}
