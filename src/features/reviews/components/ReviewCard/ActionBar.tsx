@@ -20,13 +20,6 @@ export default function ActionBar({
   createdAt,
   isTimeAgo,
 }: ActionBarProps) {
-  const compactNumber = (data: number) => {
-    return Intl.NumberFormat("en-US", {
-      notation: "compact",
-      maximumFractionDigits: 1,
-    }).format(data);
-  };
-
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
   return (
@@ -42,6 +35,13 @@ export default function ActionBar({
       </ButtonContainer>
     </ActionBarContainer>
   );
+}
+
+function compactNumber(data: number) {
+  return Intl.NumberFormat("ko-KR", {
+    notation: "compact",
+    maximumFractionDigits: 1,
+  }).format(data);
 }
 
 function dateWithDots(date: string | undefined) {
