@@ -25,7 +25,7 @@ export default class ProfileApi {
 
   async getBookmark(
     memberId: number,
-    pageParam: string,
+    pageParam: string | undefined,
     selected: SelectedSort,
   ): Promise<BookmarkPage> {
     const params = this.setParams(pageParam, selected);
@@ -38,7 +38,7 @@ export default class ProfileApi {
 
   async getReview(
     memberId: number,
-    pageParam: string,
+    pageParam: string | undefined,
     selected: SelectedSort,
   ): Promise<ReviewPage> {
     const params = this.setParams(pageParam, selected);
@@ -49,7 +49,7 @@ export default class ProfileApi {
     });
   }
 
-  private setParams(pageParam: string, selected: SelectedSort) {
+  private setParams(pageParam: string | undefined, selected: SelectedSort) {
     let sort;
     if (selected.id === "제목 순") sort = "title";
     else if (selected.id === "별점 순") sort = "score";
