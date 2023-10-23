@@ -1,10 +1,16 @@
 import { get } from "@/libs/api";
 
 import { SelectedSort } from "../hooks/useSortBar";
-import { MENU } from "../routes/Profile/TabMenu";
 
 export interface BookmarkPage {
   items: Bookmark[];
+  hasNext: boolean;
+  cursor: string;
+  size: number;
+}
+
+export interface ReviewPage {
+  items: Review[];
   hasNext: boolean;
   cursor: string;
   size: number;
@@ -20,15 +26,30 @@ export default class ProfileApi {
   async getBookmark(
     memberId: number,
     pageParam: string,
-    selectedMenu: MENU,
     selected: SelectedSort,
   ): Promise<BookmarkPage> {
-    // FIXME: log 제거
+    const params = this.setParams(pageParam, selected);
+    // FIXME: /members/${memberId} 변경, log제거
     console.log(memberId);
+    return await get(`/members/${"26"}/bookmarks`, {
+      params: params,
+    });
+  }
 
-    // FIXME: 회원 리뷰 api 구현 시, reviews 변경
-    const request = selectedMenu === "입덕애니" ? "bookmarks" : "bookmarks";
+  async getReview(
+    memberId: number,
+    pageParam: string,
+    selected: SelectedSort,
+  ): Promise<ReviewPage> {
+    const params = this.setParams(pageParam, selected);
+    // FIXME: /members/${memberId} 변경, log 제거
+    console.log(memberId);
+    return await get(`/members/${"26"}/reviews`, {
+      params: params,
+    });
+  }
 
+  private setParams(pageParam: string, selected: SelectedSort) {
     let sort;
     if (selected.id === "제목 순") sort = "title";
     else if (selected.id === "별점 순") sort = "score";
@@ -42,6 +63,7 @@ export default class ProfileApi {
       sort,
       order,
     };
+
     const params =
       pageParam === undefined
         ? baseParams
@@ -50,11 +72,6 @@ export default class ProfileApi {
             cursor: pageParam,
           };
 
-    // FIXME: /members/${memberId} 변경
-    const uri = `/members/${"26"}/${request}`;
-
-    return await get(uri, {
-      params: params,
-    });
+    return params;
   }
 }
