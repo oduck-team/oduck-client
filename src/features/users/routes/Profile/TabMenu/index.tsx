@@ -7,7 +7,7 @@ import useTabMenu, {
 import BookmarkList from "./BookmarkList";
 import ReviewList from "./ReviewList";
 import SortBar from "./SortBar";
-import { ContentContainer, Tab, TabButton } from "./style";
+import { ContentContainer, Tab, TabButton, Target } from "./style";
 
 const TAB_BUTTONS = [
   { text: REVIEW_MENU as MENU },
@@ -20,16 +20,13 @@ interface TabMenuProps {
 
 export default function TabMenu({ isMine }: TabMenuProps) {
   const {
+    targetRef,
     selectedMenu,
-    selected,
+    selected: selectedSort,
     bookmarks,
     isLoadingBookmark,
-    fetchNextPageBookmark,
-    hasNextPageBookmark,
     reviews,
     isLoadingReview,
-    fetchNextPageReview,
-    hasNextPageReview,
     listCount,
     handleTabMenuClick,
     SHEET_BUTTONS,
@@ -54,25 +51,18 @@ export default function TabMenu({ isMine }: TabMenuProps) {
       <ContentContainer>
         <SortBar
           count={listCount ?? 0}
-          selected={selected}
+          selected={selectedSort}
           BUTTONS={SHEET_BUTTONS}
           onClick={handleSortClick}
         />
         {selectedMenu === "한줄리뷰" && (
-          <ReviewList
-            isMine={isMine}
-            list={reviews?.pages ?? []}
-            fetchNextPage={fetchNextPageReview}
-            hasNextPage={hasNextPageReview}
-          />
+          <ReviewList isMine={isMine} list={reviews?.pages ?? []} />
         )}
         {selectedMenu === "입덕애니" && (
-          <BookmarkList
-            list={bookmarks?.pages ?? []}
-            fetchNextPage={fetchNextPageBookmark}
-            hasNextPage={hasNextPageBookmark}
-          />
+          <BookmarkList list={bookmarks?.pages ?? []} />
         )}
+
+        <Target ref={targetRef} />
 
         {(isLoadingBookmark || isLoadingReview) && <span>로딩중</span>}
       </ContentContainer>

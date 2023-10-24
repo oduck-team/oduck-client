@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import useAuth from "@/features/auth/hooks/useAuth";
 import useSortBar from "@/features/users/hooks/useSortBar";
 import { useApi } from "@/hooks/useApi";
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 export const REVIEW_MENU = "한줄리뷰";
 export const BOOKMARK_MENU = "입덕애니";
@@ -12,6 +13,7 @@ export const BOOKMARK_MENU = "입덕애니";
 export type MENU = typeof REVIEW_MENU | typeof BOOKMARK_MENU;
 
 export default function useTabMenu() {
+  const targetRef = useRef(null);
   const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState<MENU>(REVIEW_MENU);
   const handleTabMenuClick = (text: MENU) => setSelectedMenu(text);
@@ -61,6 +63,14 @@ export default function useTabMenu() {
     },
   );
 
+  useIntersectionObserver({
+    target: targetRef,
+    onIntersect:
+      selectedMenu === "입덕애니" ? fetchNextPageBookmark : fetchNextPageReview,
+    enabled:
+      selectedMenu === "입덕애니" ? hasNextPageBookmark : hasNextPageReview,
+  });
+
   const listCount =
     selectedMenu === "입덕애니"
       ? bookmarks?.pages.length
@@ -73,16 +83,13 @@ export default function useTabMenu() {
   }, [location.state]);
 
   return {
+    targetRef,
     selectedMenu,
     selected: selectedSort,
     bookmarks,
     isLoadingBookmark,
-    fetchNextPageBookmark,
-    hasNextPageBookmark,
     reviews,
     isLoadingReview,
-    fetchNextPageReview,
-    hasNextPageReview,
     listCount,
     handleTabMenuClick,
     SHEET_BUTTONS,
