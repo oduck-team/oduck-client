@@ -37,14 +37,14 @@ export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
               {bookmark.myScore < 0 && <Score>평가전</Score>}
             </ScoreContainer>
           </RatingContainer>
-          <CreatedDate>{dateFormat(bookmark.createdAt)}</CreatedDate>
+          <CreatedDate>{dateWithDots(bookmark.createdAt)}</CreatedDate>
         </div>
       </InfoContainer>
     </BookmarkCardContainer>
   );
 }
 
-function dateFormat(date: string) {
+function dateWithDots(date: string) {
   const originalDate = new Date(date);
 
   const year = originalDate.getFullYear();

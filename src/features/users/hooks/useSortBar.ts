@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { MENU } from "../routes/Profile/TabMenu";
 import { TextSortBy } from "../routes/Profile/TabMenu/SheetButton";
+
+import { MENU } from "./useTabMenu";
 
 export type SortById = typeof CREATE_BY | typeof RATING_BY | typeof TITLE_BY;
 

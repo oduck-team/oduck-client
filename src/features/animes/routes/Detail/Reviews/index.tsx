@@ -10,6 +10,10 @@ const REVIEW_MOCK_DATA = {
   },
   rating: 5,
   comment: "제목이 뭐이리기냐 제목부터 맘에안듬",
+  isSpoiler: true,
+  isLike: true,
+  likeCount: 310,
+  isMine: true,
 };
 
 export default function Reviews() {
@@ -47,9 +51,17 @@ export default function Reviews() {
               user={REVIEW_MOCK_DATA.user}
               rating={REVIEW_MOCK_DATA.rating}
             />
-            <ReviewCard.Comment text={REVIEW_MOCK_DATA.comment} />
+            <ReviewCard.Comment
+              text={REVIEW_MOCK_DATA.comment}
+              textSize="sm"
+              isSpoiler={REVIEW_MOCK_DATA.isSpoiler}
+            />
             {/* TODO: isMine 판별 */}
-            <ReviewCard.ActionBar isMine={false} />
+            <ReviewCard.ActionBar
+              isMine={REVIEW_MOCK_DATA.isMine}
+              isLike={REVIEW_MOCK_DATA.isLike}
+              likeCount={REVIEW_MOCK_DATA.likeCount}
+            />
           </ReviewCard>
         </li>
       </ul>
