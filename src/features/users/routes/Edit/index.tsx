@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
 import Head from "@/components/Head";
-import Loader from "@/components/Loader";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 
@@ -9,6 +8,7 @@ import ProfileImageSection from "../../components/ProfileImageSection";
 import ProfileAvatar from "../../components/ProfileImageSection/ProfileAvatar";
 
 import EditForm from "./EditForm";
+import ProfileEditLoading from "./ProfileEditLoading";
 import { ProfileEditContainer } from "./style";
 
 export default function ProfileEdit() {
@@ -20,7 +20,7 @@ export default function ProfileEdit() {
     profile.getProfile(name),
   );
 
-  if (isLoading) return <Loader />;
+  if (isLoading) return <ProfileEditLoading />;
   return (
     <>
       {userProfile && (
