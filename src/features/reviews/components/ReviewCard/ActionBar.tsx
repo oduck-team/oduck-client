@@ -1,3 +1,5 @@
+import { compactNumber } from "@/utils/common";
+
 import { ActionBarContainer, ButtonContainer } from "./ActionBar.style";
 import ReviewLikeButton from "./ReviewLikeButton";
 import ReviewMoreButton from "./ReviewMoreButton";
@@ -28,20 +30,13 @@ export default function ActionBar({
       <ButtonContainer include={include}>
         <ReviewLikeButton
           isLike={isLike}
-          count={compactNumber(likeCount)}
+          count={compactNumber(likeCount, "ko-KR")}
           onClick={() => {}}
         />
         <ReviewMoreButton isMine={isMine} />
       </ButtonContainer>
     </ActionBarContainer>
   );
-}
-
-function compactNumber(data: number) {
-  return Intl.NumberFormat("ko-KR", {
-    notation: "compact",
-    maximumFractionDigits: 1,
-  }).format(data);
 }
 
 function dateWithDots(date: string | undefined) {
