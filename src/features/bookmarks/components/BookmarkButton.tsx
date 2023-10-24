@@ -19,7 +19,7 @@ interface BookmarkButtonProps {
 
 export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const { isLoggedIn } = useAuth();
-  const { bookmarkedAt, fetchBookmark } = useBookmark(1);
+  const { bookmarkedAt, fetchBookmark } = useBookmark(animeId);
   const { error: toggleBookmarkError, toggleBookmark } = useToggleBookmark();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   //const { error: removeError, removeBookmark } = useRemoveBookmark();
