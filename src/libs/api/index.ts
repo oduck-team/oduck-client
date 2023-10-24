@@ -25,10 +25,13 @@ instance.interceptors.response.use(
     return Promise.reject(response.data);
   },
   (error) => {
-    // TODO: 서버 에외에 따른 처리
-    if (error.response?.data?.["message"]) {
+    if (error.response?.status >= 400 && error.response?.status < 500) {
       return Promise.reject(
-        new ApiError(error.response.data, error.response.status),
+        new ApiError(
+          error.response.data.message ?? "API Error",
+          error.response.status,
+          error.response.data.fieldErrors,
+        ),
       );
     }
 
