@@ -34,7 +34,7 @@ export default function ReviewList({
   return (
     <>
       {list.map((review) => (
-        <ReviewCard key={review.animeId} isBlock isBorderTop={false}>
+        <ReviewCard key={review.anime.animeId} isBlock isBorderTop={false}>
           <ReviewCard.Anime anime={review.anime} />
           <ReviewCard.Comment
             text={review.comment}

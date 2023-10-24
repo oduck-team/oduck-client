@@ -39,7 +39,6 @@ declare interface Bookmark {
 }
 
 declare interface Review {
-  animeId: number;
   name: string;
   comment: string;
   isSpoiler: boolean;
@@ -47,6 +46,7 @@ declare interface Review {
   likeCount: number;
   createdAt: string;
   anime: {
+    animeId: number;
     title: string;
     thumbnail: string;
     avgScore: number;
