@@ -4,6 +4,11 @@ import { StatContainer, Content, Title, Data, Description } from "./style";
 
 interface StatItemProps {
   title?: string;
+
+  /**
+   * 값이 number일 경우, 'compact' 표기법으로 변환합니다
+   * @example 1000 - 1K, 50000, 50K
+   */
   data?: number | string;
   description?: string;
 }
