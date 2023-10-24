@@ -1,3 +1,4 @@
+import Loader from "@/components/Loader";
 import useTabMenu, {
   BOOKMARK_MENU,
   MENU,
@@ -74,7 +75,7 @@ export default function TabMenu({ isMine }: TabMenuProps) {
           />
         )}
 
-        {(isLoadingBookmark || isLoadingReview) && <span>로딩중</span>}
+        {(isLoadingBookmark || isLoadingReview) && <Loader display="oduck" />}
       </ContentContainer>
     </>
   );
