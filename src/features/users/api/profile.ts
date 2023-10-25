@@ -2,6 +2,10 @@ import { get } from "@/libs/api";
 
 import { SelectedSort } from "../hooks/useSortBar";
 
+import reveiwMock1 from "./mock/review1.json";
+import reveiwMock2 from "./mock/review2.json";
+import reveiwMock3 from "./mock/review3.json";
+
 export interface BookmarkPage {
   items: Bookmark[];
   hasNext: boolean;
@@ -31,6 +35,7 @@ export default class ProfileApi {
     const params = this.setParams(pageParam, selected);
     // FIXME: /members/${memberId} 변경, log제거
     console.log(memberId);
+
     return await get(`/members/${"26"}/bookmarks`, {
       params: params,
     });
@@ -44,9 +49,22 @@ export default class ProfileApi {
     const params = this.setParams(pageParam, selected);
     // FIXME: /members/${memberId} 변경, log 제거
     console.log(memberId);
-    return await get(`/members/${"26"}/reviews`, {
-      params: params,
-    });
+    console.log(params);
+
+    // FIXME: review api 완성 시, mock switch 삭제
+    switch (pageParam) {
+      case "2023-10-03T21:05:31.859":
+        return reveiwMock2;
+      case "2023-09-21T21:05:31.859":
+        return reveiwMock1;
+      default:
+        return reveiwMock3;
+    }
+
+    // FIXME: review api 완성 시, 주석 제거
+    // return await get(`/members/${"26"}/reviews`, {
+    //   params: params,
+    // });
   }
 
   private setParams(pageParam: string | undefined, selected: SelectedSort) {

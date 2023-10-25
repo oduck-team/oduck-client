@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 import AuthApi from "@/features/auth/api/AuthApi";
+import BookmarkApi from "@/features/bookmarks/api/BookmarkApi";
 import ProfileApi from "@/features/users/api/profile";
 import ProfileDevApi from "@/features/users/api/profileDev";
 import { StrictPropsWithChildren } from "@/types";
@@ -8,6 +9,7 @@ import { StrictPropsWithChildren } from "@/types";
 interface API {
   authApi: AuthApi;
   profile: ProfileDevApi | ProfileApi;
+  bookmarkApi: BookmarkApi;
 }
 
 export const OduckApiContext = createContext<API | null>(null);
@@ -16,10 +18,11 @@ export const OduckApiContext = createContext<API | null>(null);
 const authApi = new AuthApi();
 // const profile = new ProfileApi();
 const profile = new ProfileDevApi();
+const bookmarkApi = new BookmarkApi();
 
 export function OduckApiProvider({ children }: StrictPropsWithChildren) {
   return (
-    <OduckApiContext.Provider value={{ authApi, profile }}>
+    <OduckApiContext.Provider value={{ authApi, profile, bookmarkApi }}>
       {children}
     </OduckApiContext.Provider>
   );
