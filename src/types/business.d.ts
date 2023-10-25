@@ -38,6 +38,21 @@ declare interface Bookmark {
   myScore: number;
 }
 
+declare interface Review {
+  name: string;
+  comment: string;
+  isSpoiler: boolean;
+  isLike: boolean;
+  likeCount: number;
+  createdAt: string;
+  anime: {
+    animeId: number;
+    title: string;
+    thumbnail: string;
+    avgScore: number;
+  };
+}
+
 declare interface Series extends BaseTimeEntity {
   id: number;
   title: string;

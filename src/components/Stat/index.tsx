@@ -1,5 +1,7 @@
 import { ComponentProps } from "react";
 
+import { compactNumber } from "@/utils/common";
+
 import { StatContainer, Content, Title, Data, Description } from "./style";
 
 interface StatItemProps {
@@ -26,15 +28,6 @@ export default function Stat({
   variant = "primary",
   ...props
 }: StatProps) {
-  const compactNumber = (data: string | number) => {
-    if (typeof data === "string") return data;
-
-    return Intl.NumberFormat("en-US", {
-      notation: "compact",
-      maximumFractionDigits: 1,
-    }).format(data);
-  };
-
   return (
     <StatContainer variant={variant} {...props}>
       {items.map((item, index) => {

@@ -1,0 +1,147 @@
+{
+  "items": [
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다. 리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다. 리뷰 입니다. 리뷰 입니다. 리뷰 입니다.",
+      "isSpoiler": true,
+      "isLike": false,
+      "likeCount": 12345678910,
+      "createdAt": "2023-10-12T21:05:31.859",
+      "anime": {
+        "animeId": 30,
+        "title": "강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다. 강연금 30 입니다.",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 3220,
+      "createdAt": "2022-10-23T21:05:31.859",
+      "anime": {
+        "animeId": 29,
+        "title": "강연금 29",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 54321,
+      "createdAt": "2022-08-10T21:05:31.859",
+      "anime": {
+        "animeId": 28,
+        "title": "강연금 28",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2021-10-09T21:05:31.859",
+      "anime": {
+        "animeId": 27,
+        "title": "강연금 27",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2005-10-08T21:05:31.859",
+      "anime": {
+        "animeId": 26,
+        "title": "강연금 26",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2023-10-23T21:25:55.859",
+      "anime": {
+        "animeId": 25,
+        "title": "강연금 25",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2023-10-06T21:05:31.859",
+      "anime": {
+        "animeId": 24,
+        "title": "강연금 24",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2023-10-05T21:05:31.859",
+      "anime": {
+        "animeId": 23,
+        "title": "강연금 23",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2023-10-04T21:05:31.859",
+      "anime": {
+        "animeId": 22,
+        "title": "강연금 22",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    },
+    {
+      "name": "faberjoo",
+      "comment": "리뷰 입니다.",
+      "isSpoiler": false,
+      "isLike": true,
+      "likeCount": 322,
+      "createdAt": "2023-10-03T21:05:31.859",
+      "anime": {
+        "animeId": 21,
+        "title": "강연금 21",
+        "thumbnail": "http://asdf.com",
+        "avgScore": 8
+      }
+    }
+  ],
+  "size": 10,
+  "hasNext": true,
+  "cursor": "2023-10-03T21:05:31.859"
+}

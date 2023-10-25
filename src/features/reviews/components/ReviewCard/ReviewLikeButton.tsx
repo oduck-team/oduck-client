@@ -4,7 +4,7 @@ import { ReviewLikeButtonContainer } from "./ReviewLikeButton.style";
 
 export interface ReviewLikeButtonProps {
   isLike: boolean;
-  count: number;
+  count: number | string;
   onClick: () => void;
 }
 
