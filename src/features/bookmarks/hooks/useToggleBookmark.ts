@@ -13,7 +13,7 @@ export default function useToggleBookmark(animeId: number) {
   return useMutation({
     mutationFn: () => bookmarkApi.toggleBookmark(animeId),
     onSuccess: () => {
-      queryClient.invalidateQueries(["bookmark", animeId]);
+      queryClient.invalidateQueries(["bookmark"]);
     },
   });
 }
