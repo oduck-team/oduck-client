@@ -34,7 +34,7 @@ export default function useTabMenu() {
     fetchNextPage: fetchNextPageBookmark,
     hasNextPage: hasNextPageBookmark,
   } = useInfiniteQuery(
-    ["bookmark", memberId, selectedSort.id, selectedSort.isDESC],
+    ["profile", memberId, "bookmark", selectedSort.id, selectedSort.isDESC],
     ({ pageParam }) => profile.getBookmark(memberId, pageParam, selectedSort),
     {
       getNextPageParam: (lastPage) => lastPage.cursor || undefined,
@@ -52,7 +52,7 @@ export default function useTabMenu() {
     fetchNextPage: fetchNextPageReview,
     hasNextPage: hasNextPageReview,
   } = useInfiniteQuery(
-    ["review", memberId, selectedSort.id, selectedSort.isDESC],
+    ["profile", memberId, "review", selectedSort.id, selectedSort.isDESC],
     ({ pageParam }) => profile.getReview(memberId, pageParam, selectedSort),
     {
       getNextPageParam: (lastPage) => lastPage.cursor || undefined,
