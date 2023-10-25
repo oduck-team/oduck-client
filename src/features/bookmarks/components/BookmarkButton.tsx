@@ -19,31 +19,33 @@ interface BookmarkButtonProps {
 
 export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const { isLoggedIn } = useAuth();
-  const { bookmarkedAt, fetchBookmark } = useBookmark(animeId);
-  const { error: toggleBookmarkError, toggleBookmark } = useToggleBookmark();
+  const bookmarkQuery = useBookmark(animeId);
+  const bookmarkMutation = useToggleBookmark(animeId);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
-  //const { error: removeError, removeBookmark } = useRemoveBookmark();
   const navigate = useNavigate();
 
-  const handleToggleBookmark = useDebounce(async (animeId: number) => {
+  const handleToggleBookmark = useDebounce(async () => {
     if (!isLoggedIn) {
       setIsLoginModalVisible(true);
       return;
     }
 
-    await toggleBookmark(animeId);
-    await fetchBookmark(animeId); // TODO:  toast 알림 ('입덕 애니에 추가했어요' 입덕한 애니 보러가기 )
+    bookmarkMutation.mutate();
+    // TODO:  toast 알림 ('입덕 애니에 추가했어요' 입덕한 애니 보러가기 )
   }, TOGGLE_DEBOUNCE);
 
   // 북마크 요청 에러 핸들링
   useEffect(() => {
-    if (toggleBookmarkError instanceof ApiError) {
-      if (toggleBookmarkError.status === 404) {
+    const { error } = bookmarkMutation;
+    if (error instanceof ApiError) {
+      if (error.status === 404) {
         // TODO: toast 알림 '존재하지 않는 애니에요'
         navigate("/animes");
       }
     }
-  }, [toggleBookmarkError, navigate]);
+  }, [bookmarkMutation, navigate]);
+
+  const { data: bookmarkedAt } = bookmarkQuery;
 
   return (
     <>
@@ -53,7 +55,7 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
         isBlock
         color={bookmarkedAt ? "primary" : "neutral"}
         style={{ fontSize: "14px" }}
-        onClick={() => handleToggleBookmark(animeId)}
+        onClick={() => handleToggleBookmark()}
       >
         {bookmarkedAt ? "입덕한 애니" : "입덕하기"}
       </Button>
