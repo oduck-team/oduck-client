@@ -1,5 +1,7 @@
-import { keyframes } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+
+import { LoaderProps } from ".";
 
 const bounce = keyframes`
   0%, 100% {
@@ -13,7 +15,7 @@ const bounce = keyframes`
   }
 `;
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div<Pick<LoaderProps, "display">>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,4 +28,16 @@ export const LoaderContainer = styled.div`
     width: var(--size);
     animation: ${bounce} 1.5s infinite;
   }
+
+  ${({ display }) =>
+    display === "oduck" &&
+    css`
+      height: auto;
+
+      & img {
+        --size: 48px;
+        height: var(--size);
+        width: var(--size);
+      }
+    `}
 `;
