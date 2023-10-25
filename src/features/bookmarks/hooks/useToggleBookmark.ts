@@ -14,7 +14,7 @@ export default function useToggleBookmark() {
     setIsLoading(true);
     setError(null);
     try {
-      await bookmarkApi.toggleBookmarK(animeId);
+      await bookmarkApi.toggleBookmark(animeId);
     } catch (e) {
       setError(e as Error);
     } finally {
