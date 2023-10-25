@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 
 /**
@@ -9,8 +10,11 @@ import { useApi } from "@/hooks/useApi";
  */
 export default function useBookmark(animeId: number) {
   const { bookmarkApi } = useApi();
+  const {
+    user: { memberId },
+  } = useAuth();
   return useQuery({
-    queryKey: ["bookmark", animeId],
+    queryKey: ["bookmark", memberId, animeId],
     queryFn: async () => {
       try {
         const { createdAt } = await bookmarkApi.getBookmark(animeId);

@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 
 /**
@@ -9,11 +10,18 @@ import { useApi } from "@/hooks/useApi";
 export default function useToggleBookmark(animeId: number) {
   const queryClient = useQueryClient();
   const { bookmarkApi } = useApi();
+  const {
+    user: { memberId },
+  } = useAuth();
 
   return useMutation({
     mutationFn: () => bookmarkApi.toggleBookmark(animeId),
     onSuccess: () => {
-      queryClient.invalidateQueries(["bookmark"]);
+      queryClient.invalidateQueries({
+        queryKey: ["profile", memberId],
+        exact: true,
+      });
+      queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
     },
   });
 }
