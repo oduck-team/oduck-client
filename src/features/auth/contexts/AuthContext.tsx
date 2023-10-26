@@ -68,10 +68,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setUser(DEFAULT_USER);
     removeLocalUser();
     setIsLoggedIn(false);
-  }, [authApi, removeLocalUser]);
+  }, [authApi, removeLocalUser, snackbar]);
 
   useEffect(() => {
-    fetchUser();
+    if (localUser) {
+      fetchUser();
+    }
   }, []);
 
   const value = useMemo<AuthState & AuthAction>(
