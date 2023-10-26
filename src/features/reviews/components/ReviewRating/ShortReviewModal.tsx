@@ -155,7 +155,7 @@ export default function ShortReviewModal({
                 <AttractionPoint
                   name={point.name}
                   isChecked={point.isChecked}
-                  onChagne={handleCheckboxChange}
+                  onChange={handleCheckboxChange}
                 >
                   {point.content}
                 </AttractionPoint>

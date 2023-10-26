@@ -5,7 +5,7 @@ import { AttractionPointContainer } from "./style";
 interface AttractionPointProps {
   name: string;
   isChecked: boolean;
-  onChagne: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 /**
@@ -14,7 +14,7 @@ interface AttractionPointProps {
 export default function AttractionPoint({
   name,
   isChecked,
-  onChagne,
+  onChange,
   children,
 }: StrictPropsWithChildren<AttractionPointProps>) {
   return (
@@ -24,7 +24,7 @@ export default function AttractionPoint({
         name={name}
         id={name}
         checked={isChecked}
-        onChange={onChagne}
+        onChange={onChange}
       />
       {children}
     </AttractionPointContainer>
