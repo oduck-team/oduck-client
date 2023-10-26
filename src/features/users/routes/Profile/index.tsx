@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 
 import Head from "@/components/Head";
@@ -19,6 +20,18 @@ export default function Profile() {
     () => profile.getProfile(params.name || user.name),
     { enabled: !!params.name || !!user.name },
   );
+
+  // 내 프로필이면 /profile로 주소 변경
+  useEffect(() => {
+    if (
+      window.location.pathname === "/profile" ||
+      typeof history.pushState === "undefined" ||
+      !userProfile?.isMine
+    )
+      return;
+
+    history.pushState(null, "", "/profile");
+  }, [userProfile?.isMine]);
 
   if (!user.name && !params.name) return <Navigate to="/login" replace />;
   if (isLoading) return <ProfileLoading />;
