@@ -2,6 +2,7 @@ import { PropsWithChildren, useState } from "react";
 
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
+import useAuth from "@/features/auth/hooks/useAuth";
 
 import AttractionPoint from "../AttractionPoint";
 
@@ -25,17 +26,23 @@ interface MOCK_USER_REVIEW_DATA {
 }
 
 interface ShortReviewModalProps {
+  animeId: number;
   onClose: () => void;
   onReview: () => void;
   userReviewData?: MOCK_USER_REVIEW_DATA;
 }
 
 export default function ShortReviewModal({
+  animeId,
   onClose,
   onReview,
   userReviewData,
   children,
 }: PropsWithChildren<ShortReviewModalProps>) {
+  const {
+    user: { name },
+  } = useAuth();
+
   const [form, setForm] = useState({
     content: userReviewData?.content ?? "",
     isSpoiler: userReviewData?.isSpoiler ?? false,
@@ -45,6 +52,8 @@ export default function ShortReviewModal({
     voiceActing: userReviewData?.voiceActing ?? false,
     sound: userReviewData?.sound ?? false,
   });
+
+  const [error, setError] = useState(false);
 
   const attractionPoints = [
     {
@@ -98,7 +107,7 @@ export default function ShortReviewModal({
 
   const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-
+    if (name === "content" && value.length > 100) return;
     setForm((prev) => ({
       ...prev,
       [name]: value,
@@ -114,14 +123,17 @@ export default function ShortReviewModal({
     }));
   };
 
-  // TODO:
-  // const handleReview = () => {
-  //   // 유효성검사
-
-  //   // 요청
-
-  //   onReview();
-  // };
+  const handleReview = () => {
+    // 유효성 검사
+    setError(false);
+    if (form.content.trim().length < 10) {
+      setError(true);
+      return;
+    }
+    console.log(name, animeId, form.isSpoiler, form.content);
+    // TODO: 요청
+    // onReview();
+  };
 
   return (
     <Modal onClose={onClose} showBackdrop={false}>
@@ -135,6 +147,8 @@ export default function ShortReviewModal({
             placeholder="최대 100자 까지 입력 가능해요"
             onChange={handleTextInputChange}
             value={form.content}
+            warn={error}
+            message="최소 10자 이상 입력해 주세요."
           />
           <SpoilerCheckBox
             name="isSpoiler"
@@ -176,7 +190,7 @@ export default function ShortReviewModal({
         >
           취소
         </Button>
-        <Button name="평가 완료" isBlock size="lg" onClick={onReview}>
+        <Button name="평가 완료" isBlock size="lg" onClick={handleReview}>
           완료
         </Button>
       </Modal.Actions>
