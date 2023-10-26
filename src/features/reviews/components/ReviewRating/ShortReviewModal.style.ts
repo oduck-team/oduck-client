@@ -15,7 +15,11 @@ export const ReviewContentSection = styled.div`
   }
 
   & > div {
-    margin-top: 4px;
+    margin-top: 8px;
+  }
+
+  textarea {
+    height: calc(100px * 1.1429);
   }
 `;
 
