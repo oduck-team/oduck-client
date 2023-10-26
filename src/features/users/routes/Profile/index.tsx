@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Navigate, useParams } from "react-router-dom";
 
 import Head from "@/components/Head";
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -10,14 +11,16 @@ import { ProfileContainer } from "./style";
 import TabMenu from "./TabMenu";
 
 export default function Profile() {
-  const {
-    user: { name },
-  } = useAuth();
+  const { user } = useAuth();
+  const params = useParams();
   const { profile } = useApi();
-  const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
-    profile.getProfile(name),
+  const { isLoading, data: userProfile } = useQuery(
+    ["profile", params.name || user.name],
+    () => profile.getProfile(params.name || user.name),
+    { enabled: !!params.name || !!user.name },
   );
 
+  if (!user.name && !params.name) return <Navigate to="/login" replace />;
   if (isLoading) return <ProfileLoading />;
   return (
     <>
