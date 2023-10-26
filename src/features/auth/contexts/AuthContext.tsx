@@ -68,6 +68,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setUser(DEFAULT_USER);
     removeLocalUser();
     setIsLoggedIn(false);
+    window.location.replace("/");
   }, [authApi, removeLocalUser, snackbar]);
 
   useEffect(() => {
