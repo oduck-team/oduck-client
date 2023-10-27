@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
+import ErrorBoundary from "@/components/Error/ErrorBoundary";
 import Layout from "@/components/Layout";
 import { HelpDeskProvider } from "@/contexts/HelpDeskContext";
 import Home from "@/features/common/routes/Home";
@@ -29,7 +30,11 @@ export const publicRoutes: RouteObject[] = [
   },
   {
     path: "",
-    element: <Layout />,
+    element: (
+      <ErrorBoundary>
+        <Layout />
+      </ErrorBoundary>
+    ),
     children: [
       {
         path: "",
