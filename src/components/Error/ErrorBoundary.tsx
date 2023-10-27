@@ -9,6 +9,7 @@ import { ErrorMessage, FallbackContainer } from "./ErrorBoundary.style";
 
 interface ErrorBoundaryProps {
   fallback?: ReactNode;
+  onReset?: () => void;
 }
 
 interface ErrorBoundaryState {
@@ -17,21 +18,33 @@ interface ErrorBoundaryState {
   errorMessage: string | null;
 }
 
+const initialState: ErrorBoundaryState = {
+  error: null,
+  hasError: false,
+  errorMessage: null,
+};
+
 export default class ErrorBoundary extends Component<
   PropsWithChildren<ErrorBoundaryProps>,
   ErrorBoundaryState
 > {
   constructor(props: PropsWithChildren<ErrorBoundaryProps>) {
     super(props);
-    this.state = {
-      error: null,
-      hasError: false,
-      errorMessage: null,
-    };
+    this.state = initialState;
   }
 
   static getDerivedStateFromError(error: AxiosError): ErrorBoundaryState {
     return { error, hasError: true, errorMessage: error.message };
+  }
+
+  onResetErrorBoundary = () => {
+    const { onReset } = this.props;
+    onReset === undefined ? void 0 : onReset();
+    this.reset();
+  };
+
+  reset() {
+    this.setState(initialState);
   }
 
   // TODO: Sentry로 에러 로그 보내기
@@ -47,14 +60,19 @@ export default class ErrorBoundary extends Component<
     if (hasError) {
       if (fallback) return fallback;
       if (error?.response?.status === 404) return <NotFound />;
-      return <DefaultFallback />;
+
+      return <DefaultFallback onReset={this.onResetErrorBoundary} />;
     }
 
     return children;
   }
 }
 
-function DefaultFallback() {
+interface DefaultFallbackProps {
+  onReset?: () => void;
+}
+
+function DefaultFallback({ onReset }: DefaultFallbackProps) {
   return (
     <FallbackContainer>
       <h1>잠시 후 다시 시도해주세요</h1>
@@ -77,7 +95,9 @@ function DefaultFallback() {
         name="다시 시도"
         size="lg"
         color="neutral"
-        onClick={() => window.location.reload()}
+        onClick={() => {
+          onReset ? onReset() : window.location.reload();
+        }}
       >
         다시 시도
       </Button>
