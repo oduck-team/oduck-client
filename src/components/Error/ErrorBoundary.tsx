@@ -1,4 +1,7 @@
+import { AxiosError } from "axios";
 import { Component, PropsWithChildren, ReactNode } from "react";
+
+import NotFound from "@/features/common/routes/Error/404";
 
 import Button from "../Button";
 
@@ -9,6 +12,7 @@ interface ErrorBoundaryProps {
 }
 
 interface ErrorBoundaryState {
+  error: AxiosError | null;
   hasError: boolean;
   errorMessage: string | null;
 }
@@ -20,13 +24,14 @@ export default class ErrorBoundary extends Component<
   constructor(props: PropsWithChildren<ErrorBoundaryProps>) {
     super(props);
     this.state = {
+      error: null,
       hasError: false,
       errorMessage: null,
     };
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, errorMessage: error.message };
+  static getDerivedStateFromError(error: AxiosError): ErrorBoundaryState {
+    return { error, hasError: true, errorMessage: error.message };
   }
 
   // TODO: Sentry로 에러 로그 보내기
@@ -35,12 +40,13 @@ export default class ErrorBoundary extends Component<
   // }
 
   render() {
-    const { hasError } = this.state;
+    const { error, hasError } = this.state;
     const { fallback, children } = this.props;
+    // console.log(error);
 
     if (hasError) {
       if (fallback) return fallback;
-
+      if (error?.response?.status === 404) return <NotFound />;
       return <DefaultFallback />;
     }
 
