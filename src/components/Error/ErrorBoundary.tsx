@@ -38,9 +38,8 @@ export default class ErrorBoundary extends Component<
     return { error, hasError: true, errorMessage: error.message };
   }
 
-  onResetErrorBoundary = () => {
-    const { onReset } = this.props;
-    onReset === undefined ? void 0 : onReset();
+  onResetErrorBoundary = (onReset: () => void) => {
+    onReset();
     this.reset();
   };
 
@@ -55,7 +54,7 @@ export default class ErrorBoundary extends Component<
 
   render() {
     const { error, hasError } = this.state;
-    const { fallback, children } = this.props;
+    const { fallback, children, onReset } = this.props;
     // console.log(error);
 
     if (hasError) {
@@ -63,7 +62,11 @@ export default class ErrorBoundary extends Component<
       if (error?.response?.status === 401) return <Login />;
       if (error?.response?.status === 404) return <NotFound />;
 
-      return <DefaultFallback onReset={this.onResetErrorBoundary} />;
+      return (
+        <DefaultFallback
+          onReset={onReset && (() => this.onResetErrorBoundary(onReset))}
+        />
+      );
     }
 
     return children;
