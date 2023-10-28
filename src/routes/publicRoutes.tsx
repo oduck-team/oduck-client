@@ -70,7 +70,7 @@ export const publicRoutes: RouteObject[] = [
             element: <NoticeList />,
           },
           {
-            path: "/users/:id",
+            path: "/users/:name",
             element: <Profile />,
           },
           {
