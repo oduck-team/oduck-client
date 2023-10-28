@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/config";
-import { get, del } from "@/libs/api";
+import { get, post } from "@/libs/api";
 
 export default class AuthApi {
   socialLogin(provider: Provider): void {
@@ -11,6 +11,6 @@ export default class AuthApi {
   }
 
   async logout(): Promise<void> {
-    return del("/auth/logout");
+    return post("/auth/logout");
   }
 }
