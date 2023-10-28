@@ -1,9 +1,9 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
-import useAuth from "@/features/auth/hooks/useAuth";
 
+import useReviewForm from "../../hook/useReviewForm";
 import AttractionPoint from "../AttractionPoint";
 
 import {
@@ -15,7 +15,9 @@ import {
 } from "./ShortReviewModal.style";
 import SpoilerCheckBox from "./SpoilerCheckBox";
 
-interface MOCK_USER_REVIEW_DATA {
+export interface MOCK_USER_REVIEW_DATA {
+  id: number;
+  animeId: number;
   content: string;
   isSpoiler: boolean;
   character: boolean;
@@ -26,34 +28,24 @@ interface MOCK_USER_REVIEW_DATA {
 }
 
 interface ShortReviewModalProps {
-  animeId: number;
   onClose: () => void;
   onReview: () => void;
   userReviewData?: MOCK_USER_REVIEW_DATA;
 }
 
 export default function ShortReviewModal({
-  animeId,
   onClose,
   onReview,
   userReviewData,
   children,
 }: PropsWithChildren<ShortReviewModalProps>) {
   const {
-    user: { name },
-  } = useAuth();
-
-  const [form, setForm] = useState({
-    content: userReviewData?.content ?? "",
-    isSpoiler: userReviewData?.isSpoiler ?? false,
-    character: userReviewData?.character ?? false,
-    art: userReviewData?.art ?? false,
-    story: userReviewData?.story ?? false,
-    voiceActing: userReviewData?.voiceActing ?? false,
-    sound: userReviewData?.sound ?? false,
-  });
-
-  const [error, setError] = useState(false);
+    form,
+    error,
+    handleTextInputChange,
+    handleCheckboxChange,
+    handleReviewSubmit,
+  } = useReviewForm(onReview, userReviewData);
 
   const attractionPoints = [
     {
@@ -104,36 +96,6 @@ export default function ShortReviewModal({
       isChecked: form.sound,
     },
   ];
-
-  const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    if (name === "content" && value.length > 100) return;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
-  };
-
-  const handleReview = () => {
-    // 유효성 검사
-    setError(false);
-    if (form.content.trim().length < 10) {
-      setError(true);
-      return;
-    }
-    console.log(name, animeId, form.isSpoiler, form.content);
-    // TODO: 요청
-    // onReview();
-  };
 
   return (
     <Modal onClose={onClose} showBackdrop={false}>
@@ -190,7 +152,7 @@ export default function ShortReviewModal({
         >
           취소
         </Button>
-        <Button name="평가 완료" isBlock size="lg" onClick={handleReview}>
+        <Button name="평가 완료" isBlock size="lg" onClick={handleReviewSubmit}>
           완료
         </Button>
       </Modal.Actions>
