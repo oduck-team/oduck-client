@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import Loader from "@/components/Loader";
+import NotFound from "@/features/common/routes/Error/404";
 import useRedirect from "@/hooks/useRedirect";
 
 import useAuth from "../../hooks/useAuth";
@@ -33,6 +34,5 @@ export default function Callback() {
   });
   if (redirectUrl) return <Loader />;
 
-  // TODO: 404 컴포넌트
-  return <>404</>;
+  return <NotFound />;
 }
