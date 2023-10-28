@@ -5,7 +5,7 @@ export const Main = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;

@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 
+import ErrorBoundary from "@/components/Error/ErrorBoundary";
 import Head from "@/components/Head";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
@@ -20,6 +21,7 @@ export default function Profile() {
     () => profile.getProfile(params.name || user.name),
     { enabled: !!params.name || !!user.name },
   );
+  const { reset } = useQueryErrorResetBoundary();
 
   // 내 프로필이면 /profile로 주소 변경
   useEffect(() => {
@@ -46,7 +48,9 @@ export default function Profile() {
           />
           <ProfileContainer>
             <AboutMe profile={userProfile} />
-            <TabMenu isMine={userProfile.isMine} />
+            <ErrorBoundary onReset={reset}>
+              <TabMenu isMine={userProfile.isMine} />
+            </ErrorBoundary>
           </ProfileContainer>
         </>
       )}
