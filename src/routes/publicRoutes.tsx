@@ -6,6 +6,8 @@ import { HelpDeskProvider } from "@/contexts/HelpDeskContext";
 import Home from "@/features/common/routes/Home";
 import ProfileEdit from "@/features/users/routes/Edit";
 
+import ErrorBoundaryLayout from "./ErrorBoundaryLayout";
+
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
 const AnimeList = lazy(() => import("@/features/animes/routes/List"));
@@ -20,70 +22,75 @@ const ServerError = lazy(() => import("@/features/common/routes/Error/500"));
 
 export const publicRoutes: RouteObject[] = [
   {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/auth/callback",
-    element: <Callback />,
-  },
-  {
-    path: "",
-    element: <Layout />,
+    element: <ErrorBoundaryLayout />,
     children: [
       {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/auth/callback",
+        element: <Callback />,
+      },
+      {
         path: "",
-        element: <Home />,
-      },
-      {
-        path: "/animes",
-        element: <AnimeList />,
-      },
-      {
-        path: "/animes/:id",
-        element: <AnimeDetail />,
-      },
-      {
-        path: "/search",
-        element: <Search />,
-      },
-      {
-        element: <HelpDeskProvider />,
+        element: <Layout />,
         children: [
           {
-            path: "/helpdesk",
-            element: <HelpDesk />,
+            path: "",
+            element: <Home />,
           },
           {
-            path: "/terms/email",
-            element: <EmailTerms />,
+            path: "/animes",
+            element: <AnimeList />,
+          },
+          {
+            path: "/animes/:id",
+            element: <AnimeDetail />,
+          },
+          {
+            path: "/search",
+            element: <Search />,
+          },
+          {
+            element: <HelpDeskProvider />,
+            children: [
+              {
+                path: "/helpdesk",
+                element: <HelpDesk />,
+              },
+              {
+                path: "/terms/email",
+                element: <EmailTerms />,
+              },
+            ],
+          },
+          {
+            path: "/notices",
+            element: <NoticeList />,
+          },
+          {
+            path: "/users/:id",
+            element: <Profile />,
+          },
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/profile/edit",
+            element: <ProfileEdit />,
           },
         ],
       },
       {
-        path: "/notices",
-        element: <NoticeList />,
+        path: "/error",
+        element: <ServerError />,
       },
       {
-        path: "/users/:id",
-        element: <Profile />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/profile/edit",
-        element: <ProfileEdit />,
+        path: "*",
+        element: <NotFound />,
       },
     ],
-  },
-  {
-    path: "/error",
-    element: <ServerError />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ];

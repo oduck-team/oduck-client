@@ -1,4 +1,8 @@
+import { AxiosError } from "axios";
 import { Component, PropsWithChildren, ReactNode } from "react";
+
+import Login from "@/features/auth/routes/Login";
+import NotFound from "@/features/common/routes/Error/404";
 
 import Button from "../Button";
 
@@ -6,12 +10,20 @@ import { ErrorMessage, FallbackContainer } from "./ErrorBoundary.style";
 
 interface ErrorBoundaryProps {
   fallback?: ReactNode;
+  onReset?: () => void;
 }
 
 interface ErrorBoundaryState {
+  error: AxiosError | null;
   hasError: boolean;
   errorMessage: string | null;
 }
+
+const initialState: ErrorBoundaryState = {
+  error: null,
+  hasError: false,
+  errorMessage: null,
+};
 
 export default class ErrorBoundary extends Component<
   PropsWithChildren<ErrorBoundaryProps>,
@@ -19,14 +31,20 @@ export default class ErrorBoundary extends Component<
 > {
   constructor(props: PropsWithChildren<ErrorBoundaryProps>) {
     super(props);
-    this.state = {
-      hasError: false,
-      errorMessage: null,
-    };
+    this.state = initialState;
   }
 
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, errorMessage: error.message };
+  static getDerivedStateFromError(error: AxiosError): ErrorBoundaryState {
+    return { error, hasError: true, errorMessage: error.message };
+  }
+
+  onResetErrorBoundary = (onReset: () => void) => {
+    onReset();
+    this.reset();
+  };
+
+  reset() {
+    this.setState(initialState);
   }
 
   // TODO: Sentry로 에러 로그 보내기
@@ -35,20 +53,31 @@ export default class ErrorBoundary extends Component<
   // }
 
   render() {
-    const { hasError } = this.state;
-    const { fallback, children } = this.props;
+    const { error, hasError } = this.state;
+    const { fallback, children, onReset } = this.props;
+    // console.log(error);
 
     if (hasError) {
       if (fallback) return fallback;
+      if (error?.response?.status === 401) return <Login />;
+      if (error?.response?.status === 404) return <NotFound />;
 
-      return <DefaultFallback />;
+      return (
+        <DefaultFallback
+          onReset={onReset && (() => this.onResetErrorBoundary(onReset))}
+        />
+      );
     }
 
     return children;
   }
 }
 
-function DefaultFallback() {
+interface DefaultFallbackProps {
+  onReset?: () => void;
+}
+
+function DefaultFallback({ onReset }: DefaultFallbackProps) {
   return (
     <FallbackContainer>
       <h1>잠시 후 다시 시도해주세요</h1>
@@ -71,7 +100,9 @@ function DefaultFallback() {
         name="다시 시도"
         size="lg"
         color="neutral"
-        onClick={() => window.location.reload()}
+        onClick={() => {
+          onReset ? onReset() : window.location.reload();
+        }}
       >
         다시 시도
       </Button>

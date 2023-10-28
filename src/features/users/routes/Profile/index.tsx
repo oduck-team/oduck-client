@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryErrorResetBoundary } from "@tanstack/react-query";
 
+import ErrorBoundary from "@/components/Error/ErrorBoundary";
 import Head from "@/components/Head";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
@@ -17,6 +18,7 @@ export default function Profile() {
   const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
     profile.getProfile(name),
   );
+  const { reset } = useQueryErrorResetBoundary();
 
   if (isLoading) return <ProfileLoading />;
   return (
@@ -30,7 +32,9 @@ export default function Profile() {
           />
           <ProfileContainer>
             <AboutMe profile={userProfile} />
-            <TabMenu isMine={userProfile.isMine} />
+            <ErrorBoundary onReset={reset}>
+              <TabMenu isMine={userProfile.isMine} />
+            </ErrorBoundary>
           </ProfileContainer>
         </>
       )}

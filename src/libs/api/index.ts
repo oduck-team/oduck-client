@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { BASE_URL } from "@/config";
 
-import { ApiError, BaseError } from "../error";
+// import { ApiError, BaseError } from "../error";
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -25,21 +25,24 @@ instance.interceptors.response.use(
     return Promise.reject(response.data);
   },
   (error) => {
-    if (error.response?.status >= 400 && error.response?.status < 500) {
-      return Promise.reject(
-        new ApiError(
-          error.response.data.message ?? "API Error",
-          error.response.status,
-          error.response.data.fieldErrors,
-        ),
-      );
-    }
+    return Promise.reject(error);
+    //TODO: 오류 반환을 어떻게 할지 정하기
+    // if (error.response?.status >= 400 && error.response?.status < 500) {
 
-    if (error.message.startsWith("timeout")) {
-      return Promise.reject(new BaseError("Timeout Error", "Network timeout"));
-    }
+    //   return Promise.reject(
+    //     new ApiError(
+    //       error.response.data.message ?? "API Error",
+    //       error.response.status,
+    //       error.response.data.fieldErrors,
+    //     ),
+    //   );
+    // }
 
-    return Promise.reject(new BaseError("Unknown Error", error.message));
+    // if (error.message.startsWith("timeout")) {
+    //   return Promise.reject(new BaseError("Timeout Error", "Network timeout"));
+    // }
+
+    // return Promise.reject(new BaseError("Unknown Error", error.message));
   },
 );
 
