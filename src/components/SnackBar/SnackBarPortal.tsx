@@ -32,7 +32,7 @@ export default function SnackBarPortal({
     div.setAttribute("role", "log");
     div.style.zIndex = zIndex
       ? zIndex.toString()
-      : theme.zIndex.modal.toString();
+      : theme.zIndex.snackbar.toString();
     div.id = portalId;
     div.style.position = "fixed";
     div.style.left = "50%";
