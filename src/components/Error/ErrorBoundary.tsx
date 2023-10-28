@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { Component, PropsWithChildren, ReactNode } from "react";
 
+import Login from "@/features/auth/routes/Login";
 import NotFound from "@/features/common/routes/Error/404";
 
 import Button from "../Button";
@@ -59,6 +60,7 @@ export default class ErrorBoundary extends Component<
 
     if (hasError) {
       if (fallback) return fallback;
+      if (error?.response?.status === 401) return <Login />;
       if (error?.response?.status === 404) return <NotFound />;
 
       return <DefaultFallback onReset={this.onResetErrorBoundary} />;
