@@ -40,7 +40,7 @@ const AuthContext = createContext<AuthState & AuthAction>({
   isLoggedIn: false,
   fetchUser: async () => {},
   socialLogin: () => {},
-  emailLogin: () => {},
+  emailLogin: async () => {},
   logout: async () => {},
 });
 
