@@ -5,6 +5,8 @@ import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
+import ErrorBoundaryLayout from "./ErrorBoundaryLayout";
+
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
@@ -35,20 +37,25 @@ function PrivateRoute({ children }: PropsWithChildren) {
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: "",
-    element: (
-      <PrivateRoute>
-        <Layout />
-      </PrivateRoute>
-    ),
+    element: <ErrorBoundaryLayout />,
     children: [
       {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/profile/edit",
-        element: <ProfileEdit />,
+        path: "",
+        element: (
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/profile/edit",
+            element: <ProfileEdit />,
+          },
+        ],
       },
     ],
   },
