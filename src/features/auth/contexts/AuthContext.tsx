@@ -11,6 +11,8 @@ import useSnackBar from "@/components/SnackBar/useSnackBar";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
 import { useApi } from "@/hooks/useApi";
 
+import { EmailLoginDto } from "../api/AuthApi";
+
 interface AuthState {
   user: User;
   isLoggedIn: boolean;
@@ -19,6 +21,7 @@ interface AuthState {
 interface AuthAction {
   fetchUser: () => Promise<void>;
   socialLogin: (provider: Provider) => void;
+  emailLogin: (dto: EmailLoginDto) => Promise<void>;
   logout: () => Promise<void>;
 }
 
@@ -37,6 +40,7 @@ const AuthContext = createContext<AuthState & AuthAction>({
   isLoggedIn: false,
   fetchUser: async () => {},
   socialLogin: () => {},
+  emailLogin: () => {},
   logout: async () => {},
 });
 
@@ -83,9 +87,17 @@ export function AuthProvider({ children }: PropsWithChildren) {
       isLoggedIn,
       fetchUser,
       socialLogin: authApi.socialLogin,
+      emailLogin: authApi.emailLogin,
       logout,
     }),
-    [user, isLoggedIn, authApi.socialLogin, fetchUser, logout],
+    [
+      user,
+      isLoggedIn,
+      fetchUser,
+      authApi.socialLogin,
+      authApi.emailLogin,
+      logout,
+    ],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
