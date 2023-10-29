@@ -1,6 +1,6 @@
 import { useQuery, useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import ErrorBoundary from "@/components/Error/ErrorBoundary";
 import Head from "@/components/Head";
@@ -35,7 +35,6 @@ export default function Profile() {
     history.pushState(null, "", "/profile");
   }, [userProfile?.isMine]);
 
-  if (!user.name && !params.name) return <Navigate to="/login" replace />;
   if (isLoading) return <ProfileLoading />;
   return (
     <>

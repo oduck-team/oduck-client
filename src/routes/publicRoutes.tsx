@@ -4,7 +4,6 @@ import { RouteObject } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { HelpDeskProvider } from "@/contexts/HelpDeskContext";
 import Home from "@/features/common/routes/Home";
-import ProfileEdit from "@/features/users/routes/Edit";
 
 import ErrorBoundaryLayout from "./ErrorBoundaryLayout";
 
@@ -38,6 +37,7 @@ export const publicRoutes: RouteObject[] = [
         children: [
           {
             path: "",
+            index: true,
             element: <Home />,
           },
           {
@@ -72,14 +72,6 @@ export const publicRoutes: RouteObject[] = [
           {
             path: "/users/:name",
             element: <Profile />,
-          },
-          {
-            path: "/profile",
-            element: <Profile />,
-          },
-          {
-            path: "/profile/edit",
-            element: <ProfileEdit />,
           },
         ],
       },
