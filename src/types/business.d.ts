@@ -10,9 +10,10 @@ declare type UserRole = "GUEST" | "ROLE" | "ADMIN";
 declare interface User extends BaseTimeEntity {
   name: string;
   memberId: number;
-  imageUrl?: string;
+  description: "";
+  thumbnail: "";
   point: number;
-  role: Role | null;
+  role?: UserRole;
 }
 
 declare interface Profile {
