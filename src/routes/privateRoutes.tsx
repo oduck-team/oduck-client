@@ -26,7 +26,7 @@ function PrivateRoute({ children }: PropsWithChildren) {
       fetchUser();
     };
     handleAuth();
-  }, [localUser, fetchUser, navigate]);
+  }, []);
 
   if (!isLoggedIn) return null;
 
