@@ -44,6 +44,7 @@ export default function useAdminLogin() {
         if (e.response.status >= 500) {
           notifications.show({
             message: "server error",
+            color: "red",
           });
         }
       }

@@ -6,6 +6,7 @@ import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
 import { Outlet } from "react-router-dom";
 
+import { AdminApiProvider } from "../contexts/AdminApiContext";
 import { resolver, theme } from "../libs/mantine/theme";
 
 export default function AdminProviders() {
@@ -13,7 +14,9 @@ export default function AdminProviders() {
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
       <Notifications position="top-center" />
       <ModalsProvider>
-        <Outlet />
+        <AdminApiProvider>
+          <Outlet />
+        </AdminApiProvider>
       </ModalsProvider>
     </MantineProvider>
   );
