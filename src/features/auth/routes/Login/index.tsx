@@ -11,7 +11,7 @@ import SocialGroup from "./SocialGroup";
 import { Main, Title, LoginSection } from "./style";
 
 export default function Login() {
-  const { handleSocialLogin } = useLogin();
+  const { socialLogin } = useLogin();
   const navigate = useNavigate();
 
   const handleClickBack = () => {
@@ -45,7 +45,7 @@ export default function Login() {
         </Title>
         <LoginSection>
           <h1>SNS계정으로 간편하게 시작하기</h1>
-          <SocialGroup onClick={handleSocialLogin} />
+          <SocialGroup onClick={socialLogin} />
         </LoginSection>
       </Main>
     </>

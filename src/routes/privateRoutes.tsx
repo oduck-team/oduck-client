@@ -25,7 +25,7 @@ function PrivateRoute({ children }: PropsWithChildren) {
       fetchUser();
     };
     handleAuth();
-  }, [localUser, fetchUser, navigate]);
+  }, []);
 
   if (!isLoggedIn) return null;
 
@@ -34,7 +34,7 @@ function PrivateRoute({ children }: PropsWithChildren) {
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: "",
+    path: "/",
     element: (
       <PrivateRoute>
         <Layout />

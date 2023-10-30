@@ -23,6 +23,6 @@ export default function useLogin() {
   }, [isLoggedIn, navigate]);
 
   return {
-    handleSocialLogin: socialLogin,
+    socialLogin,
   };
 }
