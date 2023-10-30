@@ -61,6 +61,7 @@ declare interface Series extends BaseTimeEntity {
 declare type BroadcastType = "TVA" | "OVA" | "ONA" | "MOV";
 declare type AnimeRating = "ADULT" | "FIFTEEN" | "TWELVE" | "ALL";
 declare type AnimeStatus = "FINISHED" | "ONGOING" | "UPCOMING" | "UNKNOWN";
+declare type AnimeQuarter = "Q1" | "Q2" | "Q3" | "Q4";
 
 declare interface Anime extends BaseTimeEntity {
   id: number;
@@ -71,7 +72,7 @@ declare interface Anime extends BaseTimeEntity {
   episodeCount: number;
   thumbnail: string;
   year: number;
-  quarter: number;
+  quarter: AnimeQuarter;
   rating: AnimeRating;
   status: AnimeStatus;
   isReleased: boolean;

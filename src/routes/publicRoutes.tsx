@@ -38,6 +38,7 @@ export const publicRoutes: RouteObject[] = [
         children: [
           {
             path: "",
+            index: true,
             element: <Home />,
           },
           {

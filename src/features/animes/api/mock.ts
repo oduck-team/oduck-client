@@ -26,7 +26,7 @@ export function getAnimeMock() {
     episodeCount: getRandomNum(13, 100),
     thumbnail: "",
     year: getRandomNum(1999, 2030),
-    quarter: getRandomNum(1, 4) as 1 | 2 | 3 | 4,
+    quarter: "Q1" as AnimeQuarter,
     rating: getRandomArrayElement(animeRatings),
     status: getRandomArrayElement(animeStatuses),
     isReleased: true,

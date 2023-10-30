@@ -1,0 +1,8 @@
+.main {
+  min-height: 100vh;
+  background-color: light-dark(
+    var(--mantine-color-gray-0),
+    var(--mantine-color-dark-9)
+  );
+  padding-bottom: 10rem;
+}
