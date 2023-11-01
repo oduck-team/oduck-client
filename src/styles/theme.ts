@@ -12,6 +12,7 @@ export const theme: Theme = {
     secondary: colors.yellow,
     warn: colors.red,
     neutral: colors.neutral,
+    green: colors.green,
   },
   typo,
   zIndex,
