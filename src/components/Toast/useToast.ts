@@ -13,6 +13,7 @@ export default function useToast() {
    * @example { message: "내용을 입력해 주세요!", icon: <Warning />, duration: 5 }
    * @required message: Toast에 보여줄 메시지
    * @optional icon: Toast 메시지와 함께 들어갈 아이콘
+   * @optional iconColor: 아이콘 색상 (primary, secondary ...)
    * @optional closeButton: 닫기 버튼 포함 여부
    * @optional buttonText: Text in Button
    * @optional onClickButton: Toast button 이벤트 핸들러 함수
