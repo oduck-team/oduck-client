@@ -11,9 +11,9 @@ export interface ToastProps {
   id: string;
   message: string;
   icon?: React.ReactNode;
-  closeIcon?: boolean;
+  closeButton?: boolean;
   onClose: () => void;
-  onClick?: (e: React.MouseEvent) => void;
+  onClickButton?: (e: React.MouseEvent) => void;
   buttonText?: string;
   position?: ToastPosition;
   duration?: number;
@@ -23,9 +23,9 @@ export default function Toast({
   id,
   message,
   icon,
-  closeIcon = false,
+  closeButton = false,
   onClose,
-  onClick,
+  onClickButton,
   buttonText,
   position = "bottom",
   duration = 2,
@@ -39,18 +39,22 @@ export default function Toast({
   }, [duration, closeToast]);
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    onClick && onClick(e);
+    onClickButton && onClickButton(e);
     onClose();
   };
 
   return (
-    <ToastContainer id={id} hasButton={Boolean(onClick)} position={position}>
+    <ToastContainer
+      id={id}
+      hasButton={Boolean(onClickButton)}
+      position={position}
+    >
       <Content>
         <Left>
           {icon && icon}
           <span>{message}</span>
         </Left>
-        {closeIcon && (
+        {closeButton && (
           <Right>
             <Divider />
             <Button
@@ -63,7 +67,7 @@ export default function Toast({
           </Right>
         )}
       </Content>
-      {onClick && (
+      {onClickButton && (
         <Button name="button" onClick={handleButtonClick}>
           {buttonText}
         </Button>

@@ -14,7 +14,6 @@ export const ToastContext = createContext<State | null>(null);
 
 export function ToastContextProvider({
   children,
-  position,
 }: StrictPropsWithChildren<Pick<ToastProps, "position">>) {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
 
@@ -55,33 +54,34 @@ export function ToastContextProvider({
           <ToastListContainer position="top">
             {topToasts
               .filter((toast) => toast.position === "top")
-              .map((item, i) => (
+              .map((item) => (
                 <Toast
                   id={item.id}
                   message={item.message}
                   icon={item.icon}
-                  closeIcon={item.closeIcon}
+                  closeButton={item.closeButton}
                   onClose={item.onClose}
                   buttonText={item.buttonText}
-                  onClick={item.onClick}
+                  onClickButton={item.onClickButton}
                   duration={item.duration}
                   position={item.position}
-                  key={i}
+                  key={item.id}
                 />
               ))}
           </ToastListContainer>
         )}
-        <ToastListContainer position={position}>
-          {bottomToasts.map((item, i) => (
+        <ToastListContainer position="bottom">
+          {bottomToasts.map((item) => (
             <Toast
               id={item.id}
               message={item.message}
               icon={item.icon}
-              closeIcon={item.closeIcon}
+              closeButton={item.closeButton}
               onClose={item.onClose}
               buttonText={item.buttonText}
-              onClick={item.onClick}
-              key={i}
+              onClickButton={item.onClickButton}
+              duration={item.duration}
+              key={item.id}
             />
           ))}
         </ToastListContainer>
