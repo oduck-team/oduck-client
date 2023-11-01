@@ -24,7 +24,7 @@ export const SnackBarContainer = styled.div<Pick<SnackBarProps, "position">>`
   `}
 `;
 
-function getAnimation(position: Position) {
+export function getAnimation(position: Position) {
   if (position === "top") return fadeinTopToBottom;
   if (position === "bottom") return fadeinBottomToTop;
 }
