@@ -22,8 +22,9 @@ export default class FileApi {
         Accept: "application/json",
         "Content-Type": file.type,
       },
+      withCredentials: false,
     });
 
-    return `/${path}/${filename}`;
+    return `https://cdn.oduck.io/static/${path}/${filename}`;
   }
 }

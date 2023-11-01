@@ -2,7 +2,6 @@ import {
   Flex,
   Input,
   Stack,
-  Image,
   Select,
   TextInput,
   Text,
@@ -12,6 +11,8 @@ import {
   MultiSelect,
   Button,
   Table,
+  Switch,
+  Title,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications } from "@mantine/notifications";
@@ -22,7 +23,6 @@ import DateSelect from "@/admins/components/Form/DateSelect";
 import Form from "@/admins/components/Form/Form";
 import ImageDropzone from "@/admins/components/Form/ImageDropzone";
 import ADMIN_ROUTE from "@/admins/constants/path";
-import { CDN_URL } from "@/config";
 
 import useCreateAnime from "../hooks/useCreateAnime";
 import useCreateGenre from "../hooks/useCreateGenre";
@@ -35,6 +35,7 @@ import useSeries from "../hooks/useSeries";
 import useStudios from "../hooks/useStudios";
 
 import AnimeFormActions from "./AdminFormActions";
+import AnimePreviewCard from "./AnimePreviewCard";
 import CreateSubCategoryButton from "./CreateSubCategoryButton";
 import EditVoiceActorsModal from "./EditVoiceActorsModal";
 
@@ -96,6 +97,7 @@ export default function AdminCreateAnimeForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log(form.values);
     form.validate();
     if (!form.isValid()) {
       return;
@@ -154,7 +156,28 @@ export default function AdminCreateAnimeForm() {
       <Flex justify="end" mb="sm">
         <AnimeFormActions mode="create" onAction={handleSubmit} />
       </Flex>
+
+      <Stack p="md" mb="md" bg="gray.0" style={{ borderRadius: 12 }}>
+        <Title size="h5">미리보기</Title>
+        <AnimePreviewCard
+          title={form.values.title}
+          thumbnail={form.values.thumbnail}
+        />
+      </Stack>
+
       <Stack gap="xl">
+        <Input.Wrapper
+          label="공개여부"
+          withAsterisk
+          inputWrapperOrder={INPUT_WRAPPER_ORDER}
+        >
+          <Switch
+            label="사용자들에게 공개합니다"
+            onChange={(e) =>
+              form.setFieldValue("isReleased", e.currentTarget.checked)
+            }
+          />
+        </Input.Wrapper>
         <Input.Wrapper
           label="썸네일"
           withAsterisk
@@ -167,15 +190,6 @@ export default function AdminCreateAnimeForm() {
               form.setFieldValue("thumbnail", path);
             }}
           />
-          {form.values.thumbnail && (
-            <Image
-              alt="썸네일"
-              src={`${CDN_URL}${form.values.thumbnail}`}
-              width="auto"
-              height="260"
-              p="sm"
-            />
-          )}
         </Input.Wrapper>
 
         <Flex align="end" gap="sm">
