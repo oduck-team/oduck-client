@@ -1,7 +1,7 @@
 import { createContext, useCallback, useMemo, useState } from "react";
 
-import Toast, { ToastProps } from "@/components/Toast";
-import { ToastListContainer, ToastWrapper } from "@/components/Toast/style";
+import { ToastProps } from "@/components/Toast";
+import ToastPortal from "@/components/Toast/ToastPortal";
 import { StrictPropsWithChildren } from "@/types";
 
 interface State {
@@ -12,11 +12,8 @@ interface State {
 
 export const ToastContext = createContext<State | null>(null);
 
-export function ToastContextProvider({
-  children,
-}: StrictPropsWithChildren<Pick<ToastProps, "position">>) {
+export function ToastContextProvider({ children }: StrictPropsWithChildren) {
   const [toasts, setToasts] = useState<ToastProps[]>([]);
-
   // 상단에 위치할 toasts
   const topToasts = useMemo(() => {
     return toasts.filter((toast) => toast.position === "top");
@@ -49,43 +46,7 @@ export function ToastContextProvider({
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <ToastWrapper>
-        {topToasts && (
-          <ToastListContainer position="top">
-            {topToasts
-              .filter((toast) => toast.position === "top")
-              .map((item) => (
-                <Toast
-                  id={item.id}
-                  message={item.message}
-                  icon={item.icon}
-                  closeButton={item.closeButton}
-                  onClose={item.onClose}
-                  buttonText={item.buttonText}
-                  onClickButton={item.onClickButton}
-                  duration={item.duration}
-                  position={item.position}
-                  key={item.id}
-                />
-              ))}
-          </ToastListContainer>
-        )}
-        <ToastListContainer position="bottom">
-          {bottomToasts.map((item) => (
-            <Toast
-              id={item.id}
-              message={item.message}
-              icon={item.icon}
-              closeButton={item.closeButton}
-              onClose={item.onClose}
-              buttonText={item.buttonText}
-              onClickButton={item.onClickButton}
-              duration={item.duration}
-              key={item.id}
-            />
-          ))}
-        </ToastListContainer>
-      </ToastWrapper>
+      <ToastPortal topToasts={topToasts} bottomToasts={bottomToasts} />
     </ToastContext.Provider>
   );
 }
