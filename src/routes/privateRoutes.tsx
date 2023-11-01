@@ -35,7 +35,7 @@ function PrivateRoute({ children }: PropsWithChildren) {
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: "",
+    path: "/",
     element: (
       <PrivateRoute>
         <Layout />

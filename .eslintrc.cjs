@@ -13,7 +13,12 @@ module.exports = {
     "plugin:testing-library/react",
     "plugin:jest-dom/recommended",
   ],
-  ignorePatterns: ["dist", "node_modules/*"],
+  ignorePatterns: [
+    "dist",
+    "node_modules/*",
+    ".eslintrc.cjs",
+    "postcss.config.cjs",
+  ],
   parser: "@typescript-eslint/parser",
   plugins: ["react-refresh"],
   settings: {

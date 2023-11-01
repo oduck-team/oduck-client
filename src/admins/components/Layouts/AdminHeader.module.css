@@ -1,0 +1,8 @@
+.oduck {
+  display: flex;
+  align-items: center;
+
+  & > a {
+    margin-left: 0.5rem;
+  }
+}
