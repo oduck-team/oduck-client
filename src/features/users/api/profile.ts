@@ -22,9 +22,7 @@ export interface ReviewPage {
 
 export default class ProfileApi {
   async getProfile(name: string): Promise<Profile> {
-    console.log(name);
-    // FIXME: /members/${name}, log 제거
-    return await get(`/members/${"faberjoo"}`);
+    return await get(`/members/${name}`);
   }
 
   async getBookmark(
@@ -33,10 +31,8 @@ export default class ProfileApi {
     selected: SelectedSort,
   ): Promise<BookmarkPage> {
     const params = this.setParams(pageParam, selected);
-    // FIXME: /members/${memberId} 변경, log제거
-    console.log(memberId);
 
-    return await get(`/members/${"26"}/bookmarks`, {
+    return await get(`/members/${memberId}/bookmarks`, {
       params: params,
     });
   }

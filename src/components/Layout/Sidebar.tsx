@@ -117,7 +117,7 @@ export default function Sidebar({
             <Profile to="/profile">
               <Avatar
                 userName={user.name ? user.name : ""}
-                src={user.imageUrl}
+                src={user.thumbnail}
                 size="xl"
               />
               <UserName>{user.name}</UserName>
