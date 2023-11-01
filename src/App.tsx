@@ -10,6 +10,7 @@ import DeferredComponent from "./components/DeferredComponent";
 import Loader from "./components/Loader";
 import { OduckApiProvider } from "./contexts/OduckApiContext";
 import { SnackBarContextProvider } from "./contexts/SnackBarContext";
+import { ToastContextProvider } from "./contexts/ToastContext";
 import { AuthProvider } from "./features/auth/contexts/AuthContext";
 import { queryClient } from "./libs/react-query";
 import router from "./routes";
@@ -27,26 +28,28 @@ export default function App() {
                 size: 24,
               }}
             >
-              <SnackBarContextProvider>
-                <Global
-                  styles={css`
-                    body {
-                      color: ${theme.colors.neutral["90"]};
-                    }
-                  `}
-                />
-                <AuthProvider>
-                  <Suspense
-                    fallback={
-                      <DeferredComponent>
-                        <Loader />
-                      </DeferredComponent>
-                    }
-                  >
-                    <RouterProvider router={router} />
-                  </Suspense>
-                </AuthProvider>
-              </SnackBarContextProvider>
+              <ToastContextProvider>
+                <SnackBarContextProvider>
+                  <Global
+                    styles={css`
+                      body {
+                        color: ${theme.colors.neutral["90"]};
+                      }
+                    `}
+                  />
+                  <AuthProvider>
+                    <Suspense
+                      fallback={
+                        <DeferredComponent>
+                          <Loader />
+                        </DeferredComponent>
+                      }
+                    >
+                      <RouterProvider router={router} />
+                    </Suspense>
+                  </AuthProvider>
+                </SnackBarContextProvider>
+              </ToastContextProvider>
             </IconContext.Provider>
           </ThemeProvider>
         </QueryClientProvider>
