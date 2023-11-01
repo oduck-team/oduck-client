@@ -28,9 +28,9 @@ interface AuthAction {
 const DEFAULT_USER: User = {
   name: "",
   memberId: 0,
-  imageUrl: "",
+  description: "",
+  thumbnail: "",
   point: 0,
-  role: null,
   createdAt: "",
   updatedAt: "",
 } as const;

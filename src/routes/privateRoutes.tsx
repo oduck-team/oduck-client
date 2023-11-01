@@ -6,6 +6,7 @@ import useAuth from "@/features/auth/hooks/useAuth";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
+const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
   const { isLoggedIn, fetchUser } = useAuth();
@@ -44,6 +45,10 @@ export const privateRoutes: RouteObject[] = [
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/profile/edit",
+        element: <ProfileEdit />,
       },
     ],
   },

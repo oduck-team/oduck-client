@@ -10,6 +10,7 @@ import useAnimeForm from "./useAnimeForm";
 export default function useCreateAnime() {
   const { animeApi } = useAdminApi();
   const form = useAnimeForm({
+    isReleased: false,
     seriesId: 0,
     title: "",
     summary: "",
