@@ -24,6 +24,6 @@ export default class FileApi {
       },
     });
 
-    return `/${path}/${filename}`;
+    return `https://cdn.oduck.io/static/${path}/${filename}`;
   }
 }
