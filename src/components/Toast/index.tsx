@@ -1,16 +1,20 @@
 import { X } from "@phosphor-icons/react";
 import { useCallback, useEffect } from "react";
 
+import { theme } from "@/styles/theme";
+
 import Button from "../Button";
 
 import { ToastContainer, Left, Divider, Content, Right } from "./style";
 
 export type ToastPosition = "top" | "bottom";
+export type ToastColor = keyof typeof theme.colors;
 
 export interface ToastProps {
   id: string;
   message: string;
   icon?: React.ReactNode;
+  iconColor?: ToastColor;
   closeButton?: boolean;
   onClose: () => void;
   onClickButton?: (e: React.MouseEvent) => void;
@@ -23,6 +27,7 @@ export default function Toast({
   id,
   message,
   icon,
+  iconColor,
   closeButton = false,
   onClose,
   onClickButton,
@@ -50,7 +55,7 @@ export default function Toast({
       position={position}
     >
       <Content>
-        <Left>
+        <Left iconColor={iconColor}>
           {icon && icon}
           <span>{message}</span>
         </Left>

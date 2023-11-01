@@ -1,15 +1,15 @@
-import { css } from "@emotion/react";
+import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { getAnimation } from "../SnackBar/style";
 
-import { ToastProps } from ".";
+import { ToastPosition, ToastProps } from ".";
 
 interface ToastStyleProps extends Pick<ToastProps, "position"> {
   hasButton?: boolean;
 }
 
-const ToastListPosition = {
+const ToastListPosition: Record<ToastPosition, SerializedStyles> = {
   top: css`
     top: 10px;
   `,
@@ -18,7 +18,7 @@ const ToastListPosition = {
   `,
 };
 
-export const ToastWrapper = styled.div`
+export const ToastPortalContainer = styled.div`
   width: 100%;
   height: 100dvh;
   position: fixed;
@@ -82,11 +82,18 @@ export const Content = styled.div`
   justify-content: space-between;
 `;
 
-export const Left = styled.div`
+export const Left = styled.div<Pick<ToastProps, "iconColor">>`
   width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
+
+  svg {
+    color: ${({ iconColor = "neutral", theme }) =>
+      iconColor === "secondary"
+        ? theme.colors[iconColor]["70"]
+        : theme.colors[iconColor]["60"]};
+  }
 `;
 
 export const Right = styled.div`
