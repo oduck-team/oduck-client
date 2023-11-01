@@ -40,7 +40,7 @@ export const privateRoutes: RouteObject[] = [
     element: <ErrorBoundaryLayout />,
     children: [
       {
-        path: "",
+        path: "/",
         element: (
           <PrivateRoute>
             <Layout />
