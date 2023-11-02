@@ -5,7 +5,16 @@ import { Star } from "@phosphor-icons/react";
 export const BookmarkCardContainer = styled.div`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[10]};
-  padding: 16px 0;
+  padding: 16px;
+  margin: 0 -16px;
+  cursor: pointer;
+  transition: background-color ease 0.1s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: #fdfdfd;
+    }
+  }
 `;
 export const Image = styled.img`
   flex-shrink: 0;
