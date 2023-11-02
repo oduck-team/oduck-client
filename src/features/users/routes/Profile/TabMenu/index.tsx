@@ -61,7 +61,7 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
           <ReviewList isMine={isMine} list={reviews?.pages ?? []} />
         )}
         {selectedMenu === "입덕애니" && (
-          <BookmarkList list={bookmarks?.pages ?? []} />
+          <BookmarkList isMine={isMine} list={bookmarks?.pages ?? []} />
         )}
 
         <Target ref={targetRef} />

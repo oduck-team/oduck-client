@@ -2,10 +2,11 @@ import BookmarkCard from "./BookmarkCard";
 import EmptyList from "./EmptyList";
 
 interface BookmarkListProps {
+  isMine: boolean;
   list: Bookmark[];
 }
 
-export default function BookmarkList({ list }: BookmarkListProps) {
+export default function BookmarkList({ isMine, list }: BookmarkListProps) {
   return (
     <>
       {list.length === 0 && (
@@ -16,7 +17,11 @@ export default function BookmarkList({ list }: BookmarkListProps) {
         />
       )}
       {list.map((bookmark) => (
-        <BookmarkCard key={bookmark.animeId} bookmark={bookmark} />
+        <BookmarkCard
+          key={bookmark.animeId}
+          bookmark={bookmark}
+          isMine={isMine}
+        />
       ))}
     </>
   );
