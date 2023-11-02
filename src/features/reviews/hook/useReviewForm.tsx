@@ -1,7 +1,11 @@
+import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import { AxiosError } from "axios";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
+import useRedirect from "@/hooks/useRedirect";
 
 import { MOCK_USER_REVIEW_DATA } from "../components/ReviewRating/ShortReviewModal";
 
@@ -12,11 +16,15 @@ export default function useReviewForm(
   userReviewData?: MOCK_USER_REVIEW_DATA,
 ) {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const { setRedirect } = useRedirect();
 
   const {
     user: { name },
   } = useAuth();
   const reviewMutation = useAddReview(onReview);
+
+  const toast = useToast();
 
   const [form, setForm] = useState({
     content: userReviewData?.content ?? "",
@@ -65,12 +73,50 @@ export default function useReviewForm(
     });
     // TODO: 새 리뷰 작성인지 수정인지 검사
     // 새 리뷰 작성 POST 요청
-    reviewMutation.mutate({
-      name,
-      animeId,
-      hasSpoiler: form.isSpoiler,
-      content: form.content,
-    });
+    reviewMutation.mutate(
+      {
+        name,
+        animeId,
+        hasSpoiler: form.isSpoiler,
+        content: form.content,
+      },
+      {
+        onSuccess: () => {
+          toast.open({
+            message: "리뷰가 등록되었어요.",
+            icon: <CheckCircle weight="fill" />,
+            iconColor: "green",
+            buttonText: "내 모든 리뷰 보러 가기",
+            onClickButton: () => navigate("/profile"),
+            position: "top",
+          });
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError && error.response?.status) {
+            const status = error.response.status;
+            if ([401, 403].includes(status))
+              toast.open({
+                message: "로그인이 필요해요.",
+                icon: <CheckCircle weight="fill" />,
+                iconColor: "warn",
+                buttonText: "로그인",
+                onClickButton: () => {
+                  setRedirect(pathname);
+                  navigate("/login");
+                },
+                position: "top",
+              });
+            else if (status >= 500)
+              toast.open({
+                message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
+                icon: <WarningCircle weight="fill" />,
+                iconColor: "warn",
+                position: "top",
+              });
+          }
+        },
+      },
+    );
   };
 
   return {
