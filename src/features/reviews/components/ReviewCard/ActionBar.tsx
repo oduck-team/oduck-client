@@ -25,9 +25,9 @@ export default function ActionBar({
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
   return (
-    <ActionBarContainer include={include} onClick={(e) => e.stopPropagation()}>
+    <ActionBarContainer include={include}>
       {include === "time" && date && <time>{date}</time>}
-      <ButtonContainer include={include}>
+      <ButtonContainer include={include} onClick={(e) => e.stopPropagation()}>
         <ReviewLikeButton
           isLike={isLike}
           count={compactNumber(likeCount, "ko-KR")}

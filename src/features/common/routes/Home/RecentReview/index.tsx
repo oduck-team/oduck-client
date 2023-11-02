@@ -5,6 +5,7 @@ import { Header, RecentReviewContainer, Title, ReviewConainer } from "./style";
 
 const REVIEW_MOCK_DATA = {
   animation: {
+    animeId: 1,
     title: "레벨 1이지만 유니크 스킬로 최강이 되었습니다",
     thumbnail:
       "https://i.namu.wiki/i/v8ca2gF_MPV_L4QZGoN449G29Nt8vy3PtSLKv1T9XwmZBJ8p1GTz3S3Y32sXB-eoGDv5npoGXzpD6fASoQFLwg.webp",
@@ -28,7 +29,11 @@ export default function RecentReview() {
         </Button>
       </Header>
       <ReviewConainer>
-        <ReviewCard isBlock border="none">
+        <ReviewCard
+          isBlock
+          border="none"
+          linkTo={`/animes/${REVIEW_MOCK_DATA.animation.animeId}`}
+        >
           <ReviewCard.Anime anime={REVIEW_MOCK_DATA.animation} />
           <ReviewCard.Comment
             text={REVIEW_MOCK_DATA.comment}

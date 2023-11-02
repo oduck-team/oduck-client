@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { StrictPropsWithChildren } from "@/types";
 
 import ActionBar from "./ActionBar";
@@ -13,21 +15,25 @@ export interface ReviewCardProps {
   isBlock?: boolean;
   /** border에 관한 옵션(기본적으로 bottom을 가지고 있음) */
   border?: Border;
-  onClick?: () => void;
+  linkTo?: string;
 }
 
 export default function ReviewCard({
   isBlock,
   border = "bottom",
-  onClick,
+  linkTo,
   children,
 }: StrictPropsWithChildren<ReviewCardProps>) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    linkTo && navigate(linkTo);
+  };
   return (
     <ReviewCardContainer
       isBlock={isBlock}
       border={border}
-      cursorPointer={onClick ? true : false}
-      onClick={() => onClick && onClick()}
+      cursorPointer={linkTo ? true : false}
+      onClick={handleClick}
     >
       {children}
     </ReviewCardContainer>
