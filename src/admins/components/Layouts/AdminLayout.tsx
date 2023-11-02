@@ -39,7 +39,7 @@ export default function AdminLayout() {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <AdminNavList userName={user.name} userImage={user.imageUrl} />
+        <AdminNavList userName={user.name} userImage={user.thumbnail} />
       </AppShell.Navbar>
 
       <AppShell.Main className={classes.main}>

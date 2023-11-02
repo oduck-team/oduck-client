@@ -7,9 +7,12 @@ import {
   UserCircle,
   X,
 } from "@phosphor-icons/react";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
+import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 import useAuth from "@/features/auth/hooks/useAuth";
 
 import Avatar from "../Avatar";
@@ -62,12 +65,16 @@ export default function Sidebar({
   onClose,
 }: SidebarProps) {
   const { user, isLoggedIn, logout } = useAuth();
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleClickUserMenu = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
 
-    if (!isLoggedIn) navigate("/login", { replace: true });
+    if (!isLoggedIn) {
+      setIsLoginModalVisible(true);
+      return;
+    }
 
     const foundItem = userMenuItems.find((item) => item.id === id);
 
@@ -110,7 +117,7 @@ export default function Sidebar({
             <Profile to="/profile">
               <Avatar
                 userName={user.name ? user.name : ""}
-                src={user.imageUrl}
+                src={user.thumbnail}
                 size="xl"
               />
               <UserName>{user.name}</UserName>
@@ -154,6 +161,11 @@ export default function Sidebar({
           )}
         </Navigation.Content>
       </Navigation>
+      <AnimatePresence>
+        {isLoginModalVisible && (
+          <LoginAlertModal onClose={() => setIsLoginModalVisible(false)} />
+        )}
+      </AnimatePresence>
     </Drawer>
   );
 }
