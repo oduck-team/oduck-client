@@ -43,7 +43,7 @@ export const ToastListContainer = styled.div<Pick<ToastProps, "position">>`
 
 export const ToastContainer = styled.div<ToastStyleProps>`
   width: 100%;
-  height: ${({ hasButton = false }) => (!hasButton ? "70px" : "110px")};
+  height: fit-content;
   box-shadow:
     0px 8px 24px -4px rgba(24, 39, 75, 0.08),
     0px 6px 12px -6px rgba(24, 39, 75, 0.12);
@@ -89,16 +89,23 @@ export const Left = styled.div<Pick<ToastProps, "iconColor">>`
   gap: 8px;
 
   svg {
+    flex-shrink: 0;
     color: ${({ iconColor = "neutral", theme }) =>
       iconColor === "secondary"
         ? theme.colors[iconColor]["70"]
         : theme.colors[iconColor]["60"]};
+  }
+
+  span {
+    white-space: pre-line;
   }
 `;
 
 export const Right = styled.div`
   display: flex;
   gap: 14px;
+  align-items: center;
+  flex-shrink: 0;
 
   svg {
     display: block;
