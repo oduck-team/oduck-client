@@ -15,6 +15,8 @@ import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
 
 const USER_MOCK_REVIEW_DATA = {
+  id: 1,
+  animeId: 1,
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
   isSpoiler: true,

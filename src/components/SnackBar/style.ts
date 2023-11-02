@@ -15,7 +15,7 @@ export const SnackBarContainer = styled.div<Pick<SnackBarProps, "position">>`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  z-index: ${({ theme }) => theme.zIndex.modal};
+  z-index: ${({ theme }) => theme.zIndex.snackbar};
   margin-bottom: 4px;
   cursor: pointer;
 

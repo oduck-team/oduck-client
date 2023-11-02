@@ -1,8 +1,9 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren } from "react";
 
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
 
+import useReviewForm from "../../hook/useReviewForm";
 import AttractionPoint from "../AttractionPoint";
 
 import {
@@ -14,7 +15,9 @@ import {
 } from "./ShortReviewModal.style";
 import SpoilerCheckBox from "./SpoilerCheckBox";
 
-interface MOCK_USER_REVIEW_DATA {
+export interface MOCK_USER_REVIEW_DATA {
+  id: number;
+  animeId: number;
   content: string;
   isSpoiler: boolean;
   character: boolean;
@@ -36,15 +39,13 @@ export default function ShortReviewModal({
   userReviewData,
   children,
 }: PropsWithChildren<ShortReviewModalProps>) {
-  const [form, setForm] = useState({
-    content: userReviewData?.content ?? "",
-    isSpoiler: userReviewData?.isSpoiler ?? false,
-    character: userReviewData?.character ?? false,
-    art: userReviewData?.art ?? false,
-    story: userReviewData?.story ?? false,
-    voiceActing: userReviewData?.voiceActing ?? false,
-    sound: userReviewData?.sound ?? false,
-  });
+  const {
+    form,
+    error,
+    handleTextInputChange,
+    handleCheckboxChange,
+    handleReviewSubmit,
+  } = useReviewForm(onReview, userReviewData);
 
   const attractionPoints = [
     {
@@ -96,33 +97,6 @@ export default function ShortReviewModal({
     },
   ];
 
-  const handleTextInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: checked,
-    }));
-  };
-
-  // TODO:
-  // const handleReview = () => {
-  //   // 유효성검사
-
-  //   // 요청
-
-  //   onReview();
-  // };
-
   return (
     <Modal onClose={onClose} showBackdrop={false}>
       <Modal.Content>
@@ -135,6 +109,8 @@ export default function ShortReviewModal({
             placeholder="최대 100자 까지 입력 가능해요"
             onChange={handleTextInputChange}
             value={form.content}
+            warn={error}
+            message="최소 10자 이상 입력해 주세요."
           />
           <SpoilerCheckBox
             name="isSpoiler"
@@ -155,7 +131,7 @@ export default function ShortReviewModal({
                 <AttractionPoint
                   name={point.name}
                   isChecked={point.isChecked}
-                  onChagne={handleCheckboxChange}
+                  onChange={handleCheckboxChange}
                 >
                   {point.content}
                 </AttractionPoint>
@@ -176,7 +152,7 @@ export default function ShortReviewModal({
         >
           취소
         </Button>
-        <Button name="평가 완료" isBlock size="lg" onClick={onReview}>
+        <Button name="평가 완료" isBlock size="lg" onClick={handleReviewSubmit}>
           완료
         </Button>
       </Modal.Actions>
