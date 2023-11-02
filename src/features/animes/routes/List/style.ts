@@ -25,3 +25,9 @@ export const Content = styled.div`
   gap: 32px;
   padding: 24px 16px;
 `;
+
+export const AnimeSkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
