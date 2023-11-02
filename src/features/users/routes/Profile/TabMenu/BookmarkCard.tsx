@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import {
   BookmarkCardContainer,
   CreatedDate,
@@ -16,8 +18,11 @@ interface BookmarkCardProps {
 }
 
 export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
+  const navigate = useNavigate();
+  const handleLinkToAnime = () => navigate(`/animes/${bookmark.animeId}`);
+
   return (
-    <BookmarkCardContainer>
+    <BookmarkCardContainer onClick={handleLinkToAnime}>
       <Image src={bookmark.thumbnail} alt={bookmark.title} />
       <InfoContainer>
         <Title>{bookmark.title}</Title>
