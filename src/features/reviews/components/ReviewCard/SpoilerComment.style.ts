@@ -10,6 +10,14 @@ export const SpoilerCommentContainer = styled.div`
   border: none;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.neutral["05"]};
+  transition: background-color ease-in-out 0.1s;
+  cursor: default;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.neutral[10]};
+    }
+  }
 `;
 
 export const Info = styled.span`

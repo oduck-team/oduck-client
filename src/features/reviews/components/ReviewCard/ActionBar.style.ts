@@ -6,8 +6,9 @@ import { ActionBarProps, Include } from "./ActionBar";
 export const ActionBarContainer = styled.div<Pick<ActionBarProps, "include">>`
   ${({ theme }) => theme.typo["body-3-r"]}
   color: #adaeb8;
+  cursor: default;
 
-  ${({ include = "common" }) => getActionBarContainerStyle(include)}
+  ${({ include = "common" }) => getActionBarContainerStyle(include)};
 `;
 
 export const ButtonContainer = styled.div<Pick<ActionBarProps, "include">>`
@@ -20,10 +21,10 @@ function getActionBarContainerStyle(include: Include) {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 8px;
+      padding-top: 8px;
     `,
     common: css`
-      margin-top: 16px;
+      padding-top: 16px;
     `,
   };
 

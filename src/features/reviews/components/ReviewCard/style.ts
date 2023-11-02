@@ -7,6 +7,13 @@ export const ReviewCardContainer = styled.article<
   Pick<ReviewCardProps, "isBlock" | "isBorderTop"> & { cursorPointer: boolean }
 >`
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[10]};
+  transition: background-color ease 0.1s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: #fcfcfc;
+    }
+  }
 
   ${({ theme, isBlock = false, isBorderTop = true, cursorPointer }) =>
     getStyle(theme, isBlock, isBorderTop, cursorPointer)}

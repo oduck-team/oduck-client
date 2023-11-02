@@ -25,7 +25,7 @@ export default function ActionBar({
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
   return (
-    <ActionBarContainer include={include}>
+    <ActionBarContainer include={include} onClick={(e) => e.stopPropagation()}>
       {include === "time" && date && <time>{date}</time>}
       <ButtonContainer include={include}>
         <ReviewLikeButton
