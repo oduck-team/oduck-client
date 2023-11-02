@@ -25,7 +25,6 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
         <ReviewCard
           key={review.anime.animeId}
           isBlock
-          isBorderTop={false}
           onClick={() => handleClick(`/animes/${review.anime.animeId}`)}
         >
           <ReviewCard.Anime anime={review.anime} />

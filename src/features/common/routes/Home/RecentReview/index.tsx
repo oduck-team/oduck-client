@@ -28,7 +28,7 @@ export default function RecentReview() {
         </Button>
       </Header>
       <ReviewConainer>
-        <ReviewCard>
+        <ReviewCard isBlock border="none">
           <ReviewCard.Anime anime={REVIEW_MOCK_DATA.animation} />
           <ReviewCard.Comment
             text={REVIEW_MOCK_DATA.comment}
