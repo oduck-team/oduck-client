@@ -17,9 +17,10 @@ const TAB_BUTTONS = [
 
 interface TabMenuProps {
   isMine: boolean;
+  memberId: number;
 }
 
-export default function TabMenu({ isMine }: TabMenuProps) {
+export default function TabMenu({ isMine, memberId }: TabMenuProps) {
   const {
     targetRef,
     selectedMenu,
@@ -32,7 +33,7 @@ export default function TabMenu({ isMine }: TabMenuProps) {
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,
-  } = useTabMenu();
+  } = useTabMenu(memberId);
 
   return (
     <>
