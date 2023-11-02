@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 
 import EmptyList from "./EmptyList";
@@ -8,6 +10,8 @@ interface ReviewListProps {
 }
 
 export default function ReviewList({ isMine, list }: ReviewListProps) {
+  const navigate = useNavigate();
+  const handleClick = (to: string) => navigate(to);
   return (
     <>
       {list.length === 0 && (
@@ -18,7 +22,12 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
         />
       )}
       {list.map((review) => (
-        <ReviewCard key={review.anime.animeId} isBlock isBorderTop={false}>
+        <ReviewCard
+          key={review.anime.animeId}
+          isBlock
+          isBorderTop={false}
+          onClick={() => handleClick(`/animes/${review.anime.animeId}`)}
+        >
           <ReviewCard.Anime anime={review.anime} />
           <ReviewCard.Comment
             text={review.comment}

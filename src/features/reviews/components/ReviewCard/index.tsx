@@ -11,15 +11,22 @@ export interface ReviewCardProps {
   isBlock?: boolean;
   /** border top을 생기게 하는 옵션 */
   isBorderTop?: boolean;
+  onClick?: () => void;
 }
 
 export default function ReviewCard({
   isBlock,
   isBorderTop = true,
+  onClick,
   children,
 }: StrictPropsWithChildren<ReviewCardProps>) {
   return (
-    <ReviewCardContainer isBlock={isBlock} isBorderTop={isBorderTop}>
+    <ReviewCardContainer
+      isBlock={isBlock}
+      isBorderTop={isBorderTop}
+      cursorPointer={onClick ? true : false}
+      onClick={() => onClick && onClick()}
+    >
       {children}
     </ReviewCardContainer>
   );
