@@ -96,7 +96,7 @@ export default function useReviewForm(
             const status = error.response.status;
             if ([401, 403].includes(status))
               toast.open({
-                message: "로그인이 필요해요.",
+                message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
                 icon: <CheckCircle weight="fill" />,
                 iconColor: "warn",
                 buttonText: "로그인",
