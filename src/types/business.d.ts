@@ -80,3 +80,10 @@ declare interface Anime extends BaseTimeEntity {
   viewCount: number;
   reviewCount: number;
 }
+
+declare interface CursorPage<T> {
+  items: T[];
+  size: number;
+  hasNext: boolean;
+  cursor: string;
+}
