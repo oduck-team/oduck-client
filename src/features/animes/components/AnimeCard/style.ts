@@ -55,7 +55,6 @@ export const Title = styled.div`
 
 export const Rating = styled.div`
   display: flex;
-  width: 39px;
   height: 21px;
   justify-content: center;
   align-items: center;
