@@ -15,6 +15,7 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
           message="입덕한 애니가 없어요. 애니를 추가해 보세요"
           buttonText="애니 추가하러 가기"
           linkTo="/animes"
+          isMine={isMine}
         />
       )}
       {list.map((review) => (
