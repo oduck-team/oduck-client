@@ -9,7 +9,7 @@ const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { isLoggedIn, fetchUser } = useAuth();
+  const { fetchUser } = useAuth();
   const { localUser } = useLocalUser();
   const navigate = useNavigate();
 
@@ -27,8 +27,6 @@ function PrivateRoute({ children }: PropsWithChildren) {
     };
     handleAuth();
   }, []);
-
-  if (!isLoggedIn) return null;
 
   return children;
 }

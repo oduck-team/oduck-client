@@ -1,11 +1,20 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Star } from "@phosphor-icons/react";
+import { Star, Trash } from "@phosphor-icons/react";
 
 export const BookmarkCardContainer = styled.div`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[10]};
-  padding: 16px 0;
+  padding: 16px;
+  margin: 0 -16px;
+  cursor: pointer;
+  transition: background-color ease 0.1s;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: #fdfdfd;
+    }
+  }
 `;
 export const Image = styled.img`
   flex-shrink: 0;
@@ -20,6 +29,7 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 `;
 
 export const Title = styled.h4`
@@ -76,7 +86,52 @@ export const MyScore = styled.span`
   color: ${({ theme }) => theme.colors.primary[60]};
 `;
 
+export const BottomContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  /* & > svg {
+    color: ${({ theme }) => theme.colors.neutral[40]};
+
+    border-radius: 50%;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.neutral[10]};
+      color: ${({ theme }) => theme.colors.neutral[50]};
+    }
+  } */
+`;
+
 export const CreatedDate = styled.time`
   ${({ theme }) => theme.typo["body-3-r"]}
   color: ${({ theme }) => theme.colors.neutral[40]}
+`;
+
+export const TrashIconContainer = styled.div`
+  position: relative;
+  right: -8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 8px;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.neutral[10]};
+
+      & > svg {
+        color: ${({ theme }) => theme.colors.neutral[50]};
+      }
+    }
+  }
+
+  &:active {
+    background-color: ${({ theme }) => theme.colors.neutral[10]};
+  }
+`;
+
+export const TrashIcon = styled(Trash)`
+  color: ${({ theme }) => theme.colors.neutral[40]};
 `;

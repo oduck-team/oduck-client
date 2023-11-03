@@ -10,10 +10,10 @@ import {
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 import useAuth from "@/features/auth/hooks/useAuth";
+import { BOOKMARK } from "@/features/users/hooks/useTabMenu";
 
 import Avatar from "../Avatar";
 import Button from "../Button";
@@ -81,9 +81,7 @@ export default function Sidebar({
     if (foundItem) {
       onClickItem();
       if (foundItem.id === "bookmark") {
-        navigate(foundItem.to, {
-          state: `bookmark ${uuidv4()}`,
-        });
+        navigate({ pathname: "/profile", search: `?tab=${BOOKMARK}` });
       } else {
         navigate(foundItem.to);
       }
