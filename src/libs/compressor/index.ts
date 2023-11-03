@@ -15,7 +15,7 @@ export async function fileToWebPFile(
       quality,
       mimeType: "image/webp",
       maxWidth: 880,
-      height: 620,
+      maxHeight: 620,
       success(result) {
         const webPFile = new File([result], file.name, {
           type: "image/webp",
