@@ -12,8 +12,8 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
     <>
       {list.length === 0 && (
         <EmptyList
-          message="입덕한 애니가 없어요. 애니를 추가해 보세요"
-          buttonText="애니 추가하러 가기"
+          message="작성한 리뷰가 없어요. 리뷰를 작성해 보세요."
+          buttonText="리뷰 작성하기"
           linkTo="/animes"
           isMine={isMine}
         />
