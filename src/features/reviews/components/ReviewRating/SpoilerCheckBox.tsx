@@ -15,7 +15,15 @@ export default function SpoilerCheckBox({
 }: SpoilerCheckBoxProps) {
   return (
     <SpoilerCheckBoxContainer>
-      <CheckBox name={name} checked={checked} onChange={onChange} /> 스포일러
+      <CheckBox
+        id="isSpoiler"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+      />
+      <label htmlFor="isSpoiler" style={{ cursor: "pointer" }}>
+        스포일러
+      </label>
     </SpoilerCheckBoxContainer>
   );
 }

@@ -17,6 +17,7 @@ declare module "@emotion/react" {
       secondary: Colors["yellow"];
       warn: Colors["red"];
       neutral: Colors["neutral"];
+      green: Colors["green"];
     };
     typo: Typography;
     zIndex: ZIndex;
