@@ -48,7 +48,10 @@ export default function Profile() {
           <ProfileContainer>
             <AboutMe profile={userProfile} />
             <ErrorBoundary onReset={reset}>
-              <TabMenu isMine={userProfile.isMine} />
+              <TabMenu
+                isMine={userProfile.isMine}
+                memberId={userProfile.memberId}
+              />
             </ErrorBoundary>
           </ProfileContainer>
         </>

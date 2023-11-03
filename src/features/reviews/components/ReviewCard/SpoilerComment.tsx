@@ -6,7 +6,7 @@ interface SpoilerCommentProps {
 
 export default function SpoilerComment({ onClick }: SpoilerCommentProps) {
   return (
-    <SpoilerCommentContainer>
+    <SpoilerCommentContainer onClick={(e) => e.stopPropagation()}>
       <Info>스포일러를 포함한 리뷰에요!</Info>
       <Button type="button" onClick={onClick}>
         리뷰보기
