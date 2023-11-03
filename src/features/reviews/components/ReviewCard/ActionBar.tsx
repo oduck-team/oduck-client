@@ -27,7 +27,7 @@ export default function ActionBar({
   return (
     <ActionBarContainer include={include}>
       {include === "time" && date && <time>{date}</time>}
-      <ButtonContainer include={include}>
+      <ButtonContainer include={include} onClick={(e) => e.stopPropagation()}>
         <ReviewLikeButton
           isLike={isLike}
           count={compactNumber(likeCount, "ko-KR")}

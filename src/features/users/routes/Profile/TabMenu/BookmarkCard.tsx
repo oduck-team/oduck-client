@@ -1,5 +1,10 @@
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   BookmarkCardContainer,
+  BottomContainer,
   CreatedDate,
   Image,
   InfoContainer,
@@ -9,38 +14,67 @@ import {
   ScoreContainer,
   StarIcon,
   Title,
+  TrashIcon,
+  TrashIconContainer,
 } from "./BookmarkCard.style";
+import BookmarkDelteModal from "./BookmarkDeleteModal";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
+  isMine: boolean;
 }
 
-export default function BookmarkCard({ bookmark }: BookmarkCardProps) {
+export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const toggleDeleteModal = () => setIsDeleteModalOpen((prev) => !prev);
+  const handleDeleteModalToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleDeleteModal();
+  };
+  const navigate = useNavigate();
+  const handleLinkToAnime = () => navigate(`/animes/${bookmark.animeId}`);
+
   return (
-    <BookmarkCardContainer>
-      <Image src={bookmark.thumbnail} alt={bookmark.title} />
-      <InfoContainer>
-        <Title>{bookmark.title}</Title>
-        <div>
-          <RatingContainer>
-            <ScoreContainer>
-              <StarIcon size={13} weight="fill" color="yellow" />
-              <Score>평균 {bookmark.avgScore / 2}</Score>
-            </ScoreContainer>
-            <ScoreContainer>
-              {bookmark.myScore >= 0 && (
-                <>
-                  <StarIcon size={13} weight="fill" color="blue" />
-                  <MyScore>내 평점 {bookmark.myScore / 2}</MyScore>
-                </>
+    <>
+      <BookmarkCardContainer onClick={handleLinkToAnime}>
+        <Image src={bookmark.thumbnail} alt={bookmark.title} />
+        <InfoContainer>
+          <Title>{bookmark.title}</Title>
+          <div>
+            <RatingContainer>
+              <ScoreContainer>
+                <StarIcon size={13} weight="fill" color="yellow" />
+                <Score>평균 {bookmark.avgScore / 2}</Score>
+              </ScoreContainer>
+              <ScoreContainer>
+                {bookmark.myScore >= 0 && (
+                  <>
+                    <StarIcon size={13} weight="fill" color="blue" />
+                    <MyScore>내 평점 {bookmark.myScore / 2}</MyScore>
+                  </>
+                )}
+                {bookmark.myScore < 0 && <Score>평가전</Score>}
+              </ScoreContainer>
+            </RatingContainer>
+            <BottomContainer>
+              <CreatedDate>{dateWithDots(bookmark.createdAt)}</CreatedDate>
+              {isMine && (
+                <TrashIconContainer onClick={(e) => handleDeleteModalToggle(e)}>
+                  {<TrashIcon size={18} />}
+                </TrashIconContainer>
               )}
-              {bookmark.myScore < 0 && <Score>평가전</Score>}
-            </ScoreContainer>
-          </RatingContainer>
-          <CreatedDate>{dateWithDots(bookmark.createdAt)}</CreatedDate>
-        </div>
-      </InfoContainer>
-    </BookmarkCardContainer>
+            </BottomContainer>
+          </div>
+        </InfoContainer>
+      </BookmarkCardContainer>
+      {isMine && (
+        <AnimatePresence>
+          {isDeleteModalOpen && (
+            <BookmarkDelteModal onClose={toggleDeleteModal} />
+          )}
+        </AnimatePresence>
+      )}
+    </>
   );
 }
 
