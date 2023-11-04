@@ -23,13 +23,10 @@ export default function Login() {
   };
 
   /**
-   * PrivateRoute에서 보낸 from(pathname)이 없으면
    * sessionStorage에 저장된 prevPath를 redirect path로 지정
    */
   useEffect(() => {
-    location.state?.from
-      ? setRedirect(location.state.from)
-      : setRedirect(sessionStorage.getItem("prevPath") ?? "/");
+    setRedirect(sessionStorage.getItem("prevPath") ?? "/");
   }, [location, setRedirect]);
 
   return (

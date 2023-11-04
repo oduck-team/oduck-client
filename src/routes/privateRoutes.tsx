@@ -1,5 +1,5 @@
 import { PropsWithChildren, lazy, useEffect } from "react";
-import { RouteObject, useLocation, useNavigate } from "react-router-dom";
+import { RouteObject, useNavigate } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -14,7 +14,6 @@ function PrivateRoute({ children }: PropsWithChildren) {
   const { fetchUser } = useAuth();
   const { localUser } = useLocalUser();
   const navigate = useNavigate();
-  const location = useLocation();
 
   /**
    * 로컬 스토리지에 유저 정보가 있다면 서버에 유저 정보를 요청합니다
@@ -23,10 +22,7 @@ function PrivateRoute({ children }: PropsWithChildren) {
   useEffect(() => {
     const handleAuth = () => {
       if (!localUser) {
-        navigate("/login", {
-          state: { from: location.pathname },
-          replace: true,
-        });
+        navigate("/login", { replace: true });
       }
 
       fetchUser();
