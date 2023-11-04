@@ -14,6 +14,7 @@ import useCreateVoiceActor from "../hooks/useCreateVoiceActor";
 import useVoiceActors from "../hooks/useVoiceActors";
 
 import CreateSubCategoryButton from "./CreateSubCategoryButton";
+import { HeaderBottom, HeaderTop } from "./EditVoiceActorsModal.style";
 
 interface SelectedActor {
   id: number;
@@ -37,10 +38,11 @@ export default function EditVoiceActorsModal({
   const [selectedActors, setSelectedActors] = useState<SelectedActor[]>(
     selectedActorsInitial,
   );
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     setSelectedActors(selectedActorsInitial);
-  }, []);
+  }, [selectedActorsInitial]);
 
   const handleCheckboxChange = (
     actorId: number,
@@ -74,6 +76,12 @@ export default function EditVoiceActorsModal({
     onAdd(actorsToAdd);
   };
 
+  const filteredVoiceActors = searchKeyword
+    ? voiceActors?.filter((actor) =>
+        actor.name.toLowerCase().includes(searchKeyword.toLowerCase()),
+      )
+    : voiceActors;
+
   if (isLoadingActors)
     return (
       <Modal title="성우 관리" size="xl" opened onClose={onClose}>
@@ -83,7 +91,7 @@ export default function EditVoiceActorsModal({
       </Modal>
     );
 
-  const rows = voiceActors?.map((actor) => {
+  const rows = filteredVoiceActors?.map((actor) => {
     const selectedActor = selectedActors.find((item) => item.id === actor.id);
 
     return (
@@ -117,28 +125,50 @@ export default function EditVoiceActorsModal({
   });
 
   return (
-    <Modal title="성우 관리" size="xl" opened onClose={onClose}>
-      <Table.ScrollContainer minWidth={500} type="native">
-        <Table>
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>ID</Table.Th>
-              <Table.Th>이름</Table.Th>
-              <Table.Th>선택</Table.Th>
-              <Table.Th>배역</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>{rows}</Table.Tbody>
-        </Table>
-      </Table.ScrollContainer>
-      <Flex justify="flex-end" gap="sm">
-        <CreateSubCategoryButton
-          label="+ 새 성우"
-          modalTitle="새 성우 등록"
-          onCreate={(name) => createVoiceActorMutation.mutate(name)}
-        />
-        <Button onClick={handleSubmit}>확인</Button>
-      </Flex>
-    </Modal>
+    <Modal.Root size="xl" opened onClose={onClose}>
+      <Modal.Overlay />
+      <Modal.Content>
+        <Modal.Header style={{ flexDirection: "column" }}>
+          <HeaderTop>
+            <Modal.Title>성우 관리</Modal.Title>
+            <Modal.CloseButton />
+          </HeaderTop>
+          <HeaderBottom>
+            <div>
+              <TextInput
+                placeholder="성우 이름 검색"
+                onChange={(event) =>
+                  setSearchKeyword(event.currentTarget.value)
+                }
+                mb="md"
+              />
+            </div>
+            <Flex justify="flex-end" gap="sm">
+              <CreateSubCategoryButton
+                label="+ 새 성우"
+                modalTitle="새 성우 등록"
+                onCreate={(name) => createVoiceActorMutation.mutate(name)}
+              />
+              <Button onClick={handleSubmit}>확인</Button>
+            </Flex>
+          </HeaderBottom>
+        </Modal.Header>
+        <Modal.Body>
+          <Table.ScrollContainer minWidth={500} type="native">
+            <Table>
+              <Table.Thead>
+                <Table.Tr>
+                  <Table.Th>ID</Table.Th>
+                  <Table.Th>이름</Table.Th>
+                  <Table.Th>선택</Table.Th>
+                  <Table.Th>배역</Table.Th>
+                </Table.Tr>
+              </Table.Thead>
+              <Table.Tbody>{rows}</Table.Tbody>
+            </Table>
+          </Table.ScrollContainer>
+        </Modal.Body>
+      </Modal.Content>
+    </Modal.Root>
   );
 }
