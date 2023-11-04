@@ -7,13 +7,13 @@ import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
 import useRedirect from "@/hooks/useRedirect";
 
-import useLogin from "../../hooks/useLogin";
+import useAuth from "../../hooks/useAuth";
 
 import SocialGroup from "./SocialGroup";
 import { Main, Title, LoginSection } from "./style";
 
 export default function Login() {
-  const { socialLogin } = useLogin();
+  const { socialLogin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const { setRedirect } = useRedirect();
