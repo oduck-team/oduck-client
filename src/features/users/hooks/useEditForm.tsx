@@ -2,12 +2,11 @@ import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
-import useRedirect from "@/hooks/useRedirect";
 
 export interface ProfileEditFormData {
   name: string;
@@ -17,9 +16,7 @@ export interface ProfileEditFormData {
 export default function useEditForm(name: string, description: string) {
   const { profile } = useApi();
   const { fetchUser, user } = useAuth();
-  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { setRedirect } = useRedirect();
   const [form, setForm] = useState<ProfileEditFormData>({
     name: name.length <= 10 ? name : "",
     description: description,
@@ -63,10 +60,7 @@ export default function useEditForm(name: string, description: string) {
                 icon: <CheckCircle weight="fill" />,
                 iconColor: "warn",
                 buttonText: "로그인",
-                onClickButton: () => {
-                  setRedirect(pathname);
-                  navigate("/login");
-                },
+                onClickButton: () => navigate("/login"),
                 position: "top",
               });
               break;
