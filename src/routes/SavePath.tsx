@@ -13,9 +13,13 @@ export default function SavePath() {
       return;
     }
 
-    if (prevPath === "/auth/callback") sessionStorage.setItem("prevPath", "");
-    else sessionStorage.setItem("prevPath", prevPath ?? "/");
+    /** /auth/callback url 숨김 */
+    if (location.pathname === "/auth/callback") {
+      sessionStorage.setItem("prevPath", "");
+      return;
+    }
 
+    sessionStorage.setItem("prevPath", prevPath ?? "/");
     sessionStorage.setItem("currPath", location.pathname);
   }, [location]);
 
