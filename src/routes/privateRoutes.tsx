@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
-import RouteLayout from "./RouteLayout";
+import RouteLayout from "../components/Layout/RouteLayout";
 
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));

@@ -1,9 +1,9 @@
 import { PropsWithChildren, lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
+import ErrorBoundaryLayout from "@/components/Layout/ErrorBoundaryLayout";
 import useAuth from "@/features/auth/hooks/useAuth";
 import NotFound from "@/features/common/routes/Error/404";
-import ErrorBoundaryLayout from "@/routes/ErrorBoundaryLayout";
 
 const AdminProviders = lazy(() => import("./AdminProviders"));
 const AdminLayout = lazy(() => import("../components/Layouts/AdminLayout"));

@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import { HelpDeskProvider } from "@/contexts/HelpDeskContext";
 import Home from "@/features/common/routes/Home";
 
-import RouteLayout from "./RouteLayout";
+import RouteLayout from "../components/Layout/RouteLayout";
 
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
