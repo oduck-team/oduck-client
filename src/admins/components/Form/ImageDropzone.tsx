@@ -6,6 +6,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { useApi } from "@/hooks/useApi";
+import { fileToWebPFile } from "@/libs/compressor";
 
 /** 5MB */
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
@@ -33,14 +34,17 @@ export default function ImageDropzone({
     try {
       setIsLoading(true);
 
+      const webPFile = await fileToWebPFile(file);
+
       const path = await fileApi.uploadImage({
         path: uploadPath,
         filename: uuidv4(),
-        file,
+        file: webPFile,
       });
 
       if (path) onUpload(path);
     } catch (e) {
+      console.error(e);
       notifications.show({
         message: "이미지를 올리는데 실패했어요. 다시 시도해보세요",
       });

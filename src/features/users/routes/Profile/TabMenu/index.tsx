@@ -17,9 +17,10 @@ const TAB_BUTTONS = [
 
 interface TabMenuProps {
   isMine: boolean;
+  memberId: number;
 }
 
-export default function TabMenu({ isMine }: TabMenuProps) {
+export default function TabMenu({ isMine, memberId }: TabMenuProps) {
   const {
     targetRef,
     selectedMenu,
@@ -32,7 +33,7 @@ export default function TabMenu({ isMine }: TabMenuProps) {
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,
-  } = useTabMenu();
+  } = useTabMenu(memberId);
 
   return (
     <>
@@ -60,7 +61,7 @@ export default function TabMenu({ isMine }: TabMenuProps) {
           <ReviewList isMine={isMine} list={reviews?.pages ?? []} />
         )}
         {selectedMenu === "입덕애니" && (
-          <BookmarkList list={bookmarks?.pages ?? []} />
+          <BookmarkList isMine={isMine} list={bookmarks?.pages ?? []} />
         )}
 
         <Target ref={targetRef} />

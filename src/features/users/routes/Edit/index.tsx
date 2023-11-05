@@ -16,8 +16,9 @@ export default function ProfileEdit() {
     user: { name },
   } = useAuth();
   const { profile } = useApi();
-  const { isLoading, data: userProfile } = useQuery(["profile", name], () =>
-    profile.getProfile(name),
+  const { isLoading, data: userProfile } = useQuery(
+    ["profile", "edit", name],
+    () => profile.getProfile(name),
   );
 
   if (isLoading) return <ProfileEditLoading />;

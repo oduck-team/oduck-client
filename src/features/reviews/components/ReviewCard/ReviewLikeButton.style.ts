@@ -15,14 +15,24 @@ export const ReviewLikeButtonContainer = styled.button<
   cursor: pointer;
   ${({ theme }) => theme.typo["body-3-r"]}
 
+  @media(hover: hover) and (pointer: fine) {
+    &:hover {
+      & * {
+        color: ${({ theme }) => theme.colors.neutral["70"]};
+      }
+    }
+  }
+
   & > span {
     margin-left: 4px;
     color: ${({ theme }) => theme.colors.neutral["50"]};
+    transition: color ease 0.1s;
   }
 
   & > svg {
     color: ${({ isLike, theme }) =>
       isLike ? colors.red["40"] : theme.colors.neutral["50"]};
     fill: ${({ isLike }) => (isLike ? colors.red["40"] : "")};
+    transition: color ease 0.1s;
   }
 `;

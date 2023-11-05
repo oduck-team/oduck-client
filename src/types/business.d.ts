@@ -17,6 +17,7 @@ declare interface User extends BaseTimeEntity {
 }
 
 declare interface Profile {
+  memberId: number;
   name: string;
   description: string;
   backgroundImage: string;

@@ -1,20 +1,33 @@
 import { css, Theme } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { ReviewCardProps } from ".";
+import { Border, ReviewCardProps } from ".";
 
 export const ReviewCardContainer = styled.article<
-  Pick<ReviewCardProps, "isBlock" | "isBorderTop">
+  Pick<ReviewCardProps, "isBlock" | "border"> & { cursorPointer: boolean }
 >`
   border-bottom: 1px solid ${({ theme }) => theme.colors.neutral[10]};
+  transition: background-color ease 0.1s;
 
-  ${({ theme, isBlock = false, isBorderTop = true }) =>
-    getStyle(theme, isBlock, isBorderTop)}
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: #fdfdfd;
+    }
+  }
+
+  ${({ theme, isBlock = false, border = "bottom", cursorPointer }) =>
+    getStyle(theme, isBlock, border, cursorPointer)}
 `;
 
-function getStyle(theme: Theme, isBlock: boolean, isBorderTop: boolean) {
+function getStyle(
+  theme: Theme,
+  isBlock: boolean,
+  border: Border,
+  cursorPointer: boolean,
+) {
   let isBlockStyle;
-  let isBorderTopStyle;
+  let borderStyle;
+  let cursorStyle;
 
   if (isBlock) {
     isBlockStyle = `
@@ -27,14 +40,25 @@ function getStyle(theme: Theme, isBlock: boolean, isBorderTop: boolean) {
     `;
   }
 
-  if (isBorderTop) {
-    isBorderTopStyle = `
+  if (border === "top") {
+    borderStyle = `
       border-top: 1px solid ${theme.colors.neutral[10]};
+    `;
+  } else if (border === "none") {
+    borderStyle = `
+      border: none;
+    `;
+  }
+
+  if (cursorPointer) {
+    cursorStyle = `
+      cursor: pointer;
     `;
   }
 
   return css`
     ${isBlockStyle};
-    ${isBorderTopStyle};
+    ${borderStyle};
+    ${cursorStyle}
   `;
 }

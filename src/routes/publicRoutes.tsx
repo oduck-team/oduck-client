@@ -5,7 +5,7 @@ import Layout from "@/components/Layout";
 import { HelpDeskProvider } from "@/contexts/HelpDeskContext";
 import Home from "@/features/common/routes/Home";
 
-import ErrorBoundaryLayout from "./ErrorBoundaryLayout";
+import RouteLayout from "../components/Layout/RouteLayout";
 
 const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
@@ -21,7 +21,7 @@ const ServerError = lazy(() => import("@/features/common/routes/Error/500"));
 
 export const publicRoutes: RouteObject[] = [
   {
-    element: <ErrorBoundaryLayout />,
+    element: <RouteLayout />,
     children: [
       {
         path: "/login",

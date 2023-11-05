@@ -5,7 +5,6 @@ export const RecentReviewContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-bottom: solid 1px ${({ theme }) => theme.colors["neutral"]["05"]};
 `;
 
 export const Header = styled.div`
@@ -22,5 +21,7 @@ export const Title = styled.h1`
 `;
 
 export const ReviewConainer = styled.div`
+  border-top: solid 2px ${({ theme }) => theme.colors["neutral"]["05"]};
+  border-bottom: solid 2px ${({ theme }) => theme.colors["neutral"]["05"]};
   padding: 0 16px;
 `;

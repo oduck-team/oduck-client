@@ -4,7 +4,6 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import BackdropPortal from "@/components/Backdrop/BackdropPortal";
-import Button from "@/components/Button";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
 import DropDownModal from "@/features/users/components/DropDownModal";
@@ -12,9 +11,15 @@ import useDropDownModal from "@/features/users/components/DropDownModal/useDropD
 
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
-import { MyRating, RatingContainer } from "./ReviewMoreButton.style";
+import {
+  MoreButton,
+  MyRating,
+  RatingContainer,
+} from "./ReviewMoreButton.style";
 
 const USER_MOCK_REVIEW_DATA = {
+  id: 1,
+  animeId: 1,
   score: 7,
   content: "유저가 생성한 짧은 리뷰입니다.",
   isSpoiler: true,
@@ -68,7 +73,7 @@ export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
 
   return (
     <>
-      <Button
+      <MoreButton
         name="더보기"
         icon={<DotsThree color={theme.colors.neutral["50"]} />}
         variant="text"

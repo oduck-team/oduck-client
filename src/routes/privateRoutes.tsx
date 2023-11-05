@@ -5,11 +5,13 @@ import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
 import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
+import RouteLayout from "../components/Layout/RouteLayout";
+
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { isLoggedIn, fetchUser } = useAuth();
+  const { fetchUser } = useAuth();
   const { localUser } = useLocalUser();
   const navigate = useNavigate();
 
@@ -28,27 +30,30 @@ function PrivateRoute({ children }: PropsWithChildren) {
     handleAuth();
   }, []);
 
-  if (!isLoggedIn) return null;
-
   return children;
 }
 
 export const privateRoutes: RouteObject[] = [
   {
-    path: "/",
-    element: (
-      <PrivateRoute>
-        <Layout />
-      </PrivateRoute>
-    ),
+    element: <RouteLayout />,
     children: [
       {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/profile/edit",
-        element: <ProfileEdit />,
+        path: "/",
+        element: (
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />,
+          },
+          {
+            path: "/profile/edit",
+            element: <ProfileEdit />,
+          },
+        ],
       },
     ],
   },

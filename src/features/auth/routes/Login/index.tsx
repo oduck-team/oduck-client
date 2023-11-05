@@ -1,22 +1,33 @@
 import { CaretLeft } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
+import useRedirect from "@/hooks/useRedirect";
 
-import useLogin from "../../hooks/useLogin";
+import useAuth from "../../hooks/useAuth";
 
 import SocialGroup from "./SocialGroup";
 import { Main, Title, LoginSection } from "./style";
 
 export default function Login() {
-  const { socialLogin } = useLogin();
+  const { socialLogin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { setRedirect } = useRedirect();
 
   const handleClickBack = () => {
     navigate(-1);
   };
+
+  /**
+   * sessionStorage에 저장된 prevPath를 redirect path로 지정
+   */
+  useEffect(() => {
+    setRedirect(sessionStorage.getItem("prevPath") ?? "/");
+  }, [location, setRedirect]);
 
   return (
     <>
