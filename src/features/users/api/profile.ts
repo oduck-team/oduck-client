@@ -1,5 +1,6 @@
-import { get } from "@/libs/api";
+import { get, patch } from "@/libs/api";
 
+import { ProfileEditFormData } from "../hooks/useEditForm";
 import { SelectedSort } from "../hooks/useSortBar";
 
 import reveiwMock1 from "./mock/review1.json";
@@ -61,6 +62,10 @@ export default class ProfileApi {
     // return await get(`/members/${"26"}/reviews`, {
     //   params: params,
     // });
+  }
+
+  async updateProfile(form: ProfileEditFormData) {
+    return await patch("/members", form);
   }
 
   private setParams(pageParam: string | undefined, selected: SelectedSort) {

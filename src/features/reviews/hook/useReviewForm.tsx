@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
-import useRedirect from "@/hooks/useRedirect";
 
 import { MOCK_USER_REVIEW_DATA } from "../components/ReviewRating/ShortReviewModal";
 
@@ -17,7 +16,6 @@ export default function useReviewForm(
 ) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { setRedirect } = useRedirect();
 
   const {
     user: { name },
@@ -100,10 +98,7 @@ export default function useReviewForm(
                 icon: <CheckCircle weight="fill" />,
                 iconColor: "warn",
                 buttonText: "로그인",
-                onClickButton: () => {
-                  setRedirect(pathname);
-                  navigate("/login");
-                },
+                onClickButton: () => navigate("/login"),
                 position: "top",
               });
             else if (status >= 500)

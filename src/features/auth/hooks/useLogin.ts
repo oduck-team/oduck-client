@@ -5,6 +5,10 @@ import useRedirect from "@/hooks/useRedirect";
 
 import useAuth from "./useAuth";
 
+/**
+ * deprecated
+ * 로그인 리다이렉트 로직 변경으로 더 이상 사용되지 않습니다.
+ * */
 export default function useLogin() {
   const { isLoggedIn, socialLogin } = useAuth();
   const { redirectUrl, setRedirect } = useRedirect();

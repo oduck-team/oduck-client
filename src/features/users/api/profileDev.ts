@@ -35,4 +35,8 @@ export default class ProfileDevApi {
         return reveiwMock3;
     }
   }
+
+  async updateProfile() {
+    console.log("닉네임, 자기소개 수정");
+  }
 }
