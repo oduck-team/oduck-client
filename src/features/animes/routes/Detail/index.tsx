@@ -3,6 +3,7 @@
 // import Loader from "@/components/Loader";
 // import { useAnimation } from "../../hooks/useAnimation";
 
+import Loader from "@/components/Loader";
 import SectionDivider from "@/components/SectionDivider";
 import useGetAnimeReviews from "@/features/reviews/hook/useGetAnimeReviews";
 
@@ -35,6 +36,7 @@ export default function AnimeDetail() {
   const anime = getAnimeMock();
   const {
     reviews,
+    isLoading,
     targetRef,
     SORT_OPTION,
     selectedsortOption,
@@ -64,6 +66,7 @@ export default function AnimeDetail() {
           handleChipClick={handleChipClick}
         />
         <div ref={targetRef}></div>
+        {isLoading && <Loader display="oduck" />}
       </AnimeDetailContainer>
     );
 }

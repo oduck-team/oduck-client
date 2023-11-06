@@ -51,6 +51,7 @@ export default function useGetAnimeReviews(animeId: number) {
     data: reviews,
     fetchNextPage,
     hasNextPage,
+    isLoading,
   } = useInfiniteQuery(
     ["review", animeId, selectedsortOption.sort, selectedsortOption.order],
     ({ pageParam }) =>
@@ -72,6 +73,7 @@ export default function useGetAnimeReviews(animeId: number) {
 
   return {
     reviews,
+    isLoading,
     targetRef,
     SORT_OPTION,
     selectedsortOption,
