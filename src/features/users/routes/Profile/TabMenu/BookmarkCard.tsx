@@ -70,7 +70,10 @@ export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
       {isMine && (
         <AnimatePresence>
           {isDeleteModalOpen && (
-            <BookmarkDelteModal onClose={toggleDeleteModal} />
+            <BookmarkDelteModal
+              animeId={bookmark.animeId}
+              onClose={toggleDeleteModal}
+            />
           )}
         </AnimatePresence>
       )}

@@ -1,7 +1,13 @@
-import { X } from "@phosphor-icons/react";
+import { CheckCircle, WarningCircle, X } from "@phosphor-icons/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import useToast from "@/components/Toast/useToast";
+import useAuth from "@/features/auth/hooks/useAuth";
+import { useApi } from "@/hooks/useApi";
 
 import {
   CloseButton,
@@ -10,12 +16,60 @@ import {
 } from "./BookmarkDeleteModal.style";
 
 interface BookmarkDelteModalProps {
+  animeId: number;
   onClose: () => void;
 }
 
 export default function BookmarkDelteModal({
+  animeId,
   onClose,
 }: BookmarkDelteModalProps) {
+  const { bookmarkApi } = useApi();
+  const {
+    user: { memberId, name },
+  } = useAuth();
+  const deleteBookmark = useMutation(() => bookmarkApi.toggleBookmark(animeId));
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+  const toast = useToast();
+  const handleDeleteButtonClick = () => {
+    deleteBookmark.mutate(undefined, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ["profile", name],
+          exact: true,
+        });
+        queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
+        queryClient.invalidateQueries(["bookmark", memberId, animeId]);
+        queryClient.invalidateQueries(["anime", animeId, memberId]);
+      },
+      onError: (error) => {
+        if (error instanceof AxiosError && error.response?.status) {
+          const status = error.response.status;
+          switch (status) {
+            case 401:
+              toast.open({
+                message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
+                icon: <CheckCircle weight="fill" />,
+                iconColor: "warn",
+                buttonText: "로그인",
+                onClickButton: () => navigate("/login"),
+                position: "top",
+              });
+              break;
+            default:
+              toast.open({
+                message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
+                icon: <WarningCircle weight="fill" />,
+                iconColor: "warn",
+                position: "top",
+              });
+              break;
+          }
+        }
+      },
+    });
+  };
   return (
     <>
       <Modal onClose={onClose} size="sm">
@@ -42,7 +96,7 @@ export default function BookmarkDelteModal({
             name="삭제"
             color="warn"
             isBlock
-            onClick={() => {}}
+            onClick={handleDeleteButtonClick}
           >
             삭제
           </Button>

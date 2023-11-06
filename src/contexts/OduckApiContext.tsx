@@ -24,8 +24,8 @@ export const OduckApiContext = createContext<API | null>(null);
 
 /** @desc: 서버 Api와 개발용 Api 선택 */
 const authApi = new AuthApi();
-// const profile = new ProfileApi();
-const profile = new ProfileDevApi();
+const profile = new ProfileApi();
+// const profile = new ProfileDevApi();
 const animeApi = new AnimeApi();
 const genreApi = new GenreApi();
 const bookmarkApi = new BookmarkApi();
