@@ -1,8 +1,10 @@
+import { CheckCircle } from "@phosphor-icons/react";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
+import useToast from "@/components/Toast/useToast";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 import useAuth from "@/features/auth/hooks/useAuth";
 import useDebounce from "@/hooks/useDebounce";
@@ -23,6 +25,7 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const bookmarkMutation = useToggleBookmark(animeId);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleToggleBookmark = useDebounce(async () => {
     if (!isLoggedIn) {
@@ -30,8 +33,27 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
       return;
     }
 
-    bookmarkMutation.mutate();
-    // TODO:  toast 알림 ('입덕 애니에 추가했어요' 입덕한 애니 보러가기 )
+    bookmarkMutation.mutate(undefined, {
+      onSuccess: () => {
+        if (bookmarkQuery.data) {
+          toast.open({
+            message: "탈덕했어요",
+            icon: <CheckCircle weight="fill" />,
+            iconColor: "green",
+            position: "top",
+          });
+        } else {
+          toast.open({
+            message: "입덕 애니에 추가했어요",
+            icon: <CheckCircle weight="fill" />,
+            iconColor: "green",
+            buttonText: "입덕한 애니 보러가기",
+            onClickButton: () => navigate("/profile?tab=bookmark"),
+            position: "top",
+          });
+        }
+      },
+    });
   }, TOGGLE_DEBOUNCE);
 
   // 북마크 요청 에러 핸들링
@@ -46,6 +68,8 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   }, [bookmarkMutation, navigate]);
 
   const { data: bookmarkedAt } = bookmarkQuery;
+  // console.log("bookmarkedAt");
+  // console.log(bookmarkedAt);
 
   return (
     <>

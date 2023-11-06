@@ -22,6 +22,7 @@ export default function useToggleBookmark(animeId: number) {
         exact: true,
       });
       queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
+      queryClient.invalidateQueries(["bookmark", memberId, animeId]);
     },
   });
 }
