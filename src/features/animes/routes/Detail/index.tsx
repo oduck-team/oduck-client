@@ -1,9 +1,10 @@
 // import { useNavigate } from "react-router-dom";
 
 // import Loader from "@/components/Loader";
-import SectionDivider from "@/components/SectionDivider";
-
 // import { useAnimation } from "../../hooks/useAnimation";
+
+import SectionDivider from "@/components/SectionDivider";
+import useGetAnimeReviews from "@/features/reviews/hook/useGetAnimeReviews";
 
 import { getAnimeMock } from "../../api/mock";
 
@@ -32,6 +33,13 @@ export default function AnimeDetail() {
   //   }
   // }
   const anime = getAnimeMock();
+  const {
+    reviews,
+    targetRef,
+    SORT_OPTION,
+    selectedsortOption,
+    handleChipClick,
+  } = useGetAnimeReviews(anime.id);
 
   if (anime)
     return (
@@ -48,7 +56,14 @@ export default function AnimeDetail() {
         <SectionDivider />
 
         {/* 리뷰 목록 */}
-        <Reviews />
+        <Reviews
+          reviews={reviews?.pages ?? []}
+          totalReviewCount={anime.reviewCount}
+          sortOptions={SORT_OPTION}
+          selectedOption={selectedsortOption}
+          handleChipClick={handleChipClick}
+        />
+        <div ref={targetRef}></div>
       </AnimeDetailContainer>
     );
 }
