@@ -5,7 +5,7 @@ import { useApi } from "@/hooks/useApi";
 
 import { AddReviewDto } from "../api/review";
 
-export default function useAddReview(onReview: () => void) {
+export default function useAddReview(animeId: number, onReview: () => void) {
   const queryClient = useQueryClient();
   const { reviewApi } = useApi();
   const {
@@ -20,7 +20,8 @@ export default function useAddReview(onReview: () => void) {
         exact: true,
       });
       queryClient.invalidateQueries(["profile", memberId, "review"]);
-      // TODO: 최신 리뷰 목록, 해당 애니의 리뷰 목록 query 무효화
+      queryClient.invalidateQueries(["review", animeId]);
+      // TODO: 최신 리뷰 목록 query 무효화
       onReview();
     },
   });

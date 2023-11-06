@@ -16,11 +16,12 @@ export default function useReviewForm(
 ) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
   const {
     user: { name },
   } = useAuth();
-  const reviewMutation = useAddReview(onReview);
+  const reviewMutation = useAddReview(animeId, onReview);
 
   const toast = useToast();
 
@@ -33,8 +34,6 @@ export default function useReviewForm(
     voiceActing: userReviewData?.voiceActing ?? false,
     sound: userReviewData?.sound ?? false,
   });
-
-  const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
   const [error, setError] = useState(false);
 
