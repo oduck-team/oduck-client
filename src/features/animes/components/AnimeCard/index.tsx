@@ -9,7 +9,7 @@ import {
   Title,
 } from "./style";
 
-interface AnimeCardProps {
+export interface AnimeCardProps {
   /** 애니 id */
   id: number;
 

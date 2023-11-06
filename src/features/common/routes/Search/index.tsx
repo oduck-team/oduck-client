@@ -101,7 +101,12 @@ export default function Search() {
           <ul style={{ display: "flex", gap: "32px 8px", flexWrap: "wrap" }}>
             {이런_애니_어떠세요.map((anime) => (
               <li key={anime.id}>
-                <AnimeCard anime={anime} />
+                <AnimeCard
+                  id={anime.id}
+                  thumbnail={anime.thumbnail}
+                  title={anime.title}
+                  starScoreAvg={10}
+                />
               </li>
             ))}
           </ul>
