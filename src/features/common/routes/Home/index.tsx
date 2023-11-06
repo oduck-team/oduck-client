@@ -130,16 +130,18 @@ export default function Home() {
     id: 1,
     title: "주술회전",
     thumbnail: "https://url.kr/lo4miy",
-  } as Anime;
+    starScoreAvg: 5.0,
+  };
 
   const cardAnime2 = {
     id: 2,
     title:
       "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
     thumbnail: "https://url.kr/azbxi1",
-  } as Anime;
+    starScoreAvg: 5.0,
+  };
 
-  const slideAnimes: Anime[] = [
+  const slideAnimes = [
     cardAnime,
     cardAnime2,
     cardAnime,
