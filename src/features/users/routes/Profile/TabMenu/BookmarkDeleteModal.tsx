@@ -35,10 +35,7 @@ export default function BookmarkDelteModal({
   const handleDeleteButtonClick = () => {
     deleteBookmark.mutate(undefined, {
       onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: ["profile", name],
-          exact: true,
-        });
+        queryClient.invalidateQueries(["profile", name]);
         queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
         queryClient.invalidateQueries(["bookmark", memberId, animeId]);
         queryClient.invalidateQueries(["anime", animeId, memberId]);
