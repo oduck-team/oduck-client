@@ -2,7 +2,13 @@ import { get } from "@/libs/api";
 
 /* 애니 조회 정렬 기준*/
 export type AnimeSort = "latest" | "reviewCount" | "score";
-export type Order = "ASC" | "DESC";
+export type Direction = "ASC" | "DESC";
+export type EpisodeCount =
+  | "UNDER_TWELVE"
+  | "UNDER_TWENTY_FOUR"
+  | "UNDER_FORTY_EIGHT"
+  | "UNDER_HUNDRED"
+  | "OVER_HUNDRED";
 
 export interface GetAnimesQuery {
   /* 검색어 */
@@ -15,7 +21,7 @@ export interface GetAnimesQuery {
   sort?: AnimeSort;
 
   /* 정렬 방향 */
-  order?: Order;
+  direction?: Direction;
 
   /* 다음 요청 cursor */
   cursor?: string;
@@ -26,7 +32,7 @@ export interface GetAnimesQuery {
 
   statuses?: AnimeStatus[];
 
-  episodeCounts?: number[];
+  episodeCounts?: EpisodeCount[];
 
   years?: number[];
 
@@ -41,6 +47,10 @@ export interface GetAnimesResponse {
 }
 
 export default class AnimeApi {
+  getById(id: number): Promise<Anime> {
+    return get(`/animes/${id}`);
+  }
+
   getList(query: GetAnimesQuery): Promise<CursorPage<GetAnimesResponse>> {
     const queryParams: Record<string, string> = {};
 

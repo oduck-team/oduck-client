@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-import { GetAnimesQuery } from "../api/AnimeApi";
+import { AnimeSort, EpisodeCount, GetAnimesQuery } from "../api/AnimeApi";
 
 import useAnimes from "./useAnimes";
 
@@ -18,7 +18,7 @@ export type BroadCastFilter = FilteredOption<BroadcastType> & {
   type: "broadcast";
 };
 export type StatusFilter = FilteredOption<AnimeStatus> & { type: "status" };
-export type EpisodeCountFilter = FilteredOption<12 | 24 | 48 | 100 | "100+"> & {
+export type EpisodeCountFilter = FilteredOption<EpisodeCount> & {
   type: "episodeCount";
 };
 
@@ -51,6 +51,15 @@ export default function useFilterAnimes() {
     sort: "latest",
   }); // 요청 필터
   const animesQuery = useAnimes(filterParams);
+
+  /** 상단 Tab 최신순, 리뷰순, 평점순 */
+  const changeSort = (sort: AnimeSort) => {
+    const queryParams = filterToQueryParams(selectedFilters);
+    setFilterParams({
+      ...queryParams,
+      sort: sort,
+    });
+  };
 
   const filterOptions = useMemo(
     () => ({
@@ -126,12 +135,7 @@ export default function useFilterAnimes() {
           break;
         case "episodeCount":
           if (!queryParams.episodeCounts) queryParams.episodeCounts = [];
-          if (filter.value === "100+") {
-            // TODO: 100화 이상인 경우 별도 처리 API 불명확함
-            // queryParams.episodeCounts.push(101);
-          } else {
-            queryParams.episodeCounts.push(filter.value);
-          }
+          queryParams.episodeCounts.push(filter.value);
           break;
       }
     });
@@ -143,6 +147,7 @@ export default function useFilterAnimes() {
     animesQuery,
     filterOptions,
     selectedFilters,
+    changeSort,
     addFilter,
     removeFilter,
     resetFilter,
@@ -239,21 +244,21 @@ const episodeCounts: EpisodeCountFilter[] = [
   {
     type: "episodeCount",
     label: "12화 이하",
-    value: 12,
+    value: "UNDER_TWELVE",
   },
   {
     type: "episodeCount",
     label: "24화 이하",
-    value: 24,
+    value: "UNDER_TWENTY_FOUR",
   },
   {
     type: "episodeCount",
     label: "100화 이하",
-    value: 100,
+    value: "UNDER_HUNDRED",
   },
   {
     type: "episodeCount",
     label: "100화 이상",
-    value: "100+",
+    value: "OVER_HUNDRED",
   },
 ];

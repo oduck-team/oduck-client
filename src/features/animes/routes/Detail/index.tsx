@@ -1,11 +1,13 @@
 // import { useNavigate } from "react-router-dom";
 
-// import Loader from "@/components/Loader";
+import { useParams } from "react-router-dom";
+
+import Loader from "@/components/Loader";
 import SectionDivider from "@/components/SectionDivider";
+import NotFound from "@/features/common/routes/Error/404";
+import { ApiError } from "@/libs/error";
 
-// import { useAnimation } from "../../hooks/useAnimation";
-
-import { getAnimeMock } from "../../api/mock";
+import useAnime from "../../hooks/useAnime";
 
 import Hero from "./Hero";
 import PlotAndInfo from "./PlotAndInfo";
@@ -14,24 +16,25 @@ import Reviews from "./Reviews";
 import { AnimeDetailContainer } from "./style";
 
 export default function AnimeDetail() {
-  // const { animation, isAnimationLoading, animationError } = useAnimation();
+  const { id: animeId } = useParams();
+
+  const {
+    data: anime,
+    isLoading: isAnimeLoading,
+    error: animeError,
+  } = useAnime(Number(animeId));
   // const navigate = useNavigate();
 
-  // if (isAnimationLoading) {
-  //   return <Loader />;
-  // }
+  if (isAnimeLoading) {
+    return <Loader />;
+  }
 
-  // if (animationError) {
-  //   // TODO: 상수 처리
-  //   switch (animationError.message) {
-  //     case "Not Found":
-  //       return <AnimationDetailContainer>404</AnimationDetailContainer>;
-  //     case "Internal Server Error":
-  //       navigate("/error", { replace: true });
-  //       return;
-  //   }
-  // }
-  const anime = getAnimeMock();
+  if (animeError && animeError instanceof ApiError) {
+    switch (animeError.status) {
+      case 404:
+        return <NotFound />;
+    }
+  }
 
   if (anime)
     return (
@@ -40,7 +43,7 @@ export default function AnimeDetail() {
         <SectionDivider />
 
         {/* 줄거리 및 정보 */}
-        <PlotAndInfo />
+        <PlotAndInfo summary={anime.summary} />
         <SectionDivider />
 
         {/* 평점 */}

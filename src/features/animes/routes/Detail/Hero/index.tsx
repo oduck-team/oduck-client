@@ -1,4 +1,3 @@
-import { CDN_URL } from "@/config";
 import BookmarkButton from "@/features/bookmarks/components/BookmarkButton";
 import ReviewRating from "@/features/reviews/components/ReviewRating";
 
@@ -37,7 +36,7 @@ export default function Hero({ anime }: HeroProps) {
   return (
     <Container>
       <Banner>
-        <Image url={`${CDN_URL}${anime.thumbnail}`}></Image>
+        <Image url={anime.thumbnail}></Image>
         <ImageGradient />
         <Info>
           <h1>{anime.title}</h1>
@@ -53,9 +52,9 @@ export default function Hero({ anime }: HeroProps) {
           variant="primary"
           items={[
             { title: "별점", data: `★ 4.8` },
-            { title: "한줄리뷰", data: 111 },
-            { title: "덕후", data: 1111 },
-            { title: "방영년도", data: "2023" },
+            { title: "한줄리뷰", data: `${anime.reviewCount}` },
+            { title: "덕후", data: `${anime.bookmarkCount}` },
+            { title: "방영년도", data: `${anime.year}` },
           ]}
           style={{ margin: "0 auto" }}
         />

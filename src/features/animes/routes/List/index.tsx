@@ -10,6 +10,7 @@ import { TabItem } from "@/components/Tabs";
 import AnimeCard from "@/features/animes/components/AnimeCard";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
+import { AnimeSort } from "../../api/AnimeApi";
 import useFilterAnimes from "../../hooks/useFilterAnimes";
 
 import Filter from "./Filter";
@@ -22,15 +23,15 @@ import {
 
 const TabItems: TabItem[] = [
   {
-    id: "latest",
+    id: "createdAt",
     title: "최신순",
   },
   {
-    id: "reviewCounts",
+    id: "reviewCount",
     title: "리뷰순",
   },
   {
-    id: "ratings",
+    id: "score",
     title: "평점순",
   },
 ];
@@ -43,6 +44,7 @@ export default function AnimeList() {
     bottomSheetClose,
     filterOptions,
     selectedFilters,
+    changeSort,
     addFilter,
     removeFilter,
     resetFilter,
@@ -76,7 +78,11 @@ export default function AnimeList() {
             ></Button>
           </Header.Right>
         </Header>
-        <Tabs items={TabItems} defaultActiveId={"latest"} />
+        <Tabs
+          items={TabItems}
+          defaultActiveId={"createdAt"}
+          onChange={(value) => changeSort(value as AnimeSort)}
+        />
         <Content>
           {(animesQuery.isLoading || animesQuery.isFetching) &&
             Array.from({ length: 7 }, () => (
