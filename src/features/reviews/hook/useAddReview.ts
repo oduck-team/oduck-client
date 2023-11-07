@@ -17,7 +17,8 @@ export default function useAddReview(animeId: number, onReview: () => void) {
     onSuccess: () => {
       queryClient.invalidateQueries(["profile", name]);
       queryClient.invalidateQueries(["profile", memberId, "review"]);
-      queryClient.invalidateQueries(["review", animeId]);
+      queryClient.invalidateQueries(["review", animeId, memberId]);
+      queryClient.invalidateQueries(["anime", animeId, memberId]);
       // TODO: 최신 리뷰 목록 query 무효화
       onReview();
     },
