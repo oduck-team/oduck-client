@@ -19,14 +19,19 @@ export default function AnimeDetail() {
   if (isAnimeLoading) {
     return <Loader />;
   }
+
   if (anime)
     return (
       <AnimeDetailContainer>
-        <Hero anime={anime} />
+        {/* TODO: 평점 */}
+        <Hero {...anime} starScoreAvg={10} />
         <SectionDivider />
 
         {/* 줄거리 및 정보 */}
-        <PlotAndInfo summary={anime.summary} />
+        <PlotAndInfo
+          {...anime}
+          voiceActors={anime.voiceActors.map((actor) => actor.name)}
+        />
         <SectionDivider />
 
         {/* 평점 */}

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { v4 as uuid } from "uuid";
 
 import Button from "@/components/Button";
+import Empty from "@/components/Error/Empty";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
 import Skeleton from "@/components/Skeleton";
@@ -23,15 +24,15 @@ import {
 
 const TabItems: TabItem[] = [
   {
-    id: "createdAt",
+    id: "LATEST",
     title: "최신순",
   },
   {
-    id: "reviewCount",
+    id: "REVIEW_COUNT",
     title: "리뷰순",
   },
   {
-    id: "score",
+    id: "SCORE",
     title: "평점순",
   },
 ];
@@ -95,7 +96,9 @@ export default function AnimeList() {
 
           {!animesQuery.isLoading &&
             !animesQuery.isFetching &&
-            animesQuery.data?.pages.length === 0 && <div>애니가 없어요.</div>}
+            animesQuery.data?.pages.length === 0 && (
+              <Empty message="애니가 없어요" />
+            )}
 
           {!animesQuery.isLoading && !animesQuery.isFetching && (
             <>
