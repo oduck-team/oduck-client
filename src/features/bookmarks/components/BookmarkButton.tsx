@@ -1,4 +1,4 @@
-import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
+import { CheckCircle } from "@phosphor-icons/react";
 import { AxiosError } from "axios";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -9,6 +9,7 @@ import useToast from "@/components/Toast/useToast";
 import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
 import useAuth from "@/features/auth/hooks/useAuth";
 import useDebounce from "@/hooks/useDebounce";
+import { useCommonToastError } from "@/libs/error";
 
 import useBookmark from "../hooks/useBookmark";
 import useToggleBookmark from "../hooks/useToggleBookmark";
@@ -26,6 +27,7 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
+  const { error401, defaultError } = useCommonToastError();
 
   const handleToggleBookmark = useDebounce(async () => {
     if (!isLoggedIn) {
@@ -58,22 +60,10 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
           const status = error.response.status;
           switch (status) {
             case 401:
-              toast.open({
-                message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
-                icon: <CheckCircle weight="fill" />,
-                iconColor: "warn",
-                buttonText: "로그인",
-                onClickButton: () => navigate("/login"),
-                position: "top",
-              });
+              error401();
               break;
             default:
-              toast.open({
-                message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
-                icon: <WarningCircle weight="fill" />,
-                iconColor: "warn",
-                position: "top",
-              });
+              defaultError();
               break;
           }
         }
