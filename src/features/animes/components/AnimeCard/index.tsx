@@ -9,23 +9,39 @@ import {
   Title,
 } from "./style";
 
-interface AnimeCardProps {
-  anime: Anime;
+export interface AnimeCardProps {
+  /** 애니 id */
+  id: number;
+
+  /** 썸네일 url */
+  thumbnail: string;
+
+  /** 애니 제목 */
+  title: string;
+
+  /** 애니 평점 */
+  starScoreAvg: number;
+
+  /** UI 사이즈 */
   size?: "md" | "lg";
 }
 
-export default function AnimeCard({ anime, size }: AnimeCardProps) {
+export default function AnimeCard({
+  id,
+  thumbnail,
+  title,
+  starScoreAvg,
+  size,
+}: AnimeCardProps) {
   return (
     <AnimeCardContainer size={size}>
-      <Link to={`/animes/${anime.id}`}>
-        <Image image={anime.thumbnail} size={size} />
+      <Link to={`/animes/${id}`}>
+        <Image image={thumbnail} size={size} />
         <InfoContainer size={size}>
-          <Title>{anime.title}</Title>
+          <Title>{title}</Title>
           <Rating>
             <Star weight="fill" />
-            {/* TODO: 응답타입 불명확함 */}
-            {/* <span> {anime.rating}</span> */}
-            <span> 5.0 </span>
+            <span> {starScoreAvg === 0 ? "평가 전" : starScoreAvg} </span>
           </Rating>
         </InfoContainer>
       </Link>

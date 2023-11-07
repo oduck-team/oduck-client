@@ -7,6 +7,7 @@ export const HeaderContainer = styled.header`
   max-width: ${({ theme }) => theme.maxWidth};
   margin: 0 auto;
   background-color: #fff;
+  z-index: ${({ theme }) => theme.zIndex.default};
 
   & h1 {
     ${({ theme }) => theme.typo["title-3-m"]}

@@ -15,6 +15,7 @@ export const Tabs = styled(BaseTabs)`
   max-width: 600px;
   position: sticky;
   top: 60px;
+  z-index: ${({ theme }) => theme.zIndex.default};
 `;
 
 export const Content = styled.div`
@@ -23,4 +24,10 @@ export const Content = styled.div`
   flex-direction: column;
   gap: 32px;
   padding: 24px 16px;
+`;
+
+export const AnimeSkeletonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
