@@ -55,7 +55,7 @@ export default function Hero({
   genres,
   episodeCount,
   status,
-  starScoreAvg,
+  // starScoreAvg,
   reviewCount,
   bookmarkCount,
   year,
