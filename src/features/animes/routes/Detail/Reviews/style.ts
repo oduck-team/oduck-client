@@ -3,7 +3,11 @@ import styled from "@emotion/styled";
 import { SectionContainer } from "../Section.style";
 
 export const Section = styled(SectionContainer)`
-  padding-bottom: 200px;
+  & > ul:first-of-type {
+    display: flex;
+    gap: 4px;
+    padding-bottom: 16px;
+  }
 `;
 
 export const TotalReviews = styled.p`

@@ -5,8 +5,8 @@ import { CreatorContainer, Username } from "./UserRating.style";
 
 interface UserRatingProps {
   user: {
-    nickname: string;
-    image: string;
+    name: string;
+    thumbnail: string;
   };
   rating: number;
 }
@@ -16,8 +16,8 @@ export default function UserRating({ user, rating }: UserRatingProps) {
     <CreatorContainer>
       <Rating color="secondary" value={rating} size="sm" readonly />
       <div>
-        <Username>{user.nickname}</Username>
-        <Avatar src={user.image} userName={user.nickname} size="xs" />
+        <Username>{user.name}</Username>
+        <Avatar src={user.thumbnail} userName={user.name} size="xs" />
       </div>
     </CreatorContainer>
   );

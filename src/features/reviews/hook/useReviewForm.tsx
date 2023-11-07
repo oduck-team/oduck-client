@@ -16,11 +16,12 @@ export default function useReviewForm(
 ) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
   const {
     user: { name },
   } = useAuth();
-  const reviewMutation = useAddReview(onReview);
+  const reviewMutation = useAddReview(animeId, onReview);
 
   const toast = useToast();
 
@@ -33,8 +34,6 @@ export default function useReviewForm(
     voiceActing: userReviewData?.voiceActing ?? false,
     sound: userReviewData?.sound ?? false,
   });
-
-  const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
   const [error, setError] = useState(false);
 
@@ -66,7 +65,7 @@ export default function useReviewForm(
     console.log({
       name,
       animeId,
-      hasSpiler: form.isSpoiler,
+      isSpoiler: form.isSpoiler,
       content: form.content,
     });
     // TODO: 새 리뷰 작성인지 수정인지 검사
@@ -75,7 +74,7 @@ export default function useReviewForm(
       {
         name,
         animeId,
-        hasSpoiler: form.isSpoiler,
+        isSpoiler: form.isSpoiler,
         content: form.content,
       },
       {
