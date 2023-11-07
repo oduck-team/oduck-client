@@ -7,20 +7,6 @@ import reveiwMock1 from "./mock/review1.json";
 import reveiwMock2 from "./mock/review2.json";
 import reveiwMock3 from "./mock/review3.json";
 
-export interface BookmarkPage {
-  items: Bookmark[];
-  hasNext: boolean;
-  cursor: string;
-  size: number;
-}
-
-export interface ReviewPage {
-  items: Review[];
-  hasNext: boolean;
-  cursor: string;
-  size: number;
-}
-
 export default class ProfileApi {
   async getProfile(name: string): Promise<Profile> {
     return await get(`/members/${name}`);
@@ -30,7 +16,7 @@ export default class ProfileApi {
     memberId: number,
     pageParam: string | undefined,
     selected: SelectedSort,
-  ): Promise<BookmarkPage> {
+  ): Promise<CursorPage<Bookmark>> {
     const params = this.setParams(pageParam, selected);
 
     return await get(`/members/${memberId}/bookmarks`, {
@@ -42,7 +28,7 @@ export default class ProfileApi {
     memberId: number,
     pageParam: string | undefined,
     selected: SelectedSort,
-  ): Promise<ReviewPage> {
+  ): Promise<CursorPage<Review>> {
     const params = this.setParams(pageParam, selected);
     // FIXME: /members/${memberId} 변경, log 제거
     console.log(memberId);
