@@ -39,24 +39,15 @@ export interface GetAnimesQuery {
   quarters?: AnimeQuarter[];
 }
 
-export interface DetailAnimeResponse {
-  id: number;
-  title: string;
-  thumbnail: string;
-  broadcastType: BroadcastType;
-  year: number;
-  quarter: AnimeQuarter;
-  summary: string;
-  episodeCount: number;
-  rating: AnimeRating;
-  status: AnimeStatus;
+export type DetailAnimeResponse = Omit<
+  Anime,
+  "series" | "isReleased" | "viewCount"
+> & {
   originalAuthors: string[];
   voiceActors: { name: string; part: string }[];
   genres: string[];
   studios: string[];
-  reviewCount: number;
-  bookmarkCount: number;
-}
+};
 
 type ListAnimeResponse = CursorPage<{
   id: number;
