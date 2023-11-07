@@ -15,7 +15,7 @@ const REVIEW_MOCK_DATA = {
     "너무너무 재밌게 안 봤습니다. 애니제목을 왜 이딴식으로 짓는지 이해가 안가네요하하하하하하하하하하하하하하하하하하하하핳아항항핳하아항하하하하아항하아항하아항항",
   createdAt: "2023-10-23T22:15:31.859",
   isSpoiler: true,
-  isLike: false,
+  isLiked: false,
   likeCount: 3,
 };
 
@@ -43,7 +43,7 @@ export default function RecentReview() {
             include="time"
             createdAt={REVIEW_MOCK_DATA.createdAt}
             isMine={false} // TODO: isMine 판별
-            isLike={REVIEW_MOCK_DATA.isLike}
+            isLiked={REVIEW_MOCK_DATA.isLiked}
             likeCount={REVIEW_MOCK_DATA.likeCount}
             isTimeAgo={true}
           />

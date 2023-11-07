@@ -51,11 +51,11 @@ export default function Reviews({
               <ReviewCard.Comment
                 text={review.content}
                 textSize="sm"
-                isSpoiler={review.hasSpoiler}
+                isSpoiler={review.isSpoiler}
               />
               <ReviewCard.ActionBar
                 isMine={review.isMine}
-                isLike={review.hasLike}
+                isLiked={review.isLiked}
                 likeCount={review.likeCount}
                 include="time"
                 createdAt={review.createdAt}

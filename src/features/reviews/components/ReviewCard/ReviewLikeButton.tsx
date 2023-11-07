@@ -3,20 +3,20 @@ import { Heart } from "@phosphor-icons/react";
 import { ReviewLikeButtonContainer } from "./ReviewLikeButton.style";
 
 export interface ReviewLikeButtonProps {
-  isLike: boolean;
+  isLiked: boolean;
   count: number | string;
   onClick: () => void;
 }
 
 export default function ReviewLikeButton({
-  isLike,
+  isLiked,
   count = 0,
   onClick,
 }: ReviewLikeButtonProps) {
   return (
     <ReviewLikeButtonContainer
       onClick={onClick}
-      isLike={isLike}
+      isLiked={isLiked}
       aria-label="좋아요"
     >
       <Heart width={16} height={16} />

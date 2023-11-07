@@ -9,8 +9,8 @@ export interface ReviewInfo {
   thumbnail: string;
   score: number;
   content: string;
-  hasSpoiler: boolean;
-  hasLike: boolean;
+  isSpoiler: boolean;
+  isLiked: boolean;
   likeCount: number;
   isMine: boolean;
   createdAt: string;
@@ -19,7 +19,7 @@ export interface ReviewInfo {
 export interface AddReviewDto {
   name: string;
   animeId: number;
-  hasSpoiler: boolean;
+  isSpoiler: boolean;
   content: string;
 }
 

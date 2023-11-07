@@ -8,7 +8,7 @@ export type Include = "time" | "common";
 
 export interface ActionBarProps {
   isMine: boolean;
-  isLike: boolean;
+  isLiked: boolean;
   likeCount: number;
   include?: Include;
   createdAt?: string;
@@ -16,7 +16,7 @@ export interface ActionBarProps {
 }
 export default function ActionBar({
   isMine,
-  isLike,
+  isLiked,
   likeCount,
   include = "common",
   createdAt,
@@ -29,7 +29,7 @@ export default function ActionBar({
       {include === "time" && date && <time>{date}</time>}
       <ButtonContainer include={include} onClick={(e) => e.stopPropagation()}>
         <ReviewLikeButton
-          isLike={isLike}
+          isLiked={isLiked}
           count={compactNumber(likeCount, "ko-KR")}
           onClick={() => {}}
         />

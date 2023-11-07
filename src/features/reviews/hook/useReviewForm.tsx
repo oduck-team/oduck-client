@@ -65,7 +65,7 @@ export default function useReviewForm(
     console.log({
       name,
       animeId,
-      hasSpiler: form.isSpoiler,
+      isSpoiler: form.isSpoiler,
       content: form.content,
     });
     // TODO: 새 리뷰 작성인지 수정인지 검사
@@ -74,7 +74,7 @@ export default function useReviewForm(
       {
         name,
         animeId,
-        hasSpoiler: form.isSpoiler,
+        isSpoiler: form.isSpoiler,
         content: form.content,
       },
       {
