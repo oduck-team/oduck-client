@@ -67,7 +67,7 @@ export default function useGetAnimeReviews(animeId: number) {
 
   useIntersectionObserver({
     target: targetRef,
-    onIntersect: fetchNextPage,
+    onIntersect: () => fetchNextPage(),
     enabled: hasNextPage,
   });
 
