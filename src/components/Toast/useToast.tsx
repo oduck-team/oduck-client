@@ -6,11 +6,7 @@ import { ToastContext } from "@/contexts/ToastContext";
 
 import { ToastProps } from ".";
 
-type BaseOpenToast = Omit<ToastProps, "id" | "onClose">;
-type OpenSuccessOrErrorToast = Omit<
-  BaseOpenToast,
-  "icon" | "iconColor" | "position"
->;
+type OpenToast = Omit<ToastProps, "id" | "onClose">;
 
 export default function useToast() {
   const context = useContext(ToastContext);
@@ -28,31 +24,31 @@ export default function useToast() {
    * @optional duration: 유지 시간 (default = 2)
    *
    */
-  const open = (toast: BaseOpenToast) => {
+  const open = (toast: OpenToast) => {
     context.addToast(toast, uuidv4());
   };
 
   /**
    * @description success toast
    */
-  const success = (toast: OpenSuccessOrErrorToast) => {
+  const success = (toast: OpenToast) => {
     open({
-      ...toast,
       icon: <CheckCircle weight="fill" />,
       iconColor: "green",
       position: "top",
+      ...toast,
     });
   };
 
   /**
    * @description error toast
    */
-  const error = (toast: OpenSuccessOrErrorToast) => {
+  const error = (toast: OpenToast) => {
     open({
-      ...toast,
       icon: <WarningCircle weight="fill" />,
       iconColor: "warn",
       position: "top",
+      ...toast,
     });
   };
 
