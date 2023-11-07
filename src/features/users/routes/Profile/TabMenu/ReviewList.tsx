@@ -28,7 +28,7 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
         >
           <ReviewCard.Anime anime={review.anime} />
           <ReviewCard.Comment
-            text={review.comment}
+            text={review.content}
             isSpoiler={review.isSpoiler}
           />
           <ReviewCard.ActionBar

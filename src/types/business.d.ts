@@ -42,7 +42,7 @@ declare interface Bookmark {
 
 declare interface Review {
   name: string;
-  comment: string;
+  content: string;
   isSpoiler: boolean;
   isLiked: boolean;
   likeCount: number;
