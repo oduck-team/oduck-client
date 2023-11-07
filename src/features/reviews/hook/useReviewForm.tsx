@@ -25,7 +25,7 @@ export default function useReviewForm(
   const reviewMutation = useAddReview(animeId, onReview);
 
   const toast = useToast();
-  const { error401, defaultError } = useCommonToastError();
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const [form, setForm] = useState({
     content: userReviewData?.content ?? "",
@@ -94,9 +94,9 @@ export default function useReviewForm(
           if (error instanceof AxiosError && error.response?.status) {
             const status = error.response.status;
             if ([401, 403].includes(status)) {
-              error401();
+              toastAuthError();
             } else if (status >= 500) {
-              defaultError();
+              toastDefaultError();
             }
           }
         },

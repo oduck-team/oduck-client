@@ -29,7 +29,7 @@ export default function BookmarkDeleteModal({
   } = useAuth();
   const deleteBookmark = useMutation(() => bookmarkApi.toggleBookmark(animeId));
   const queryClient = useQueryClient();
-  const { error401, defaultError } = useCommonToastError();
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const handleDeleteButtonClick = () => {
     deleteBookmark.mutate(undefined, {
@@ -44,10 +44,10 @@ export default function BookmarkDeleteModal({
           const status = error.response.status;
           switch (status) {
             case 401:
-              error401();
+              toastAuthError();
               break;
             default:
-              defaultError();
+              toastDefaultError();
               break;
           }
         }

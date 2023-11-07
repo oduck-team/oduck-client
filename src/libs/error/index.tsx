@@ -43,7 +43,7 @@ export function useCommonToastError() {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const error401 = () =>
+  const toastAuthError = () =>
     toast.open({
       message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
       icon: <CheckCircle weight="fill" />,
@@ -53,7 +53,7 @@ export function useCommonToastError() {
       position: "top",
     });
 
-  const defaultError = () => {
+  const toastDefaultError = () => {
     toast.open({
       message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
       icon: <WarningCircle weight="fill" />,
@@ -62,5 +62,5 @@ export function useCommonToastError() {
     });
   };
 
-  return { error401, defaultError };
+  return { toastAuthError, toastDefaultError };
 }

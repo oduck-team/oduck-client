@@ -27,7 +27,7 @@ export default function useEditForm(name: string, description: string) {
   const updateProfile = useMutation(() => profile.updateProfile(form));
   const queryClient = useQueryClient();
   const toast = useToast();
-  const { error401, defaultError } = useCommonToastError();
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -57,7 +57,7 @@ export default function useEditForm(name: string, description: string) {
           const status = error.response.status;
           switch (status) {
             case 401: // 인증 오류
-              error401();
+              toastAuthError();
               break;
             case 400: // 기존 닉네임과 동일
             case 409: // 정규식 검사 오류
@@ -69,7 +69,7 @@ export default function useEditForm(name: string, description: string) {
               });
               break;
             default:
-              defaultError();
+              toastDefaultError();
               break;
           }
         }

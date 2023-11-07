@@ -27,7 +27,7 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
-  const { error401, defaultError } = useCommonToastError();
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const handleToggleBookmark = useDebounce(async () => {
     if (!isLoggedIn) {
@@ -60,10 +60,10 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
           const status = error.response.status;
           switch (status) {
             case 401:
-              error401();
+              toastAuthError();
               break;
             default:
-              defaultError();
+              toastDefaultError();
               break;
           }
         }
