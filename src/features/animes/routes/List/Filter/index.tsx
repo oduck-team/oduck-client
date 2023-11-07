@@ -2,53 +2,77 @@ import { X } from "@phosphor-icons/react";
 
 import BottomSheet from "@/components/BottomSheet";
 import Chip from "@/components/Chip";
+import {
+  GenreFilter,
+  BroadCastFilter,
+  EpisodeCountFilter,
+  SeasonFilter,
+  StatusFilter,
+  AllFilterTypes,
+} from "@/features/animes/hooks/useFilterAnimes";
 
 import { Chips, ChipsContainer, Actions, OkButton, ResetButton } from "./style";
 
-// 임시
 interface FilterOptions {
-  genres: string[];
-  seasons: string[];
-  broadcastTypes: string[];
-  statuses: string[];
-  episodeNumber: string[];
+  genres: GenreFilter[];
+  seasons: SeasonFilter[];
+  broadcastTypes: BroadCastFilter[];
+  statuses: StatusFilter[];
+  episodeCounts: EpisodeCountFilter[];
 }
 
 interface FilterProps {
-  filterOptions: FilterOptions;
+  /** Filter 렌더링 여부 */
   isVisible: boolean;
+
+  /** 렌더링할 필터 옵션 목록 */
+  filterOptions: FilterOptions;
+
+  /** 선택한 필터 목록 */
+  selectedFilters: AllFilterTypes[];
+
+  /** Filter 컴포넌트 닫기 */
   onClose: () => void;
-  filtered: string[];
+
+  /** 선택한 필터 초기화 */
   resetFilter: () => void;
-  handleOptionClick: (item: string) => void;
+
+  /** 필터 옵션 추가 핸들러 */
+  handleFilterAdd: (option: AllFilterTypes) => void;
+
+  /** 필터 옵션 제거 핸들러 */
+  handleFilterRemove: (option: AllFilterTypes) => void;
+
+  /** 필터 옵션 적용 클릭 핸들러 */
   handleOkClick: () => void;
 }
 
 export default function Filter({
   isVisible,
-  onClose,
   filterOptions,
-  filtered,
+  selectedFilters,
+  onClose,
   resetFilter,
-  handleOptionClick,
+  handleFilterAdd,
+  handleFilterRemove,
   handleOkClick,
 }: FilterProps) {
   return (
     <BottomSheet isVisible={isVisible} onClose={onClose}>
       <BottomSheet.Content>
-        {filtered.length > 0 && (
+        {selectedFilters.length > 0 && (
           <ChipsContainer style={{ marginBottom: "24px" }}>
             <h3 style={{ marginTop: "0" }}>선택된 필터</h3>
             <Chips>
-              {filtered.map((item, i) => (
+              {selectedFilters.map((item, i) => (
                 <Chip
-                  key={i}
-                  active={filtered.includes(item)}
+                  key={`${item.label}-${i}`}
+                  active={true}
                   variant="filter"
-                  onClick={() => handleOptionClick(item)}
                   icon={<X weight="bold" />}
+                  onClick={() => handleFilterRemove(item)}
                 >
-                  {item}
+                  {item.label}
                 </Chip>
               ))}
             </Chips>
@@ -60,11 +84,13 @@ export default function Filter({
             {filterOptions.genres.map((genre, i) => (
               <Chip
                 key={i}
-                active={filtered.includes(genre)}
+                active={selectedFilters.some(
+                  (item) => item.label === genre.label,
+                )}
                 variant="filter"
-                onClick={() => handleOptionClick(genre)}
+                onClick={() => handleFilterAdd(genre)}
               >
-                {genre}
+                {genre.label}
               </Chip>
             ))}
           </Chips>
@@ -75,11 +101,13 @@ export default function Filter({
             {filterOptions.seasons.map((season, i) => (
               <Chip
                 key={i}
-                active={filtered.includes(season)}
+                active={selectedFilters.some(
+                  (item) => item.label === season.label,
+                )}
                 variant="filter"
-                onClick={() => handleOptionClick(season)}
+                onClick={() => handleFilterAdd(season)}
               >
-                {season}
+                {season.label}
               </Chip>
             ))}
           </Chips>
@@ -90,11 +118,13 @@ export default function Filter({
             {filterOptions.broadcastTypes.map((type, i) => (
               <Chip
                 key={i}
-                active={filtered.includes(type)}
+                active={selectedFilters.some(
+                  (item) => item.label === type.label,
+                )}
                 variant="filter"
-                onClick={() => handleOptionClick(type)}
+                onClick={() => handleFilterAdd(type)}
               >
-                {type}
+                {type.label}
               </Chip>
             ))}
           </Chips>
@@ -105,11 +135,13 @@ export default function Filter({
             {filterOptions.statuses.map((status, i) => (
               <Chip
                 key={i}
-                active={filtered.includes(status)}
+                active={selectedFilters.some(
+                  (item) => item.label === status.label,
+                )}
                 variant="filter"
-                onClick={() => handleOptionClick(status)}
+                onClick={() => handleFilterAdd(status)}
               >
-                {status}
+                {status.label}
               </Chip>
             ))}
           </Chips>
@@ -117,14 +149,16 @@ export default function Filter({
         <ChipsContainer>
           <h3>화수</h3>
           <Chips>
-            {filterOptions.episodeNumber.map((num, i) => (
+            {filterOptions.episodeCounts.map((num, i) => (
               <Chip
                 key={i}
-                active={filtered.includes(num)}
+                active={selectedFilters.some(
+                  (item) => item.label === num.label,
+                )}
                 variant="filter"
-                onClick={() => handleOptionClick(num)}
+                onClick={() => handleFilterAdd(num)}
               >
-                {num}
+                {num.label}
               </Chip>
             ))}
           </Chips>
