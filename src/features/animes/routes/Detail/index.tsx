@@ -39,7 +39,7 @@ export default function AnimeDetail() {
     isLoading,
     targetRef,
     SORT_OPTION,
-    selectedsortOption,
+    selectedSortOption,
     handleChipClick,
   } = useGetAnimeReviews(anime.id);
 
@@ -62,7 +62,7 @@ export default function AnimeDetail() {
           reviews={reviews?.pages ?? []}
           totalReviewCount={anime.reviewCount}
           sortOptions={SORT_OPTION}
-          selectedOption={selectedsortOption}
+          selectedOption={selectedSortOption}
           handleChipClick={handleChipClick}
         />
         <div ref={targetRef}></div>

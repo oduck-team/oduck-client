@@ -40,7 +40,7 @@ export default function useGetAnimeReviews(animeId: number) {
     },
   ];
 
-  const [selectedsortOption, setSelectedSortOption] =
+  const [selectedSortOption, setSelectedSortOption] =
     useState<ReviewSortOption>(SORT_OPTION[0]);
 
   const handleChipClick = (i: number) => {
@@ -53,9 +53,9 @@ export default function useGetAnimeReviews(animeId: number) {
     hasNextPage,
     isLoading,
   } = useInfiniteQuery(
-    ["review", animeId, selectedsortOption.sort, selectedsortOption.order],
+    ["review", animeId, selectedSortOption.sort, selectedSortOption.order],
     ({ pageParam }) =>
-      reviewApi.getAnimeReviews(animeId, pageParam, selectedsortOption),
+      reviewApi.getAnimeReviews(animeId, pageParam, selectedSortOption),
     {
       getNextPageParam: (lastPage) => lastPage.cursor || undefined,
       select: (data) => ({
@@ -76,7 +76,7 @@ export default function useGetAnimeReviews(animeId: number) {
     isLoading,
     targetRef,
     SORT_OPTION,
-    selectedsortOption,
+    selectedSortOption,
     handleChipClick,
   };
 }
