@@ -1,4 +1,3 @@
-import { CheckCircle } from "@phosphor-icons/react";
 import { AxiosError } from "axios";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -38,20 +37,12 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
     bookmarkMutation.mutate(undefined, {
       onSuccess: () => {
         if (bookmarkQuery.data) {
-          toast.open({
-            message: "탈덕했어요",
-            icon: <CheckCircle weight="fill" />,
-            iconColor: "green",
-            position: "top",
-          });
+          toast.success({ message: "탈덕했어요" });
         } else {
-          toast.open({
+          toast.success({
             message: "입덕 애니에 추가했어요",
-            icon: <CheckCircle weight="fill" />,
-            iconColor: "green",
             buttonText: "입덕한 애니 보러가기",
             onClickButton: () => navigate("/profile?tab=bookmark"),
-            position: "top",
           });
         }
       },

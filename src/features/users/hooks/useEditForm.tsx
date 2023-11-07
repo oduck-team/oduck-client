@@ -1,4 +1,3 @@
-import { WarningCircle } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -61,12 +60,7 @@ export default function useEditForm(name: string, description: string) {
               break;
             case 400: // 기존 닉네임과 동일
             case 409: // 정규식 검사 오류
-              toast.open({
-                message: "사용할 수 없는 닉네임입니다.",
-                icon: <WarningCircle weight="fill" />,
-                iconColor: "warn",
-                position: "top",
-              });
+              toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
             default:
               toastDefaultError();

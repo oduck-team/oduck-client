@@ -1,4 +1,3 @@
-import { CheckCircle } from "@phosphor-icons/react";
 import { AxiosError } from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -81,13 +80,10 @@ export default function useReviewForm(
       },
       {
         onSuccess: () => {
-          toast.open({
+          toast.success({
             message: "리뷰가 등록되었어요.",
-            icon: <CheckCircle weight="fill" />,
-            iconColor: "green",
             buttonText: "내 모든 리뷰 보러 가기",
             onClickButton: () => navigate("/profile"),
-            position: "top",
           });
         },
         onError: (error) => {

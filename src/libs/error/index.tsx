@@ -1,4 +1,3 @@
-import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
@@ -44,21 +43,15 @@ export function useCommonToastError() {
   const navigate = useNavigate();
 
   const toastAuthError = () =>
-    toast.open({
+    toast.error({
       message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
-      icon: <CheckCircle weight="fill" />,
-      iconColor: "warn",
       buttonText: "로그인",
       onClickButton: () => navigate("/login"),
-      position: "top",
     });
 
   const toastDefaultError = () => {
-    toast.open({
+    toast.error({
       message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
-      icon: <WarningCircle weight="fill" />,
-      iconColor: "warn",
-      position: "top",
     });
   };
 
