@@ -17,7 +17,7 @@ import {
   TrashIcon,
   TrashIconContainer,
 } from "./BookmarkCard.style";
-import BookmarkDelteModal from "./BookmarkDeleteModal";
+import BookmarkDeleteModal from "./BookmarkDeleteModal";
 
 interface BookmarkCardProps {
   bookmark: Bookmark;
@@ -70,7 +70,7 @@ export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
       {isMine && (
         <AnimatePresence>
           {isDeleteModalOpen && (
-            <BookmarkDelteModal
+            <BookmarkDeleteModal
               animeId={bookmark.animeId}
               onClose={toggleDeleteModal}
             />

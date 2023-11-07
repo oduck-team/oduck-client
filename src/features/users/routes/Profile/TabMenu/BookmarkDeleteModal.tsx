@@ -15,15 +15,15 @@ import {
   Title,
 } from "./BookmarkDeleteModal.style";
 
-interface BookmarkDelteModalProps {
+interface BookmarkDeleteModalProps {
   animeId: number;
   onClose: () => void;
 }
 
-export default function BookmarkDelteModal({
+export default function BookmarkDeleteModal({
   animeId,
   onClose,
-}: BookmarkDelteModalProps) {
+}: BookmarkDeleteModalProps) {
   const { bookmarkApi } = useApi();
   const {
     user: { memberId, name },
