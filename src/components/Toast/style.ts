@@ -49,7 +49,7 @@ export const ToastContainer = styled.div<ToastStyleProps>`
     0px 6px 12px -6px rgba(24, 39, 75, 0.12);
   background-color: white;
   border-radius: 8px;
-  padding: 24px 16px;
+  padding: 16px;
   z-index: ${({ theme }) => theme.zIndex.toast};
 
   display: flex;
@@ -85,7 +85,7 @@ export const Content = styled.div`
 export const Left = styled.div<Pick<ToastProps, "iconColor">>`
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
 
   svg {
