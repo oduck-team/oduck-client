@@ -1,9 +1,12 @@
+import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { ToastContext } from "@/contexts/ToastContext";
 
 import { ToastProps } from ".";
+
+type OpenToast = Omit<ToastProps, "id" | "onClose">;
 
 export default function useToast() {
   const context = useContext(ToastContext);
@@ -21,13 +24,43 @@ export default function useToast() {
    * @optional duration: 유지 시간 (default = 2)
    *
    */
-  const open = (toast: Omit<ToastProps, "id" | "onClose">) => {
+  const open = (toast: OpenToast) => {
     context.addToast(toast, uuidv4());
+  };
+
+  /**
+   * @description success toast
+   */
+  const success = (toast: OpenToast) => {
+    open({
+      icon: <CheckCircle weight="fill" />,
+      iconColor: "green",
+      position: "top",
+      ...toast,
+    });
+  };
+
+  /**
+   * @description error toast
+   */
+  const error = (toast: OpenToast) => {
+    open({
+      icon: <WarningCircle weight="fill" />,
+      iconColor: "warn",
+      position: "top",
+      ...toast,
+    });
   };
 
   const close = (id: string) => {
     context.removeToast(id);
   };
 
-  return { open, close, list: context.toasts };
+  return {
+    open,
+    success,
+    error,
+    close,
+    list: context.toasts,
+  };
 }
