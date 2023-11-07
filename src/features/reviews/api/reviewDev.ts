@@ -6,7 +6,7 @@ import reviewsMock from "./mock/anime_review_list1.json";
 import reviewsMock2 from "./mock/anime_review_list2.json";
 import reviewsMock3 from "./mock/anime_review_list3.json";
 import reviewsMock4 from "./mock/anime_review_list4.json";
-import { AddReviewDto, ReviewPage } from "./review";
+import { AddReviewDto, ReviewInfo } from "./review";
 
 export default class ReviewDevApi {
   /** @description 리뷰 작성 요청*/
@@ -19,7 +19,7 @@ export default class ReviewDevApi {
     animeId: number,
     pageParam: string,
     selectedOption: ReviewSortOption,
-  ): Promise<ReviewPage> {
+  ): Promise<CursorPage<ReviewInfo>> {
     console.log(animeId, pageParam, selectedOption);
     // 좋아요순 조회
     if (selectedOption.sort === "created_at") return reviewsMock3;

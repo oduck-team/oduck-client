@@ -23,13 +23,6 @@ export interface AddReviewDto {
   content: string;
 }
 
-export interface ReviewPage {
-  items: ReviewInfo[];
-  hasNext: boolean;
-  cursor: string;
-  size: number;
-}
-
 export default class ReviewApi {
   /** @description 리뷰 작성 요청*/
   async addReview(review: AddReviewDto): Promise<void> {
@@ -54,6 +47,6 @@ export default class ReviewApi {
             cursor: pageParam,
             ...baseParams,
           };
-    return get<ReviewPage>(`/short-reviews/${animeId}`, { params });
+    return get<CursorPage<ReviewInfo>>(`/short-reviews/${animeId}`, { params });
   }
 }
