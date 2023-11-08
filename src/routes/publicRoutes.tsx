@@ -17,7 +17,6 @@ const EmailTerms = lazy(() => import("@/features/common/routes/Terms/Email"));
 const NoticeList = lazy(() => import("@/features/notices/routes/List"));
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const NotFound = lazy(() => import("@/features/common/routes/Error/404"));
-const ServerError = lazy(() => import("@/features/common/routes/Error/500"));
 
 export const publicRoutes: RouteObject[] = [
   {
