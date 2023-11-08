@@ -15,7 +15,6 @@ import useAutoLogin from "../hooks/useAutoLogin";
 
 interface AuthState {
   user: User | undefined;
-  isLoggedIn: boolean;
 }
 
 interface AuthAction {
@@ -27,7 +26,6 @@ interface AuthAction {
 
 const AuthContext = createContext<AuthState & AuthAction>({
   user: undefined,
-  isLoggedIn: false,
   fetchUser: async () => {},
   socialLogin: () => {},
   emailLogin: async () => {},
@@ -39,7 +37,6 @@ export default AuthContext;
 export function AuthProvider({ children }: PropsWithChildren) {
   const { authApi } = useApi();
   const [user, setUser] = useState<User>();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { setLocalUser, removeLocalUser, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
@@ -47,10 +44,8 @@ export function AuthProvider({ children }: PropsWithChildren) {
     try {
       const user = await authApi.getStatus();
       setUser(user);
-      setIsLoggedIn(true);
       setLocalUser(true);
     } catch (e) {
-      setIsLoggedIn(false);
       removeLocalUser();
     }
   }, [authApi, removeLocalUser, setLocalUser]);
@@ -58,7 +53,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const logout = useCallback(async () => {
     authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
-    setIsLoggedIn(false);
     removeLocalUser();
     window.location.replace("/");
   }, [authApi, removeLocalUser, snackbar]);
@@ -73,20 +67,12 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const value = useMemo<AuthState & AuthAction>(
     () => ({
       user,
-      isLoggedIn,
       fetchUser,
       socialLogin: authApi.socialLogin,
       emailLogin: authApi.emailLogin,
       logout,
     }),
-    [
-      user,
-      isLoggedIn,
-      fetchUser,
-      authApi.socialLogin,
-      authApi.emailLogin,
-      logout,
-    ],
+    [user, fetchUser, authApi.socialLogin, authApi.emailLogin, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -20,7 +20,7 @@ interface BookmarkButtonProps {
 }
 
 export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const bookmarkQuery = useBookmark(animeId);
   const bookmarkMutation = useToggleBookmark(animeId);
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
@@ -29,7 +29,7 @@ export default function BookmarkButton({ animeId }: BookmarkButtonProps) {
   const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const handleToggleBookmark = useDebounce(async () => {
-    if (!isLoggedIn) {
+    if (!user) {
       setIsLoginModalVisible(true);
       return;
     }

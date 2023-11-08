@@ -16,7 +16,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   const hasEvaluated = true; // dev용 변수
   const hasReviewed = true; // dev용 변수
 
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
@@ -24,7 +24,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   console.log(animeId);
 
   const handleRate = (value: number) => {
-    if (!isLoggedIn) {
+    if (!user) {
       setIsLoginModalVisible(true);
       return;
     }
