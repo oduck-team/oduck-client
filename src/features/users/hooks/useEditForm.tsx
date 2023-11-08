@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
+import useDebounce from "@/hooks/useDebounce";
 import { useCommonToastError } from "@/libs/error";
 
 export interface ProfileEditFormData {
@@ -43,7 +44,7 @@ export default function useEditForm(name: string, description: string) {
     setIsFormChange(true);
   };
 
-  const handleFormSumbit = async (e: React.FormEvent) => {
+  const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
     e.preventDefault();
     updateProfile.mutate(undefined, {
       onSuccess: async () => {
@@ -80,7 +81,7 @@ export default function useEditForm(name: string, description: string) {
     }
 
     setStatus({ isWarn: false, message: "" });
-  };
+  }, 200);
 
   return { form, status, isFormChange, handleInputChange, handleFormSumbit };
 }
