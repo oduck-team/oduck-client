@@ -10,25 +10,16 @@ const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { user, fetchUser } = useAuth();
-  // const { localUser } = useLocalUser();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   /**
-   * 로컬 스토리지에 유저 정보가 있다면 서버에 유저 정보를 요청합니다
-   * 없다면 로그인 페이지로 이동합니다
+   * 유저 정보가 없다면 로그인 페이지로 이동합니다.
    */
   useEffect(() => {
-    const handleAuth = () => {
-      if (!user) {
-        navigate("/login", { replace: true });
-      }
-      // if (!localUser) {
-      // navigate("/login", { replace: true });
-      // }
-      // fetchUser();
-    };
-    handleAuth();
+    if (!user) {
+      navigate("/login", { replace: true });
+    }
   }, [navigate, user]);
 
   return children;
