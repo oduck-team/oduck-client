@@ -12,6 +12,7 @@ export default function Callback() {
   const { redirectUrl, handleRedirect } = useRedirect();
 
   /**
+   * deprecated
    * 로컬 스토리지에 유저 정보가 있다면 서버에 유저 정보를 요청합니다
    * /auth/callback으로 사용자의 첫 url 요청 방지입니다
    */
