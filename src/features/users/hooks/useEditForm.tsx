@@ -59,8 +59,7 @@ export default function useEditForm(name: string, description: string) {
             case 401: // 인증 오류
               toastAuthError();
               break;
-            case 400: // 기존 닉네임과 동일
-            case 409: // 정규식 검사 오류
+            case 400: // 정규식 검사 오류
               toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
             default:
