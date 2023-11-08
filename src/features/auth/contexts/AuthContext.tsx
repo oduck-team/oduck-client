@@ -8,13 +8,12 @@ import {
 } from "react";
 
 import useSnackBar from "@/components/SnackBar/useSnackBar";
-import useLocalUser from "@/features/auth/hooks/useLocalUser";
 import { useApi } from "@/hooks/useApi";
 
 import { EmailLoginDto } from "../api/AuthApi";
 
 interface AuthState {
-  user: User;
+  user: User | undefined;
   isLoggedIn: boolean;
 }
 
@@ -25,18 +24,8 @@ interface AuthAction {
   logout: () => Promise<void>;
 }
 
-const DEFAULT_USER: User = {
-  name: "",
-  memberId: 0,
-  description: "",
-  thumbnail: "",
-  point: 0,
-  createdAt: "",
-  updatedAt: "",
-} as const;
-
 const AuthContext = createContext<AuthState & AuthAction>({
-  user: DEFAULT_USER,
+  user: undefined,
   isLoggedIn: false,
   fetchUser: async () => {},
   socialLogin: () => {},
@@ -48,8 +37,7 @@ export default AuthContext;
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const { authApi } = useApi();
-  const { localUser, setLocalUser, removeLocalUser } = useLocalUser();
-  const [user, setUser] = useState<User>(localUser ?? DEFAULT_USER);
+  const [user, setUser] = useState<User>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const snackbar = useSnackBar();
 
@@ -57,28 +45,21 @@ export function AuthProvider({ children }: PropsWithChildren) {
     try {
       const user = await authApi.getStatus();
       setUser(user);
-      setLocalUser(user);
       setIsLoggedIn(true);
     } catch (e) {
-      setUser(DEFAULT_USER);
-      removeLocalUser();
       setIsLoggedIn(false);
     }
-  }, [authApi, removeLocalUser, setLocalUser]);
+  }, [authApi]);
 
   const logout = useCallback(async () => {
     authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
-    setUser(DEFAULT_USER);
-    removeLocalUser();
     setIsLoggedIn(false);
     window.location.replace("/");
-  }, [authApi, removeLocalUser, snackbar]);
+  }, [authApi, snackbar]);
 
   useEffect(() => {
-    if (localUser) {
-      fetchUser();
-    }
+    fetchUser();
   }, []);
 
   const value = useMemo<AuthState & AuthAction>(

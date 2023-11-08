@@ -3,7 +3,6 @@ import { RouteObject, useNavigate } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
-import useLocalUser from "@/features/auth/hooks/useLocalUser";
 
 import RouteLayout from "../components/Layout/RouteLayout";
 
@@ -11,8 +10,8 @@ const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { fetchUser } = useAuth();
-  const { localUser } = useLocalUser();
+  const { user, fetchUser } = useAuth();
+  // const { localUser } = useLocalUser();
   const navigate = useNavigate();
 
   /**
@@ -21,14 +20,16 @@ function PrivateRoute({ children }: PropsWithChildren) {
    */
   useEffect(() => {
     const handleAuth = () => {
-      if (!localUser) {
+      if (!user) {
         navigate("/login", { replace: true });
       }
-
-      fetchUser();
+      // if (!localUser) {
+      // navigate("/login", { replace: true });
+      // }
+      // fetchUser();
     };
     handleAuth();
-  }, []);
+  }, [navigate, user]);
 
   return children;
 }
