@@ -76,10 +76,6 @@ export const publicRoutes: RouteObject[] = [
         ],
       },
       {
-        path: "/error",
-        element: <ServerError />,
-      },
-      {
         path: "*",
         element: <NotFound />,
       },
