@@ -72,6 +72,7 @@ export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
           {isDeleteModalOpen && (
             <BookmarkDeleteModal
               animeId={bookmark.animeId}
+              title={bookmark.title}
               onClose={toggleDeleteModal}
             />
           )}
