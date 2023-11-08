@@ -19,7 +19,8 @@ export const LoaderContainer = styled.div<Pick<LoaderProps, "display">>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100dvh;
+  height: 100vh;
+  max-height: 100dvh;
   width: 100%;
 
   & img {
