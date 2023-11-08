@@ -1,4 +1,3 @@
-import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useState } from "react";
@@ -7,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
+import { useCommonToastError } from "@/libs/error";
 
 export interface ProfileEditFormData {
   name: string;
@@ -26,6 +26,7 @@ export default function useEditForm(name: string, description: string) {
   const updateProfile = useMutation(() => profile.updateProfile(form));
   const queryClient = useQueryClient();
   const toast = useToast();
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -55,31 +56,14 @@ export default function useEditForm(name: string, description: string) {
           const status = error.response.status;
           switch (status) {
             case 401: // 인증 오류
-              toast.open({
-                message: "로그인 시간이 만료되었어요.\n다시 로그인해 주세요.",
-                icon: <CheckCircle weight="fill" />,
-                iconColor: "warn",
-                buttonText: "로그인",
-                onClickButton: () => navigate("/login"),
-                position: "top",
-              });
+              toastAuthError();
               break;
             case 400: // 기존 닉네임과 동일
             case 409: // 정규식 검사 오류
-              toast.open({
-                message: "사용할 수 없는 닉네임입니다.",
-                icon: <WarningCircle weight="fill" />,
-                iconColor: "warn",
-                position: "top",
-              });
+              toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
             default:
-              toast.open({
-                message: "오류가 발생했어요. 잠시 후 다시 시도해 주세요.",
-                icon: <WarningCircle weight="fill" />,
-                iconColor: "warn",
-                position: "top",
-              });
+              toastDefaultError();
               break;
           }
         }
