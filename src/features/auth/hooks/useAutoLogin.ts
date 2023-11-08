@@ -1,14 +1,14 @@
 import useLocalStorage from "@/hooks/useLocalStorage";
 
-export default function useLocalUser() {
+export default function useAutoLogin() {
   const {
-    value: localUser,
+    value: isAutoLogin,
     setStorageValue: setLocalUser,
     removeStorageValue: removeLocalUser,
-  } = useLocalStorage<User>("user");
+  } = useLocalStorage("autoAuth");
 
   return {
-    localUser,
+    isAutoLogin,
     setLocalUser,
     removeLocalUser,
   };
