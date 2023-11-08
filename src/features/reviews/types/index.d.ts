@@ -1,8 +1,8 @@
 declare interface Review {
   name: string;
-  comment: string;
+  content: string;
   isSpoiler: boolean;
-  isLike: boolean;
+  isLiked: boolean;
   likeCount: number;
   createdAt: string;
   anime: {
