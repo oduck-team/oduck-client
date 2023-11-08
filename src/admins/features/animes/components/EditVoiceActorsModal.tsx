@@ -96,7 +96,6 @@ export default function EditVoiceActorsModal({
 
     return (
       <Table.Tr key={actor.id}>
-        <Table.Td>{actor.id}</Table.Td>
         <Table.Td>{actor.name}</Table.Td>
         <Table.Td>
           <Checkbox
@@ -158,7 +157,6 @@ export default function EditVoiceActorsModal({
             <Table>
               <Table.Thead>
                 <Table.Tr>
-                  <Table.Th>ID</Table.Th>
                   <Table.Th>이름</Table.Th>
                   <Table.Th>선택</Table.Th>
                   <Table.Th>배역</Table.Th>
