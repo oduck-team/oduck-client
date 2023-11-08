@@ -11,6 +11,7 @@ import useSnackBar from "@/components/SnackBar/useSnackBar";
 import { useApi } from "@/hooks/useApi";
 
 import { EmailLoginDto } from "../api/AuthApi";
+import useAutoLogin from "../hooks/useAutoLogin";
 
 interface AuthState {
   user: User | undefined;
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const { authApi } = useApi();
   const [user, setUser] = useState<User>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { setLocalUser, removeLocalUser, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
   const fetchUser = useCallback(async () => {
@@ -46,21 +48,27 @@ export function AuthProvider({ children }: PropsWithChildren) {
       const user = await authApi.getStatus();
       setUser(user);
       setIsLoggedIn(true);
+      setLocalUser(true);
     } catch (e) {
       setIsLoggedIn(false);
+      removeLocalUser();
     }
-  }, [authApi]);
+  }, [authApi, removeLocalUser, setLocalUser]);
 
   const logout = useCallback(async () => {
     authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
     setIsLoggedIn(false);
+    removeLocalUser();
     window.location.replace("/");
-  }, [authApi, snackbar]);
+  }, [authApi, removeLocalUser, snackbar]);
 
+  /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
-    fetchUser();
-  }, []);
+    if (isAutoLogin) {
+      fetchUser();
+    }
+  }, [isAutoLogin]);
 
   const value = useMemo<AuthState & AuthAction>(
     () => ({
