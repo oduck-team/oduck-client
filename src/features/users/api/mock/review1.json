@@ -2,9 +2,9 @@
   "items": [
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-20T21:05:31.859",
       "anime": {
@@ -16,9 +16,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-19T21:05:31.859",
       "anime": {
@@ -30,9 +30,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-18T21:05:31.859",
       "anime": {
@@ -44,9 +44,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-17T21:05:31.859",
       "anime": {
@@ -58,9 +58,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-16T21:05:31.859",
       "anime": {
@@ -72,9 +72,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-15T21:05:31.859",
       "anime": {
@@ -86,9 +86,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-14T21:05:31.859",
       "anime": {
@@ -100,9 +100,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-13T21:05:31.859",
       "anime": {
@@ -114,9 +114,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-12T21:05:31.859",
       "anime": {
@@ -128,9 +128,9 @@
     },
     {
       "name": "faberjoo",
-      "comment": "리뷰 입니다.",
+      "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
+      "isLiked": true,
       "likeCount": 322,
       "createdAt": "2023-09-11T21:05:31.859",
       "anime": {
