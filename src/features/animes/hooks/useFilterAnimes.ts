@@ -48,7 +48,7 @@ export default function useFilterAnimes() {
   const [selectedFilters, setSelectedFilters] = useState<AllFilterTypes[]>([]); // 선택한 필터
   const [filterParams, setFilterParams] = useState<GetAnimesQuery>({
     size: 2,
-    sort: "latest",
+    sort: "LATEST",
   }); // 요청 필터
   const animesQuery = useAnimes(filterParams);
 

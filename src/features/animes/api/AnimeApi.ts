@@ -1,7 +1,7 @@
 import { get } from "@/libs/api";
 
 /* 애니 조회 정렬 기준*/
-export type AnimeSort = "latest" | "reviewCount" | "score";
+export type AnimeSort = "LATEST" | "REVIEW_COUNT" | "SCORE";
 export type Direction = "ASC" | "DESC";
 export type EpisodeCount =
   | "UNDER_TWELVE"
@@ -39,19 +39,29 @@ export interface GetAnimesQuery {
   quarters?: AnimeQuarter[];
 }
 
-export interface GetAnimesResponse {
+export type DetailAnimeResponse = Omit<
+  Anime,
+  "series" | "isReleased" | "viewCount"
+> & {
+  originalAuthors: string[];
+  voiceActors: { name: string; part: string }[];
+  genres: string[];
+  studios: string[];
+};
+
+type ListAnimeResponse = CursorPage<{
   id: number;
   title: string;
   thumbnail: string;
   starScoreAvg: number;
-}
+}>;
 
 export default class AnimeApi {
-  getById(id: number): Promise<Anime> {
+  getById(id: number): Promise<DetailAnimeResponse> {
     return get(`/animes/${id}`);
   }
 
-  getList(query: GetAnimesQuery): Promise<CursorPage<GetAnimesResponse>> {
+  getList(query: GetAnimesQuery): Promise<ListAnimeResponse> {
     const queryParams: Record<string, string> = {};
 
     Object.entries(query).forEach(([key, value]) => {

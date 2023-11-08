@@ -5,14 +5,16 @@ import profileMock from "./mock/profile.json";
 import reveiwMock1 from "./mock/review1.json";
 import reveiwMock2 from "./mock/review2.json";
 import reveiwMock3 from "./mock/review3.json";
-import { BookmarkPage, ReviewPage } from "./profile";
 
 export default class ProfileDevApi {
   async getProfile(): Promise<Profile> {
     return profileMock;
   }
 
-  async getBookmark(_: number, pageParam: string): Promise<BookmarkPage> {
+  async getBookmark(
+    _: number,
+    pageParam: string,
+  ): Promise<CursorPage<Bookmark>> {
     // 입덕 최신 순 정렬
     switch (pageParam) {
       case "2023-10-03T21:05:31.859":
@@ -24,7 +26,7 @@ export default class ProfileDevApi {
     }
   }
 
-  async getReview(_: number, pageParam: string): Promise<ReviewPage> {
+  async getReview(_: number, pageParam: string): Promise<CursorPage<Review>> {
     // 등록 최신 순 정렬
     switch (pageParam) {
       case "2023-10-03T21:05:31.859":
