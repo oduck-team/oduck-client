@@ -46,6 +46,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       setUser(user);
       setLocalUser(true);
     } catch (e) {
+      setUser(undefined);
       removeLocalUser();
     }
   }, [authApi, removeLocalUser, setLocalUser]);
