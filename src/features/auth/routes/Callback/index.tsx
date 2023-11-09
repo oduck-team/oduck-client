@@ -27,10 +27,14 @@ export default function Callback() {
    */
   useEffect(() => {
     if (redirectUrl) {
-      fetchUser();
-      handleRedirect();
+      const handleFetchUser = async () => {
+        await fetchUser();
+        handleRedirect();
+      };
+
+      handleFetchUser();
     }
-  });
+  }, [redirectUrl]);
   if (redirectUrl) return <Loader />;
 
   return <NotFound />;
