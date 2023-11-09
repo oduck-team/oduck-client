@@ -5,6 +5,8 @@ export interface SkeletonProps {
   h?: number | "full";
   /** 스켈레톤 넓이 @default 24 */
   w?: number | "full";
+  /** 스켈레톤 넓이 단위 @default px */
+  wUnit?: "%" | "px";
   /** 스켈레톤 모서리의 둥근 정도 @default 4 */
   borderRadius?: number | "full";
 }
@@ -12,12 +14,14 @@ export interface SkeletonProps {
 export default function Skeleton({
   h = 24,
   w = 24,
+  wUnit = "px",
   borderRadius = 4,
 }: SkeletonProps) {
   return (
     <SkeletonContainer
       h={h}
       w={w}
+      wUnit={wUnit}
       borderRadius={borderRadius === "full" ? 999 : borderRadius}
     />
   );
