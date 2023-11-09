@@ -4,8 +4,11 @@ import { AxiosError } from "axios";
 
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
+import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
+import useToggleBookmark from "@/features/bookmarks/hooks/useToggleBookmark";
 import { useApi } from "@/hooks/useApi";
+import useDebounce from "@/hooks/useDebounce";
 import { useCommonToastError } from "@/libs/error";
 
 import {
@@ -16,11 +19,13 @@ import {
 
 interface BookmarkDeleteModalProps {
   animeId: number;
+  title: string;
   onClose: () => void;
 }
 
 export default function BookmarkDeleteModal({
   animeId,
+  title,
   onClose,
 }: BookmarkDeleteModalProps) {
   const { bookmarkApi } = useApi();
@@ -30,14 +35,23 @@ export default function BookmarkDeleteModal({
   const deleteBookmark = useMutation(() => bookmarkApi.toggleBookmark(animeId));
   const queryClient = useQueryClient();
   const { toastAuthError, toastDefaultError } = useCommonToastError();
+  const toast = useToast();
+  const bookmarkMutation = useToggleBookmark(animeId);
 
-  const handleDeleteButtonClick = () => {
+  const handleDeleteButtonClick = useDebounce(() => {
     deleteBookmark.mutate(undefined, {
       onSuccess: () => {
         queryClient.invalidateQueries(["profile", name]);
         queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
         queryClient.invalidateQueries(["bookmark", memberId, animeId]);
         queryClient.invalidateQueries(["anime", animeId, memberId]);
+
+        toast.success({
+          message: `${title} 탈덕 했어요.`,
+          buttonText: "탈덕 취소하기",
+          onClickButton: () => bookmarkMutation.mutate(),
+          duration: 4,
+        });
       },
       onError: (error) => {
         if (error instanceof AxiosError && error.response?.status) {
@@ -53,7 +67,7 @@ export default function BookmarkDeleteModal({
         }
       },
     });
-  };
+  }, 200);
   return (
     <>
       <Modal onClose={onClose} size="sm">

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
+import useDebounce from "@/hooks/useDebounce";
 import { useCommonToastError } from "@/libs/error";
 
 export interface ProfileEditFormData {
@@ -43,7 +44,7 @@ export default function useEditForm(name: string, description: string) {
     setIsFormChange(true);
   };
 
-  const handleFormSumbit = async (e: React.FormEvent) => {
+  const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
     e.preventDefault();
     updateProfile.mutate(undefined, {
       onSuccess: async () => {
@@ -58,8 +59,7 @@ export default function useEditForm(name: string, description: string) {
             case 401: // 인증 오류
               toastAuthError();
               break;
-            case 400: // 기존 닉네임과 동일
-            case 409: // 정규식 검사 오류
+            case 400: // 정규식 검사 오류
               toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
             default:
@@ -80,7 +80,7 @@ export default function useEditForm(name: string, description: string) {
     }
 
     setStatus({ isWarn: false, message: "" });
-  };
+  }, 200);
 
   return { form, status, isFormChange, handleInputChange, handleFormSumbit };
 }
