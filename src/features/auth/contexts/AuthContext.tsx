@@ -37,26 +37,26 @@ export default AuthContext;
 export function AuthProvider({ children }: PropsWithChildren) {
   const { authApi } = useApi();
   const [user, setUser] = useState<User>();
-  const { setLocalUser, removeLocalUser, isAutoLogin } = useAutoLogin();
+  const { setAutoLogin, removeAutoLogin, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
   const fetchUser = useCallback(async () => {
     try {
       const user = await authApi.getStatus();
       setUser(user);
-      setLocalUser(true);
+      setAutoLogin(true);
     } catch (e) {
       setUser(undefined);
-      removeLocalUser();
+      removeAutoLogin();
     }
-  }, [authApi, removeLocalUser, setLocalUser]);
+  }, [authApi, removeAutoLogin, setAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
-    removeLocalUser();
+    removeAutoLogin();
     window.location.replace("/");
-  }, [authApi, removeLocalUser, snackbar]);
+  }, [authApi, removeAutoLogin, snackbar]);
 
   /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
