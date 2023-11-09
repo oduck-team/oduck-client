@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { AnimeSort, EpisodeCount, GetAnimesQuery } from "../api/AnimeApi";
 
 import useAnimes from "./useAnimes";
+import useGeneres from "./useGenres";
 
 export interface FilteredOption<T> {
   label: string;
@@ -29,25 +30,30 @@ export type AllFilterTypes =
   | StatusFilter
   | EpisodeCountFilter;
 
+const REQUEST_SIZE = 10; // 요청당 개수
+
+/**
+ * @description 애니메이션 목록을 필터와 함께 조회합니다
+ */
 export default function useFilterAnimes() {
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
-  // TODO: 장르 목록 API
-  const [genres, setGenres] = useState<GenreFilter[]>([
-    { label: "판타지", value: "판타지", type: "genre" },
-    { label: "로맨스", value: "로맨스", type: "genre" },
-    { label: "액션", value: "액션", type: "genre" },
-    { label: "가족", value: "가족", type: "genre" },
-    { label: "이세계", value: "이세계", type: "genre" },
-    { label: "개그", value: "개그", type: "genre" },
-    { label: "학원", value: "학원", type: "genre" },
-    { label: "감동", value: "감동", type: "genre" },
-    { label: "범죄", value: "범죄", type: "genre" },
-    { label: "SF", value: "SF", type: "genre" },
-    { label: "드라마", value: "드라마", type: "genre" },
-  ]);
+  const { data: initialGenres } = useGeneres();
+  const [genres, setGenres] = useState<GenreFilter[]>([]);
+  /** 장르 목록을 받아온후, 가공 */
+  useEffect(() => {
+    if (!initialGenres) return;
+    setGenres(
+      initialGenres.map((genre) => ({
+        label: genre.name,
+        value: genre.id.toString(),
+        type: "genre",
+      })),
+    );
+  }, [initialGenres]);
+
   const [selectedFilters, setSelectedFilters] = useState<AllFilterTypes[]>([]); // 선택한 필터
   const [filterParams, setFilterParams] = useState<GetAnimesQuery>({
-    size: 2,
+    size: REQUEST_SIZE,
     sort: "LATEST",
   }); // 요청 필터
   const animesQuery = useAnimes(filterParams);
@@ -71,6 +77,8 @@ export default function useFilterAnimes() {
     }),
     [genres],
   );
+
+  /** 필터 추가 */
   const addFilter = (option: AllFilterTypes) => {
     // 이미 있다면 제거
     if (selectedFilters.some((f) => f.label === option.label)) {
@@ -82,26 +90,31 @@ export default function useFilterAnimes() {
     setSelectedFilters([...selectedFilters, option]);
   };
 
+  /** 필터 제거 */
   const removeFilter = ({ label }: AllFilterTypes) => {
     if (selectedFilters.some((f) => f.label === label)) {
       setSelectedFilters(selectedFilters.filter((f) => f.label !== label));
     }
   };
 
+  /** 필터 초기화 */
   const resetFilter = () => {
     setSelectedFilters([]);
     setFilterParams({});
     animesQuery.refetch();
   };
 
+  /** 필터 바텀시트 열기 */
   const bottomSheetOpen = () => {
     setBottomSheetVisible(true);
   };
 
+  /** 필터 바텀시트 닫기 */
   const bottomSheetClose = () => {
     setBottomSheetVisible(false);
   };
 
+  /** 필터 적용하기 */
   const applyFilters = () => {
     const queryParams = filterToQueryParams(selectedFilters);
     setFilterParams(queryParams);
@@ -115,7 +128,8 @@ export default function useFilterAnimes() {
     filters.forEach((filter) => {
       switch (filter.type) {
         case "genre":
-          // queryParams.genreIds?.push(장르id);
+          if (!queryParams.genreIds) queryParams.genreIds = [];
+          queryParams.genreIds.push(Number(filter.value));
           break;
         case "season":
           if (!queryParams.years) queryParams.years = [];
