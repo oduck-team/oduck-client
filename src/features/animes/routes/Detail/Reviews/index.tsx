@@ -3,10 +3,13 @@ import { ReviewInfo } from "@/features/reviews/api/review";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 import { ReviewSortOption } from "@/features/reviews/hook/useGetAnimeReviews";
 
+import LoadingReviews from "../LoadingReviews";
+
 import { Section, TotalReviews } from "./style";
 
 interface Props {
   reviews: ReviewInfo[];
+  isLoading: boolean;
   totalReviewCount: number;
   handleChipClick: (i: number) => void;
   sortOptions: ReviewSortOption[];
@@ -15,6 +18,7 @@ interface Props {
 
 export default function Reviews({
   reviews,
+  isLoading,
   totalReviewCount,
   sortOptions,
   selectedOption,
@@ -39,7 +43,9 @@ export default function Reviews({
           </li>
         ))}
       </ul>
-      {reviews.length !== 0 && (
+      {isLoading && <LoadingReviews />}
+      {/* { TODO: 리뷰가 0개일 때 디자인 적용 } */}
+      {!isLoading && reviews.length !== 0 && (
         <ul>
           {reviews.map((review, i) => (
             <li key={review.reviewId}>
