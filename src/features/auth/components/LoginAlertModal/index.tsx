@@ -1,8 +1,7 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Modal from "@/components/Modal";
-import useRedirect from "@/hooks/useRedirect";
 
 import { Text } from "./style";
 
@@ -11,15 +10,12 @@ interface LoginAlertModalProps {
 }
 
 export default function LoginAlertModal({ onClose }: LoginAlertModalProps) {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { setRedirect } = useRedirect();
 
   /**
    * 현재 페이지를 리다이렉트로 지정후 로그인페이지로 이동합니다.
    */
   const handleClickLogin = () => {
-    setRedirect(location.pathname);
     navigate("/login");
   };
 
