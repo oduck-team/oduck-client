@@ -7,15 +7,12 @@ export default function SavePath() {
   useEffect(() => {
     const prevPath = sessionStorage.getItem("currPath");
 
-    /** 사용자가 login url을 직접 입력한 경우 prevPath 설정 */
-    if (location.pathname === "/login") {
+    /** login 관련 url인 경우 prevPath만 설정 */
+    if (
+      location.pathname === "/login" ||
+      location.pathname === "/auth/callback"
+    ) {
       sessionStorage.setItem("prevPath", prevPath ?? "/");
-      return;
-    }
-
-    /** /auth/callback url 숨김 */
-    if (location.pathname === "/auth/callback") {
-      sessionStorage.setItem("prevPath", "");
       return;
     }
 
