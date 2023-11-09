@@ -75,7 +75,7 @@ export default function useReviewForm(
       {
         name,
         animeId,
-        isSpoiler: form.isSpoiler,
+        hasSpoiler: form.isSpoiler,
         content: form.content,
       },
       {
