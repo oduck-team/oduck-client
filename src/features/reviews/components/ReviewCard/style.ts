@@ -32,11 +32,11 @@ function getStyle(
   if (isBlock) {
     isBlockStyle = `
       margin: 0 -16px;
-      padding: 16px;
+      padding: 16px 16px 14px;
     `;
   } else {
     isBlockStyle = `
-      padding: 16px 0;
+      padding: 16px 0 14px;
     `;
   }
 
