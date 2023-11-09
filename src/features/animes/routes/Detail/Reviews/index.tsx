@@ -39,31 +39,31 @@ export default function Reviews({
           </li>
         ))}
       </ul>
-
-      <ul>
-        {reviews.map((review, i) => (
-          <li key={review.reviewId}>
-            <ReviewCard border={i === 0 ? "top" : "bottom"}>
-              <ReviewCard.UserRating
-                user={{ name: review.name, thumbnail: review.thumbnail }}
-                rating={review.score}
-              />
-              <ReviewCard.Comment
-                text={review.content}
-                textSize="sm"
-                isSpoiler={review.isSpoiler}
-              />
-              <ReviewCard.ActionBar
-                isMine={review.isMine}
-                isLiked={review.isLiked}
-                likeCount={review.likeCount}
-                include="time"
-                createdAt={review.createdAt}
-              />
-            </ReviewCard>
-          </li>
-        ))}
-      </ul>
+      {reviews.length !== 0 && (
+        <ul>
+          {reviews.map((review, i) => (
+            <li key={review.reviewId}>
+              <ReviewCard border={i === 0 ? "top" : "bottom"}>
+                <ReviewCard.UserRating
+                  user={{ name: review.name, thumbnail: review.thumbnail }}
+                  rating={review.score}
+                />
+                <ReviewCard.Comment
+                  text={review.content}
+                  textSize="sm"
+                  isSpoiler={review.isSpoiler}
+                />
+                <ReviewCard.ActionBar
+                  isMine={review.isMine}
+                  isLiked={review.isLiked}
+                  likeCount={review.likeCount}
+                  createdAt={review.createdAt}
+                />
+              </ReviewCard>
+            </li>
+          ))}
+        </ul>
+      )}
     </Section>
   );
 }
