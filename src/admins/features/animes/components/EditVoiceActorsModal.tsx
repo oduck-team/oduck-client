@@ -8,7 +8,7 @@ import {
   Table,
   TextInput,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import useCreateVoiceActor from "../hooks/useCreateVoiceActor";
 import useVoiceActors from "../hooks/useVoiceActors";
@@ -16,12 +16,23 @@ import useVoiceActors from "../hooks/useVoiceActors";
 import CreateSubCategoryButton from "./CreateSubCategoryButton";
 import { HeaderBottom, HeaderTop } from "./EditVoiceActorsModal.style";
 
+function sortBykey<T>(array: T[], key: keyof T) {
+  return [...array].sort((a, b) => {
+    const aValue = a[key] as string;
+    const bValue = b[key] as string;
+    return aValue.localeCompare(bValue, "ko-KR");
+  });
+}
+
 interface SelectedActor {
   id: number;
   name: string;
   part: string;
 }
 
+/**
+ * @description 성우 관리 모달입니다
+ */
 interface EditVoiceActorsModalProps {
   selectedActorsInitial?: SelectedActor[];
   onAdd: (actors: SelectedActor[]) => void;
@@ -35,14 +46,10 @@ export default function EditVoiceActorsModal({
 }: EditVoiceActorsModalProps) {
   const { data: voiceActors, isLoading: isLoadingActors } = useVoiceActors();
   const createVoiceActorMutation = useCreateVoiceActor();
-  const [selectedActors, setSelectedActors] = useState<SelectedActor[]>(
+  const [selectedActors, setSelectedActors] = useState<SelectedActor[]>( // 선택한 성우
     selectedActorsInitial,
   );
-  const [searchKeyword, setSearchKeyword] = useState("");
-
-  useEffect(() => {
-    setSelectedActors(selectedActorsInitial);
-  }, [selectedActorsInitial]);
+  const [searchKeyword, setSearchKeyword] = useState(""); // 성우 검색
 
   const handleCheckboxChange = (
     actorId: number,
@@ -82,7 +89,7 @@ export default function EditVoiceActorsModal({
       )
     : voiceActors;
 
-  if (isLoadingActors)
+  if (isLoadingActors) {
     return (
       <Modal title="성우 관리" size="xl" opened onClose={onClose}>
         <Center>
@@ -90,8 +97,8 @@ export default function EditVoiceActorsModal({
         </Center>
       </Modal>
     );
-
-  const rows = filteredVoiceActors?.map((actor) => {
+  }
+  const rows = sortBykey(filteredVoiceActors || [], "name")?.map((actor) => {
     const selectedActor = selectedActors.find((item) => item.id === actor.id);
 
     return (

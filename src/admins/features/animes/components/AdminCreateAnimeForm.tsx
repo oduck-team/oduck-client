@@ -68,6 +68,14 @@ const STATUSES = [
   { value: "UNKNOWN", label: "알 수 없음" },
 ];
 
+function sortBykey<T>(array: T[], key: keyof T) {
+  return [...array].sort((a, b) => {
+    const aValue = a[key] as string;
+    const bValue = b[key] as string;
+    return aValue.localeCompare(bValue, "ko-KR");
+  });
+}
+
 export default function AdminCreateAnimeForm() {
   const { form, createAnimeMutation } = useCreateAnime();
   const { data: series, isLoading: isLoadingSeries } = useSeries();
@@ -121,7 +129,7 @@ export default function AdminCreateAnimeForm() {
 
   const seriesOptions =
     !isLoadingSeries && series
-      ? series.map((s) => ({
+      ? sortBykey(series, "title").map((s) => ({
           value: s.id.toString(),
           label: s.title,
         }))
@@ -129,7 +137,7 @@ export default function AdminCreateAnimeForm() {
 
   const authorsOptions =
     !isLoadingAuthors && originalAuthors
-      ? originalAuthors.map((author) => ({
+      ? sortBykey(originalAuthors, "name").map((author) => ({
           value: author.id.toString(),
           label: author.name,
         }))
@@ -137,7 +145,7 @@ export default function AdminCreateAnimeForm() {
 
   const genresOptions =
     !isLoadingGenres && genres
-      ? genres.map((genre) => ({
+      ? sortBykey(genres, "name").map((genre) => ({
           value: genre.id.toString(),
           label: genre.name,
         }))
@@ -145,7 +153,7 @@ export default function AdminCreateAnimeForm() {
 
   const studiosOptions =
     !isLoadingStudios && studios
-      ? studios.map((studio) => ({
+      ? sortBykey(studios, "name").map((studio) => ({
           value: studio.id.toString(),
           label: studio.name,
         }))
