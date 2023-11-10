@@ -1,4 +1,4 @@
-import { get, post } from "@/libs/api";
+import { get, patch, post } from "@/libs/api";
 
 import { ReviewSortOption } from "../hook/useGetAnimeReviews";
 
@@ -21,6 +21,11 @@ export interface AddReviewDto {
   animeId: number;
   isSpoiler: boolean;
   content: string;
+}
+
+export interface UserEvaluation {
+  createdAt: string;
+  score: number;
 }
 
 export default class ReviewApi {
@@ -48,5 +53,20 @@ export default class ReviewApi {
             ...baseParams,
           };
     return get<CursorPage<ReviewInfo>>(`/short-reviews/${animeId}`, { params });
+  }
+
+  /** @description 애니 별점 평가 추가 */
+  async addEvaluation(animeId: number, score: number) {
+    return post(`/ratings/${animeId}`, { score });
+  }
+
+  /** @description 애니 별점 평가 수정 */
+  async updateEvaluation(animeId: number, score: number) {
+    return patch(`/ratings/${animeId}`, { score });
+  }
+
+  /** @description 애니 별점 평가 여부 및 score 조회 */
+  async getEvaluation(animeId: number) {
+    return get<UserEvaluation>(`/ratings/${animeId}`);
   }
 }
