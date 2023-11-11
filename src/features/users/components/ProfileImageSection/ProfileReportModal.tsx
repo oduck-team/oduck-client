@@ -50,7 +50,7 @@ export default function ProfileReportModal({
 
   return (
     <>
-      <Modal onClose={onClose} showBackdrop={false}>
+      <Modal onClose={onClose} showBackdrop={false} overflowY={"visible"}>
         <Modal.Content>
           <Header>
             <Title>신고하기</Title>

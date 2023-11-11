@@ -31,7 +31,9 @@ export const Backdrop = styled(BaseBackdrop)`
   z-index: ${({ theme }) => theme.zIndex.modal};
 `;
 
-export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
+export const ModalContainer = styled(motion.div)<
+  Pick<ModalProps, "size" | "overflowY">
+>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -42,10 +44,19 @@ export const ModalContainer = styled(motion.div)<Pick<ModalProps, "size">>`
     0px 10px 32px -4px rgba(24, 39, 75, 0.1),
     0px 6px 14px -6px rgba(24, 39, 75, 0.12);
   z-index: ${({ theme }) => theme.zIndex.modal};
-  max-height: calc(100vh - 16px);
   overflow-y: auto;
+  max-height: calc(100vh - 16px);
 
-  ${({ size = "default" }) => css`
-    ${sizes[size]}
-  `};
+  ${({ size = "default", overflowY }) => {
+    const modalSize = sizes[size];
+    const modalOverflowY =
+      overflowY === "visible" &&
+      css`
+        overflow-y: visible;
+      `;
+
+    return css`
+      ${modalSize} ${modalOverflowY}
+    `;
+  }}
 `;

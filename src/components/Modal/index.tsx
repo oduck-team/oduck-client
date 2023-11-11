@@ -9,6 +9,7 @@ import ModalContent from "./ModalContent";
 import { Backdrop, ModalContainer } from "./style";
 
 export type Size = "default" | "sm" | "md" | "lg" | "xl";
+type OverflowY = "auto" | "visible";
 
 export interface ModalProps {
   isVisible?: boolean;
@@ -18,6 +19,7 @@ export interface ModalProps {
    */
   size?: Size;
   showBackdrop?: boolean;
+  overflowY: OverflowY;
   onClose: () => void;
 }
 
@@ -26,6 +28,7 @@ export default function Modal({
   isVisible = true,
   size = "default",
   showBackdrop = true,
+  overflowY = "auto",
   onClose,
   children,
 }: StrictPropsWithChildren<ModalProps>) {
@@ -40,6 +43,7 @@ export default function Modal({
         exit="exit"
         variants={modalVariants}
         size={size}
+        overflowY={overflowY}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
