@@ -19,7 +19,7 @@ export interface ModalProps {
    */
   size?: Size;
   showBackdrop?: boolean;
-  overflowY: OverflowY;
+  overflowY?: OverflowY;
   onClose: () => void;
 }
 
