@@ -11,7 +11,8 @@ const pulse = keyframes`
 
 export const SkeletonContainer = styled.div<SkeletonProps>`
   height: ${({ h }) => (h === "full" ? "100%" : `${h}px`)};
-  width: ${({ w }) => (w === "full" ? "100%" : `${w}px`)};
+  width: ${({ w, wUnit }) =>
+    w === "full" ? "100%" : wUnit === "px" ? `${w}px` : `${w}%`};
   border-radius: ${({ borderRadius }) => borderRadius}px;
   background-color: ${({ theme }) => theme.colors.neutral["20"]};
   animation: ${pulse} 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
