@@ -48,7 +48,7 @@ export default function useEditForm(name: string, description: string) {
     e.preventDefault();
     updateProfile.mutate(undefined, {
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["profile", user.name]);
+        await queryClient.invalidateQueries(["profile", user?.name]);
         await fetchUser();
         navigate("/profile");
       },

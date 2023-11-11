@@ -17,9 +17,9 @@ export default function Profile() {
   const params = useParams();
   const { profile } = useApi();
   const { isLoading, data: userProfile } = useQuery(
-    ["profile", params.name || user.name],
-    () => profile.getProfile(params.name || user.name),
-    { enabled: !!params.name || !!user.name },
+    ["profile", params.name || user?.name],
+    () => profile.getProfile(params.name || user?.name),
+    { enabled: !!params.name || !!user?.name },
   );
   const { reset } = useQueryErrorResetBoundary();
 

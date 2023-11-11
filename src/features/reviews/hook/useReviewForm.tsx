@@ -18,9 +18,7 @@ export default function useReviewForm(
   const navigate = useNavigate();
   const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
-  const {
-    user: { name },
-  } = useAuth();
+  const { user } = useAuth();
   const reviewMutation = useAddReview(animeId, onReview);
 
   const toast = useToast();
@@ -64,7 +62,7 @@ export default function useReviewForm(
     }
     // console.log(form);
     console.log({
-      name,
+      name: user?.name,
       animeId,
       isSpoiler: form.isSpoiler,
       content: form.content,
@@ -73,7 +71,7 @@ export default function useReviewForm(
     // 새 리뷰 작성 POST 요청
     reviewMutation.mutate(
       {
-        name,
+        name: user?.name ?? "",
         animeId,
         hasSpoiler: form.isSpoiler,
         content: form.content,
