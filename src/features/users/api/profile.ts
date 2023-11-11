@@ -8,7 +8,7 @@ import reveiwMock2 from "./mock/review2.json";
 import reveiwMock3 from "./mock/review3.json";
 
 export default class ProfileApi {
-  async getProfile(name: string): Promise<Profile> {
+  async getProfile(name: string | undefined): Promise<Profile> {
     return await get(`/members/${name}`);
   }
 

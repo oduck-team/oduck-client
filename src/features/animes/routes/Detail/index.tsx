@@ -51,6 +51,7 @@ export default function AnimeDetail() {
         {/* 리뷰 목록 */}
         <Reviews
           reviews={reviews?.pages ?? []}
+          isLoading={isLoading}
           totalReviewCount={anime.reviewCount}
           sortOptions={SORT_OPTION}
           selectedOption={selectedSortOption}

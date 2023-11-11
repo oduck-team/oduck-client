@@ -47,7 +47,7 @@ export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
     // setIsReviewModalVisible(true);
   };
   const handleRate = (value: number) => {
-    // if (!isLoggedIn) {
+    // if (!user) {
     //   setIsLoginModalVisible(true);
     //   return;
     // }

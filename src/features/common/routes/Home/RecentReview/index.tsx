@@ -40,7 +40,6 @@ export default function RecentReview() {
             isSpoiler={REVIEW_MOCK_DATA.isSpoiler}
           />
           <ReviewCard.ActionBar
-            include="time"
             createdAt={REVIEW_MOCK_DATA.createdAt}
             isMine={false} // TODO: isMine 판별
             isLiked={REVIEW_MOCK_DATA.isLiked}

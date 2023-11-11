@@ -8,6 +8,11 @@ export const Section = styled(SectionContainer)`
     gap: 4px;
     padding-bottom: 16px;
   }
+
+  li > article {
+    padding-left: 8px;
+    padding-right: 10px;
+  }
 `;
 
 export const TotalReviews = styled.p`
