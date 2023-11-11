@@ -13,7 +13,9 @@ export const Plot = styled.p<{ isExpanded: boolean }>`
 export const Grid = styled.ul`
   display: grid;
   grid-template-columns: max-content auto;
-  gap: 4px;
+  column-gap: 24px;
+  row-gap: 8px;
+  margin-top: 24px;
   list-style: none;
 
   & > li {
