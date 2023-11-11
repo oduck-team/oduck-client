@@ -17,7 +17,7 @@ const AdminCreateAnimePage = lazy(
 function AdminProtectedRoute({ children }: PropsWithChildren) {
   const { user } = useAuth();
 
-  if (user.role === "ADMIN") {
+  if (user?.role === "ADMIN") {
     return children;
   }
 

@@ -8,17 +8,15 @@ import { AddReviewDto } from "../api/review";
 export default function useAddReview(animeId: number, onReview: () => void) {
   const queryClient = useQueryClient();
   const { reviewApi } = useApi();
-  const {
-    user: { memberId, name },
-  } = useAuth();
+  const { user } = useAuth();
 
   return useMutation({
     mutationFn: (review: AddReviewDto) => reviewApi.addReview(review),
     onSuccess: () => {
-      queryClient.invalidateQueries(["profile", name]);
-      queryClient.invalidateQueries(["profile", memberId, "review"]);
-      queryClient.invalidateQueries(["review", animeId, memberId]);
-      queryClient.invalidateQueries(["anime", animeId, memberId]);
+      queryClient.invalidateQueries(["profile", user?.name]);
+      queryClient.invalidateQueries(["profile", user?.memberId, "review"]);
+      queryClient.invalidateQueries(["review", animeId, user?.memberId]);
+      queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
       // TODO: 최신 리뷰 목록 query 무효화
       onReview();
     },

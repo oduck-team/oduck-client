@@ -10,17 +10,15 @@ import { useApi } from "@/hooks/useApi";
 export default function useToggleBookmark(animeId: number) {
   const queryClient = useQueryClient();
   const { bookmarkApi } = useApi();
-  const {
-    user: { memberId, name },
-  } = useAuth();
+  const { user } = useAuth();
 
   return useMutation({
     mutationFn: () => bookmarkApi.toggleBookmark(animeId),
     onSuccess: () => {
-      queryClient.invalidateQueries(["profile", name]);
-      queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
-      queryClient.invalidateQueries(["bookmark", memberId, animeId]);
-      queryClient.invalidateQueries(["anime", animeId, memberId]);
+      queryClient.invalidateQueries(["profile", user?.name]);
+      queryClient.invalidateQueries(["profile", user?.memberId, "bookmark"]);
+      queryClient.invalidateQueries(["bookmark", user?.memberId, animeId]);
+      queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
     },
   });
 }

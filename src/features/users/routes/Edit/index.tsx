@@ -12,13 +12,11 @@ import ProfileEditLoading from "./ProfileEditLoading";
 import { ProfileEditContainer } from "./style";
 
 export default function ProfileEdit() {
-  const {
-    user: { name },
-  } = useAuth();
+  const { user } = useAuth();
   const { profile } = useApi();
   const { isLoading, data: userProfile } = useQuery(
-    ["profile", "edit", name],
-    () => profile.getProfile(name),
+    ["profile", "edit", user?.name],
+    () => profile.getProfile(user?.name),
   );
 
   if (isLoading) return <ProfileEditLoading />;
