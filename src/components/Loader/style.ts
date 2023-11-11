@@ -19,6 +19,7 @@ export const LoaderContainer = styled.div<Pick<LoaderProps, "display">>`
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh; // dvh를 지원하지 않는 브라우저 대응
   height: 100dvh;
   width: 100%;
 

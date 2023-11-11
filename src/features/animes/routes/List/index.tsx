@@ -37,6 +37,8 @@ const TabItems: TabItem[] = [
   },
 ];
 
+const DEFAULT_TAB_ID = "LATEST";
+
 export default function AnimeList() {
   const {
     animesQuery,
@@ -81,7 +83,7 @@ export default function AnimeList() {
         </Header>
         <Tabs
           items={TabItems}
-          defaultActiveId={"createdAt"}
+          defaultActiveId={DEFAULT_TAB_ID}
           onChange={(value) => changeSort(value as AnimeSort)}
         />
         <Content>
