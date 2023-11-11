@@ -32,8 +32,8 @@ import useStudioManager from "../hooks/useStudioManager";
 
 import AnimeFormActions from "./AdminFormActions";
 import AnimePreviewCard from "./AnimePreviewCard";
-import EditVoiceActorsModal from "./EditVoiceActorsModal";
 import ManageSubCategory from "./ManageSubCategory/ManageSubCategory";
+import ManageVoiceActorsModal from "./ManageSubCategory/ManageVoiceActorsModal";
 
 /** input내 요소 배치 순서 */
 const INPUT_WRAPPER_ORDER: ("label" | "input" | "description" | "error")[] = [
@@ -410,7 +410,7 @@ export default function AdminCreateAnimeForm() {
             </Stack>
           </Input.Wrapper>
           {isEditActorsModalVisible && (
-            <EditVoiceActorsModal
+            <ManageVoiceActorsModal
               selectedActorsInitial={form.values.voiceActors}
               onAdd={(actors) => {
                 closeActorsModal();
