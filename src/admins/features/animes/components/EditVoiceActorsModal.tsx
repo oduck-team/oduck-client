@@ -10,8 +10,7 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 
-import useCreateVoiceActor from "../hooks/useCreateVoiceActor";
-import useVoiceActors from "../hooks/useVoiceActors";
+import useVoiceActorManager from "../hooks/useVoiceActorManager";
 
 import CreateSubCategoryButton from "./CreateSubCategoryButton";
 import { HeaderBottom, HeaderTop } from "./EditVoiceActorsModal.style";
@@ -44,8 +43,11 @@ export default function EditVoiceActorsModal({
   onAdd,
   onClose,
 }: EditVoiceActorsModalProps) {
-  const { data: voiceActors, isLoading: isLoadingActors } = useVoiceActors();
-  const createVoiceActorMutation = useCreateVoiceActor();
+  const {
+    voiceActors,
+    isLoading: isLoadingActors,
+    createVoiceActor,
+  } = useVoiceActorManager();
   const [selectedActors, setSelectedActors] = useState<SelectedActor[]>( // 선택한 성우
     selectedActorsInitial,
   );
@@ -153,7 +155,7 @@ export default function EditVoiceActorsModal({
               <CreateSubCategoryButton
                 label="+ 새 성우"
                 modalTitle="새 성우 등록"
-                onCreate={(name) => createVoiceActorMutation.mutate(name)}
+                onCreate={(name) => createVoiceActor.mutate(name)}
               />
               <Button onClick={handleSubmit}>확인</Button>
             </Flex>
