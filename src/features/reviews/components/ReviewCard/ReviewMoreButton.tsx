@@ -122,6 +122,7 @@ export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
             key="ShortReviewModal"
             onClose={() => setIsReviewModalVisible(false)}
             onReview={() => setIsReviewModalVisible(false)}
+            showBackdrop={false}
             userReviewData={USER_MOCK_REVIEW_DATA}
           >
             <MyRating>내 별점</MyRating>
