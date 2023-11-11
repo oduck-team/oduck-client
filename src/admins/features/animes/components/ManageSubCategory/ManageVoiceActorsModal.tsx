@@ -3,18 +3,27 @@ import {
   Center,
   Checkbox,
   Flex,
+  Group,
   Loader,
   Modal,
   Table,
   TextInput,
+  Text,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { modals } from "@mantine/modals";
+import { useRef, useState } from "react";
 
-import useCreateVoiceActor from "../hooks/useCreateVoiceActor";
-import useVoiceActors from "../hooks/useVoiceActors";
+import useVoiceActorManager from "../../hooks/useVoiceActorManager";
 
-import CreateSubCategoryButton from "./CreateSubCategoryButton";
-import { HeaderBottom, HeaderTop } from "./EditVoiceActorsModal.style";
+import { HeaderBottom, HeaderTop } from "./ManageVoiceActorsModal.style";
+
+function sortBykey<T>(array: T[], key: keyof T) {
+  return [...array].sort((a, b) => {
+    const aValue = a[key] as string;
+    const bValue = b[key] as string;
+    return aValue.localeCompare(bValue, "ko-KR");
+  });
+}
 
 interface SelectedActor {
   id: number;
@@ -22,9 +31,15 @@ interface SelectedActor {
   part: string;
 }
 
+/**
+ * @description 성우 관리 모달입니다
+ */
 interface EditVoiceActorsModalProps {
   selectedActorsInitial?: SelectedActor[];
+
+  /** 성우를 애니에 추가 */
   onAdd: (actors: SelectedActor[]) => void;
+
   onClose: () => void;
 }
 
@@ -33,16 +48,17 @@ export default function EditVoiceActorsModal({
   onAdd,
   onClose,
 }: EditVoiceActorsModalProps) {
-  const { data: voiceActors, isLoading: isLoadingActors } = useVoiceActors();
-  const createVoiceActorMutation = useCreateVoiceActor();
-  const [selectedActors, setSelectedActors] = useState<SelectedActor[]>(
+  const {
+    voiceActors,
+    isLoading: isLoadingActors,
+    createVoiceActor,
+    updateVoiceActor,
+    deleteVoiceActor,
+  } = useVoiceActorManager();
+  const [selectedActors, setSelectedActors] = useState<SelectedActor[]>( // 선택한 성우
     selectedActorsInitial,
   );
-  const [searchKeyword, setSearchKeyword] = useState("");
-
-  useEffect(() => {
-    setSelectedActors(selectedActorsInitial);
-  }, [selectedActorsInitial]);
+  const [searchKeyword, setSearchKeyword] = useState(""); // 성우 검색
 
   const handleCheckboxChange = (
     actorId: number,
@@ -76,13 +92,85 @@ export default function EditVoiceActorsModal({
     onAdd(actorsToAdd);
   };
 
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const handleCreate = () => {
+    modals.open({
+      title: `성우 등록`,
+      children: (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!inputRef.current) return;
+            createVoiceActor.mutate(inputRef.current.value);
+            modals.closeAll();
+          }}
+        >
+          <TextInput
+            ref={inputRef}
+            label="이름"
+            placeholder="이름을 입력하세요"
+            data-autofocus
+            withAsterisk
+          />
+          <Button fullWidth type="submit" mt="md">
+            등록
+          </Button>
+        </form>
+      ),
+    });
+  };
+
+  const handleEdit = (actor: VoiceActor) => {
+    modals.open({
+      title: `성우 수정`,
+      children: (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!inputRef.current) return;
+            updateVoiceActor.mutate({
+              id: actor.id,
+              name: inputRef.current.value,
+            });
+            modals.closeAll();
+          }}
+        >
+          <TextInput
+            ref={inputRef}
+            defaultValue={actor.name}
+            label="이름"
+            placeholder="이름을 입력하세요"
+            data-autofocus
+            withAsterisk
+          />
+          <Button fullWidth type="submit" mt="md">
+            수정
+          </Button>
+        </form>
+      ),
+    });
+  };
+
+  const handleDelete = (actor: VoiceActor) =>
+    modals.openConfirmModal({
+      title: "삭제 확인",
+      children: (
+        <Text size="sm">
+          &apos;{actor.name}&apos;을/를 정말로 삭제하시겠어요?
+        </Text>
+      ),
+      labels: { confirm: "삭제", cancel: "취소" },
+      confirmProps: { color: "red" },
+      onConfirm: () => deleteVoiceActor.mutate(actor.id),
+    });
+
   const filteredVoiceActors = searchKeyword
     ? voiceActors?.filter((actor) =>
         actor.name.toLowerCase().includes(searchKeyword.toLowerCase()),
       )
     : voiceActors;
 
-  if (isLoadingActors)
+  if (isLoadingActors) {
     return (
       <Modal title="성우 관리" size="xl" opened onClose={onClose}>
         <Center>
@@ -90,8 +178,8 @@ export default function EditVoiceActorsModal({
         </Center>
       </Modal>
     );
-
-  const rows = filteredVoiceActors?.map((actor) => {
+  }
+  const rows = sortBykey(filteredVoiceActors || [], "name")?.map((actor) => {
     const selectedActor = selectedActors.find((item) => item.id === actor.id);
 
     return (
@@ -119,6 +207,26 @@ export default function EditVoiceActorsModal({
             placeholder="배역 입력"
           />
         </Table.Td>
+        <Table.Td>
+          <Group gap="sm">
+            <Button
+              variant="default"
+              size="xs"
+              fw={400}
+              onClick={() => handleEdit(actor)}
+            >
+              수정
+            </Button>
+            <Button
+              variant="default"
+              size="xs"
+              fw={400}
+              onClick={() => handleDelete(actor)}
+            >
+              삭제
+            </Button>
+          </Group>
+        </Table.Td>
       </Table.Tr>
     );
   });
@@ -143,12 +251,17 @@ export default function EditVoiceActorsModal({
               />
             </div>
             <Flex justify="flex-end" gap="sm">
-              <CreateSubCategoryButton
-                label="+ 새 성우"
-                modalTitle="새 성우 등록"
-                onCreate={(name) => createVoiceActorMutation.mutate(name)}
-              />
-              <Button onClick={handleSubmit}>확인</Button>
+              <Button
+                variant="default"
+                size="xs"
+                fw={400}
+                onClick={handleCreate}
+              >
+                새 성우
+              </Button>
+              <Button size="xs" onClick={handleSubmit}>
+                확인
+              </Button>
             </Flex>
           </HeaderBottom>
         </Modal.Header>
@@ -160,6 +273,7 @@ export default function EditVoiceActorsModal({
                   <Table.Th>이름</Table.Th>
                   <Table.Th>선택</Table.Th>
                   <Table.Th>배역</Table.Th>
+                  <Table.Th></Table.Th>
                 </Table.Tr>
               </Table.Thead>
               <Table.Tbody>{rows}</Table.Tbody>

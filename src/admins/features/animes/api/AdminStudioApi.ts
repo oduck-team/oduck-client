@@ -1,16 +1,28 @@
 import { ADMIN_BASE_URL } from "@/admins/constants/config";
-import { get, post } from "@/libs/api";
+import { del, get, patch, post } from "@/libs/api";
 
 interface CreateStudioDto {
   name: string;
 }
 
+interface UpdateStudioDto {
+  name: string;
+}
+
 export default class AdminStudioApi {
+  create(dto: CreateStudioDto) {
+    return post(ADMIN_BASE_URL + "/studios", dto);
+  }
+
   getList() {
     return get<Studio[]>(ADMIN_BASE_URL + "/studios");
   }
 
-  create(dto: CreateStudioDto) {
-    return post(ADMIN_BASE_URL + "/studios", dto);
+  update(id: number, dto: UpdateStudioDto) {
+    return patch(ADMIN_BASE_URL + `/studios/${id}`, dto);
+  }
+
+  delete(id: number) {
+    return del(ADMIN_BASE_URL + `/studios/${id}`);
   }
 }
