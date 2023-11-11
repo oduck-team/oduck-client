@@ -1,7 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
+import { useCommonToastError } from "@/libs/error";
 
 export default function useEvaluation(animeId: number) {
   const queryClient = useQueryClient();
@@ -9,6 +11,8 @@ export default function useEvaluation(animeId: number) {
   const {
     user: { memberId },
   } = useAuth();
+
+  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const { data } = useQuery({
     queryKey: ["evaluation", animeId, memberId],
@@ -30,6 +34,19 @@ export default function useEvaluation(animeId: number) {
       // 사용자의 평가 여부 및 score 조회 query 무효화
       queryClient.invalidateQueries(["evaluation", animeId, memberId]);
       // TODO: 애니 평균 평점 조회 query 무효화
+    },
+    onError: (error) => {
+      if (error instanceof AxiosError && error.response?.status) {
+        const status = error.response.status;
+        switch (status) {
+          case 401:
+            toastAuthError();
+            break;
+          default:
+            toastDefaultError();
+            break;
+        }
+      }
     },
   });
 
