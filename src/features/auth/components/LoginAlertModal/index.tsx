@@ -11,10 +11,6 @@ interface LoginAlertModalProps {
 
 export default function LoginAlertModal({ onClose }: LoginAlertModalProps) {
   const navigate = useNavigate();
-
-  /**
-   * 현재 페이지를 리다이렉트로 지정후 로그인페이지로 이동합니다.
-   */
   const handleClickLogin = () => {
     navigate("/login");
   };
