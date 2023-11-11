@@ -4,13 +4,10 @@ import { ActionBarContainer, ButtonContainer } from "./ActionBar.style";
 import ReviewLikeButton from "./ReviewLikeButton";
 import ReviewMoreButton from "./ReviewMoreButton";
 
-export type Include = "time" | "common";
-
 export interface ActionBarProps {
   isMine: boolean;
   isLiked: boolean;
   likeCount: number;
-  include?: Include;
   createdAt?: string;
   isTimeAgo?: boolean;
 }
@@ -18,16 +15,15 @@ export default function ActionBar({
   isMine,
   isLiked,
   likeCount,
-  include = "common",
   createdAt,
   isTimeAgo,
 }: ActionBarProps) {
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
   return (
-    <ActionBarContainer include={include}>
-      {include === "time" && date && <time>{date}</time>}
-      <ButtonContainer include={include} onClick={(e) => e.stopPropagation()}>
+    <ActionBarContainer>
+      {date && <time>{date}</time>}
+      <ButtonContainer onClick={(e) => e.stopPropagation()}>
         <ReviewLikeButton
           isLiked={isLiked}
           count={compactNumber(likeCount, "ko-KR")}

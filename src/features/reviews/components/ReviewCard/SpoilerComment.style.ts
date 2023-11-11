@@ -7,6 +7,7 @@ export const SpoilerCommentContainer = styled.div`
   height: 56px;
   width: 100%;
   padding: 0 16px;
+  margin: 12px 0 6px;
   border: none;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.neutral["05"]};

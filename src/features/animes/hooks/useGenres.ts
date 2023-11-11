@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 
-import useAdminApi from "@/admins/hooks/useAdminApi";
+import { useApi } from "@/hooks/useApi";
 
-export default function useGenres() {
-  const { genreApi } = useAdminApi();
+export default function useGeneres() {
+  const { genreApi } = useApi();
 
   return useQuery({
     queryKey: ["genres"],

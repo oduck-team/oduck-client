@@ -32,7 +32,6 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
             isSpoiler={review.isSpoiler}
           />
           <ReviewCard.ActionBar
-            include="time"
             createdAt={review.createdAt}
             isTimeAgo={false}
             isMine={isMine}
