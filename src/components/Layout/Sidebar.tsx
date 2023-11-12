@@ -64,14 +64,14 @@ export default function Sidebar({
   onClickItem,
   onClose,
 }: SidebarProps) {
-  const { user, isLoggedIn, logout } = useAuth();
+  const { user, logout } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleClickUserMenu = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
 
-    if (!isLoggedIn) {
+    if (!user) {
       setIsLoginModalVisible(true);
       return;
     }
@@ -110,7 +110,7 @@ export default function Sidebar({
       onClose={onClose}
     >
       <div>
-        {isLoggedIn && (
+        {user && (
           <>
             <Profile to="/profile">
               <Avatar
@@ -122,7 +122,7 @@ export default function Sidebar({
             </Profile>
           </>
         )}
-        {!isLoggedIn && (
+        {!user && (
           <>
             <Profile to="/login">
               <UserCircle size={56} weight="fill" color="#ccc" />
@@ -146,7 +146,7 @@ export default function Sidebar({
           {helpMenuItems.map((item) => (
             <Navigation.Item key={item.id} item={item} onClick={onClickItem} />
           ))}
-          {isLoggedIn && (
+          {user && (
             <Navigation.Item
               item={{
                 id: "logout",

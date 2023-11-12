@@ -8,14 +8,13 @@ import {
 } from "react";
 
 import useSnackBar from "@/components/SnackBar/useSnackBar";
-import useLocalUser from "@/features/auth/hooks/useLocalUser";
 import { useApi } from "@/hooks/useApi";
 
 import { EmailLoginDto } from "../api/AuthApi";
+import useAutoLogin from "../hooks/useAutoLogin";
 
 interface AuthState {
-  user: User;
-  isLoggedIn: boolean;
+  user: User | undefined;
 }
 
 interface AuthAction {
@@ -25,19 +24,8 @@ interface AuthAction {
   logout: () => Promise<void>;
 }
 
-const DEFAULT_USER: User = {
-  name: "",
-  memberId: 0,
-  description: "",
-  thumbnail: "",
-  point: 0,
-  createdAt: "",
-  updatedAt: "",
-} as const;
-
 const AuthContext = createContext<AuthState & AuthAction>({
-  user: DEFAULT_USER,
-  isLoggedIn: false,
+  user: undefined,
   fetchUser: async () => {},
   socialLogin: () => {},
   emailLogin: async () => {},
@@ -48,56 +36,45 @@ export default AuthContext;
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const { authApi } = useApi();
-  const { localUser, setLocalUser, removeLocalUser } = useLocalUser();
-  const [user, setUser] = useState<User>(localUser ?? DEFAULT_USER);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User>();
+  const { setAutoLogin, removeAutoLogin, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
   const fetchUser = useCallback(async () => {
     try {
       const user = await authApi.getStatus();
       setUser(user);
-      setLocalUser(user);
-      setIsLoggedIn(true);
+      setAutoLogin(true);
     } catch (e) {
-      setUser(DEFAULT_USER);
-      removeLocalUser();
-      setIsLoggedIn(false);
+      setUser(undefined);
+      //FIXME: 배포환경 테스트를 위해 주석 처리
+      // removeAutoLogin();
     }
-  }, [authApi, removeLocalUser, setLocalUser]);
+  }, [authApi, setAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();
     snackbar.open({ message: "로그아웃 되었어요" });
-    setUser(DEFAULT_USER);
-    removeLocalUser();
-    setIsLoggedIn(false);
+    removeAutoLogin();
     window.location.replace("/");
-  }, [authApi, removeLocalUser, snackbar]);
+  }, [authApi, removeAutoLogin, snackbar]);
 
+  /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
-    if (localUser) {
+    if (isAutoLogin) {
       fetchUser();
     }
-  }, []);
+  }, [isAutoLogin]);
 
   const value = useMemo<AuthState & AuthAction>(
     () => ({
       user,
-      isLoggedIn,
       fetchUser,
       socialLogin: authApi.socialLogin,
       emailLogin: authApi.emailLogin,
       logout,
     }),
-    [
-      user,
-      isLoggedIn,
-      fetchUser,
-      authApi.socialLogin,
-      authApi.emailLogin,
-      logout,
-    ],
+    [user, fetchUser, authApi.socialLogin, authApi.emailLogin, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

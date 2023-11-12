@@ -25,19 +25,15 @@ import ImageDropzone from "@/admins/components/Form/ImageDropzone";
 import ADMIN_ROUTE from "@/admins/constants/path";
 
 import useCreateAnime from "../hooks/useCreateAnime";
-import useCreateGenre from "../hooks/useCreateGenre";
-import useCreateOriginalAuthor from "../hooks/useCreateOriginalAuthor";
-import useCreateSeries from "../hooks/useCreateSeries";
-import useCreateStudio from "../hooks/useCreateStudio";
-import useGenres from "../hooks/useGenres";
-import useOriginalAuthors from "../hooks/useOriginalAuthors";
-import useSeries from "../hooks/useSeries";
-import useStudios from "../hooks/useStudios";
+import useGenreManager from "../hooks/useGenreManager";
+import useOriginalAuthorManager from "../hooks/useOriginalAuthorsManager";
+import useSeriesManager from "../hooks/useSeriesManager";
+import useStudioManager from "../hooks/useStudioManager";
 
 import AnimeFormActions from "./AdminFormActions";
 import AnimePreviewCard from "./AnimePreviewCard";
-import CreateSubCategoryButton from "./CreateSubCategoryButton";
-import EditVoiceActorsModal from "./EditVoiceActorsModal";
+import ManageSubCategory from "./ManageSubCategory/ManageSubCategory";
+import ManageVoiceActorsModal from "./ManageSubCategory/ManageVoiceActorsModal";
 
 /** input내 요소 배치 순서 */
 const INPUT_WRAPPER_ORDER: ("label" | "input" | "description" | "error")[] = [
@@ -68,23 +64,56 @@ const STATUSES = [
   { value: "UNKNOWN", label: "알 수 없음" },
 ];
 
+function sortBykey<T>(array: T[], key: keyof T) {
+  return [...array].sort((a, b) => {
+    const aValue = a[key] as string;
+    const bValue = b[key] as string;
+    return aValue.localeCompare(bValue, "ko-KR");
+  });
+}
+
 export default function AdminCreateAnimeForm() {
-  const { form, createAnimeMutation } = useCreateAnime();
-  const { data: series, isLoading: isLoadingSeries } = useSeries();
-  const createSeriesMutation = useCreateSeries();
-  const { data: originalAuthors, isLoading: isLoadingAuthors } =
-    useOriginalAuthors();
-  const createOriginalAuthorMutation = useCreateOriginalAuthor();
-  const { data: genres, isLoading: isLoadingGenres } = useGenres();
-  const createGnereMutation = useCreateGenre();
-  const { data: studios, isLoading: isLoadingStudios } = useStudios();
-  const createStudioMutation = useCreateStudio();
+  const {
+    series,
+    isLoading: isSeriesLoading,
+
+    createSeries,
+    updateSeries,
+    deleteSeries,
+  } = useSeriesManager();
+
+  const {
+    originalAuthors,
+    isLoading: isOriginalAuthorsLoading,
+    createOriginalAuthor,
+    updateOriginalAuthor,
+    deleteOriginalAuthor,
+  } = useOriginalAuthorManager();
+
+  const {
+    studios,
+    isLoading: isStudiosLoading,
+    createStudio,
+    updateStudio,
+    deleteStudio,
+  } = useStudioManager();
+
+  const {
+    genres,
+    isLoading: isGenresLoading,
+    createGenre,
+    updateGenre,
+    deleteGenre,
+  } = useGenreManager();
+
   const [
     isEditActorsModalVisible,
     { open: openActorsModal, close: closeActorsModal },
   ] = useDisclosure(false);
+
   const navigate = useNavigate();
 
+  const { form, createAnimeMutation } = useCreateAnime();
   const { error: createError } = createAnimeMutation;
 
   useEffect(() => {
@@ -97,7 +126,7 @@ export default function AdminCreateAnimeForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(form.values);
+
     form.validate();
     if (!form.isValid()) {
       return;
@@ -120,32 +149,32 @@ export default function AdminCreateAnimeForm() {
   };
 
   const seriesOptions =
-    !isLoadingSeries && series
-      ? series.map((s) => ({
+    !isSeriesLoading && series
+      ? sortBykey(series, "title").map((s) => ({
           value: s.id.toString(),
           label: s.title,
         }))
       : [];
 
   const authorsOptions =
-    !isLoadingAuthors && originalAuthors
-      ? originalAuthors.map((author) => ({
+    !isOriginalAuthorsLoading && originalAuthors
+      ? sortBykey(originalAuthors, "name").map((author) => ({
           value: author.id.toString(),
           label: author.name,
         }))
       : [];
 
   const genresOptions =
-    !isLoadingGenres && genres
-      ? genres.map((genre) => ({
+    !isGenresLoading && genres
+      ? sortBykey(genres, "name").map((genre) => ({
           value: genre.id.toString(),
           label: genre.name,
         }))
       : [];
 
   const studiosOptions =
-    !isLoadingStudios && studios
-      ? studios.map((studio) => ({
+    !isStudiosLoading && studios
+      ? sortBykey(studios, "name").map((studio) => ({
           value: studio.id.toString(),
           label: studio.name,
         }))
@@ -203,10 +232,17 @@ export default function AdminCreateAnimeForm() {
             style={{ flex: 1 }}
             {...form.getInputProps("seriesId")}
           />
-          <CreateSubCategoryButton
-            label="+"
-            modalTitle="시리즈 등록"
-            onCreate={(title) => createSeriesMutation.mutate(title)}
+          <ManageSubCategory
+            title="시리즈"
+            data={
+              series?.map((s) => ({
+                id: s.id,
+                name: s.title,
+              })) || []
+            }
+            onCreate={(title) => createSeries.mutate(title)}
+            onUpdate={(id, title) => updateSeries.mutate({ id, title })}
+            onDelete={(id) => deleteSeries.mutate(id)}
           />
         </Flex>
 
@@ -291,10 +327,12 @@ export default function AdminCreateAnimeForm() {
             style={{ flex: 1 }}
             {...form.getInputProps("originalAuthorIds")}
           />
-          <CreateSubCategoryButton
-            label="+"
-            modalTitle="원작자 등록"
-            onCreate={(name) => createOriginalAuthorMutation.mutate(name)}
+          <ManageSubCategory
+            title="원작자"
+            data={originalAuthors || []}
+            onCreate={(name) => createOriginalAuthor.mutate(name)}
+            onUpdate={(id, name) => updateOriginalAuthor.mutate({ id, name })}
+            onDelete={(id) => deleteOriginalAuthor.mutate(id)}
           />
         </Flex>
 
@@ -309,10 +347,12 @@ export default function AdminCreateAnimeForm() {
             style={{ flex: 1 }}
             {...form.getInputProps("studioIds")}
           />
-          <CreateSubCategoryButton
-            label="+"
-            modalTitle="제작사 등록"
-            onCreate={(name) => createStudioMutation.mutate(name)}
+          <ManageSubCategory
+            title="제작사"
+            data={studios || []}
+            onCreate={(name) => createStudio.mutate(name)}
+            onUpdate={(id, name) => updateStudio.mutate({ id, name })}
+            onDelete={(id) => deleteStudio.mutate(id)}
           />
         </Flex>
 
@@ -327,10 +367,12 @@ export default function AdminCreateAnimeForm() {
             style={{ flex: 1 }}
             {...form.getInputProps("genreIds")}
           />
-          <CreateSubCategoryButton
-            label="+"
-            modalTitle="장르 등록"
-            onCreate={(name) => createGnereMutation.mutate(name)}
+          <ManageSubCategory
+            title="장르"
+            data={genres || []}
+            onCreate={(name) => createGenre.mutate(name)}
+            onUpdate={(id, name) => updateGenre.mutate({ id, name })}
+            onDelete={(id) => deleteGenre.mutate(id)}
           />
         </Flex>
 
@@ -368,7 +410,7 @@ export default function AdminCreateAnimeForm() {
             </Stack>
           </Input.Wrapper>
           {isEditActorsModalVisible && (
-            <EditVoiceActorsModal
+            <ManageVoiceActorsModal
               selectedActorsInitial={form.values.voiceActors}
               onAdd={(actors) => {
                 closeActorsModal();

@@ -29,9 +29,7 @@ export default function BookmarkDeleteModal({
   onClose,
 }: BookmarkDeleteModalProps) {
   const { bookmarkApi } = useApi();
-  const {
-    user: { memberId, name },
-  } = useAuth();
+  const { user } = useAuth();
   const deleteBookmark = useMutation(() => bookmarkApi.toggleBookmark(animeId));
   const queryClient = useQueryClient();
   const { toastAuthError, toastDefaultError } = useCommonToastError();
@@ -41,10 +39,10 @@ export default function BookmarkDeleteModal({
   const handleDeleteButtonClick = useDebounce(() => {
     deleteBookmark.mutate(undefined, {
       onSuccess: () => {
-        queryClient.invalidateQueries(["profile", name]);
-        queryClient.invalidateQueries(["profile", memberId, "bookmark"]);
-        queryClient.invalidateQueries(["bookmark", memberId, animeId]);
-        queryClient.invalidateQueries(["anime", animeId, memberId]);
+        queryClient.invalidateQueries(["profile", user?.name]);
+        queryClient.invalidateQueries(["profile", user?.memberId, "bookmark"]);
+        queryClient.invalidateQueries(["bookmark", user?.memberId, animeId]);
+        queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
 
         toast.success({
           message: `${title} 탈덕 했어요.`,

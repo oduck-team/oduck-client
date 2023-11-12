@@ -10,11 +10,9 @@ import { useApi } from "@/hooks/useApi";
  */
 export default function useBookmark(animeId: number) {
   const { bookmarkApi } = useApi();
-  const {
-    user: { memberId },
-  } = useAuth();
+  const { user } = useAuth();
   return useQuery({
-    queryKey: ["bookmark", memberId, animeId],
+    queryKey: ["bookmark", user?.memberId, animeId],
     queryFn: async () => {
       try {
         const { createdAt } = await bookmarkApi.getBookmark(animeId);

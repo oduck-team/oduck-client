@@ -2,26 +2,18 @@ import { get, patch, post } from "@/libs/api";
 
 import { ReviewSortOption } from "../hook/useGetAnimeReviews";
 
-export interface ReviewInfo {
+export type ReviewInfo = Omit<Review, "anime"> & {
   reviewId: number;
   animeId: number;
-  name: string;
   thumbnail: string;
   score: number;
-  content: string;
-  isSpoiler: boolean;
-  isLiked: boolean;
-  likeCount: number;
   isMine: boolean;
-  createdAt: string;
-}
+};
 
-export interface AddReviewDto {
-  name: string;
+export type AddReviewDto = Pick<Review, "name" | "content"> & {
   animeId: number;
-  isSpoiler: boolean;
-  content: string;
-}
+  hasSpoiler: boolean;
+};
 
 export interface UserEvaluation {
   createdAt: string;
@@ -29,12 +21,12 @@ export interface UserEvaluation {
 }
 
 export default class ReviewApi {
-  /** @description 리뷰 작성 요청*/
+  /** @description 리뷰 작성 요청 */
   async addReview(review: AddReviewDto): Promise<void> {
     return post("/short-reviews", review);
   }
 
-  /** @description 한 애니의 리뷰 목록 요청*/
+  /** @description 한 애니의 리뷰 목록 요청 */
   async getAnimeReviews(
     animeId: number,
     pageParam: string,

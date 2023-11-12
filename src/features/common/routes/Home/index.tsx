@@ -156,11 +156,11 @@ export default function Home() {
     cardAnime2,
   ];
 
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const handlerReviewButtonClick = () => {
-    if (isLoggedIn) navigate("/search");
+    if (user) navigate("/search");
     else navigate("/login");
   };
 

@@ -20,7 +20,7 @@ const DEBOUNCE_DELAY = 200;
 export default function ReviewRating({ animeId }: ReviewRatingProps) {
   const hasReviewed = true; // dev용 변수
 
-  const { isLoggedIn } = useAuth();
+  const { user } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
@@ -28,7 +28,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   console.log("평가 여부: ", evaluation?.createdAt);
 
   const handleRate = useDebounce((value: number) => {
-    if (!isLoggedIn) {
+    if (!user) {
       setIsLoginModalVisible(true);
       return;
     }

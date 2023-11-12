@@ -8,7 +8,7 @@ export default function useAnime(animeId: number) {
   const { user } = useAuth();
 
   return useQuery({
-    queryKey: ["anime", animeId, user.memberId],
+    queryKey: ["anime", animeId, user?.memberId],
     queryFn: () => animeApi.getById(animeId),
   });
 }
