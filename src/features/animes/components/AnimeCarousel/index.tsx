@@ -1,24 +1,17 @@
-import { CaretLeft, CaretRight, Star } from "@phosphor-icons/react";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import { useApi } from "@/hooks/useApi";
 
-import { getListOfRecentReviewedResponse } from "../../api/AnimeApi";
-
+import SlideItem from "./SlideItem";
 import {
   AnimeCarouselContainer,
   Background,
   Slides,
-  Slide,
-  InfoContainer,
-  Info,
   Indicator,
   IndicatorContainer,
-  Rating,
-  Review,
 } from "./style";
 
 export default function AnimeCarousel() {
@@ -188,28 +181,5 @@ export default function AnimeCarousel() {
         </AnimeCarouselContainer>
       )}
     </>
-  );
-}
-
-function SlideItem({ anime }: { anime: getListOfRecentReviewedResponse }) {
-  const navigate = useNavigate();
-  return (
-    <Slide
-      image={anime.thumbnail}
-      onClick={() => navigate(`/animes/${anime.id}`)}
-    >
-      <InfoContainer>
-        <Info>
-          <div>{anime.title}</div>
-          <Review>
-            <span>{anime.review}</span>
-            <Rating>
-              <Star weight="fill" />
-              <span> {anime.avgScore}</span>
-            </Rating>
-          </Review>
-        </Info>
-      </InfoContainer>
-    </Slide>
   );
 }
