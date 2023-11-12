@@ -8,14 +8,12 @@ import { useCommonToastError } from "@/libs/error";
 export default function useEvaluation(animeId: number) {
   const queryClient = useQueryClient();
   const { reviewApi } = useApi();
-  const {
-    user: { memberId },
-  } = useAuth();
+  const { user } = useAuth();
 
   const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const { data } = useQuery({
-    queryKey: ["evaluation", animeId, memberId],
+    queryKey: ["evaluation", animeId, user?.memberId],
     queryFn: async () => {
       try {
         return await reviewApi.getEvaluation(animeId);
@@ -32,7 +30,7 @@ export default function useEvaluation(animeId: number) {
     },
     onSuccess: () => {
       // 사용자의 평가 여부 및 score 조회 query 무효화
-      queryClient.invalidateQueries(["evaluation", animeId, memberId]);
+      queryClient.invalidateQueries(["evaluation", animeId, user?.memberId]);
       // TODO: 애니 평균 평점 조회 query 무효화
     },
     onError: (error) => {
