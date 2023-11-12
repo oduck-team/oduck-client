@@ -1,5 +1,7 @@
 import { get } from "@/libs/api";
 
+import listOfRecentReviewedMock from "./mock/listOfRecentReviewed.json";
+
 /* 애니 조회 정렬 기준*/
 export type AnimeSort = "LATEST" | "REVIEW_COUNT" | "SCORE";
 export type Direction = "ASC" | "DESC";
@@ -56,6 +58,14 @@ type ListAnimeResponse = CursorPage<{
   starScoreAvg: number;
 }>;
 
+export type getListOfRecentReviewedResponse = Pick<
+  Anime,
+  "id" | "title" | "thumbnail"
+> & {
+  review: string;
+  avgScore: number;
+};
+
 export default class AnimeApi {
   getById(id: number): Promise<DetailAnimeResponse> {
     return get(`/animes/${id}`);
@@ -72,5 +82,22 @@ export default class AnimeApi {
 
     const queryString = new URLSearchParams(queryParams).toString();
     return get(`/animes?${queryString}`);
+  }
+
+  async getListOfRecentReviewed(): Promise<getListOfRecentReviewedResponse[]> {
+    return [
+      listOfRecentReviewedMock.at(-1) as getListOfRecentReviewedResponse,
+      ...listOfRecentReviewedMock,
+      listOfRecentReviewedMock[0],
+    ];
+
+    //FIXME: URI 수정
+    // 무한 캐러셀을 위한 배열 확장
+    // return get<getListOfRecentReviewdResponse[]>(`/someURI`) //
+    //   .then((data) => [
+    //     data.at(-1) as getListOfRecentReviewdResponse,
+    //     ...data,
+    //     data[0],
+    //   ]);
   }
 }

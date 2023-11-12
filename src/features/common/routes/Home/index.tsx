@@ -2,9 +2,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
-import AnimeCarousel, {
-  AnimeWithReview,
-} from "@/features/animes/components/AnimeCarousel";
+import AnimeCarousel from "@/features/animes/components/AnimeCarousel";
 import AnimeRanking, {
   Ranking,
 } from "@/features/animes/components/AnimeRanking";
@@ -15,34 +13,6 @@ import Discord from "./Discord";
 import RecentReview from "./RecentReview";
 
 export default function Home() {
-  const carouselAnimes = [
-    {
-      id: 1,
-      title: "주술회전",
-      thumbnail: "https://url.kr/lo4miy",
-      review: "리뷰1입니다리뷰1입니다리뷰1입니다리뷰1입니다",
-    },
-    {
-      id: 2,
-      title:
-        "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
-      thumbnail: "https://url.kr/azbxi1",
-      review: "리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다",
-    },
-    {
-      id: 3,
-      title: "제목333",
-      thumbnail: "https://url.kr/txfijy",
-      review: "리뷰3입니다리뷰3입니다리뷰3입니다리뷰3입니다",
-    },
-    {
-      id: 4,
-      title: "제목444",
-      thumbnail: "https://url.kr/4gtucf",
-      review: "리뷰4입니다리뷰4입니다리뷰4입니다리뷰4입니다",
-    },
-  ] as AnimeWithReview[];
-
   const rankingAnimes: Ranking[] = [
     {
       id: "123451",
@@ -166,7 +136,7 @@ export default function Home() {
 
   return (
     <HomeContainer>
-      <AnimeCarousel animes={carouselAnimes} />
+      <AnimeCarousel />
       <AnimeRanking title="이번주 TOP10" contents={rankingAnimes} />
       <Discord />
       <AnimeSlide title="2023년 3분기 신작" animes={slideAnimes} />
