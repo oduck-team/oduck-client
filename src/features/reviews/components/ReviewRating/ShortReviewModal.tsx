@@ -30,6 +30,7 @@ export interface MOCK_USER_REVIEW_DATA {
 interface ShortReviewModalProps {
   onClose: () => void;
   onReview: () => void;
+  showBackdrop?: boolean;
   userReviewData?: MOCK_USER_REVIEW_DATA;
 }
 
@@ -37,6 +38,7 @@ export default function ShortReviewModal({
   onClose,
   onReview,
   userReviewData,
+  showBackdrop = true,
   children,
 }: PropsWithChildren<ShortReviewModalProps>) {
   const {
@@ -98,7 +100,7 @@ export default function ShortReviewModal({
   ];
 
   return (
-    <Modal onClose={onClose} showBackdrop={false}>
+    <Modal onClose={onClose} showBackdrop={showBackdrop}>
       <Modal.Content>
         <Title>한 줄 리뷰 모달</Title>
         {children}

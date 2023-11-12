@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 
-import useScrollLock from "@/hooks/useScrollLock";
-
 import { OPTION_HEIGHT, SHOW_MAX_OPTION } from "./style";
 
 import { Option } from ".";
@@ -30,8 +28,6 @@ export default function useSelectBox(
     handleListToggle();
   };
 
-  useScrollLock(listVisible);
-
   const scrollToSelectedOption = useCallback(
     (direction: Direction) => {
       if (direction === "ArrowDown") {
@@ -56,6 +52,7 @@ export default function useSelectBox(
   const keyHandler = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === ARROW_DOWN) {
+        e.preventDefault();
         cursor.current =
           cursor.current < options.length - 1 ? cursor.current + 1 : 0;
 
@@ -65,6 +62,7 @@ export default function useSelectBox(
       }
 
       if (e.key === ARROW_UP) {
+        e.preventDefault();
         cursor.current =
           cursor.current > 0 ? cursor.current - 1 : options.length - 1;
 
