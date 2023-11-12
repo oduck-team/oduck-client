@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/components/Button";
 import { useApi } from "@/hooks/useApi";
 
+import AnimeCarouselLoading from "./AnimeCarouselLoading";
 import SlideItem from "./SlideItem";
 import {
   AnimeCarouselContainer,
@@ -23,7 +24,7 @@ export default function AnimeCarousel() {
   const slideContainerRef = useRef<HTMLDivElement | null>(null); // 슬라이드 박스 가로 길이 측정에 사용됨
   const [width, setWidth] = useState<number | null>(null); // 슬라이드 박스 가로 길이
   const { animeApi } = useApi();
-  const { data: animes } = useQuery({
+  const { data: animes, isLoading } = useQuery({
     queryKey: ["listOfRecentReviewed"],
     queryFn: () => animeApi.getListOfRecentReviewed(),
   });
@@ -141,6 +142,7 @@ export default function AnimeCarousel() {
     }
   }, [currentSlide, width, animes]);
 
+  if (isLoading) return <AnimeCarouselLoading />;
   return (
     <>
       {animes && (
