@@ -1,12 +1,14 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import Button from "@/components/Button";
+import useAuth from "@/features/auth/hooks/useAuth";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 import { useApi } from "@/hooks/useApi";
 
 import { Header, RecentReviewContainer, Title, ReviewConainer } from "./style";
 
 export default function RecentReview() {
+  const { user } = useAuth();
   const { reviewApi } = useApi();
   const { data } = useInfiniteQuery({
     queryKey: ["MostRecentReviewCard", "first"],
@@ -40,7 +42,7 @@ export default function RecentReview() {
               />
               <ReviewCard.ActionBar
                 createdAt={data.pages[0].createdAt}
-                isMine={false} // TODO: isMine 판별
+                isMine={user?.name === data.pages[0].name ? true : false}
                 isLiked={data.pages[0].isLiked}
                 likeCount={data.pages[0].likeCount}
                 isTimeAgo={true}
