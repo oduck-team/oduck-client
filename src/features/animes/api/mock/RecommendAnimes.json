@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "그대들은 어떻게 살 것인가",
+    "thumbnail": "https://images.unsplash.com/photo-1511360823-5c672a170787?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzJ8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 4.8
+  },
+  {
+    "id": 2,
+    "title": "장송의 프리렌",
+    "thumbnail": "https://images.unsplash.com/photo-1630710478039-9c680b99f800?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODJ8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 3.5
+  },
+  {
+    "id": 3,
+    "title": "환일의 요하네",
+    "thumbnail": "https://images.unsplash.com/photo-1485394735640-56c0356b62cf?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTV8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 0
+  },
+  {
+    "id": 4,
+    "title": "도주중 그레이트 미션",
+    "thumbnail": "https://images.unsplash.com/photo-1627693685101-687bf0eb1222?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA4fHxhbmltZXxlbnwwfHwwfHx8MA%3D%3D",
+    "avgScore": 4
+  },
+  {
+    "id": 5,
+    "title": "썸네일 없음",
+    "thumbnail": "",
+    "avgScore": 3
+  },
+  {
+    "id": 6,
+    "title": "타이틀인 긴 애니메이션 타이틀인 긴 애니메이션 타이틀인 긴 애니메이션 타이틀인 긴 애니메이션",
+    "thumbnail": "https://images.unsplash.com/photo-1594007759138-855170ec8dc0?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTA3fHxhbmltZXxlbnwwfHwwfHx8MA%3D%3D",
+    "avgScore": 4.7
+  },
+  {
+    "id": 7,
+    "title": "레벨 1이지만 유니크 스킬로 최강입니다",
+    "thumbnail": "https://images.unsplash.com/photo-1625895197185-efcec01cffe0?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTR8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 4.8
+  },
+  {
+    "id": 8,
+    "title": "마사무네의 리벤지 R",
+    "thumbnail": "https://plus.unsplash.com/premium_photo-1673373002237-bc21c06b27e5?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTN8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 3.5
+  },
+  {
+    "id": 9,
+    "title": "포켓몬스터",
+    "thumbnail": "https://images.unsplash.com/photo-1641831705160-5d56ac4094cb?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 2.2
+  },
+  {
+    "id": 10,
+    "title": "다크 개더링",
+    "thumbnail": "https://plus.unsplash.com/premium_photo-1676879781067-75642b342eb1?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 5
+  }
+]
