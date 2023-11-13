@@ -1,4 +1,4 @@
-import { CSSVariablesResolver, createTheme } from "@mantine/core";
+import { Button, CSSVariablesResolver, createTheme } from "@mantine/core";
 
 import { blueGray } from "./colors";
 
@@ -8,6 +8,13 @@ export const theme = createTheme({
     blueGray,
   },
   primaryColor: "blueGray",
+  components: {
+    Button: Button.extend({
+      defaultProps: {
+        fw: 400,
+      },
+    }),
+  },
 });
 
 export const resolver: CSSVariablesResolver = (theme) => ({
