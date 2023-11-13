@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import AnimeCarousel from "@/features/animes/components/AnimeCarousel";
-import AnimeRanking, {
-  Ranking,
-} from "@/features/animes/components/AnimeRanking";
+import AnimeRanking from "@/features/animes/components/AnimeRanking";
 import AnimeSlide from "@/features/animes/components/AnimeSlide";
 import useAuth from "@/features/auth/hooks/useAuth";
 
@@ -13,89 +11,6 @@ import Discord from "./Discord";
 import RecentReview from "./RecentReview";
 
 export default function Home() {
-  const rankingAnimes: Ranking[] = [
-    {
-      id: "123451",
-      title: "봇치더락",
-      thumbnail: "https://url.kr/dkt2w7",
-      genre: "판타지/액션",
-      rank: 1,
-      rating: 4.8,
-    },
-    {
-      id: "123452",
-      title: "카구야 님은 고백받고 싶어~ 카구야 님은 고백받고 싶어~",
-      thumbnail: "https://url.kr/azbxi1",
-      genre: "장르2",
-      rank: 2,
-      rating: 4.5,
-    },
-    {
-      id: "123453",
-      title: "주술회전",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르3",
-      rank: 3,
-      rating: 4.3,
-    },
-    {
-      id: "123454",
-      title: "4등인애니라네요",
-      thumbnail: "https://url.kr/txfijy",
-      genre: "장르4",
-      rank: 4,
-      rating: 3.9,
-    },
-    {
-      id: "123455",
-      title: "5등애니요",
-      thumbnail: "https://url.kr/4gtucf",
-      genre: "장르5",
-      rank: 5,
-      rating: 4.8,
-    },
-    {
-      id: "123456",
-      title: "6등애니",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르6",
-      rank: 6,
-      rating: 4.5,
-    },
-    {
-      id: "123457",
-      title: "7등애니7등애니7등애니7등애니7등애니",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르7",
-      rank: 7,
-      rating: 4.3,
-    },
-    {
-      id: "123458",
-      title: "8등애니8등애니8등애니",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르8",
-      rank: 8,
-      rating: 4.7,
-    },
-    {
-      id: "123459",
-      title: "9등애니9등애니9등애니",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르9",
-      rank: 9,
-      rating: 3.3,
-    },
-    {
-      id: "123460",
-      title: "10등애니라네요",
-      thumbnail: "https://url.kr/ma76s1",
-      genre: "장르10",
-      rank: 10,
-      rating: 3.5,
-    },
-  ];
-
   const cardAnime = {
     id: 1,
     title: "주술회전",
@@ -137,7 +52,7 @@ export default function Home() {
   return (
     <HomeContainer>
       <AnimeCarousel />
-      <AnimeRanking title="이번주 TOP10" contents={rankingAnimes} />
+      <AnimeRanking title="이번주 TOP10" />
       <Discord />
       <AnimeSlide title="2023년 3분기 신작" animes={slideAnimes} />
       <RecentReview />
