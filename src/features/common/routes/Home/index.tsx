@@ -1,4 +1,3 @@
-import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -10,6 +9,7 @@ import Discord from "./Discord";
 import NewestAnimes from "./NewestAnimes";
 import RecentReview from "./RecentReview";
 import RecommendAnimes from "./RecommendAnimes";
+import { Bottom, HomeContainer } from "./style";
 
 export default function Home() {
   const { user } = useAuth();
@@ -38,25 +38,3 @@ export default function Home() {
     </HomeContainer>
   );
 }
-
-const HomeContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  padding-bottom: 66px;
-`;
-
-const Bottom = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 0 16px 28px;
-
-  & > span {
-    ${({ theme }) => theme.typo["body-2-r"]};
-    color: ${({ theme }) => theme.colors["neutral"]["60"]};
-    text-align: center;
-  }
-`;
