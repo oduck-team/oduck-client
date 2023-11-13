@@ -34,6 +34,7 @@ export default function useAnimes() {
   const setDisplaySize = (size: number) => {
     setSearchQuery((prev) => ({
       ...prev,
+      page: 1,
       size,
     }));
   };
