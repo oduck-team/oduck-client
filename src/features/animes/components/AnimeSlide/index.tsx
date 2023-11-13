@@ -18,7 +18,7 @@ export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
             id={anime.id}
             thumbnail={anime.thumbnail}
             title={anime.title}
-            starScoreAvg={anime.starScoreAvg}
+            avgScore={anime.avgScore}
           />
         ))}
       </CardSlider>

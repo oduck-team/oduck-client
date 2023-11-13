@@ -8,6 +8,7 @@ import AnimeSlide from "@/features/animes/components/AnimeSlide";
 import useAuth from "@/features/auth/hooks/useAuth";
 
 import Discord from "./Discord";
+import NewestAnimes from "./NewestAnimes";
 import RecentReview from "./RecentReview";
 
 export default function Home() {
@@ -54,7 +55,7 @@ export default function Home() {
       <AnimeCarousel />
       <AnimeRanking title="이번주 TOP10" />
       <Discord />
-      <AnimeSlide title="2023년 3분기 신작" animes={slideAnimes} />
+      <NewestAnimes />
       <RecentReview />
       <AnimeSlide title="덕후들의 눈물샘을 터뜨린" animes={slideAnimes} />
       <AnimeSlide title="이불밖을 못 나오게 하는" animes={slideAnimes} />
