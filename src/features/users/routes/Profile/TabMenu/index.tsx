@@ -29,7 +29,6 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
     isLoadingBookmark,
     reviews,
     isLoadingReview,
-    listCount,
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,
@@ -52,7 +51,7 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
       </Tab>
       <ContentContainer>
         <SortBar
-          count={listCount ?? 0}
+          selectedMenu={selectedMenu}
           selected={selectedSort}
           BUTTONS={SHEET_BUTTONS}
           onClick={handleSortClick}
