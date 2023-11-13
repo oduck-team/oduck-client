@@ -33,7 +33,7 @@ export default function AdminAnimeSearch() {
             radius="md"
             leftSection={<MagnifyingGlass size={16} />}
           >
-            검색
+            검색(미구현)
           </Button>
           <Button type="submit" variant="default" radius="md">
             초기화
