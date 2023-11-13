@@ -1,6 +1,7 @@
 import { get } from "@/libs/api";
 
 import listOfRecentReviewedMock from "./mock/listOfRecentReviewed.json";
+import top10AnimesMock from "./mock/top10Animes.json";
 
 /* 애니 조회 정렬 기준*/
 export type AnimeSort = "LATEST" | "REVIEW_COUNT" | "SCORE";
@@ -66,6 +67,12 @@ export type getListOfRecentReviewedResponse = Pick<
   avgScore: number;
 };
 
+export type TOP10ListResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
+  genres: string[];
+  rank: number;
+  avgScore: number;
+};
+
 export default class AnimeApi {
   getById(id: number): Promise<DetailAnimeResponse> {
     return get(`/animes/${id}`);
@@ -98,5 +105,12 @@ export default class AnimeApi {
     //     ...data,
     //     data[0],
     //   ]);
+  }
+
+  async getTOP10List(): Promise<TOP10ListResponse[]> {
+    return top10AnimesMock;
+
+    //FIXME: URI 수정
+    // return get(`/someURI`)
   }
 }
