@@ -6,6 +6,10 @@ import reviewsMock from "./mock/anime_review_list1.json";
 import reviewsMock2 from "./mock/anime_review_list2.json";
 import reviewsMock3 from "./mock/anime_review_list3.json";
 import reviewsMock4 from "./mock/anime_review_list4.json";
+import recentReviewMock1 from "./mock/recentReview1.json";
+import recentReviewMock2 from "./mock/recentReview2.json";
+import recentReviewMock3 from "./mock/recentReview3.json";
+import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
 import { AddReviewDto, ReviewInfo } from "./review";
 
 export default class ReviewDevApi {
@@ -29,6 +33,22 @@ export default class ReviewDevApi {
     else {
       if (pageParam === "7") return reviewsMock2;
       else return reviewsMock;
+    }
+  }
+
+  async getRecentReviewList(
+    pageParam: string | undefined,
+    size: number = 10,
+  ): Promise<CursorPage<Review>> {
+    if (size === 1) return recentReviewOnlyOneMock;
+
+    switch (pageParam) {
+      case "2023-10-03T21:05:31.859":
+        return recentReviewMock2;
+      case "2023-09-21T21:05:31.859":
+        return recentReviewMock1;
+      default:
+        return recentReviewMock3;
     }
   }
 }
