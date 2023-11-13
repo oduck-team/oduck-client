@@ -2,6 +2,7 @@ import { get } from "@/libs/api";
 
 import listOfRecentReviewedMock from "./mock/listOfRecentReviewed.json";
 import newestAnimes from "./mock/newestAnimes.json";
+import recommendAnimesMock from "./mock/RecommendAnimes.json";
 import top10AnimesMock from "./mock/top10Animes.json";
 
 /* 애니 조회 정렬 기준*/
@@ -121,6 +122,14 @@ export default class AnimeApi {
 
   async getNewestList(): Promise<AnimeSlideResponse[]> {
     return newestAnimes;
+
+    //FIXME: URI 수정
+    // return get(`/someURI`)
+  }
+
+  //TODO: 어떤식으로 요청 할 지 정하기
+  async getRecommendList(): Promise<AnimeSlideResponse[]> {
+    return recommendAnimesMock;
 
     //FIXME: URI 수정
     // return get(`/someURI`)
