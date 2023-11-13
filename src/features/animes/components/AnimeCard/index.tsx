@@ -20,7 +20,7 @@ export interface AnimeCardProps {
   title: string;
 
   /** 애니 평점 */
-  avgScore: number;
+  starScoreAvg: number;
 
   /** UI 사이즈 */
   size?: "md" | "lg";
@@ -30,7 +30,7 @@ export default function AnimeCard({
   id,
   thumbnail,
   title,
-  avgScore,
+  starScoreAvg,
   size,
 }: AnimeCardProps) {
   return (
@@ -41,7 +41,7 @@ export default function AnimeCard({
           <Title>{title}</Title>
           <Rating>
             <Star weight="fill" />
-            <span> {avgScore === 0 ? "평가 전" : avgScore} </span>
+            <span> {starScoreAvg === 0 ? "평가 전" : starScoreAvg} </span>
           </Rating>
         </InfoContainer>
       </Link>

@@ -74,7 +74,7 @@ export type TOP10ListResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
   avgScore: number;
 };
 
-type AnimeSlideResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
+export type AnimeSlideResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
   avgScore: number;
 };
 
