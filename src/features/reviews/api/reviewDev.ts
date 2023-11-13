@@ -1,4 +1,4 @@
-import { post } from "@/libs/api";
+import { get, patch, post } from "@/libs/api";
 
 import { ReviewSortOption } from "../hook/useGetAnimeReviews";
 
@@ -10,7 +10,7 @@ import recentReviewMock1 from "./mock/recentReview1.json";
 import recentReviewMock2 from "./mock/recentReview2.json";
 import recentReviewMock3 from "./mock/recentReview3.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
-import { AddReviewDto, ReviewInfo } from "./review";
+import { AddReviewDto, ReviewInfo, UserEvaluation } from "./review";
 
 export default class ReviewDevApi {
   /** @description 리뷰 작성 요청*/
@@ -50,5 +50,20 @@ export default class ReviewDevApi {
       default:
         return recentReviewMock3;
     }
+  }
+
+  /** @description 애니 별점 평가 추가 */
+  async addEvaluation(animeId: number, score: number) {
+    return post(`/ratings/${animeId}`, { score });
+  }
+
+  /** @description 애니 별점 평가 수정 */
+  async updateEvaluation(animeId: number, score: number) {
+    return patch(`/ratings/${animeId}`, { score });
+  }
+
+  /** @description 애니 별점 평가 여부 조회 */
+  async getEvaluation(animeId: number) {
+    return get<UserEvaluation>(`/ratings/${animeId}`);
   }
 }
