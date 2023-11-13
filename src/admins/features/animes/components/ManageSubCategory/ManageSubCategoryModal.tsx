@@ -109,12 +109,7 @@ export default function ManageSubCategoryModal({
                   <Table.Th>이름</Table.Th>
                   <Table.Th>관리</Table.Th>
                   <Table.Th>
-                    <Button
-                      variant="default"
-                      size="xs"
-                      fw={400}
-                      onClick={handleCreate}
-                    >
+                    <Button variant="default" size="xs" onClick={handleCreate}>
                       등록
                     </Button>
                   </Table.Th>
@@ -129,7 +124,6 @@ export default function ManageSubCategoryModal({
                         <Button
                           variant="default"
                           size="xs"
-                          fw={400}
                           onClick={() => handleEdit(d)}
                         >
                           수정
@@ -137,7 +131,6 @@ export default function ManageSubCategoryModal({
                         <Button
                           variant="default"
                           size="xs"
-                          fw={400}
                           onClick={() => handleDelete(d)}
                         >
                           삭제

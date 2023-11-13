@@ -212,7 +212,6 @@ export default function EditVoiceActorsModal({
             <Button
               variant="default"
               size="xs"
-              fw={400}
               onClick={() => handleEdit(actor)}
             >
               수정
@@ -220,7 +219,6 @@ export default function EditVoiceActorsModal({
             <Button
               variant="default"
               size="xs"
-              fw={400}
               onClick={() => handleDelete(actor)}
             >
               삭제
@@ -251,12 +249,7 @@ export default function EditVoiceActorsModal({
               />
             </div>
             <Flex justify="flex-end" gap="sm">
-              <Button
-                variant="default"
-                size="xs"
-                fw={400}
-                onClick={handleCreate}
-              >
+              <Button variant="default" size="xs" onClick={handleCreate}>
                 새 성우
               </Button>
               <Button size="xs" onClick={handleSubmit}>
