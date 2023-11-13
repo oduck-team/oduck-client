@@ -5,12 +5,13 @@ import useAuth from "@/features/auth/hooks/useAuth";
 import ReviewCard from "@/features/reviews/components/ReviewCard";
 import { useApi } from "@/hooks/useApi";
 
+import RecentReviewLoading from "./RecentReviewLoading";
 import { Header, RecentReviewContainer, Title, ReviewConainer } from "./style";
 
 export default function RecentReview() {
   const { user } = useAuth();
   const { reviewApi } = useApi();
-  const { data } = useInfiniteQuery({
+  const { data, isLoading } = useInfiniteQuery({
     queryKey: ["MostRecentReviewCard", "first"],
     queryFn: ({ pageParam }) => reviewApi.getRecentReviewList(pageParam, 1),
     select: (data) => ({
@@ -30,24 +31,27 @@ export default function RecentReview() {
             </Button>
           </Header>
           <ReviewConainer>
-            <ReviewCard
-              isBlock
-              border="none"
-              linkTo={`/animes/${data.pages[0].anime.animeId}`}
-            >
-              <ReviewCard.Anime anime={data.pages[0].anime} />
-              <ReviewCard.Comment
-                text={data.pages[0].content}
-                isSpoiler={data.pages[0].isSpoiler}
-              />
-              <ReviewCard.ActionBar
-                createdAt={data.pages[0].createdAt}
-                isMine={user?.name === data.pages[0].name ? true : false}
-                isLiked={data.pages[0].isLiked}
-                likeCount={data.pages[0].likeCount}
-                isTimeAgo={true}
-              />
-            </ReviewCard>
+            {isLoading && <RecentReviewLoading />}
+            {!isLoading && (
+              <ReviewCard
+                isBlock
+                border="none"
+                linkTo={`/animes/${data.pages[0].anime.animeId}`}
+              >
+                <ReviewCard.Anime anime={data.pages[0].anime} />
+                <ReviewCard.Comment
+                  text={data.pages[0].content}
+                  isSpoiler={data.pages[0].isSpoiler}
+                />
+                <ReviewCard.ActionBar
+                  createdAt={data.pages[0].createdAt}
+                  isMine={user?.name === data.pages[0].name ? true : false}
+                  isLiked={data.pages[0].isLiked}
+                  likeCount={data.pages[0].likeCount}
+                  isTimeAgo={true}
+                />
+              </ReviewCard>
+            )}
           </ReviewConainer>
         </RecentReviewContainer>
       )}
