@@ -90,12 +90,11 @@ export default class AnimeApi {
       ...listOfRecentReviewedMock,
       listOfRecentReviewedMock[0],
     ];
-
     //FIXME: URI 수정
     // 무한 캐러셀을 위한 배열 확장
-    // return get<getListOfRecentReviewdResponse[]>(`/someURI`) //
+    // return get<getListOfRecentReviewedResponse[]>(`/someURI`) //
     //   .then((data) => [
-    //     data.at(-1) as getListOfRecentReviewdResponse,
+    //     data.at(-1) as getListOfRecentReviewedResponse,
     //     ...data,
     //     data[0],
     //   ]);
