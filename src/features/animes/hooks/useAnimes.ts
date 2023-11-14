@@ -4,9 +4,18 @@ import { useApi } from "@/hooks/useApi";
 
 import { GetAnimesQuery } from "../api/AnimeApi";
 
-export default function useAnimes(
-  queryParams: GetAnimesQuery = { size: 10, sort: "LATEST" },
-) {
+interface UseAnimes {
+  /** 자동 fetch 여부 */
+  autoFetch?: boolean;
+
+  /** 요청 쿼리 */
+  queryParams: GetAnimesQuery;
+}
+
+export default function useAnimes({
+  autoFetch = true,
+  queryParams = { size: 10, sort: "LATEST" },
+}: UseAnimes) {
   const { animeApi } = useApi();
 
   return useInfiniteQuery({
@@ -18,5 +27,6 @@ export default function useAnimes(
       pages: data.pages.flatMap((page) => page.items),
       pageParams: data.pageParams,
     }),
+    enabled: autoFetch,
   });
 }
