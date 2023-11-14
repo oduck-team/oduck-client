@@ -5,7 +5,7 @@ export default function Discord() {
     <DiscordContainer>
       <a
         target="_blank"
-        href="https://discord.gg/h2aXh2hx"
+        href="https://discord.gg/wY6YZbTUn4"
         rel="noopener noreferrer"
       >
         <div>
