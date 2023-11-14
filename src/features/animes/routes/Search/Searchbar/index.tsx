@@ -1,38 +1,56 @@
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { ComponentProps } from "react";
+import { ComponentProps, useState } from "react";
 
 import Button from "@/components/Button";
 
 import { SearchbarContainer } from "./style";
 
 interface SearchbarProps extends ComponentProps<"div"> {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.FormEvent<HTMLFormElement>) => void;
+  /** 취소 버튼 렌더링 여부  */
+  isCancelButtonVisible: boolean;
+
+  /** 검색 */
+  onSearch: (value: string) => void;
+
+  /** 검색 취소 */
   onCancel: () => void;
 }
 
 export default function Searchbar({
-  value,
-  onChange,
+  isCancelButtonVisible,
   onSearch,
   onCancel,
   ...props
 }: SearchbarProps) {
-  const isButtonVisible = value.length > 0;
+  const [inputValue, setInputValue] = useState("");
+
+  const handleCancel = () => {
+    setInputValue("");
+    onCancel();
+  };
+
   return (
-    <SearchbarContainer isButtonVisible={isButtonVisible} {...props}>
+    <SearchbarContainer isButtonVisible={isCancelButtonVisible} {...props}>
       <MagnifyingGlass size={20} />
-      <form action="/search" onSubmit={onSearch}>
+      <form
+        action="/search"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSearch(inputValue);
+        }}
+      >
         <label htmlFor="search">검색</label>
         <input
           id="search"
           type="text"
+          name="search"
           placeholder="검색어를 입력해주세요"
-          value={value}
-          onChange={onChange}
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+          }}
         />
-        {isButtonVisible && (
+        {isCancelButtonVisible && (
           <Button
             name="검색취소"
             variant="text"
@@ -43,7 +61,7 @@ export default function Searchbar({
               paddingLeft: "0",
               paddingRight: 0,
             }}
-            onClick={onCancel}
+            onClick={handleCancel}
           >
             취소
           </Button>

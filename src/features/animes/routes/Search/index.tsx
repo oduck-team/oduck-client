@@ -1,65 +1,54 @@
 import { useState } from "react";
 
-import Chip from "@/components/Chip";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
-import AnimeCard from "@/features/animes/components/AnimeCard";
+
+import useAnimes from "../../hooks/useAnimes";
 
 import Searchbar from "./Searchbar";
+import SearchedAnimes from "./SearchedAnimes";
 import { SearchContainer, Section } from "./style";
+import SuggestedAnimes from "./SuggestedAnimes";
 
-const 최근_많이_검색된 = [
-  "판타지",
-  "일상",
-  "주술회전",
-  "원피스",
-  "발키리",
-  "너의이름은",
-  "이세계",
-  "무직전생",
-];
-
-const 이런_애니_어떠세요 = [
-  {
-    id: 1,
-    title: "주술회전",
-    thumbnail: "https://url.kr/lo4miy",
-  },
-  {
-    id: 3,
-    title: "주술회전",
-    thumbnail: "https://url.kr/lo4miy",
-  },
-  {
-    id: 4,
-    title: "주술회전",
-    thumbnail: "https://url.kr/lo4miy",
-  },
-  {
-    id: 3,
-    title: "주술회전",
-    thumbnail: "https://url.kr/lo4miy",
-  },
-] as Anime[];
+const SEARCH_RESULT_SIZE = 10;
 
 export default function Search() {
-  const [searchInputValue, setSearchInputValue] = useState(""); // 사용자가 입력하는 검색어
+  const [searchCancelVisible, setSearchCancelVisible] = useState(false); // 검색 취소 렌더링 여부
+  const [searchQuery, setSearchQuery] = useState(""); // 검색어
+  const [isSearching, setIsSearching] = useState(false); // authFetch 상태 관리
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchInputValue(e.target.value);
-  };
+  // 추천애니
+  const { data: suggestedAnimes, isLoading: isSuggestedAnimesLoading } =
+    useAnimes({
+      autoFetch: true,
+      queryParams: { size: 4, sort: "REVIEW_COUNT" },
+    });
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO 검색
+  // 검색 애니
+  const {
+    data: searchedAnimes,
+    isLoading: isSearchedAnimesLoading,
+    hasNextPage,
+    fetchNextPage: fetchNextSearchPage,
+  } = useAnimes({
+    autoFetch: isSearching,
+    queryParams: {
+      query: searchQuery,
+      size: SEARCH_RESULT_SIZE,
+      sort: "LATEST",
+    },
+  });
+
+  const handleSearch = (value: string) => {
+    setSearchCancelVisible(true);
+    setSearchQuery(value);
+    setIsSearching(true); // 검색 시작
   };
 
   const handleSearchCancel = () => {
-    setSearchInputValue("");
-  };
-
-  const handleClickPopularKeyowrd = (value: string) => {
-    setSearchInputValue(value);
+    setIsSearching(false); // 검색 취소
+    setSearchQuery("");
+    setSearchCancelVisible(false);
   };
 
   return (
@@ -70,15 +59,15 @@ export default function Search() {
         <Header>
           <Header.Center style={{ width: "100%" }}>
             <Searchbar
-              value={searchInputValue}
-              onChange={handleSearchChange}
+              isCancelButtonVisible={searchCancelVisible}
               onSearch={handleSearch}
               onCancel={handleSearchCancel}
             />
           </Header.Center>
         </Header>
         <h1>검색하기</h1>
-        <Section style={{ marginTop: "32px" }}>
+        {/* TODO: API */}
+        {/* <Section style={{ marginTop: "32px" }}>
           <h1>최근 많이 검색된</h1>
           <ul
             style={{
@@ -95,21 +84,25 @@ export default function Search() {
               </li>
             ))}
           </ul>
-        </Section>
+        </Section> */}
+
         <Section style={{ marginTop: "32px" }}>
-          <h1>이런 애니는 어떠세요?</h1>
-          <ul style={{ display: "flex", gap: "32px 8px", flexWrap: "wrap" }}>
-            {이런_애니_어떠세요.map((anime) => (
-              <li key={anime.id}>
-                <AnimeCard
-                  id={anime.id}
-                  thumbnail={anime.thumbnail}
-                  title={anime.title}
-                  starScoreAvg={10}
-                />
-              </li>
-            ))}
-          </ul>
+          {isSearching && (
+            <SearchedAnimes
+              isLoading={isSearchedAnimesLoading}
+              animes={searchedAnimes?.pages ?? []}
+              hasNext={hasNextPage ?? false}
+              onLoadNext={fetchNextSearchPage}
+            />
+          )}
+
+          {/* 추천 애니메이션 */}
+          {!isSearching && (
+            <SuggestedAnimes
+              isLoading={isSuggestedAnimesLoading}
+              animes={suggestedAnimes?.pages ?? []}
+            />
+          )}
         </Section>
       </SearchContainer>
     </>
