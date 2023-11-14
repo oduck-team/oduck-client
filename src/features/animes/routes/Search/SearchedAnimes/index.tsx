@@ -1,6 +1,7 @@
 import { useRef } from "react";
 
 import DeferredComponent from "@/components/DeferredComponent";
+import Empty from "@/components/Error/Empty";
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
@@ -47,6 +48,14 @@ export default function SearchedAnimes({
           <AnimeCardSkeleton />
           <AnimeCardSkeleton />
         </DeferredComponent>
+      </SearchedAnimesContainer>
+    );
+  }
+
+  if (animes.length === 0) {
+    return (
+      <SearchedAnimesContainer>
+        <Empty message="애니를 찾을 수 없어요" />
       </SearchedAnimesContainer>
     );
   }
