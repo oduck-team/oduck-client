@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "주술회전",
+    "thumbnail": "https://images.unsplash.com/photo-1519638399535-1b036603ac77?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YW5pbWV8ZW58MHx8MHx8fDA%3D",
+    "avgScore": 9,
+    "review": "리뷰1입니다 리뷰1입니다 리뷰1입니다 리뷰1입니다"
+  },
+  {
+    "id": 2,
+    "title": "레벨 1이지만 유니크 스킬로 최강이 되었습니다 레벨 1이지만 유니크 스킬로 최강이 되었습니다",
+    "thumbnail": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YW5pbWV8ZW58MHx8MHx8fDA%3D",
+    "avgScore": 10,
+    "review": "리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다리뷰2입니다"
+  },
+  {
+    "id": 3,
+    "title": "이미지 없음",
+    "thumbnail": "",
+    "avgScore": 0,
+    "review": "리뷰3입니다리뷰3입니다리뷰3입니다리뷰3입니다"
+  },
+  {
+    "id": 4,
+    "title": "네번째 애니메이션",
+    "thumbnail": "https://images.unsplash.com/photo-1571757767119-68b8dbed8c97?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YW5pbWV8ZW58MHx8MHx8fDA%3D",
+    "avgScore": 3,
+    "review": "리뷰4입니다리뷰4입니다리뷰4입니다리뷰4입니다"
+  },
+  {
+    "id": 5,
+    "title": "토이스토리",
+    "thumbnail": "https://images.unsplash.com/photo-1580477667995-2b94f01c9516?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFuaW1lfGVufDB8fDB8fHww",
+    "avgScore": 5,
+    "review": "리뷰5입니다"
+  }
+]

@@ -1,7 +1,7 @@
 import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Rating } from "../AnimeCarousel/style";
+import { Rating } from "../AnimeCarousel/SlideItem.style";
 
 interface ItemProps {
   readonly image: string;
