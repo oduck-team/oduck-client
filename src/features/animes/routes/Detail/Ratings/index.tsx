@@ -24,6 +24,7 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
           <span>{starScoreAvg}</span>
         </AverageRatingsOverview>
         <Rating
+          value={starScoreAvg * 2}
           readonly
           style={{
             marginTop: "2px",
