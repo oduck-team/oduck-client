@@ -2,10 +2,15 @@ import { get, patch } from "@/libs/api";
 
 import { ProfileEditFormData } from "../hooks/useEditForm";
 import { SelectedSort } from "../hooks/useSortBar";
+import { MENU } from "../hooks/useTabMenu";
 
 import reveiwMock1 from "./mock/review1.json";
 import reveiwMock2 from "./mock/review2.json";
 import reveiwMock3 from "./mock/review3.json";
+
+export interface TabListCountResponse {
+  count: number;
+}
 
 export default class ProfileApi {
   async getProfile(name: string | undefined): Promise<Profile> {
@@ -48,6 +53,14 @@ export default class ProfileApi {
     // return await get(`/members/${"26"}/reviews`, {
     //   params: params,
     // });
+  }
+
+  async getTabListCount(
+    memberId: number | undefined,
+    selectedMenu: MENU,
+  ): Promise<TabListCountResponse> {
+    const menu = selectedMenu === "입덕애니" ? "bookmarks" : "short-reviews";
+    return await get(`/members/${memberId}/${menu}/count`);
   }
 
   async updateProfile(form: ProfileEditFormData) {

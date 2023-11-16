@@ -1,10 +1,11 @@
-import AnimeCard, { AnimeCardProps } from "../AnimeCard";
+import { AnimeSlideResponse } from "../../api/AnimeApi";
+import AnimeCard from "../AnimeCard";
 
 import { CardSlider, AnimeSlideContainer } from "./style";
 
 interface AnimeSlideProps {
   title: string;
-  animes: AnimeCardProps[];
+  animes: AnimeSlideResponse[];
 }
 
 export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
@@ -18,7 +19,7 @@ export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
             id={anime.id}
             thumbnail={anime.thumbnail}
             title={anime.title}
-            starScoreAvg={anime.starScoreAvg}
+            starScoreAvg={anime.avgScore}
           />
         ))}
       </CardSlider>

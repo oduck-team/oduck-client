@@ -1,5 +1,10 @@
 import { get } from "@/libs/api";
 
+import listOfRecentReviewedMock from "./mock/listOfRecentReviewed.json";
+import newestAnimes from "./mock/newestAnimes.json";
+import recommendAnimesMock from "./mock/RecommendAnimes.json";
+import top10AnimesMock from "./mock/top10Animes.json";
+
 /* 애니 조회 정렬 기준*/
 export type AnimeSort = "LATEST" | "REVIEW_COUNT" | "SCORE";
 export type Direction = "ASC" | "DESC";
@@ -56,6 +61,24 @@ type ListAnimeResponse = CursorPage<{
   starScoreAvg: number;
 }>;
 
+export type getListOfRecentReviewedResponse = Pick<
+  Anime,
+  "id" | "title" | "thumbnail"
+> & {
+  review: string;
+  avgScore: number;
+};
+
+export type TOP10ListResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
+  genres: string[];
+  rank: number;
+  avgScore: number;
+};
+
+export type AnimeSlideResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
+  avgScore: number;
+};
+
 export default class AnimeApi {
   getById(id: number): Promise<DetailAnimeResponse> {
     return get(`/animes/${id}`);
@@ -76,5 +99,43 @@ export default class AnimeApi {
 
   getAverageRating(id: number) {
     return get<{ starRatingAvg: number }>(`/animes/${id}/ratings/average`);
+  }
+
+  async getListOfRecentReviewed(): Promise<getListOfRecentReviewedResponse[]> {
+    return [
+      listOfRecentReviewedMock.at(-1) as getListOfRecentReviewedResponse,
+      ...listOfRecentReviewedMock,
+      listOfRecentReviewedMock[0],
+    ];
+    //FIXME: URI 수정
+    // 무한 캐러셀을 위한 배열 확장
+    // return get<getListOfRecentReviewedResponse[]>(`/someURI`) //
+    //   .then((data) => [
+    //     data.at(-1) as getListOfRecentReviewedResponse,
+    //     ...data,
+    //     data[0],
+    //   ]);
+  }
+
+  async getTOP10List(): Promise<TOP10ListResponse[]> {
+    return top10AnimesMock;
+
+    //FIXME: URI 수정
+    // return get(`/someURI`)
+  }
+
+  async getNewestList(): Promise<AnimeSlideResponse[]> {
+    return newestAnimes;
+
+    //FIXME: URI 수정
+    // return get(`/someURI`)
+  }
+
+  //TODO: 어떤식으로 요청 할 지 정하기
+  async getRecommendList(): Promise<AnimeSlideResponse[]> {
+    return recommendAnimesMock;
+
+    //FIXME: URI 수정
+    // return get(`/someURI`)
   }
 }
