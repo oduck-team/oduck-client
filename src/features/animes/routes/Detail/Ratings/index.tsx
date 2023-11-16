@@ -20,9 +20,7 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
       <h1>평점</h1>
       <AverageRatings>
         <AverageRatingsOverview>
-          <span>
-            <Star size={36} weight="fill" />
-          </span>
+          <Star size={36} weight="fill" />
           <span>{starScoreAvg}</span>
         </AverageRatingsOverview>
         <Rating

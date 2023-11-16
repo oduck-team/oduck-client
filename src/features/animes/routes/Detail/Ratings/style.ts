@@ -10,16 +10,16 @@ export const AverageRatings = styled.div`
 export const AverageRatingsOverview = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 4px;
 
   & > span {
     font-size: 32px;
     font-weight: 500;
     letter-spacing: -1.6px;
-
-    & > svg {
-      color: ${({ theme }) => theme.colors.secondary["50"]};
-    }
+  }
+  & > svg {
+    color: ${({ theme }) => theme.colors.secondary["50"]};
   }
 `;
 
