@@ -15,6 +15,7 @@ const SEARCH_RESULT_SIZE = 10;
 export default function Search() {
   const [searchCancelVisible, setSearchCancelVisible] = useState(false); // 검색 취소 렌더링 여부
   const [searchQuery, setSearchQuery] = useState(""); // 검색어
+  const [searchErrorMessage, setSearchErrorMessage] = useState(""); // 검색 에러 메세지
   const [isSearching, setIsSearching] = useState(false); // authFetch 상태 관리
 
   // 추천애니
@@ -41,8 +42,22 @@ export default function Search() {
 
   const handleSearch = (value: string) => {
     setSearchCancelVisible(true);
+
+    if (!isValid(value)) {
+      return;
+    }
+
     setSearchQuery(value);
     setIsSearching(true); // 검색 시작
+  };
+
+  const isValid = (value: string) => {
+    if (value.length > 50) {
+      setSearchErrorMessage("50자 이내로 입력해주세요");
+      return false;
+    }
+
+    return true;
   };
 
   const handleSearchCancel = () => {
@@ -60,6 +75,7 @@ export default function Search() {
           <Header.Center style={{ width: "100%" }}>
             <Searchbar
               isCancelButtonVisible={searchCancelVisible}
+              errorMessage={searchErrorMessage}
               onSearch={handleSearch}
               onCancel={handleSearchCancel}
             />

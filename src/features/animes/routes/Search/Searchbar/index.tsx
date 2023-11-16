@@ -3,11 +3,13 @@ import { ComponentProps, useState } from "react";
 
 import Button from "@/components/Button";
 
-import { SearchbarContainer } from "./style";
+import { ErrorMessage, SearchbarContainer } from "./style";
 
 interface SearchbarProps extends ComponentProps<"div"> {
   /** 취소 버튼 렌더링 여부  */
   isCancelButtonVisible: boolean;
+
+  errorMessage: string;
 
   /** 검색 */
   onSearch: (value: string) => void;
@@ -18,6 +20,7 @@ interface SearchbarProps extends ComponentProps<"div"> {
 
 export default function Searchbar({
   isCancelButtonVisible,
+  errorMessage,
   onSearch,
   onCancel,
   ...props
@@ -67,6 +70,7 @@ export default function Searchbar({
             취소
           </Button>
         )}
+        <ErrorMessage>{errorMessage}</ErrorMessage>
       </form>
     </SearchbarContainer>
   );

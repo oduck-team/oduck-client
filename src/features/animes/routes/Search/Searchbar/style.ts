@@ -78,3 +78,10 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
     ${({ theme }) => theme.typo["body-2-r"]};
   }
 `;
+
+export const ErrorMessage = styled.p`
+  ${({ theme }) => theme.typo["body-2-r"]}
+  position: absolute;
+  margin-top: 5rem;
+  color: ${({ theme }) => theme.colors.warn[60]};
+`;
