@@ -15,7 +15,7 @@ const voiceActorSchema = z.object({
 export const createAnimeSchema = z.object({
   seriesId: stringToNumberSchema,
   title: z.string(),
-  summary: z.string(),
+  summary: z.string().max(600, "600자 이내로 입력해주세요"),
   episodeCount: z.number().min(1, "1이상의 숫자를 입력해주세요"),
   thumbnail: z.string().min(1, "썸네일을 등록해주세요"),
   year: z.number().min(1900, "1900년도 이후로 입력해주세요"),
