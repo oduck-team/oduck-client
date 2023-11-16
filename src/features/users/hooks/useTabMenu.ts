@@ -76,11 +76,6 @@ export default function useTabMenu(memberId: number) {
       selectedMenu === "입덕애니" ? hasNextPageBookmark : hasNextPageReview,
   });
 
-  const listCount =
-    selectedMenu === "입덕애니"
-      ? bookmarks?.pages.length
-      : reviews?.pages.length;
-
   /** queryString tab === 'bookmark'인 경우, 입덕애니 Menu 선택 */
   useEffect(() => {
     searchParams.get("tab") === BOOKMARK
@@ -96,7 +91,6 @@ export default function useTabMenu(memberId: number) {
     isLoadingBookmark,
     reviews,
     isLoadingReview,
-    listCount,
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,
