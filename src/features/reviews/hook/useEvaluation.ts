@@ -31,7 +31,8 @@ export default function useEvaluation(animeId: number) {
     onSuccess: () => {
       // 사용자의 평가 여부 및 score 조회 query 무효화
       queryClient.invalidateQueries(["evaluation", animeId, user?.memberId]);
-      // TODO: 애니 평균 평점 조회 query 무효화
+      // 애니 평균 평점 조회 query 무효화
+      queryClient.invalidateQueries(["averageRating", animeId, user?.memberId]);
     },
     onError: (error) => {
       if (error instanceof AxiosError && error.response?.status) {
