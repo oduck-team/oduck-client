@@ -36,6 +36,7 @@ export default function Searchbar({
         action="/search"
         onSubmit={(e) => {
           e.preventDefault();
+          if (inputValue.trim().length === 0) return;
           onSearch(inputValue);
         }}
       >
