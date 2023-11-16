@@ -73,4 +73,8 @@ export default class AnimeApi {
     const queryString = new URLSearchParams(queryParams).toString();
     return get(`/animes?${queryString}`);
   }
+
+  getAverageRating(id: number) {
+    return get<{ starRatingAvg: number }>(`/animes/${id}/ratings/average`);
+  }
 }
