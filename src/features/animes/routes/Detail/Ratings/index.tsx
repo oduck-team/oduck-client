@@ -14,7 +14,7 @@ import {
   Grid,
 } from "./style";
 
-export default function Ratings() {
+export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
   return (
     <Section>
       <h1>평점</h1>
@@ -23,7 +23,7 @@ export default function Ratings() {
           <span>
             <Star size={36} weight="fill" />
           </span>
-          <span>4.2</span>
+          <span>{starScoreAvg}</span>
         </AverageRatingsOverview>
         <Rating
           readonly
