@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useApi } from "@/hooks/useApi";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
-type SortOptionId = "likeCount" | "score" | "created_at";
+type SortOptionId = "like_count" | "score" | "created_at";
 type Order = "ASC" | "DESC";
 
 export interface ReviewSortOption {
@@ -20,7 +20,7 @@ export default function useGetAnimeReviews(animeId: number) {
   const SORT_OPTION: ReviewSortOption[] = [
     {
       label: "좋아요순",
-      sort: "likeCount",
+      sort: "like_count",
       order: "DESC",
     },
     {
