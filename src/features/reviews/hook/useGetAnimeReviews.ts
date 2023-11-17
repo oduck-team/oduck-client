@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 
+import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
@@ -16,6 +17,8 @@ export interface ReviewSortOption {
 export default function useGetAnimeReviews(animeId: number) {
   const targetRef = useRef(null);
   const { reviewApi } = useApi();
+
+  const { user } = useAuth();
 
   const SORT_OPTION: ReviewSortOption[] = [
     {
@@ -53,7 +56,13 @@ export default function useGetAnimeReviews(animeId: number) {
     hasNextPage,
     isLoading,
   } = useInfiniteQuery(
-    ["review", animeId, selectedSortOption.sort, selectedSortOption.order],
+    [
+      "review",
+      animeId,
+      user?.memberId,
+      selectedSortOption.sort,
+      selectedSortOption.order,
+    ],
     ({ pageParam }) =>
       reviewApi.getAnimeReviews(animeId, pageParam, selectedSortOption),
     {
