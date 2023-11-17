@@ -97,6 +97,10 @@ export default class AnimeApi {
     return get(`/animes?${queryString}`);
   }
 
+  getAverageRating(id: number) {
+    return get<{ starRatingAvg: number }>(`/animes/${id}/ratings/average`);
+  }
+
   async getListOfRecentReviewed(): Promise<getListOfRecentReviewedResponse[]> {
     return [
       listOfRecentReviewedMock.at(-1) as getListOfRecentReviewedResponse,
