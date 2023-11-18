@@ -19,10 +19,10 @@ export default class AdminVoiceActorApi {
   }
 
   update(id: number, dto: UpdateVoiceActorDto) {
-    return patch(ADMIN_BASE_URL + `//voice-actors/${id}`, dto);
+    return patch(ADMIN_BASE_URL + `/voice-actors/${id}`, dto);
   }
 
   delete(id: number) {
-    return del(ADMIN_BASE_URL + `//voice-actors/${id}`);
+    return del(ADMIN_BASE_URL + `/voice-actors/${id}`);
   }
 }
