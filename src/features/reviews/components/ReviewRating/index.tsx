@@ -25,7 +25,6 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
   const { data: evaluation, evaluationMutation } = useEvaluation(animeId);
-  console.log("평가 여부: ", evaluation?.createdAt);
 
   const handleRate = useDebounce((value: number) => {
     if (!user) {
@@ -39,8 +38,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   return (
     <>
       <Rating
-        value={evaluation ? 9 : 0}
-        // value={evaluated ? evaluation.score : 0}
+        value={evaluation ? evaluation.score : 0}
         size="lg"
         onRate={handleRate}
       />

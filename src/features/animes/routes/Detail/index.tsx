@@ -16,7 +16,11 @@ import { AnimeDetailContainer } from "./style";
 export default function AnimeDetail() {
   const { id: animeId } = useParams();
 
-  const { data: anime, isLoading: isAnimeLoading } = useAnime(Number(animeId));
+  const {
+    starRatingAvg,
+    anime,
+    isLoading: isAnimeLoading,
+  } = useAnime(Number(animeId));
 
   const {
     reviews,
@@ -37,7 +41,7 @@ export default function AnimeDetail() {
         <Head title={`${anime.title} | 오덕`} image={anime.thumbnail} />
         <AnimeDetailContainer>
           {/* TODO: 평점 */}
-          <Hero {...anime} starScoreAvg={10} />
+          <Hero {...anime} starScoreAvg={starRatingAvg} />
           <SectionDivider />
 
           {/* 줄거리 및 정보 */}
@@ -48,7 +52,7 @@ export default function AnimeDetail() {
           <SectionDivider />
 
           {/* 평점 */}
-          <Ratings />
+          <Ratings starScoreAvg={starRatingAvg} />
           <SectionDivider />
 
           {/* 리뷰 목록 */}

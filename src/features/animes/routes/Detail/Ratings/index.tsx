@@ -14,18 +14,17 @@ import {
   Grid,
 } from "./style";
 
-export default function Ratings() {
+export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
   return (
     <Section>
       <h1>평점</h1>
       <AverageRatings>
         <AverageRatingsOverview>
-          <span>
-            <Star size={36} weight="fill" />
-          </span>
-          <span>4.2</span>
+          <Star size={36} weight="fill" />
+          <span>{starScoreAvg}</span>
         </AverageRatingsOverview>
         <Rating
+          value={starScoreAvg * 2}
           readonly
           style={{
             marginTop: "2px",

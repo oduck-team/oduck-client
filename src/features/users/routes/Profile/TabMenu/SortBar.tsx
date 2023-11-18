@@ -1,11 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import BottomSheet from "@/components/BottomSheet";
+import useAuth from "@/features/auth/hooks/useAuth";
 import {
   ButtonType,
   SelectedSort,
   SortById,
 } from "@/features/users/hooks/useSortBar";
+import { MENU } from "@/features/users/hooks/useTabMenu";
+import { useApi } from "@/hooks/useApi";
 
 import { ArrowsDownIcon, ArrowsUpIcon } from "./Icons";
 import SheetButton, { TextSortBy } from "./SheetButton";
@@ -18,26 +22,37 @@ import {
 } from "./SortBar.style";
 
 interface SortBarProps {
-  count: number;
+  selectedMenu: MENU;
   selected: SelectedSort;
   BUTTONS: ButtonType[];
   onClick: (isDESC: boolean, id: SortById, text: TextSortBy) => void;
 }
 
 export default function SortBar({
-  count,
+  selectedMenu,
   selected,
   BUTTONS,
   onClick,
 }: SortBarProps) {
+  const { user } = useAuth();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleBottomSheetToggle = () =>
     setIsBottomSheetVisible((prev) => !prev);
+  const { profile } = useApi();
+  const { data } = useQuery({
+    queryKey: [
+      "profile",
+      user?.memberId,
+      selectedMenu === "입덕애니" ? "bookmark" : "review",
+      "count",
+    ],
+    queryFn: () => profile.getTabListCount(user?.memberId, selectedMenu),
+  });
 
   return (
     <>
       <SortBarContainer>
-        <Count>{count}개의 애니가 있어요</Count>
+        <Count>{data?.count ?? 0}개의 애니가 있어요</Count>
         <Button type="button" onClick={handleBottomSheetToggle}>
           <ButtonText>{selected.text}</ButtonText>
           {selected.isDESC ? <ArrowsDownIcon /> : <ArrowsUpIcon />}

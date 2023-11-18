@@ -5,6 +5,7 @@ import profileMock from "./mock/profile.json";
 import reveiwMock1 from "./mock/review1.json";
 import reveiwMock2 from "./mock/review2.json";
 import reveiwMock3 from "./mock/review3.json";
+import { TabListCountResponse } from "./profile";
 
 export default class ProfileDevApi {
   async getProfile(): Promise<Profile> {
@@ -36,6 +37,10 @@ export default class ProfileDevApi {
       default:
         return reveiwMock3;
     }
+  }
+
+  async getTabListCount(): Promise<TabListCountResponse> {
+    return { count: 30 };
   }
 
   async updateProfile() {

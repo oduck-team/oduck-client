@@ -55,7 +55,7 @@ export default function Hero({
   genres,
   episodeCount,
   status,
-  // starScoreAvg,
+  starScoreAvg,
   reviewCount,
   bookmarkCount,
   year,
@@ -112,7 +112,7 @@ export default function Hero({
         <Stat
           variant="primary"
           items={[
-            { title: "별점", data: `★ 4.8` },
+            { title: "별점", data: `★ ${starScoreAvg}` },
             { title: "한줄리뷰", data: `${reviewCount}` },
             { title: "덕후", data: `${bookmarkCount}` },
             { title: "방영년도", data: `${year}` },
