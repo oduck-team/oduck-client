@@ -9,6 +9,10 @@ interface SlideItemProps {
   anime: getListOfRecentReviewedResponse;
 }
 
+/**
+ * depreacted
+ * SliderItem 컴포넌트로 변경
+ * */
 export default function SlideItem({ anime }: SlideItemProps) {
   const navigate = useNavigate();
   return (
