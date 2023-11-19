@@ -1,27 +1,34 @@
-import { Star } from "@phosphor-icons/react";
-
 import { getListOfRecentReviewedResponse } from "../../api/AnimeApi";
 
-import { Image } from "./SliderItem.style";
-
+import {
+  Image,
+  InfoContainer,
+  RatingContainer,
+  Review,
+  ReviewContainer,
+  Score,
+  SliderItemContainer,
+  StarIcon,
+  Title,
+} from "./SliderItem.style";
 interface SliderItemProps {
   anime: getListOfRecentReviewedResponse;
 }
 
 export default function SliderItem({ anime }: SliderItemProps) {
   return (
-    <section>
+    <SliderItemContainer>
       <Image src={anime.thumbnail} alt={anime.title} />
-      <div>
-        <h4>{anime.title}</h4>
-        <div>
-          <span>{anime.review}</span>
-          <div>
-            <Star weight="fill" />
-            <span>{anime.avgScore}</span>
-          </div>
-        </div>
-      </div>
-    </section>
+      <InfoContainer>
+        <Title>{anime.title}</Title>
+        <ReviewContainer>
+          <Review>{anime.review}</Review>
+          <RatingContainer>
+            <StarIcon weight="fill" size={18} />
+            <Score>{anime.avgScore}</Score>
+          </RatingContainer>
+        </ReviewContainer>
+      </InfoContainer>
+    </SliderItemContainer>
   );
 }
