@@ -1,4 +1,3 @@
-import { Star } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import Slider from "react-slick";
@@ -8,7 +7,8 @@ import { MainCarousel } from "@/libs/carousel";
 
 import AnimeCarouselLoading from "../AnimeCarousel/AnimeCarouselLoading";
 
-import { AnimeMainCarouselContainer, Image } from "./style";
+import SliderItem from "./SliderItem";
+import { AnimeMainCarouselContainer } from "./style";
 
 export default function AnimeMainCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,21 +28,7 @@ export default function AnimeMainCarousel() {
             beforeChange={(_, newSlide) => setCurrentSlide(newSlide)}
           >
             {animes.map((anime, index) => (
-              <>
-                <section key={index}>
-                  <Image src={anime.thumbnail} alt={anime.title} />
-                  <div>
-                    <h4>{anime.title}</h4>
-                    <div>
-                      <span>{anime.review}</span>
-                      <div>
-                        <Star weight="fill" />
-                        <span>{anime.avgScore}</span>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </>
+              <SliderItem key={index} anime={anime} />
             ))}
           </Slider>
         </AnimeMainCarouselContainer>
