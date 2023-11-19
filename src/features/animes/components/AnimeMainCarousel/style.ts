@@ -7,6 +7,19 @@ export const AnimeMainCarouselContainer = styled.div<{ image: string }>`
   height: 545px;
   overflow: hidden;
 
+  ${({ theme }) => theme.mq("md")} {
+    & .slick-prev,
+    .slick-next {
+      z-index: ${({ theme }) => theme.zIndex.carousel};
+    }
+    & .slick-prev {
+      left: 25px;
+    }
+    & .slick-next {
+      right: 25px;
+    }
+  }
+
   & .slick-dots {
     position: absolute;
     bottom: 40px;
