@@ -6,12 +6,12 @@ import Button from "@/components/Button";
 import Empty from "@/components/Error/Empty";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
-import Skeleton from "@/components/Skeleton";
 import { TabItem } from "@/components/Tabs";
 import AnimeCard from "@/features/animes/components/AnimeCard";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 import { AnimeSort } from "../../api/AnimeApi";
+import AnimeCardSkeleton from "../../components/AnimeCardSkeleton";
 import useFilterAnimes from "../../hooks/useFilterAnimes";
 
 import Filter from "./Filter";
@@ -90,9 +90,7 @@ export default function AnimeList() {
           {(animesQuery.isLoading || animesQuery.isFetching) &&
             Array.from({ length: 7 }, () => (
               <AnimeSkeletonContainer aria-busy="true" key={uuid()}>
-                <Skeleton w="full" h={152} />
-                <Skeleton w={120} h={24} />
-                <Skeleton w={30} h={24} />
+                <AnimeCardSkeleton />
               </AnimeSkeletonContainer>
             ))}
 
@@ -105,7 +103,7 @@ export default function AnimeList() {
           {!animesQuery.isLoading && !animesQuery.isFetching && (
             <>
               {animesQuery.data?.pages.map((item) => (
-                <AnimeCard {...item} size="lg" key={item.id} />
+                <AnimeCard {...item} size="md" key={item.id} />
               ))}
               <div ref={observeRef}></div>
             </>
