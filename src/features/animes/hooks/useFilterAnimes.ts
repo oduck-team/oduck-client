@@ -56,7 +56,7 @@ export default function useFilterAnimes() {
     size: REQUEST_SIZE,
     sort: "LATEST",
   }); // 요청 필터
-  const animesQuery = useAnimes(filterParams);
+  const animesQuery = useAnimes({ autoFetch: true, queryParams: filterParams });
 
   /** 상단 Tab 최신순, 리뷰순, 평점순 */
   const changeSort = (sort: AnimeSort) => {

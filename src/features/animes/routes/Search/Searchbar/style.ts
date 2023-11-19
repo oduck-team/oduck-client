@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
@@ -27,7 +28,17 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
     align-items: center;
     flex-shrink: 0;
     --scale: 1.1429;
-    width: calc(100% * var(--scale));
+    ${({ isButtonVisible }) =>
+      isButtonVisible
+        ? css`
+            --width: calc(100% * var(--scale) - 40px);
+            width: var(--width);
+            margin-right: calc((var(--width) * -0.125));
+          `
+        : css`
+            width: calc(100% * var(--scale));
+            margin-right: calc((-100% * var(--scale)));
+          `}
     height: calc(40px * var(--scale));
     font-size: 16px;
     transform: scale(0.875);
@@ -58,4 +69,19 @@ export const SearchbarContainer = styled.div<{ isButtonVisible: boolean }>`
       outline: none;
     }
   }
+
+  button {
+    min-width: fit-content;
+    margin-left: 8px;
+    padding-left: 0;
+    padding-right: 0;
+    ${({ theme }) => theme.typo["body-2-r"]};
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  ${({ theme }) => theme.typo["body-2-r"]}
+  position: absolute;
+  margin-top: 5rem;
+  color: ${({ theme }) => theme.colors.warn[60]};
 `;

@@ -11,7 +11,7 @@ const Login = lazy(() => import("@/features/auth/routes/Login"));
 const Callback = lazy(() => import("@/features/auth/routes/Callback"));
 const AnimeList = lazy(() => import("@/features/animes/routes/List"));
 const AnimeDetail = lazy(() => import("@/features/animes/routes/Detail"));
-const Search = lazy(() => import("@/features/common/routes/Search"));
+const Search = lazy(() => import("@/features/animes/routes/Search"));
 const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
 const EmailTerms = lazy(() => import("@/features/common/routes/Terms/Email"));
 const NoticeList = lazy(() => import("@/features/notices/routes/List"));
