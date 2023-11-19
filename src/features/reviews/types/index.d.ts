@@ -2,7 +2,7 @@ declare interface Review {
   name: string;
   content: string;
   isSpoiler: boolean;
-  isLiked: boolean;
+  isLike: boolean;
   likeCount: number;
   createdAt: string;
   anime: {

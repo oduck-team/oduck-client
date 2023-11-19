@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { SectionContainer } from "../Section.style";
 
 export const Section = styled(SectionContainer)`
-  & > ul:first-of-type {
+  div > ul {
     display: flex;
     gap: 4px;
     padding-bottom: 16px;

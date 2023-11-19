@@ -1,10 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useState } from "react";
 
+import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
-type SortOptionId = "likeCount" | "score" | "created_at";
+type SortOptionId = "like_count" | "score" | "created_at";
 type Order = "ASC" | "DESC";
 
 export interface ReviewSortOption {
@@ -17,10 +18,12 @@ export default function useGetAnimeReviews(animeId: number) {
   const targetRef = useRef(null);
   const { reviewApi } = useApi();
 
+  const { user } = useAuth();
+
   const SORT_OPTION: ReviewSortOption[] = [
     {
       label: "좋아요순",
-      sort: "likeCount",
+      sort: "like_count",
       order: "DESC",
     },
     {
@@ -53,7 +56,13 @@ export default function useGetAnimeReviews(animeId: number) {
     hasNextPage,
     isLoading,
   } = useInfiniteQuery(
-    ["review", animeId, selectedSortOption.sort, selectedSortOption.order],
+    [
+      "review",
+      animeId,
+      user?.memberId,
+      selectedSortOption.sort,
+      selectedSortOption.order,
+    ],
     ({ pageParam }) =>
       reviewApi.getAnimeReviews(animeId, pageParam, selectedSortOption),
     {

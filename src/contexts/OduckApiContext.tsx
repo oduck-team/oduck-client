@@ -31,8 +31,8 @@ const animeApi = new AnimeApi();
 const genreApi = new GenreApi();
 const bookmarkApi = new BookmarkApi();
 const fileApi = new FileApi();
-const reviewApi = new ReviewDevApi();
-// const reviewApi = new ReviewApi();
+// const reviewApi = new ReviewDevApi();
+const reviewApi = new ReviewApi();
 
 export function OduckApiProvider({ children }: StrictPropsWithChildren) {
   return (

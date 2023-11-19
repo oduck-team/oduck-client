@@ -6,14 +6,14 @@ import ReviewMoreButton from "./ReviewMoreButton";
 
 export interface ActionBarProps {
   isMine: boolean;
-  isLiked: boolean;
+  isLike: boolean;
   likeCount: number;
   createdAt?: string;
   isTimeAgo?: boolean;
 }
 export default function ActionBar({
   isMine,
-  isLiked,
+  isLike,
   likeCount,
   createdAt,
   isTimeAgo,
@@ -25,7 +25,7 @@ export default function ActionBar({
       {date && <time>{date}</time>}
       <ButtonContainer onClick={(e) => e.stopPropagation()}>
         <ReviewLikeButton
-          isLiked={isLiked}
+          isLike={isLike}
           count={compactNumber(likeCount, "ko-KR")}
           onClick={() => {}}
         />

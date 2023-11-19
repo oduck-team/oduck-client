@@ -12,7 +12,6 @@ export type ReviewInfo = Omit<Review, "anime"> & {
   animeId: number;
   thumbnail: string;
   score: number;
-  isMine: boolean;
 };
 
 export type AddReviewDto = Pick<Review, "name" | "content"> & {
@@ -49,7 +48,9 @@ export default class ReviewApi {
             cursor: pageParam,
             ...baseParams,
           };
-    return get<CursorPage<ReviewInfo>>(`/short-reviews/${animeId}`, { params });
+    return get<CursorPage<ReviewInfo>>(`/short-reviews/animes/${animeId}`, {
+      params,
+    });
   }
 
   /**

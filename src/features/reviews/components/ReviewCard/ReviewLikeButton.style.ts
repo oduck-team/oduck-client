@@ -5,7 +5,7 @@ import { colors } from "@/styles/colors";
 import { ReviewLikeButtonProps } from "./ReviewLikeButton";
 
 export const ReviewLikeButtonContainer = styled.button<
-  Pick<ReviewLikeButtonProps, "isLiked">
+  Pick<ReviewLikeButtonProps, "isLike">
 >`
   display: flex;
   align-items: center;
@@ -30,9 +30,9 @@ export const ReviewLikeButtonContainer = styled.button<
   }
 
   & > svg {
-    color: ${({ isLiked, theme }) =>
-      isLiked ? colors.red["40"] : theme.colors.neutral["50"]};
-    fill: ${({ isLiked }) => (isLiked ? colors.red["40"] : "")};
+    color: ${({ isLike, theme }) =>
+      isLike ? colors.red["40"] : theme.colors.neutral["50"]};
+    fill: ${({ isLike }) => (isLike ? colors.red["40"] : "")};
     transition: color ease 0.1s;
   }
 `;

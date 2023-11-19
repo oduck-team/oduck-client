@@ -8,7 +8,7 @@
       "score": 5,
       "content": "밥친구네요",
       "isSpoiler": false,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-03T20:04:31.859"
@@ -21,7 +21,7 @@
       "score": 9,
       "content": "스포가잇는리뷰내용",
       "isSpoiler": true,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-05T21:05:31.859"
@@ -34,7 +34,7 @@
       "score": 7,
       "content": "하ㅏㅎ하ㅏㅏ하하하하하하하",
       "isSpoiler": false,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-02T21:05:31.859"
@@ -47,7 +47,7 @@
       "score": 7,
       "content": "다음 시즌 얼른 나왔으면",
       "isSpoiler": true,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-01T21:05:31.859"
@@ -60,7 +60,7 @@
       "score": 10,
       "content": "정말 재밌네요",
       "isSpoiler": true,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-06T20:05:31.859"
@@ -73,7 +73,7 @@
       "score": 8,
       "content": "최고의 반전의 반전",
       "isSpoiler": false,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-06T21:05:31.859"
@@ -86,7 +86,7 @@
       "score": 3,
       "content": "으헝헝헝헝헝헝헝헝헝헝헝",
       "isSpoiler": false,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-10-31T21:05:31.859"
@@ -99,7 +99,7 @@
       "score": 10,
       "content": "후기후기후기후기후기후기",
       "isSpoiler": true,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-10-30T21:05:31.859"
@@ -112,7 +112,7 @@
       "score": 6,
       "content": "주변에추천못할것같은애니",
       "isSpoiler": true,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-03T21:05:31.859"
@@ -126,7 +126,7 @@
       "score": 8,
       "content": "뭐이런애니가다있지",
       "isSpoiler": false,
-      "isLiked": false,
+      "isLike": false,
       "likeCount": 0,
       "isMine": false,
       "createdAt": "2023-11-04T21:05:31.859"

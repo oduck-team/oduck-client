@@ -35,7 +35,7 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
             createdAt={review.createdAt}
             isTimeAgo={false}
             isMine={isMine}
-            isLiked={review.isLiked}
+            isLike={review.isLike}
             likeCount={review.likeCount}
           />
         </ReviewCard>
