@@ -13,11 +13,12 @@ import {
 } from "./SliderItem.style";
 interface SliderItemProps {
   anime: getListOfRecentReviewedResponse;
+  onClick: (e: React.MouseEvent) => void;
 }
 
-export default function SliderItem({ anime }: SliderItemProps) {
+export default function SliderItem({ anime, onClick }: SliderItemProps) {
   return (
-    <SliderItemContainer>
+    <SliderItemContainer onClick={onClick}>
       <Image src={anime.thumbnail} alt={anime.title} />
       <InfoContainer>
         <Title>{anime.title}</Title>

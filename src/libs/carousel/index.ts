@@ -11,4 +11,5 @@ export const MainCarousel = {
   autoplaySpeed: 5000,
   slidesToShow: 1,
   slidesToScroll: 1,
+  touchThreshold: 300,
 };
