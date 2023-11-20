@@ -67,7 +67,7 @@ export default function ReviewMoreButton({
       { score: value },
       {
         onSuccess: () => {
-          toast.success({ message: "평점이 수정되었어요." });
+          toast.success({ message: "별점이 수정되었어요." });
         },
       },
     );
