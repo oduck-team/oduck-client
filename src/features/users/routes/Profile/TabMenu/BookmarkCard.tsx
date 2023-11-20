@@ -9,6 +9,7 @@ import {
   BottomContainer,
   CreatedDate,
   Image,
+  ImageContainer,
   InfoContainer,
   MyScore,
   RatingContainer,
@@ -39,7 +40,9 @@ export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
   return (
     <>
       <BookmarkCardContainer onClick={handleLinkToAnime}>
-        <Image src={bookmark.thumbnail} alt={bookmark.title} />
+        <ImageContainer>
+          <Image src={bookmark.thumbnail} alt={bookmark.title} />
+        </ImageContainer>
         <InfoContainer>
           <Title>{bookmark.title}</Title>
           <div>
