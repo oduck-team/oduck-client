@@ -23,13 +23,14 @@ export const SyncingMainCarousel = {
   arrows: false,
   fade: true,
   touchThreshold: 300,
+  autoplay: true,
+  autoplaySpeed: 5000,
 };
 
 export const SyncingSubCarousel = {
   slidesToShow: 5,
   slidesToScroll: 5,
   focusOnSelect: true,
-  speed: 100,
   touchThreshold: 1000,
   responsive: [
     {
@@ -37,6 +38,7 @@ export const SyncingSubCarousel = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
+        speed: 100,
       },
     },
     {
@@ -44,6 +46,7 @@ export const SyncingSubCarousel = {
       settings: {
         slidesToShow: 4,
         slidesToScroll: 4,
+        speed: 100,
       },
     },
   ],
