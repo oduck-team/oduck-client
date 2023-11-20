@@ -12,4 +12,5 @@ export const MainCarousel = {
   slidesToShow: 1,
   slidesToScroll: 1,
   touchThreshold: 300,
+  pauseOnDotsHover: true,
 };
