@@ -1,7 +1,9 @@
 {
   "items": [
     {
+      "reviewId": 20,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -15,7 +17,9 @@
       }
     },
     {
+      "reviewId": 19,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -29,7 +33,9 @@
       }
     },
     {
+      "reviewId": 18,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -43,7 +49,9 @@
       }
     },
     {
+      "reviewId": 17,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -57,7 +65,9 @@
       }
     },
     {
+      "reviewId": 16,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -71,7 +81,9 @@
       }
     },
     {
+      "reviewId": 15,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -85,7 +97,9 @@
       }
     },
     {
+      "reviewId": 14,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -99,7 +113,9 @@
       }
     },
     {
+      "reviewId": 13,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -113,7 +129,9 @@
       }
     },
     {
+      "reviewId": 12,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
@@ -127,7 +145,9 @@
       }
     },
     {
+      "reviewId": 11,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": true,
