@@ -23,15 +23,22 @@ interface AnimeRankingProps {
 }
 
 export default function AnimeRanking({ title }: AnimeRankingProps) {
-  const navgiate = useNavigate();
+  const navigate = useNavigate();
   const [mainNav, setMainNav] = useState<Slider | undefined>();
   const [subNav, setSubNav] = useState<Slider | undefined>();
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [dragging, setDragging] = useState(false);
   const { animeApi } = useApi();
   const { data: animes, isLoading } = useQuery({
     queryKey: ["top10List"],
     queryFn: () => animeApi.getTOP10List(),
   });
+  const handleClick = (e: React.MouseEvent, animesId: number) => {
+    if (dragging) {
+      e.stopPropagation();
+      return;
+    }
+    navigate(`/animes/${animesId}`);
+  };
 
   return (
     <>
@@ -42,15 +49,17 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
             <h1>{title}</h1>
             <Slider
               {...SyncingMainCarousel}
-              asNavFor={subNav}
               ref={(mainNav) => setMainNav(mainNav ?? undefined)}
+              asNavFor={subNav}
+              beforeChange={() => setDragging(true)}
+              afterChange={() => setDragging(false)}
             >
               {animes.map((ani, i) => (
                 <div key={i}>
                   <HighlightItemContainer>
                     <HighlightItem
                       image={ani.thumbnail}
-                      onClick={() => navgiate(`/animes/${currentIndex}`)}
+                      onClick={(e: React.MouseEvent) => handleClick(e, ani.id)}
                     >
                       <Rank size="lg">{ani.rank}</Rank>
                       <h3>{ani.genres.join("/")}</h3>
@@ -71,10 +80,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               ref={(subNav) => setSubNav(subNav ?? undefined)}
             >
               {animes.map((ani, i) => (
-                <SliderItem
-                  key={i}
-                  onClick={() => setCurrentIndex(ani.rank - 1)}
-                >
+                <SliderItem key={i}>
                   <SliderItemImage image={ani.thumbnail}>
                     <Rank>{ani.rank}</Rank>
                   </SliderItemImage>

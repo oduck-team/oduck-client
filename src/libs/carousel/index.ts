@@ -22,6 +22,7 @@ export const SyncingMainCarousel = {
   slidesToScroll: 1,
   arrows: false,
   fade: true,
+  touchThreshold: 300,
 };
 
 export const SyncingSubCarousel = {
