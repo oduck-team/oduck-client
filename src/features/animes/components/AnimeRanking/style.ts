@@ -66,6 +66,21 @@ export const AnimeRankingContainer = styled.section`
   & .slick-slide > div {
     margin-right: 8px;
   }
+
+  ${({ theme }) => theme.mq("md")} {
+    & .slick-prev,
+    .slick-next {
+      z-index: ${({ theme }) => theme.zIndex.carousel};
+    }
+    & .slick-prev {
+      left: 8px;
+      top: 50px;
+    }
+    & .slick-next {
+      right: 8px;
+      top: 50px;
+    }
+  }
 `;
 
 export const HighlightItemContainer = styled.div`
