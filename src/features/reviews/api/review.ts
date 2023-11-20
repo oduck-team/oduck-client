@@ -30,6 +30,11 @@ export default class ReviewApi {
     return post("/short-reviews", review);
   }
 
+  /** @description 리뷰 수정 요청 */
+  async updateReview(reviewId: number, review: AddReviewDto) {
+    return patch(`/short-reviews/${reviewId}`, review);
+  }
+
   /** @description 한 애니의 리뷰 목록 요청 */
   async getAnimeReviews(
     animeId: number,
