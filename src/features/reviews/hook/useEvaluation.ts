@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -12,20 +12,15 @@ export default function useEvaluation(animeId: number) {
 
   const { toastAuthError, toastDefaultError } = useCommonToastError();
 
-  const { data } = useQuery({
-    queryKey: ["evaluation", animeId, user?.memberId],
-    queryFn: async () => {
-      try {
-        return await reviewApi.getEvaluation(animeId);
-      } catch (e) {
-        return null;
-      }
-    },
-  });
-
-  const evaluationMutation = useMutation({
-    mutationFn: (score: number) => {
-      if (!data) return reviewApi.addEvaluation(animeId, score);
+  return useMutation({
+    mutationFn: ({
+      score,
+      hasPrevData = true,
+    }: {
+      score: number;
+      hasPrevData?: boolean;
+    }) => {
+      if (!hasPrevData) return reviewApi.addEvaluation(animeId, score);
       return reviewApi.updateEvaluation(animeId, score);
     },
     onSuccess: () => {
@@ -48,6 +43,4 @@ export default function useEvaluation(animeId: number) {
       }
     },
   });
-
-  return { data, evaluationMutation };
 }
