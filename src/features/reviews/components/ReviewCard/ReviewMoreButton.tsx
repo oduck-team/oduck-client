@@ -50,7 +50,7 @@ export default function ReviewMoreButton({
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
-  const evaluationMutation = useEvaluation(animeId);
+  const evaluationMutation = useEvaluation({ animeId });
 
   const toast = useToast();
 

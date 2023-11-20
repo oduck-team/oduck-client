@@ -19,14 +19,14 @@ interface ReviewRatingProps {
 const DEBOUNCE_DELAY = 200;
 
 export default function ReviewRating({ animeId }: ReviewRatingProps) {
-  const hasReviewed = true; // dev용 변수
+  const hasReview = true; // dev용 변수
 
   const { user } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
   const { data: evaluation } = useGetEvaluation(animeId);
-  const evaluationMutation = useEvaluation(animeId);
+  const evaluationMutation = useEvaluation({ animeId, hasReview });
 
   const handleRate = useDebounce((value: number) => {
     if (!user) {
@@ -55,7 +55,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
           </button>
         </ReviewRecommend>
       )}
-      {hasReviewed && "TODO: 사용자 리뷰 렌더링 "}
+      {hasReview && "TODO: 사용자 리뷰 렌더링 "}
 
       <AnimatePresence>
         {isReviewModalVisible && (
