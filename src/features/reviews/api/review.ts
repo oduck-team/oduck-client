@@ -8,10 +8,8 @@ import recentReviewMock3 from "./mock/recentReview3.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
 
 export type ReviewInfo = Omit<Review, "anime"> & {
-  reviewId: number;
   animeId: number;
   thumbnail: string;
-  score: number;
 };
 
 export type AddReviewDto = Pick<Review, "name" | "content"> & {
