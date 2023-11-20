@@ -7,6 +7,7 @@ import useAuth from "@/features/auth/hooks/useAuth";
 import useDebounce from "@/hooks/useDebounce";
 
 import useEvaluation from "../../hook/useEvaluation";
+import useGetEvaluation from "../../hook/useGetEvaluation";
 
 import ShortReviewModal from "./ShortReviewModal";
 import { ReviewRecommend } from "./style";
@@ -24,7 +25,8 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
-  const { data: evaluation, evaluationMutation } = useEvaluation(animeId);
+  const { data: evaluation } = useGetEvaluation(animeId);
+  const evaluationMutation = useEvaluation(animeId);
 
   const handleRate = useDebounce((value: number) => {
     if (!user) {
@@ -32,7 +34,11 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
       return;
     }
     // 평가 추가 또는 기존과 다른 점수로 평가 수정 시에만 요청 수행
-    if (evaluation?.score !== value) evaluationMutation.mutate(value);
+    if (evaluation?.score !== value)
+      evaluationMutation.mutate({
+        score: value,
+        hasPrevData: Boolean(evaluation),
+      });
   }, DEBOUNCE_DELAY);
 
   return (

@@ -50,7 +50,7 @@ export default function ReviewMoreButton({
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
-  const { evaluationMutation } = useEvaluation(animeId);
+  const evaluationMutation = useEvaluation(animeId);
 
   const toast = useToast();
 
@@ -63,11 +63,14 @@ export default function ReviewMoreButton({
   };
 
   const handleRate = (value: number) => {
-    evaluationMutation.mutate(value, {
-      onSuccess: () => {
-        toast.success({ message: "별점이 수정되었어요." });
+    evaluationMutation.mutate(
+      { score: value },
+      {
+        onSuccess: () => {
+          toast.success({ message: "별점이 수정되었어요." });
+        },
       },
-    });
+    );
     console.log(value);
   };
 
