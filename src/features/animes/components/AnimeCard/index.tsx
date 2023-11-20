@@ -44,7 +44,7 @@ export default function AnimeCard({
           <Rating>
             <Star weight="fill" />
             <span>
-              {starScoreAvg === 0 ? "평가 전" : calcStarRatingAvg(starScoreAvg)}{" "}
+              {starScoreAvg === 0 ? "평가 전" : calcStarRatingAvg(starScoreAvg)}
             </span>
           </Rating>
         </InfoContainer>
