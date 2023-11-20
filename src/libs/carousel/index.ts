@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 /** @link https://github.com/akiran/react-slick */
 
+/** 최상단 캐러셀 */
 export const MainCarousel = {
   dots: true,
   infinite: true,
@@ -13,4 +14,36 @@ export const MainCarousel = {
   slidesToScroll: 1,
   touchThreshold: 300,
   pauseOnDotsHover: true,
+};
+
+/** Syncing-: 이번주 TOP10 캐러셀 */
+export const SyncingMainCarousel = {
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: false,
+  fade: true,
+};
+
+export const SyncingSubCarousel = {
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  focusOnSelect: true,
+  swipeToSlide: true,
+  touchThreshold: 300,
+  responsive: [
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };

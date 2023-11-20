@@ -50,29 +50,22 @@ export const Rank = styled.div<RankProps>`
 `;
 
 export const AnimeRankingContainer = styled.section`
-  width: 100%;
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
-  flex-shrink: 0;
+  overflow: hidden;
 
   & > h1 {
     ${({ theme }) => theme.typo["title-2-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["100"]};
     padding-left: 16px;
+    margin-bottom: 8px;
   }
-`;
 
-export const Content = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 16px;
-  flex-shrink: 0;
+  /** 캐러셀 item 간격 */
+  & .slick-list {
+    margin-right: -8px;
+  }
+  & .slick-slide > div {
+    margin-right: 8px;
+  }
 `;
 
 export const HighlightItemContainer = styled.div`
@@ -81,6 +74,7 @@ export const HighlightItemContainer = styled.div`
   height: 0;
   padding-bottom: 46%;
   margin: 0 auto;
+  margin-bottom: 4px;
 `;
 
 export const HighlightItem = styled.div<ItemProps>`
@@ -121,22 +115,6 @@ export const HighlightItem = styled.div<ItemProps>`
   }
 `;
 
-export const ItemSlider = styled.div`
-  width: 100%;
-  padding: 0 16px;
-  height: 139px;
-  display: flex;
-  gap: 16px;
-  overflow-x: scroll;
-  // 스크롤 안 보이도록 함
-  -ms-overflow-style: none; /* 익스플로러 */
-  scrollbar-width: none; /* 파이어폭스 */
-
-  &::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
-  }
-`;
-
 export const SliderItem = styled.div`
   width: 95px;
   display: flex;
@@ -165,6 +143,7 @@ export const SliderItemImage = styled.div<ItemProps>`
   background-size: cover;
   background-position: center;
   position: relative;
+  margin-bottom: 8px;
 `;
 
 export const SliderItemRating = styled(Rating)`
