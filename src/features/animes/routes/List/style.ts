@@ -21,14 +21,26 @@ export const Tabs = styled(BaseTabs)`
 export const Content = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
   gap: 32px 0px;
   flex-wrap: wrap;
   padding: 24px 16px;
 `;
 
 export const AnimeSkeletonContainer = styled.div`
+  width: calc(50% - 4px);
+  &:nth-child(odd) {
+    margin-right: 8px;
+  }
+  ${({ theme }) => theme.mq("sm")} {
+    width: calc(33% - 4px);
+    &:nth-child(odd) {
+      margin-right: 0;
+    }
+    &:not(:nth-child(3n)) {
+      margin-right: 8px;
+    }
+  }
+
   display: flex;
-  flex-direction: column;
   gap: 8px;
 `;
