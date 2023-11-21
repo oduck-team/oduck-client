@@ -52,3 +52,36 @@ export const SyncingSubCarousel = {
     },
   ],
 };
+
+export const RowCarousel = {
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  touchThreshold: 1000,
+  infinite: false,
+  responsive: [
+    {
+      breakpoint: 420,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+        speed: 100,
+      },
+    },
+    {
+      breakpoint: 576,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        speed: 100,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        speed: 100,
+      },
+    },
+  ],
+};
