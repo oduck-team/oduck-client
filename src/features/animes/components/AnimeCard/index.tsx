@@ -1,5 +1,4 @@
 import { Star } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
 
 import { calcStarRatingAvg } from "@/utils/common";
 

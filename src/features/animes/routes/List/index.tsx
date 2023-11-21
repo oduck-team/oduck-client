@@ -105,14 +105,11 @@ export default function AnimeList() {
           {!animesQuery.isLoading && !animesQuery.isFetching && (
             <>
               {animesQuery.data?.pages.map((item) => (
-                <>
-                  <AnimeCard
-                    {...item}
-                    key={item.id}
-                    onClick={() => navigate(`/animes/${item.id}`)}
-                  />
-                  <span>{item.id}</span>
-                </>
+                <AnimeCard
+                  {...item}
+                  key={item.id}
+                  onClick={() => navigate(`/animes/${item.id}`)}
+                />
               ))}
               <div ref={observeRef}></div>
             </>
