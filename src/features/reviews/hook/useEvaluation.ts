@@ -33,6 +33,8 @@ export default function useEvaluation(animeId: number) {
       queryClient.invalidateQueries(["evaluation", animeId, user?.memberId]);
       // 애니 평균 평점 조회 query 무효화
       queryClient.invalidateQueries(["averageRating", animeId, user?.memberId]);
+      // 프로필 북마크 query 무효화
+      queryClient.invalidateQueries(["profile", user?.memberId, "bookmark"]);
     },
     onError: (error) => {
       if (error instanceof AxiosError && error.response?.status) {

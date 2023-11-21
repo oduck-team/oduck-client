@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
+import { calcStarRatingAvg } from "@/utils/common";
 
 export default function useAnime(animeId: number) {
   const { animeApi } = useApi();
@@ -17,9 +18,7 @@ export default function useAnime(animeId: number) {
     queryFn: () => animeApi.getById(animeId),
   });
 
-  const starRatingAvg = data
-    ? Math.floor((data.starRatingAvg / 2) * 10) / 10
-    : 0;
+  const starRatingAvg = calcStarRatingAvg(data?.starRatingAvg);
 
   return { starRatingAvg, anime, isLoading };
 }
