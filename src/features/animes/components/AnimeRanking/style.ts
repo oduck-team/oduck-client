@@ -67,17 +67,25 @@ export const AnimeRankingContainer = styled.section`
     margin-right: 8px;
   }
 
+  /* 아래쪽 캐러셀의 왼쪽 마진 */
+  & .slick-slider:last-child {
+    & .slick-track .slick-slide:first-child {
+      margin-left: 16px;
+    }
+  }
+
+  /* 이전, 다음 버튼 */
   ${({ theme }) => theme.mq("md")} {
     & .slick-prev,
     .slick-next {
       z-index: ${({ theme }) => theme.zIndex.carousel};
     }
     & .slick-prev {
-      left: 8px;
+      left: 24px;
       top: 50px;
     }
     & .slick-next {
-      right: 8px;
+      right: 24px;
       top: 50px;
     }
   }

@@ -32,6 +32,7 @@ export const SyncingSubCarousel = {
   slidesToScroll: 5,
   focusOnSelect: true,
   touchThreshold: 1000,
+  infinite: false,
   responsive: [
     {
       breakpoint: 576,

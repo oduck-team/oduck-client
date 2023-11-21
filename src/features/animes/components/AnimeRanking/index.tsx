@@ -1,6 +1,6 @@
 import { Star } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
@@ -55,7 +55,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               afterChange={() => setDragging(false)}
             >
               {animes.map((ani, i) => (
-                <div key={i}>
+                <Fragment key={i}>
                   <HighlightItemContainer>
                     <HighlightItem
                       image={ani.thumbnail}
@@ -70,7 +70,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                       </SliderItemRating>
                     </HighlightItem>
                   </HighlightItemContainer>
-                </div>
+                </Fragment>
               ))}
             </Slider>
 
@@ -87,6 +87,8 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                   <div>{ani.title}</div>
                 </SliderItem>
               ))}
+              {/* 마지막 슬라이드 아이템이 조금 짤려서 빈 div 추가  */}
+              <div />
             </Slider>
           </AnimeRankingContainer>
         </>
