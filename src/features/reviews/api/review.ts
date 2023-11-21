@@ -22,6 +22,13 @@ export interface UserEvaluation {
   score: number;
 }
 
+export type AttractionType =
+  | "STORY"
+  | "CHARACTER"
+  | "DRAWING"
+  | "VOICE_ACTOR"
+  | "MUSIC";
+
 export default class ReviewApi {
   /** @description 리뷰 작성 요청 */
   async addReview(review: AddReviewDto): Promise<void> {
@@ -105,5 +112,30 @@ export default class ReviewApi {
   /** @description 애니 별점 평가 여부 및 score 조회 */
   async getEvaluation(animeId: number) {
     return get<UserEvaluation>(`/ratings/${animeId}`);
+  }
+
+  // 입덕 포인트
+
+  /** @description 입덕 포인트 남기기 */
+  async addAttractionPoint(
+    animeId: number,
+    attractionElements: AttractionType[],
+  ) {
+    return post(`/attraction-points`, {
+      animeId,
+      attractionElements,
+    });
+  }
+
+  /** @description 입덕 포인트 존재 여부 조회 */
+  async getUserAttractionPointStatus(animeId: number) {
+    return get<{ isAttractionPoint: boolean }>(`/attraction-points/${animeId}`);
+  }
+
+  /** @description 리뷰 수정 시 입덕 포인트 조회 */
+  async getUserAttractionPoint(animeId: number, name: string) {
+    return get<AttractionPoint>(`/short-reviews/attraction-points`, {
+      params: { animeId, name },
+    });
   }
 }
