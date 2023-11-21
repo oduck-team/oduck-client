@@ -9,7 +9,7 @@ import { SuggestedAnimesContainer } from "./style";
 
 interface SuggestedAnimesProps {
   isLoading: boolean;
-  animes: AnimeCardProps[];
+  animes: Omit<AnimeCardProps, "onClick">[];
 }
 
 /** 이런 애니는 어떠세요 */

@@ -13,7 +13,7 @@ import { SearchedAnimesContainer } from "./style";
 
 interface SearchedAnimesProps {
   isLoading: boolean;
-  animes: AnimeCardProps[];
+  animes: Omit<AnimeCardProps, "onClick">[];
 
   /** 다음 페이지 여부 */
   hasNext: boolean;
