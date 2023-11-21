@@ -9,6 +9,7 @@ interface ImageProps {
 
 export const AnimeCardContainer = styled.div<Pick<AnimeCardProps, "display">>`
   width: 100%; // display === 'carousel';
+  cursor: pointer;
 
   ${({ theme, display }) =>
     display === "default" &&
@@ -65,6 +66,7 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  margin-top: 8px;
 `;
 
 export const Title = styled.div`
