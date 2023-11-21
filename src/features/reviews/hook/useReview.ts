@@ -31,6 +31,12 @@ export default function useReview(animeId: number, onReview: () => void) {
     onSuccess: () => {
       queryClient.invalidateQueries(["profile", user?.name]);
       queryClient.invalidateQueries(["profile", user?.memberId, "review"]);
+      queryClient.invalidateQueries([
+        "profile",
+        user?.memberId,
+        "count",
+        "review",
+      ]);
       queryClient.invalidateQueries(["review", animeId, user?.memberId]);
       queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
       // TODO: 최신 리뷰 목록 query 무효화
