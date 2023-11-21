@@ -14,8 +14,17 @@ export const AnimeCardContainer = styled.div<Pick<AnimeCardProps, "display">>`
     display === "default" &&
     css`
       width: calc(50% - 4px);
+      &:nth-child(odd) {
+        margin-right: 8px;
+      }
       ${theme.mq("sm")} {
         width: calc(33% - 4px);
+        &:nth-child(odd) {
+          margin-right: 0;
+        }
+        &:not(:nth-child(3n)) {
+          margin-right: 8px;
+        }
       }
 
       & .image-container {
