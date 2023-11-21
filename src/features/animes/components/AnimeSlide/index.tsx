@@ -1,7 +1,11 @@
+import Slider from "react-slick";
+
+import { RowCarousel } from "@/libs/carousel";
+
 import { AnimeSlideResponse } from "../../api/AnimeApi";
 import AnimeCard from "../AnimeCard";
 
-import { CardSlider, AnimeSlideContainer } from "./style";
+import { AnimeSlideContainer } from "./style";
 
 interface AnimeSlideProps {
   title: string;
@@ -12,7 +16,7 @@ export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
   return (
     <AnimeSlideContainer>
       <h1>{title}</h1>
-      <CardSlider>
+      <Slider {...RowCarousel}>
         {animes.map((anime) => (
           <AnimeCard
             key={anime.id}
@@ -22,7 +26,9 @@ export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
             starScoreAvg={anime.avgScore}
           />
         ))}
-      </CardSlider>
+        {/* 캐러셀 레이아웃이 어색해지는 현상 수정 (div 추가)  */}
+        <div />
+      </Slider>
     </AnimeSlideContainer>
   );
 }

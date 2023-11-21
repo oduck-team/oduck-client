@@ -1,5 +1,5 @@
 import { Star } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   AnimeCardContainer,
@@ -21,9 +21,6 @@ export interface AnimeCardProps {
 
   /** 애니 평점 */
   starScoreAvg: number;
-
-  /** UI 사이즈 */
-  size?: "md" | "lg";
 }
 
 export default function AnimeCard({
@@ -31,20 +28,18 @@ export default function AnimeCard({
   thumbnail,
   title,
   starScoreAvg,
-  size,
 }: AnimeCardProps) {
+  const navigate = useNavigate();
   return (
-    <AnimeCardContainer size={size}>
-      <Link to={`/animes/${id}`}>
-        <Image image={thumbnail} size={size} />
-        <InfoContainer size={size}>
-          <Title>{title}</Title>
-          <Rating>
-            <Star weight="fill" />
-            <span> {starScoreAvg === 0 ? "평가 전" : starScoreAvg / 2} </span>
-          </Rating>
-        </InfoContainer>
-      </Link>
+    <AnimeCardContainer onClick={() => navigate(`/animes/${id}`)}>
+      <Image image={thumbnail} />
+      <InfoContainer>
+        <Title>{title}</Title>
+        <Rating>
+          <Star weight="fill" />
+          <span> {starScoreAvg === 0 ? "평가 전" : starScoreAvg / 2} </span>
+        </Rating>
+      </InfoContainer>
     </AnimeCardContainer>
   );
 }
