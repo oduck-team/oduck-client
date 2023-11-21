@@ -3,9 +3,9 @@ import { useNavigate } from "react-router";
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
-import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
+import GridAnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton/GridAnimeCardSkeleton";
 
-import { SkeletonContainer, SuggestedAnimesContainer } from "./style";
+import { SuggestedAnimesContainer } from "./style";
 
 interface SuggestedAnimesProps {
   isLoading: boolean;
@@ -25,9 +25,7 @@ export default function SuggestedAnimes({
         <h1>이런 애니는 어떠세요?</h1>
         <SuggestedAnimesContainer>
           {Array.from({ length: 4 }, (_, i) => (
-            <SkeletonContainer key={i}>
-              <AnimeCardSkeleton />
-            </SkeletonContainer>
+            <GridAnimeCardSkeleton key={i} />
           ))}
         </SuggestedAnimesContainer>
       </>

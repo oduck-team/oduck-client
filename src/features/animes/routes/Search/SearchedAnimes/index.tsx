@@ -6,10 +6,10 @@ import Empty from "@/components/Error/Empty";
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
-import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
+import GridAnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton/GridAnimeCardSkeleton";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
-import { SearchedAnimesContainer, SkeletonContainer } from "./style";
+import { SearchedAnimesContainer } from "./style";
 
 interface SearchedAnimesProps {
   isLoading: boolean;
@@ -42,9 +42,7 @@ export default function SearchedAnimes({
       <SearchedAnimesContainer>
         <DeferredComponent>
           {Array.from({ length: 4 }, (_, i) => (
-            <SkeletonContainer key={i}>
-              <AnimeCardSkeleton />
-            </SkeletonContainer>
+            <GridAnimeCardSkeleton key={i} />
           ))}
         </DeferredComponent>
       </SearchedAnimesContainer>

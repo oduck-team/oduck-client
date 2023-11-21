@@ -1,7 +1,6 @@
 import { SlidersHorizontal } from "@phosphor-icons/react";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
-import { v4 as uuid } from "uuid";
 
 import Button from "@/components/Button";
 import Empty from "@/components/Error/Empty";
@@ -12,16 +11,11 @@ import AnimeCard from "@/features/animes/components/AnimeCard";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 import { AnimeSort } from "../../api/AnimeApi";
-import AnimeCardSkeleton from "../../components/AnimeCardSkeleton";
+import GridAnimeCardSkeleton from "../../components/AnimeCardSkeleton/GridAnimeCardSkeleton";
 import useFilterAnimes from "../../hooks/useFilterAnimes";
 
 import Filter from "./Filter";
-import {
-  AnimeListContainer,
-  Tabs,
-  Content,
-  AnimeSkeletonContainer,
-} from "./style";
+import { AnimeListContainer, Tabs, Content } from "./style";
 
 const TabItems: TabItem[] = [
   {
@@ -90,10 +84,8 @@ export default function AnimeList() {
         />
         <Content>
           {(animesQuery.isLoading || animesQuery.isFetching) &&
-            Array.from({ length: 7 }, () => (
-              <AnimeSkeletonContainer aria-busy="true" key={uuid()}>
-                <AnimeCardSkeleton />
-              </AnimeSkeletonContainer>
+            Array.from({ length: 7 }, (_, i) => (
+              <GridAnimeCardSkeleton key={i} />
             ))}
 
           {!animesQuery.isLoading &&
