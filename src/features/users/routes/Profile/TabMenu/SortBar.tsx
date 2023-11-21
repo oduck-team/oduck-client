@@ -43,8 +43,8 @@ export default function SortBar({
     queryKey: [
       "profile",
       user?.memberId,
-      selectedMenu === "입덕애니" ? "bookmark" : "review",
       "count",
+      selectedMenu === "입덕애니" ? "bookmark" : "review",
     ],
     queryFn: () => profile.getTabListCount(user?.memberId, selectedMenu),
   });

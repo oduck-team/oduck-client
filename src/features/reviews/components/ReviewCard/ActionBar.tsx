@@ -10,6 +10,11 @@ export interface ActionBarProps {
   likeCount: number;
   createdAt?: string;
   isTimeAgo?: boolean;
+  reviewId: number;
+  animeId: number;
+  content: string;
+  isSpoiler: boolean;
+  score: number;
 }
 export default function ActionBar({
   isMine,
@@ -17,6 +22,11 @@ export default function ActionBar({
   likeCount,
   createdAt,
   isTimeAgo,
+  reviewId,
+  animeId,
+  content,
+  isSpoiler,
+  score,
 }: ActionBarProps) {
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
@@ -29,7 +39,14 @@ export default function ActionBar({
           count={compactNumber(likeCount, "ko-KR")}
           onClick={() => {}}
         />
-        <ReviewMoreButton isMine={isMine} />
+        <ReviewMoreButton
+          isMine={isMine}
+          reviewId={reviewId}
+          animeId={animeId}
+          content={content}
+          isSpoiler={isSpoiler}
+          score={score}
+        />
       </ButtonContainer>
     </ActionBarContainer>
   );

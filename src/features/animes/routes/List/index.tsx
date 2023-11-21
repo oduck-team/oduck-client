@@ -34,7 +34,7 @@ const TabItems: TabItem[] = [
   },
   {
     id: "SCORE",
-    title: "평점순",
+    title: "별점순",
   },
 ];
 

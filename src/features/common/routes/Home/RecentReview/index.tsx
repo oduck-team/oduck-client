@@ -49,6 +49,11 @@ export default function RecentReview() {
                   isLike={data.pages[0].isLike}
                   likeCount={data.pages[0].likeCount}
                   isTimeAgo={true}
+                  reviewId={data.pages[0].reviewId}
+                  animeId={data.pages[0].anime.animeId}
+                  isSpoiler={data.pages[0].isSpoiler}
+                  content={data.pages[0].content}
+                  score={data.pages[0].score}
                 />
               </ReviewCard>
             )}
