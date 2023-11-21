@@ -69,7 +69,7 @@ export const AnimeRankingContainer = styled.section`
 
   /* 아래쪽 캐러셀의 왼쪽 마진 */
   & .slick-slider:last-child {
-    & .slick-track .slick-slide:first-child {
+    & .slick-track .slick-slide:first-of-type {
       margin-left: 16px;
     }
   }

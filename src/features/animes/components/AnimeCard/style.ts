@@ -15,15 +15,15 @@ export const AnimeCardContainer = styled.div<Pick<AnimeCardProps, "display">>`
     display === "default" &&
     css`
       width: calc(50% - 4px);
-      &:nth-child(odd) {
+      &:nth-of-type(odd) {
         margin-right: 8px;
       }
       ${theme.mq("sm")} {
         width: calc(33% - 4px);
-        &:nth-child(odd) {
+        &:nth-of-type(odd) {
           margin-right: 0;
         }
-        &:not(:nth-child(3n)) {
+        &:not(:nth-of-type(3n)) {
           margin-right: 8px;
         }
       }
