@@ -1,6 +1,8 @@
 import { Star } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 
+import { calcStarRatingAvg } from "@/utils/common";
+
 import {
   AnimeCardContainer,
   Image,
@@ -41,7 +43,9 @@ export default function AnimeCard({
           <Title>{title}</Title>
           <Rating>
             <Star weight="fill" />
-            <span> {starScoreAvg === 0 ? "평가 전" : starScoreAvg / 2} </span>
+            <span>
+              {starScoreAvg === 0 ? "평가 전" : calcStarRatingAvg(starScoreAvg)}
+            </span>
           </Rating>
         </InfoContainer>
       </Link>

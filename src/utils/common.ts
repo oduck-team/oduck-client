@@ -11,3 +11,7 @@ export function compactNumber(data: number | string, lang: Lang = "en-US") {
     maximumFractionDigits: 1,
   }).format(data);
 }
+
+export function calcStarRatingAvg(score: number | undefined) {
+  return score ? Math.floor((score / 2) * 10) / 10 : 0;
+}
