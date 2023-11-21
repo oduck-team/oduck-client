@@ -9,7 +9,7 @@ import AnimeCard, {
 import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
-import { SearchedAnimesContainer } from "./style";
+import { SearchedAnimesContainer, SkeletonContainer } from "./style";
 
 interface SearchedAnimesProps {
   isLoading: boolean;
@@ -41,14 +41,11 @@ export default function SearchedAnimes({
     return (
       <SearchedAnimesContainer>
         <DeferredComponent>
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
+          {Array.from({ length: 4 }, (_, i) => (
+            <SkeletonContainer key={i}>
+              <AnimeCardSkeleton />
+            </SkeletonContainer>
+          ))}
         </DeferredComponent>
       </SearchedAnimesContainer>
     );

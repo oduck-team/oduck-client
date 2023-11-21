@@ -5,7 +5,7 @@ import AnimeCard, {
 } from "@/features/animes/components/AnimeCard";
 import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
 
-import { SuggestedAnimesContainer } from "./style";
+import { SkeletonContainer, SuggestedAnimesContainer } from "./style";
 
 interface SuggestedAnimesProps {
   isLoading: boolean;
@@ -24,10 +24,11 @@ export default function SuggestedAnimes({
       <>
         <h1>이런 애니는 어떠세요?</h1>
         <SuggestedAnimesContainer>
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
+          {Array.from({ length: 4 }, (_, i) => (
+            <SkeletonContainer key={i}>
+              <AnimeCardSkeleton />
+            </SkeletonContainer>
+          ))}
         </SuggestedAnimesContainer>
       </>
     );
