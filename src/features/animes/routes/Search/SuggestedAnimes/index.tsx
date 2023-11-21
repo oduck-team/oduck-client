@@ -38,15 +38,14 @@ export default function SuggestedAnimes({
       <h1>이런 애니는 어떠세요?</h1>
       <SuggestedAnimesContainer>
         {animes.map((anime) => (
-          <li key={anime.id}>
-            <AnimeCard
-              id={anime.id}
-              thumbnail={anime.thumbnail}
-              title={anime.title}
-              starScoreAvg={anime.starScoreAvg}
-              onClick={() => navigate(`/animes/${anime.id}`)}
-            />
-          </li>
+          <AnimeCard
+            id={anime.id}
+            key={anime.id}
+            thumbnail={anime.thumbnail}
+            title={anime.title}
+            starScoreAvg={anime.starScoreAvg}
+            onClick={() => navigate(`/animes/${anime.id}`)}
+          />
         ))}
       </SuggestedAnimesContainer>
     </>

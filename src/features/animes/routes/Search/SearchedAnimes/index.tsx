@@ -65,15 +65,14 @@ export default function SearchedAnimes({
   return (
     <SearchedAnimesContainer>
       {animes.map((anime) => (
-        <li key={anime.id}>
-          <AnimeCard
-            id={anime.id}
-            thumbnail={anime.thumbnail}
-            title={anime.title}
-            starScoreAvg={anime.starScoreAvg}
-            onClick={() => navigate(`/animes/${anime.id}`)}
-          />
-        </li>
+        <AnimeCard
+          id={anime.id}
+          key={anime.id}
+          thumbnail={anime.thumbnail}
+          title={anime.title}
+          starScoreAvg={anime.starScoreAvg}
+          onClick={() => navigate(`/animes/${anime.id}`)}
+        />
       ))}
       <div ref={observeRef}></div>
     </SearchedAnimesContainer>
