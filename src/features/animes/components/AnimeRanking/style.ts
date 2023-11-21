@@ -98,6 +98,7 @@ export const HighlightItemContainer = styled.div`
   padding-bottom: 46%;
   margin: 0 auto;
   margin-bottom: 4px;
+  cursor: pointer;
 `;
 
 export const HighlightItem = styled.div<ItemProps>`
@@ -144,6 +145,7 @@ export const SliderItem = styled.div`
   flex-direction: column;
   gap: 8px;
   flex-shrink: 0;
+  cursor: pointer;
 
   & > div:last-of-type {
     ${({ theme }) => theme.typo["body-3-r"]}
