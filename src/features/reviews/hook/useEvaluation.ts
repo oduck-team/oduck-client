@@ -34,6 +34,8 @@ export default function useEvaluation({
       queryClient.invalidateQueries(["evaluation", animeId, user?.memberId]);
       // 애니 평균 평점 조회 query 무효화
       queryClient.invalidateQueries(["averageRating", animeId, user?.memberId]);
+      // 프로필 북마크 query 무효화
+      queryClient.invalidateQueries(["profile", user?.memberId, "bookmark"]);
 
       // 별점 수정 대상 애니에 대한 사용자의 리뷰가 존재하는 경우에만 리뷰 목록 조회 무효화
       if (hasReview) {

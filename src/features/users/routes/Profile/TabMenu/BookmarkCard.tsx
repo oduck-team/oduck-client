@@ -2,11 +2,14 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { calcStarRatingAvg } from "@/utils/common";
+
 import {
   BookmarkCardContainer,
   BottomContainer,
   CreatedDate,
   Image,
+  ImageContainer,
   InfoContainer,
   MyScore,
   RatingContainer,
@@ -37,20 +40,28 @@ export default function BookmarkCard({ bookmark, isMine }: BookmarkCardProps) {
   return (
     <>
       <BookmarkCardContainer onClick={handleLinkToAnime}>
-        <Image src={bookmark.thumbnail} alt={bookmark.title} />
+        <ImageContainer>
+          <Image src={bookmark.thumbnail} alt={bookmark.title} />
+        </ImageContainer>
         <InfoContainer>
           <Title>{bookmark.title}</Title>
           <div>
             <RatingContainer>
               <ScoreContainer>
                 <StarIcon size={13} weight="fill" color="yellow" />
-                <Score>평균 {bookmark.avgScore / 2}</Score>
+                <Score>
+                  {bookmark.avgScore < 0 ? (
+                    <Score>평가전</Score>
+                  ) : (
+                    `별점 ${calcStarRatingAvg(bookmark.avgScore)}`
+                  )}
+                </Score>
               </ScoreContainer>
               <ScoreContainer>
                 {bookmark.myScore >= 0 && (
                   <>
                     <StarIcon size={13} weight="fill" color="blue" />
-                    <MyScore>내 평점 {bookmark.myScore / 2}</MyScore>
+                    <MyScore>내 별점 {bookmark.myScore / 2}</MyScore>
                   </>
                 )}
                 {bookmark.myScore < 0 && <Score>평가전</Score>}

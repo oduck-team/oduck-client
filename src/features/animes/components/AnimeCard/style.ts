@@ -1,28 +1,16 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-interface CardProps {
-  size?: "md" | "lg";
-}
-
-interface ImageProps extends CardProps {
+interface ImageProps {
   image: string;
 }
 
-export const AnimeCardContainer = styled.div<CardProps>`
-  width: ${({ size = "md" }) => (size === "md" ? `160px` : `100%`)};
-  flex-shrink: 0;
-  & > a {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+export const AnimeCardContainer = styled.div`
+  width: 100%;
 `;
 
 export const Image = styled.div<ImageProps>`
-  width: 100%;
-  height: ${({ size = "md" }) => (size === "md" ? `110px` : `152px`)};
+  height: 110px;
   border-radius: 5px;
   ${({ image }) => css`
     background:
@@ -31,11 +19,11 @@ export const Image = styled.div<ImageProps>`
   `}
   background-size: cover;
   background-position: center;
+  margin-bottom: 8px;
 `;
 
-export const InfoContainer = styled.div<CardProps>`
+export const InfoContainer = styled.div`
   width: 100%;
-  height: ${({ size = "md" }) => (size === "md" ? `65px` : `fit-content`)};
   display: flex;
   flex-direction: column;
   align-items: flex-start;

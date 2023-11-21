@@ -15,6 +15,10 @@ import {
   IndicatorContainer,
 } from "./style";
 
+/**
+ * depreacted
+ * AnimeMainCarousel 컴포넌트로 변경
+ * */
 export default function AnimeCarousel() {
   const [currentSlide, setCurrentSlide] = useState(1); // 현재 슬라이드 인덱스
   const [translateValue, setTranslateValue] = useState(0); // 슬라이드 이동(translate)를 위해 사용

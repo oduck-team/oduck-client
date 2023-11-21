@@ -8,21 +8,28 @@ export const BookmarkCardContainer = styled.div`
   padding: 16px;
   margin: 0 -16px;
   cursor: pointer;
-  transition: background-color ease 0.1s;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: #fdfdfd;
+    &:hover img {
+      transform: scale(1.2);
     }
   }
 `;
-export const Image = styled.img`
+export const ImageContainer = styled.div`
   flex-shrink: 0;
   width: 80px;
   height: 100px;
+  overflow: hidden;
   border-radius: 4px;
-  background-color: #d9d9d9;
   margin-right: 8px;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  object-fit: cover;
+  background-color: #d9d9d9;
+  overflow: hidden;
+  transition: transform ease 0.2s;
 `;
 
 export const InfoContainer = styled.div`
