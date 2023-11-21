@@ -19,15 +19,6 @@ import {
   RatingContainer,
 } from "./ReviewMoreButton.style";
 
-// TODO: 서버에서 가져오기
-const USER_MOCK_ATTRACTION = {
-  character: true,
-  art: true,
-  story: false,
-  voiceActing: false,
-  sound: true,
-};
-
 interface ReviewMoreButtonProps {
   isMine: boolean;
   reviewId: number;
@@ -71,7 +62,6 @@ export default function ReviewMoreButton({
         },
       },
     );
-    console.log(value);
   };
 
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
@@ -150,7 +140,6 @@ export default function ReviewMoreButton({
               animeId,
               content,
               isSpoiler,
-              ...USER_MOCK_ATTRACTION,
             }}
           >
             <MyRating>내 별점</MyRating>
