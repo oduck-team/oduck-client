@@ -1,14 +1,12 @@
-import { AxiosError } from "axios";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
-import { useCommonToastError } from "@/libs/error";
 
 import { MOCK_USER_REVIEW_DATA } from "../components/ReviewRating/ShortReviewModal";
 
-import useAddReview from "./useAddReview";
+import useReview from "./useReview";
 
 export default function useReviewForm(
   onReview: () => void,
@@ -19,10 +17,9 @@ export default function useReviewForm(
   const animeId = userReviewData?.animeId ?? Number(pathname.split("/")[2]);
 
   const { user } = useAuth();
-  const reviewMutation = useAddReview(animeId, onReview);
+  const { addReview, updateReview } = useReview(animeId, onReview);
 
   const toast = useToast();
-  const { toastAuthError, toastDefaultError } = useCommonToastError();
 
   const [form, setForm] = useState({
     content: userReviewData?.content ?? "",
@@ -60,6 +57,7 @@ export default function useReviewForm(
       setError(true);
       return;
     }
+
     // console.log(form);
     console.log({
       name: user?.name,
@@ -67,35 +65,54 @@ export default function useReviewForm(
       isSpoiler: form.isSpoiler,
       content: form.content,
     });
-    // TODO: 새 리뷰 작성인지 수정인지 검사
-    // 새 리뷰 작성 POST 요청
-    reviewMutation.mutate(
-      {
-        name: user?.name ?? "",
-        animeId,
-        hasSpoiler: form.isSpoiler,
-        content: form.content,
-      },
-      {
-        onSuccess: () => {
-          toast.success({
-            message: "리뷰가 등록되었어요.",
-            buttonText: "내 모든 리뷰 보러 가기",
-            onClickButton: () => navigate("/profile"),
-          });
+
+    // 리뷰 수정
+    if (userReviewData) {
+      // 내용에 변화가 있을 경우에만 요청
+      if (
+        userReviewData.content !== form.content ||
+        userReviewData.isSpoiler !== form.isSpoiler
+      )
+        updateReview.mutate(
+          {
+            reviewId: userReviewData.reviewId,
+            review: {
+              name: user?.name ?? "",
+              animeId,
+              hasSpoiler: form.isSpoiler,
+              content: form.content,
+            },
+          },
+          {
+            onSuccess: () => {
+              toast.success({
+                message: "리뷰가 수정되었어요.",
+              });
+            },
+          },
+        );
+      // 모달 닫기
+      else onReview();
+    } else {
+      // 리뷰 추가
+      addReview.mutate(
+        {
+          name: user?.name ?? "",
+          animeId,
+          hasSpoiler: form.isSpoiler,
+          content: form.content,
         },
-        onError: (error) => {
-          if (error instanceof AxiosError && error.response?.status) {
-            const status = error.response.status;
-            if ([401, 403].includes(status)) {
-              toastAuthError();
-            } else if (status >= 500) {
-              toastDefaultError();
-            }
-          }
+        {
+          onSuccess: () => {
+            toast.success({
+              message: "리뷰가 등록되었어요.",
+              buttonText: "내 모든 리뷰 보러 가기",
+              onClickButton: () => navigate("/profile"),
+            });
+          },
         },
-      },
-    );
+      );
+    }
   };
 
   return {

@@ -102,19 +102,10 @@ export default class AnimeApi {
   }
 
   async getListOfRecentReviewed(): Promise<getListOfRecentReviewedResponse[]> {
-    return [
-      listOfRecentReviewedMock.at(-1) as getListOfRecentReviewedResponse,
-      ...listOfRecentReviewedMock,
-      listOfRecentReviewedMock[0],
-    ];
+    return listOfRecentReviewedMock;
+
     //FIXME: URI 수정
-    // 무한 캐러셀을 위한 배열 확장
-    // return get<getListOfRecentReviewedResponse[]>(`/someURI`) //
-    //   .then((data) => [
-    //     data.at(-1) as getListOfRecentReviewedResponse,
-    //     ...data,
-    //     data[0],
-    //   ]);
+    // return get<getListOfRecentReviewedResponse[]>(`/someURI`);
   }
 
   async getTOP10List(): Promise<TOP10ListResponse[]> {

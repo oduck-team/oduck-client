@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router";
+
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
@@ -7,7 +9,7 @@ import { SuggestedAnimesContainer } from "./style";
 
 interface SuggestedAnimesProps {
   isLoading: boolean;
-  animes: AnimeCardProps[];
+  animes: Omit<AnimeCardProps, "onClick">[];
 }
 
 /** 이런 애니는 어떠세요 */
@@ -15,6 +17,8 @@ export default function SuggestedAnimes({
   isLoading,
   animes,
 }: SuggestedAnimesProps) {
+  const navigate = useNavigate();
+
   if (isLoading) {
     return (
       <>
@@ -40,6 +44,7 @@ export default function SuggestedAnimes({
               thumbnail={anime.thumbnail}
               title={anime.title}
               starScoreAvg={anime.starScoreAvg}
+              onClick={() => navigate(`/animes/${anime.id}`)}
             />
           </li>
         ))}

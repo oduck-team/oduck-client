@@ -112,7 +112,7 @@ export default function Sidebar({
       <div>
         {user && (
           <>
-            <Profile to="/profile">
+            <Profile to="/profile" onClick={onClose}>
               <Avatar
                 userName={user.name ? user.name : ""}
                 src={user.thumbnail}

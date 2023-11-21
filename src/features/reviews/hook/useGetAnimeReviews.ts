@@ -32,12 +32,12 @@ export default function useGetAnimeReviews(animeId: number) {
       order: "DESC",
     },
     {
-      label: "평점 높은 순",
+      label: "별점 높은 순",
       sort: "score",
       order: "DESC",
     },
     {
-      label: "평점 낮은 순",
+      label: "별점 낮은 순",
       sort: "score",
       order: "ASC",
     },

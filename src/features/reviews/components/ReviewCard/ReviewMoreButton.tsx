@@ -6,9 +6,11 @@ import { useState } from "react";
 import BackdropPortal from "@/components/Backdrop/BackdropPortal";
 import Rating from "@/components/Rating";
 import useSnackBar from "@/components/SnackBar/useSnackBar";
+import useToast from "@/components/Toast/useToast";
 import DropDownModal from "@/features/users/components/DropDownModal";
 import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
 
+import useEvaluation from "../../hook/useEvaluation";
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
 import {
@@ -17,12 +19,8 @@ import {
   RatingContainer,
 } from "./ReviewMoreButton.style";
 
-const USER_MOCK_REVIEW_DATA = {
-  id: 1,
-  animeId: 1,
-  score: 7,
-  content: "유저가 생성한 짧은 리뷰입니다.",
-  isSpoiler: true,
+// TODO: 서버에서 가져오기
+const USER_MOCK_ATTRACTION = {
   character: true,
   art: true,
   story: false,
@@ -32,37 +30,61 @@ const USER_MOCK_REVIEW_DATA = {
 
 interface ReviewMoreButtonProps {
   isMine: boolean;
+  reviewId: number;
+  animeId: number;
+  content: string;
+  isSpoiler: boolean;
+  score: number;
 }
 
-export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
+export default function ReviewMoreButton({
+  isMine,
+  reviewId,
+  animeId,
+  content,
+  score,
+  isSpoiler,
+}: ReviewMoreButtonProps) {
   const theme = useTheme();
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+
+  const evaluationMutation = useEvaluation({ animeId });
+
+  const toast = useToast();
+
   const handleReviewModalToggle = () =>
     setIsReviewModalVisible((prev) => !prev);
+
   const handleReviewEditClick = () => {
     handleDropDownModalToggle();
     handleReviewModalToggle();
-    // setIsReviewModalVisible(true);
   };
+
   const handleRate = (value: number) => {
-    // if (!user) {
-    //   setIsLoginModalVisible(true);
-    //   return;
-    // }
-    // TODO: 점수 등록 요청하기
+    evaluationMutation.mutate(
+      { score: value },
+      {
+        onSuccess: () => {
+          toast.success({ message: "별점이 수정되었어요." });
+        },
+      },
+    );
     console.log(value);
   };
+
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
+
   const handleReviewSpoilerReport = () => {
     handleDropDownModalToggle();
-    snackBar.open({ message: "신고가 접수되었습니다." });
+    snackBar.open({ message: "신고가 접수되었어요." });
   };
+
   const handleReviewEtcReport = () => {
     handleDropDownModalToggle();
     snackBar.open({
-      message: "신고가 접수되었습니다.",
+      message: "신고가 접수되었어요.",
     });
   };
 
@@ -123,15 +145,17 @@ export default function ReviewMoreButton({ isMine }: ReviewMoreButtonProps) {
             onClose={() => setIsReviewModalVisible(false)}
             onReview={() => setIsReviewModalVisible(false)}
             showBackdrop={false}
-            userReviewData={USER_MOCK_REVIEW_DATA}
+            userReviewData={{
+              reviewId,
+              animeId,
+              content,
+              isSpoiler,
+              ...USER_MOCK_ATTRACTION,
+            }}
           >
             <MyRating>내 별점</MyRating>
             <RatingContainer>
-              <Rating
-                size="lg"
-                onRate={handleRate}
-                value={USER_MOCK_REVIEW_DATA.score}
-              />
+              <Rating size="lg" onRate={handleRate} value={score} />
             </RatingContainer>
           </ShortReviewModal>
         )}

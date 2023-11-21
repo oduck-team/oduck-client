@@ -37,6 +37,11 @@ export default function ReviewList({ isMine, list }: ReviewListProps) {
             isMine={isMine}
             isLike={review.isLike}
             likeCount={review.likeCount}
+            reviewId={review.reviewId}
+            animeId={review.anime.animeId}
+            isSpoiler={review.isSpoiler}
+            content={review.content}
+            score={review.score}
           />
         </ReviewCard>
       ))}

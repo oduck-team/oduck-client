@@ -1,5 +1,6 @@
 import { SlidersHorizontal } from "@phosphor-icons/react";
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 import { v4 as uuid } from "uuid";
 
 import Button from "@/components/Button";
@@ -33,7 +34,7 @@ const TabItems: TabItem[] = [
   },
   {
     id: "SCORE",
-    title: "평점순",
+    title: "별점순",
   },
 ];
 
@@ -55,6 +56,7 @@ export default function AnimeList() {
   } = useFilterAnimes();
 
   const observeRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useIntersectionObserver({
     target: observeRef,
@@ -103,7 +105,14 @@ export default function AnimeList() {
           {!animesQuery.isLoading && !animesQuery.isFetching && (
             <>
               {animesQuery.data?.pages.map((item) => (
-                <AnimeCard {...item} size="md" key={item.id} />
+                <>
+                  <AnimeCard
+                    {...item}
+                    key={item.id}
+                    onClick={() => navigate(`/animes/${item.id}`)}
+                  />
+                  <span>{item.id}</span>
+                </>
               ))}
               <div ref={observeRef}></div>
             </>

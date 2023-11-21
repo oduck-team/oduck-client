@@ -1,7 +1,9 @@
 {
   "items": [
     {
+      "reviewId": 10,
       "name": "faberjoo",
+      "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
       "isLike": false,

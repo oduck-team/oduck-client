@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router";
 
 import DeferredComponent from "@/components/DeferredComponent";
 import Empty from "@/components/Error/Empty";
@@ -12,7 +13,7 @@ import { SearchedAnimesContainer } from "./style";
 
 interface SearchedAnimesProps {
   isLoading: boolean;
-  animes: AnimeCardProps[];
+  animes: Omit<AnimeCardProps, "onClick">[];
 
   /** 다음 페이지 여부 */
   hasNext: boolean;
@@ -28,6 +29,7 @@ export default function SearchedAnimes({
   onLoadNext,
 }: SearchedAnimesProps) {
   const observeRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useIntersectionObserver({
     target: observeRef,
@@ -69,6 +71,7 @@ export default function SearchedAnimes({
             thumbnail={anime.thumbnail}
             title={anime.title}
             starScoreAvg={anime.starScoreAvg}
+            onClick={() => navigate(`/animes/${anime.id}`)}
           />
         </li>
       ))}

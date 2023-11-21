@@ -8,10 +8,8 @@ import recentReviewMock3 from "./mock/recentReview3.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
 
 export type ReviewInfo = Omit<Review, "anime"> & {
-  reviewId: number;
   animeId: number;
   thumbnail: string;
-  score: number;
 };
 
 export type AddReviewDto = Pick<Review, "name" | "content"> & {
@@ -28,6 +26,11 @@ export default class ReviewApi {
   /** @description 리뷰 작성 요청 */
   async addReview(review: AddReviewDto): Promise<void> {
     return post("/short-reviews", review);
+  }
+
+  /** @description 리뷰 수정 요청 */
+  async updateReview(reviewId: number, review: AddReviewDto) {
+    return patch(`/short-reviews/${reviewId}`, review);
   }
 
   /** @description 한 애니의 리뷰 목록 요청 */

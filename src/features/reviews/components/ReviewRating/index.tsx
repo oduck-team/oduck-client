@@ -7,6 +7,7 @@ import useAuth from "@/features/auth/hooks/useAuth";
 import useDebounce from "@/hooks/useDebounce";
 
 import useEvaluation from "../../hook/useEvaluation";
+import useGetEvaluation from "../../hook/useGetEvaluation";
 
 import ShortReviewModal from "./ShortReviewModal";
 import { ReviewRecommend } from "./style";
@@ -18,13 +19,14 @@ interface ReviewRatingProps {
 const DEBOUNCE_DELAY = 200;
 
 export default function ReviewRating({ animeId }: ReviewRatingProps) {
-  const hasReviewed = true; // dev용 변수
+  const hasReview = true; // dev용 변수
 
   const { user } = useAuth();
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 
-  const { data: evaluation, evaluationMutation } = useEvaluation(animeId);
+  const { data: evaluation } = useGetEvaluation(animeId);
+  const evaluationMutation = useEvaluation({ animeId, hasReview });
 
   const handleRate = useDebounce((value: number) => {
     if (!user) {
@@ -32,7 +34,11 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
       return;
     }
     // 평가 추가 또는 기존과 다른 점수로 평가 수정 시에만 요청 수행
-    if (evaluation?.score !== value) evaluationMutation.mutate(value);
+    if (evaluation?.score !== value)
+      evaluationMutation.mutate({
+        score: value,
+        hasPrevData: Boolean(evaluation),
+      });
   }, DEBOUNCE_DELAY);
 
   return (
@@ -49,7 +55,7 @@ export default function ReviewRating({ animeId }: ReviewRatingProps) {
           </button>
         </ReviewRecommend>
       )}
-      {hasReviewed && "TODO: 사용자 리뷰 렌더링 "}
+      {hasReview && "TODO: 사용자 리뷰 렌더링 "}
 
       <AnimatePresence>
         {isReviewModalVisible && (

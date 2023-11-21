@@ -72,6 +72,11 @@ export default function Reviews({
                   isLike={review.isLike}
                   likeCount={review.likeCount}
                   createdAt={review.createdAt}
+                  reviewId={review.reviewId}
+                  animeId={review.animeId}
+                  isSpoiler={review.isSpoiler}
+                  content={review.content}
+                  score={review.score}
                 />
               </ReviewCard>
             </li>
