@@ -1,5 +1,4 @@
 import { Star } from "@phosphor-icons/react";
-import { useNavigate } from "react-router-dom";
 
 import {
   AnimeCardContainer,
@@ -21,6 +20,9 @@ export interface AnimeCardProps {
 
   /** 애니 평점 */
   starScoreAvg: number;
+
+  /** 페이지 이동 */
+  onClick: (animeId: number, e: React.MouseEvent) => void;
 }
 
 export default function AnimeCard({
@@ -28,10 +30,10 @@ export default function AnimeCard({
   thumbnail,
   title,
   starScoreAvg,
+  onClick,
 }: AnimeCardProps) {
-  const navigate = useNavigate();
   return (
-    <AnimeCardContainer onClick={() => navigate(`/animes/${id}`)}>
+    <AnimeCardContainer onClick={(e: React.MouseEvent) => onClick(id, e)}>
       <Image image={thumbnail} />
       <InfoContainer>
         <Title>{title}</Title>
