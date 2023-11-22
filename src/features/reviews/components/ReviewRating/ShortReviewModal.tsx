@@ -3,6 +3,7 @@ import { PropsWithChildren } from "react";
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
 
+import { ReviewInfo } from "../../api/review";
 import useReviewForm from "../../hook/useReviewForm";
 import AttractionPoint from "../AttractionPoint";
 
@@ -15,23 +16,16 @@ import {
 } from "./ShortReviewModal.style";
 import SpoilerCheckBox from "./SpoilerCheckBox";
 
-export interface MOCK_USER_REVIEW_DATA {
-  reviewId: number;
-  animeId: number;
-  content: string;
-  isSpoiler: boolean;
-  character: boolean;
-  art: boolean;
-  story: boolean;
-  voiceActing: boolean;
-  sound: boolean;
-}
+export type UserReview = Pick<
+  ReviewInfo,
+  "reviewId" | "animeId" | "content" | "isSpoiler"
+>;
 
 interface ShortReviewModalProps {
   onClose: () => void;
   onReview: () => void;
   showBackdrop?: boolean;
-  userReviewData?: MOCK_USER_REVIEW_DATA;
+  userReviewData?: UserReview;
 }
 
 export default function ShortReviewModal({
@@ -67,7 +61,7 @@ export default function ShortReviewModal({
           <strong style={{ marginLeft: 4 }}>그림체</strong>
         </>
       ),
-      isChecked: form.art,
+      isChecked: form.drawing,
     },
     {
       name: "story",
@@ -86,7 +80,7 @@ export default function ShortReviewModal({
           <strong>성우</strong>들의 미친 연기력
         </>
       ),
-      isChecked: form.voiceActing,
+      isChecked: form.voiceActor,
     },
     {
       name: "sound",
@@ -95,7 +89,7 @@ export default function ShortReviewModal({
           가슴이 옹졸해지는 <strong style={{ marginLeft: 4 }}>음악</strong>
         </>
       ),
-      isChecked: form.sound,
+      isChecked: form.music,
     },
   ];
 
