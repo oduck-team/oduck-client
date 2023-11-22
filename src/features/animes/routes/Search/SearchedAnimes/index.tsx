@@ -6,7 +6,7 @@ import Empty from "@/components/Error/Empty";
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
-import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
+import GridAnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton/GridAnimeCardSkeleton";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
 
 import { SearchedAnimesContainer } from "./style";
@@ -41,14 +41,9 @@ export default function SearchedAnimes({
     return (
       <SearchedAnimesContainer>
         <DeferredComponent>
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
+          {Array.from({ length: 4 }, (_, i) => (
+            <GridAnimeCardSkeleton key={i} />
+          ))}
         </DeferredComponent>
       </SearchedAnimesContainer>
     );
@@ -65,15 +60,14 @@ export default function SearchedAnimes({
   return (
     <SearchedAnimesContainer>
       {animes.map((anime) => (
-        <li key={anime.id}>
-          <AnimeCard
-            id={anime.id}
-            thumbnail={anime.thumbnail}
-            title={anime.title}
-            starScoreAvg={anime.starScoreAvg}
-            onClick={() => navigate(`/animes/${anime.id}`)}
-          />
-        </li>
+        <AnimeCard
+          id={anime.id}
+          key={anime.id}
+          thumbnail={anime.thumbnail}
+          title={anime.title}
+          starScoreAvg={anime.starScoreAvg}
+          onClick={() => navigate(`/animes/${anime.id}`)}
+        />
       ))}
       <div ref={observeRef}></div>
     </SearchedAnimesContainer>

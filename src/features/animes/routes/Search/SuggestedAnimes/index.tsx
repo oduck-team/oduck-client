@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import AnimeCard, {
   AnimeCardProps,
 } from "@/features/animes/components/AnimeCard";
-import AnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton";
+import GridAnimeCardSkeleton from "@/features/animes/components/AnimeCardSkeleton/GridAnimeCardSkeleton";
 
 import { SuggestedAnimesContainer } from "./style";
 
@@ -24,10 +24,9 @@ export default function SuggestedAnimes({
       <>
         <h1>이런 애니는 어떠세요?</h1>
         <SuggestedAnimesContainer>
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
-          <AnimeCardSkeleton />
+          {Array.from({ length: 4 }, (_, i) => (
+            <GridAnimeCardSkeleton key={i} />
+          ))}
         </SuggestedAnimesContainer>
       </>
     );
@@ -38,15 +37,14 @@ export default function SuggestedAnimes({
       <h1>이런 애니는 어떠세요?</h1>
       <SuggestedAnimesContainer>
         {animes.map((anime) => (
-          <li key={anime.id}>
-            <AnimeCard
-              id={anime.id}
-              thumbnail={anime.thumbnail}
-              title={anime.title}
-              starScoreAvg={anime.starScoreAvg}
-              onClick={() => navigate(`/animes/${anime.id}`)}
-            />
-          </li>
+          <AnimeCard
+            id={anime.id}
+            key={anime.id}
+            thumbnail={anime.thumbnail}
+            title={anime.title}
+            starScoreAvg={anime.starScoreAvg}
+            onClick={() => navigate(`/animes/${anime.id}`)}
+          />
         ))}
       </SuggestedAnimesContainer>
     </>

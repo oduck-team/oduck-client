@@ -1,16 +1,54 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
+import { AnimeCardProps } from ".";
+
 interface ImageProps {
   image: string;
 }
 
-export const AnimeCardContainer = styled.div`
-  width: 100%;
+export const AnimeCardContainer = styled.div<Pick<AnimeCardProps, "display">>`
+  width: 100%; // display === 'carousel';
+  cursor: pointer;
+
+  ${({ theme, display }) =>
+    display === "default" &&
+    css`
+      width: calc(50% - 4px);
+      &:nth-of-type(odd) {
+        margin-right: 8px;
+      }
+      ${theme.mq("sm")} {
+        width: calc(33% - 4px);
+        &:nth-of-type(odd) {
+          margin-right: 0;
+        }
+        &:not(:nth-of-type(3n)) {
+          margin-right: 8px;
+        }
+      }
+
+      & .image-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 70%;
+      }
+
+      & .image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+      }
+    `}
 `;
 
+/** .image className */
 export const Image = styled.div<ImageProps>`
-  height: 110px;
+  height: 110px; // display === 'carousel';
   border-radius: 5px;
   ${({ image }) => css`
     background:
@@ -28,6 +66,7 @@ export const InfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
+  margin-top: 8px;
 `;
 
 export const Title = styled.div`

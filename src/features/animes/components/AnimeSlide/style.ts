@@ -17,7 +17,7 @@ export const AnimeSlideContainer = styled.section`
 
   /* 캐러셀 왼쪽 마진 */
   & .slick-slider {
-    & .slick-track .slick-slide:first-child {
+    & .slick-track .slick-slide:first-of-type {
       margin-left: 16px;
     }
   }
