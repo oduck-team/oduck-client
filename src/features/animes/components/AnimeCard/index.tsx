@@ -1,5 +1,4 @@
 import { Star } from "@phosphor-icons/react";
-import { Link } from "react-router-dom";
 
 import { calcStarRatingAvg } from "@/utils/common";
 
@@ -26,6 +25,9 @@ export interface AnimeCardProps {
 
   /** 페이지 이동 */
   onClick: (animeId: number, e: React.MouseEvent) => void;
+
+  /** style: 사용되는 곳에 따라 width를 다르게 설정 */
+  display?: "default" | "carousel";
 }
 
 export default function AnimeCard({
@@ -34,10 +36,16 @@ export default function AnimeCard({
   title,
   starScoreAvg,
   onClick,
+  display = "default",
 }: AnimeCardProps) {
   return (
-    <AnimeCardContainer onClick={(e: React.MouseEvent) => onClick(id, e)}>
-      <Image image={thumbnail} />
+    <AnimeCardContainer
+      onClick={(e: React.MouseEvent) => onClick(id, e)}
+      display={display}
+    >
+      <div className="image-container">
+        <Image className="image" image={thumbnail} />
+      </div>
       <InfoContainer>
         <Title>{title}</Title>
         <Rating>

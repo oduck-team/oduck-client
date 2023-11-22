@@ -6,6 +6,7 @@ export const AnimeMainCarouselContainer = styled.div<{ image: string }>`
   width: 100%;
   height: 545px;
   overflow: hidden;
+  cursor: pointer;
 
   ${({ theme }) => theme.mq("md")} {
     & .slick-prev,
