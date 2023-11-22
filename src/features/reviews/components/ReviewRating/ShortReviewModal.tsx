@@ -54,7 +54,7 @@ export default function ShortReviewModal({
       isChecked: form.character,
     },
     {
-      name: "art",
+      name: "drawing",
       content: (
         <>
           현실 찢고 들어간듯한/이쁜
@@ -74,7 +74,7 @@ export default function ShortReviewModal({
       isChecked: form.story,
     },
     {
-      name: "voiceActing",
+      name: "voiceActor",
       content: (
         <>
           <strong>성우</strong>들의 미친 연기력
@@ -83,7 +83,7 @@ export default function ShortReviewModal({
       isChecked: form.voiceActor,
     },
     {
-      name: "sound",
+      name: "music",
       content: (
         <>
           가슴이 옹졸해지는 <strong style={{ marginLeft: 4 }}>음악</strong>
