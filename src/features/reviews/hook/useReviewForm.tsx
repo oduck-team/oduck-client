@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
+import useDebounce from "@/hooks/useDebounce";
 
-import { MOCK_USER_REVIEW_DATA } from "../components/ReviewRating/ShortReviewModal";
+import { AttractionType } from "../api/review";
+import { UserReview } from "../components/ReviewRating/ShortReviewModal";
 
+import useAttractionPoint from "./useAttractionPoint";
 import useReview from "./useReview";
+
+type ReviewForm = Pick<UserReview, "content" | "isSpoiler"> & AttractionPoint;
+
+const DEBOUNCE_DELAY = 200;
 
 export default function useReviewForm(
   onReview: () => void,
-  userReviewData?: MOCK_USER_REVIEW_DATA,
+  userReviewData?: UserReview,
 ) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -19,17 +26,30 @@ export default function useReviewForm(
   const { user } = useAuth();
   const { addReview, updateReview } = useReview(animeId, onReview);
 
+  const { userAttraction, addAttraction, status } = useAttractionPoint(animeId);
+
   const toast = useToast();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<ReviewForm>({
     content: userReviewData?.content ?? "",
     isSpoiler: userReviewData?.isSpoiler ?? false,
-    character: userReviewData?.character ?? false,
-    art: userReviewData?.art ?? false,
-    story: userReviewData?.story ?? false,
-    voiceActing: userReviewData?.voiceActing ?? false,
-    sound: userReviewData?.sound ?? false,
+    character: userAttraction?.character ?? false,
+    drawing: userAttraction?.drawing ?? false,
+    story: userAttraction?.story ?? false,
+    voiceActor: userAttraction?.voiceActor ?? false,
+    music: userAttraction?.music ?? false,
   });
+
+  useEffect(() => {
+    setForm((prev) => ({
+      ...prev,
+      character: userAttraction?.character ?? false,
+      drawing: userAttraction?.drawing ?? false,
+      story: userAttraction?.story ?? false,
+      voiceActor: userAttraction?.voiceActor ?? false,
+      music: userAttraction?.music ?? false,
+    }));
+  }, [userAttraction]);
 
   const [error, setError] = useState(false);
 
@@ -50,7 +70,7 @@ export default function useReviewForm(
     }));
   };
 
-  const handleReviewSubmit = () => {
+  const handleReviewSubmit = useDebounce(() => {
     // 유효성 검사
     setError(false);
     if (form.content.trim().length < 10) {
@@ -58,13 +78,25 @@ export default function useReviewForm(
       return;
     }
 
-    // console.log(form);
-    console.log({
-      name: user?.name,
-      animeId,
-      isSpoiler: form.isSpoiler,
-      content: form.content,
-    });
+    // 체크한 입덕 포인트
+    const selectedAttraction = Object.keys(form)
+      .filter(
+        (key) =>
+          form[key as keyof ReviewForm] === true &&
+          !["content, isSpoiler"].includes(key),
+      )
+      .map((key) =>
+        key === "voiceActor" ? "VOICE_ACTOR" : key.toUpperCase(),
+      ) as AttractionType[];
+
+    console.log("입덕 포인트: ", selectedAttraction);
+
+    // 입덕 포인트 추가: 체크된 입덕 포인트가 있는 경우에만 요청
+    if (selectedAttraction.length !== 0 && !status?.isAttractionPoint) {
+      addAttraction.mutate(selectedAttraction);
+    }
+
+    // TODO: 입덕 포인트 수정
 
     // 리뷰 수정
     if (userReviewData) {
@@ -113,7 +145,7 @@ export default function useReviewForm(
         },
       );
     }
-  };
+  }, DEBOUNCE_DELAY);
 
   return {
     form,
