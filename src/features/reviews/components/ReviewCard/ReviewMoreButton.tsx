@@ -9,6 +9,7 @@ import useSnackBar from "@/components/SnackBar/useSnackBar";
 import useToast from "@/components/Toast/useToast";
 import DropDownModal from "@/features/users/components/DropDownModal";
 import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
+import useDebounce from "@/hooks/useDebounce";
 
 import useEvaluation from "../../hook/useEvaluation";
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
@@ -27,6 +28,8 @@ interface ReviewMoreButtonProps {
   isSpoiler: boolean;
   score: number;
 }
+
+const DEBOUNCE_DELAY = 200;
 
 export default function ReviewMoreButton({
   isMine,
@@ -53,7 +56,7 @@ export default function ReviewMoreButton({
     handleReviewModalToggle();
   };
 
-  const handleRate = (value: number) => {
+  const handleRate = useDebounce((value: number) => {
     evaluationMutation.mutate(
       { score: value },
       {
@@ -62,7 +65,7 @@ export default function ReviewMoreButton({
         },
       },
     );
-  };
+  }, DEBOUNCE_DELAY);
 
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
 
