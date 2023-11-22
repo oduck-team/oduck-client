@@ -41,6 +41,12 @@ export default function BookmarkDeleteModal({
       onSuccess: () => {
         queryClient.invalidateQueries(["profile", user?.name]);
         queryClient.invalidateQueries(["profile", user?.memberId, "bookmark"]);
+        queryClient.invalidateQueries([
+          "profile",
+          user?.memberId,
+          "count",
+          "bookmark",
+        ]);
         queryClient.invalidateQueries(["bookmark", user?.memberId, animeId]);
         queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
 

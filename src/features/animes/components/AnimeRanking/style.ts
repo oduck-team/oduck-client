@@ -69,7 +69,7 @@ export const AnimeRankingContainer = styled.section`
 
   /* 아래쪽 캐러셀의 왼쪽 마진 */
   & .slick-slider:last-child {
-    & .slick-track .slick-slide:first-child {
+    & .slick-track .slick-slide:first-of-type {
       margin-left: 16px;
     }
   }
@@ -98,6 +98,7 @@ export const HighlightItemContainer = styled.div`
   padding-bottom: 46%;
   margin: 0 auto;
   margin-bottom: 4px;
+  cursor: pointer;
 `;
 
 export const HighlightItem = styled.div<ItemProps>`
@@ -144,6 +145,7 @@ export const SliderItem = styled.div`
   flex-direction: column;
   gap: 8px;
   flex-shrink: 0;
+  cursor: pointer;
 
   & > div:last-of-type {
     ${({ theme }) => theme.typo["body-3-r"]}

@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 export const ReviewSkeleton = styled.li`
   padding: 16px 10px 20px;
 
-  & > div:nth-child(2) {
+  & > div:nth-of-type(2) {
     margin: 8px 0 4px;
   }
 
-  & > div:nth-child(3) {
+  & > div:nth-of-type(3) {
     margin-bottom: 6px;
   }
 

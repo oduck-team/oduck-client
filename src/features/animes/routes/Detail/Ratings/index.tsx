@@ -17,7 +17,7 @@ import {
 export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
   return (
     <Section>
-      <h1>평점</h1>
+      <h1>별점</h1>
       <AverageRatings>
         <AverageRatingsOverview>
           <Star size={36} weight="fill" />

@@ -16,7 +16,7 @@ import {
 import SpoilerCheckBox from "./SpoilerCheckBox";
 
 export interface MOCK_USER_REVIEW_DATA {
-  id: number;
+  reviewId: number;
   animeId: number;
   content: string;
   isSpoiler: boolean;

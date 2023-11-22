@@ -36,6 +36,7 @@ export default function AnimeSlide({ title, animes }: AnimeSlideProps) {
         {animes.map((anime) => (
           <AnimeCard
             key={anime.id}
+            display="carousel"
             id={anime.id}
             thumbnail={anime.thumbnail}
             title={anime.title}

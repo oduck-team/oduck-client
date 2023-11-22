@@ -21,13 +21,7 @@ export const Tabs = styled(BaseTabs)`
 export const Content = styled.div`
   width: 100%;
   display: flex;
-  gap: 32px 8px;
+  gap: 32px 0px;
   flex-wrap: wrap;
   padding: 24px 16px;
-`;
-
-export const AnimeSkeletonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 `;
