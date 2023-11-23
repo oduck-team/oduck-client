@@ -9,6 +9,7 @@ import useSnackBar from "@/components/SnackBar/useSnackBar";
 import useToast from "@/components/Toast/useToast";
 import DropDownModal from "@/features/users/components/DropDownModal";
 import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
+import useDebounce from "@/hooks/useDebounce";
 
 import useEvaluation from "../../hook/useEvaluation";
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
@@ -19,15 +20,6 @@ import {
   RatingContainer,
 } from "./ReviewMoreButton.style";
 
-// TODO: 서버에서 가져오기
-const USER_MOCK_ATTRACTION = {
-  character: true,
-  art: true,
-  story: false,
-  voiceActing: false,
-  sound: true,
-};
-
 interface ReviewMoreButtonProps {
   isMine: boolean;
   reviewId: number;
@@ -36,6 +28,8 @@ interface ReviewMoreButtonProps {
   isSpoiler: boolean;
   score: number;
 }
+
+const DEBOUNCE_DELAY = 200;
 
 export default function ReviewMoreButton({
   isMine,
@@ -62,7 +56,7 @@ export default function ReviewMoreButton({
     handleReviewModalToggle();
   };
 
-  const handleRate = (value: number) => {
+  const handleRate = useDebounce((value: number) => {
     evaluationMutation.mutate(
       { score: value },
       {
@@ -71,8 +65,7 @@ export default function ReviewMoreButton({
         },
       },
     );
-    console.log(value);
-  };
+  }, DEBOUNCE_DELAY);
 
   const handleReviewDeleteClick = () => console.log("리뷰삭제");
 
@@ -150,7 +143,6 @@ export default function ReviewMoreButton({
               animeId,
               content,
               isSpoiler,
-              ...USER_MOCK_ATTRACTION,
             }}
           >
             <MyRating>내 별점</MyRating>

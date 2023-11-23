@@ -10,7 +10,12 @@ import recentReviewMock1 from "./mock/recentReview1.json";
 import recentReviewMock2 from "./mock/recentReview2.json";
 import recentReviewMock3 from "./mock/recentReview3.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
-import { AddReviewDto, ReviewInfo, UserEvaluation } from "./review";
+import {
+  AddReviewDto,
+  AttractionType,
+  ReviewInfo,
+  UserEvaluation,
+} from "./review";
 
 export default class ReviewDevApi {
   /** @description 리뷰 작성 요청*/
@@ -70,5 +75,28 @@ export default class ReviewDevApi {
   /** @description 애니 별점 평가 여부 조회 */
   async getEvaluation(animeId: number) {
     return get<UserEvaluation>(`/ratings/${animeId}`);
+  }
+
+  /** @description 입덕 포인트 남기기 */
+  async addAttractionPoint(
+    animeId: number,
+    attractionElements: AttractionType[],
+  ) {
+    return post(`/attraction-points`, {
+      animeId,
+      attractionElements,
+    });
+  }
+
+  /** @description 입덕 포인트 존재 여부 조회 */
+  async getUserAttractionPointStatus(animeId: number) {
+    return get<{ isAttractionPoint: boolean }>(`/attraction-points/${animeId}`);
+  }
+
+  /** @description 리뷰 수정 시 입덕 포인트 조회 */
+  async getUserAttractionPoint(animeId: number, name: string) {
+    return get<AttractionPoint>(`/short-reviews/attraction-points`, {
+      params: { animeId, name },
+    });
   }
 }
