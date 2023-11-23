@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 
+import DeferredComponent from "@/components/DeferredComponent";
 import Modal from "@/components/Modal";
 import Textarea from "@/components/TextArea";
 
@@ -94,64 +95,71 @@ export default function ShortReviewModal({
   ];
 
   return (
-    <Modal onClose={onClose} showBackdrop={showBackdrop}>
-      <Modal.Content>
-        <Title>한 줄 리뷰 모달</Title>
-        {children}
-        <ReviewContentSection>
-          <label htmlFor="content">작품에 대한 의견을 남겨주세요</label>
-          <Textarea
-            name="content"
-            placeholder="최대 100자 까지 입력 가능해요"
-            onChange={handleTextInputChange}
-            value={form.content}
-            warn={error}
-            message="최소 10자 이상 입력해 주세요."
-          />
-          <SpoilerCheckBox
-            name="isSpoiler"
-            checked={form.isSpoiler}
-            onChange={handleCheckboxChange}
-          />
-        </ReviewContentSection>
-        <AttractionPointSection>
-          <label htmlFor="attraction-point">
-            이 애니의 입덕포인트는 무엇인가요?
-          </label>
-          <p>
-            입덕 포인트 선택 시 <span>포인트</span>가 쌓여요!
-          </p>
-          <AttractionPointList>
-            {attractionPoints.map((point) => (
-              <li key={point.name}>
-                <AttractionPoint
-                  name={point.name}
-                  isChecked={point.isChecked}
-                  onChange={handleCheckboxChange}
-                >
-                  {point.content}
-                </AttractionPoint>
-              </li>
-            ))}
-          </AttractionPointList>
-        </AttractionPointSection>
-      </Modal.Content>
+    <DeferredComponent>
+      <Modal onClose={onClose} showBackdrop={showBackdrop}>
+        <Modal.Content>
+          <Title>한 줄 리뷰 모달</Title>
+          {children}
+          <ReviewContentSection>
+            <label htmlFor="content">작품에 대한 의견을 남겨주세요</label>
+            <Textarea
+              name="content"
+              placeholder="최대 100자 까지 입력 가능해요"
+              onChange={handleTextInputChange}
+              value={form.content}
+              warn={error}
+              message="최소 10자 이상 입력해 주세요."
+            />
+            <SpoilerCheckBox
+              name="isSpoiler"
+              checked={form.isSpoiler}
+              onChange={handleCheckboxChange}
+            />
+          </ReviewContentSection>
+          <AttractionPointSection>
+            <label htmlFor="attraction-point">
+              이 애니의 입덕포인트는 무엇인가요?
+            </label>
+            <p>
+              입덕 포인트 선택 시 <span>포인트</span>가 쌓여요!
+            </p>
+            <AttractionPointList>
+              {attractionPoints.map((point) => (
+                <li key={point.name}>
+                  <AttractionPoint
+                    name={point.name}
+                    isChecked={point.isChecked}
+                    onChange={handleCheckboxChange}
+                  >
+                    {point.content}
+                  </AttractionPoint>
+                </li>
+              ))}
+            </AttractionPointList>
+          </AttractionPointSection>
+        </Modal.Content>
 
-      <Modal.Actions direction="row">
-        <Button
-          name="닫기"
-          variant="solid"
-          color="neutral"
-          size="lg"
-          isBlock
-          onClick={onClose}
-        >
-          취소
-        </Button>
-        <Button name="평가 완료" isBlock size="lg" onClick={handleReviewSubmit}>
-          완료
-        </Button>
-      </Modal.Actions>
-    </Modal>
+        <Modal.Actions direction="row">
+          <Button
+            name="닫기"
+            variant="solid"
+            color="neutral"
+            size="lg"
+            isBlock
+            onClick={onClose}
+          >
+            취소
+          </Button>
+          <Button
+            name="평가 완료"
+            isBlock
+            size="lg"
+            onClick={handleReviewSubmit}
+          >
+            완료
+          </Button>
+        </Modal.Actions>
+      </Modal>
+    </DeferredComponent>
   );
 }
