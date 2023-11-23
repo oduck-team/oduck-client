@@ -49,6 +49,10 @@ export default function Rating({
     if (!save) setSave((prev) => !prev);
   };
 
+  const handleMouseLeave = () => {
+    if (!save) setRating(value);
+  };
+
   const handleTouchEnd = () => {
     if (!save) setSave((prev) => !prev);
   };
@@ -90,6 +94,7 @@ export default function Rating({
           onClick={handleClick}
           onMouseMove={handleHover}
           onTouchEnd={handleTouchEnd}
+          onMouseLeave={handleMouseLeave}
         />
       )}
       <BackStarContainer>
