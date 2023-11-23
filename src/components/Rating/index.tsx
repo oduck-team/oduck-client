@@ -31,6 +31,7 @@ export default function Rating({
   const [rating, setRating] = useState(0); // 별점
   const [save, setSave] = useState(false); // 별점 저장 여부
   const [startX, setStartX] = useState(0); // ColorStarContainer Width 계산을 위해 필요
+  const [isLoading, setIsLoading] = useState(false); // 데스크탑에서 click 후 로딩 상태
   const ContainerRef = useRef<HTMLDivElement | null>(null); // startX와 같은 이유로 필요
 
   const handleTouchDrag = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -46,10 +47,13 @@ export default function Rating({
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const dist = e.clientX - startX;
     calcRating(dist);
+    setIsLoading(true); // 데스크탑에서 별점 평가 후, 바로 마우스 leave 시 깜빡이는 현상 수정
+    setTimeout(() => setIsLoading(false), 200);
     if (!save) setSave((prev) => !prev);
   };
 
   const handleMouseLeave = () => {
+    if (isLoading) return; // 데스크탑에서 별점 평가 후, 바로 마우스 leave 시 깜빡이는 현상 수정
     if (!save) setRating(value);
   };
 
