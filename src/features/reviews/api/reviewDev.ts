@@ -46,6 +46,11 @@ export default class ReviewDevApi {
     }
   }
 
+  /** @description 리뷰 좋아요 추가/삭제 */
+  async toggleReviewLike(shortReviewId: number): Promise<void> {
+    return post(`/likes`, { shortReviewId });
+  }
+
   async getRecentReviewList(
     pageParam: string | undefined,
     size: number = 10,

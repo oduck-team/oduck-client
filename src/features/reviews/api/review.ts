@@ -40,6 +40,11 @@ export default class ReviewApi {
     return patch(`/short-reviews/${reviewId}`, review);
   }
 
+  /** @description 리뷰 좋아요 추가/삭제 */
+  async toggleReviewLike(shortReviewId: number): Promise<void> {
+    return post(`/likes`, { shortReviewId });
+  }
+
   /** @description 한 애니의 리뷰 목록 요청 */
   async getAnimeReviews(
     animeId: number,
