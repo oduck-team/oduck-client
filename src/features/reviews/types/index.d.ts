@@ -14,3 +14,11 @@ declare interface Review {
     avgScore: number;
   };
 }
+
+declare interface AttractionPoint {
+  drawing: boolean;
+  story: boolean;
+  music: boolean;
+  character: boolean;
+  voiceActor: boolean;
+}
