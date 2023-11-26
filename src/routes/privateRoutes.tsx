@@ -1,4 +1,4 @@
-import { PropsWithChildren, lazy, useEffect } from "react";
+import { PropsWithChildren, lazy, useLayoutEffect } from "react";
 import { RouteObject, useNavigate } from "react-router-dom";
 
 import Layout from "@/components/Layout";
@@ -16,8 +16,12 @@ function PrivateRoute({ children }: PropsWithChildren) {
   /**
    * 유저 정보가 없다면 로그인 페이지로 이동합니다.
    */
-  useEffect(() => {
+  useLayoutEffect(() => {
+    console.log("PrivateRoute useLayoutEffect");
+    console.log(user);
+
     if (!user) {
+      console.log("PrivateRoute user가 없어서 로그인 페이지로 이동");
       navigate("/login", { replace: true });
     }
   }, [navigate, user]);

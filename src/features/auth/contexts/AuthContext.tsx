@@ -42,15 +42,19 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const fetchUser = useCallback(async () => {
     try {
+      console.log("fetchUser 시도");
       const user = await authApi.getStatus();
+      console.log(`fetchUser user: ${JSON.stringify(user)}`);
+      // console.log(user);
       setUser(user);
       setAutoLogin(true);
+      console.log("fetchUser 끝");
     } catch (e) {
+      console.log("fetchUser 오류 발생");
       setUser(undefined);
-      //FIXME: 배포환경 테스트를 위해 주석 처리
-      // removeAutoLogin();
+      removeAutoLogin();
     }
-  }, [authApi, setAutoLogin]);
+  }, [authApi, removeAutoLogin, setAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();
@@ -61,8 +65,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
+    console.log("AuthProvider useEffect");
     if (isAutoLogin) {
       fetchUser();
+      console.log("AuthProvider fetchUser 끝");
     }
   }, [isAutoLogin]);
 
