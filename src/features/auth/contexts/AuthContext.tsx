@@ -52,8 +52,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       console.log("AuthProvider fetchUser 오류 발생");
 
       setUser(undefined);
-      //FIXME: 배포환경 테스트를 위해 주석 처리
-      // removeAutoLogin();
+      removeAutoLogin();
     }
   }, [authApi, setAutoLogin]);
 
@@ -66,9 +65,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
-    if (isAutoLogin) {
-      fetchUser();
-    }
+    const checkAutoLogin = async () => {
+      console.log("checkAutoLogin");
+      if (isAutoLogin) {
+        await fetchUser();
+      }
+    };
+
+    checkAutoLogin();
   }, [isAutoLogin]);
 
   const value = useMemo<AuthState & AuthAction>(
