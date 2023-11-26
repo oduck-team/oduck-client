@@ -40,21 +40,25 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const { setAutoLogin, removeAutoLogin, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
+  const setLoginUser = useCallback(async () => {
+    console.log("AuthProvider fetchUser try");
+    const user = await authApi.getStatus();
+    console.log(user);
+    setUser(user);
+    setAutoLogin(true);
+    console.log("AuthProvider fetchUser try end");
+  }, [authApi, setAutoLogin]);
+
   const fetchUser = useCallback(async () => {
     try {
-      console.log("AuthProvider fetchUser try");
-      const user = await authApi.getStatus();
-      console.log(user);
-      setUser(user);
-      setAutoLogin(true);
-      console.log("AuthProvider fetchUser try end");
+      await setLoginUser();
     } catch (e) {
       console.log("AuthProvider fetchUser 오류 발생");
 
       setUser(undefined);
       removeAutoLogin();
     }
-  }, [authApi, setAutoLogin]);
+  }, [setLoginUser, removeAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();
@@ -68,6 +72,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const checkAutoLogin = async () => {
       console.log("checkAutoLogin");
       if (isAutoLogin) {
+        console.log("checkAutoLogin true");
         await fetchUser();
       }
     };
