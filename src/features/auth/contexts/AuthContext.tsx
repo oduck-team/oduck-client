@@ -45,7 +45,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
       console.log("fetchUser 시도");
       const user = await authApi.getStatus();
       console.log(`fetchUser user: ${JSON.stringify(user)}`);
-      // console.log(user);
       setUser(user);
       setAutoLogin(true);
       console.log("fetchUser 끝");
