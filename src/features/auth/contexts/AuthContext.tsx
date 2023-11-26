@@ -42,10 +42,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const fetchUser = useCallback(async () => {
     try {
+      console.log("AuthProvider fetchUser try");
       const user = await authApi.getStatus();
+      console.log(user);
       setUser(user);
       setAutoLogin(true);
+      console.log("AuthProvider fetchUser try end");
     } catch (e) {
+      console.log("AuthProvider fetchUser 오류 발생");
+
       setUser(undefined);
       //FIXME: 배포환경 테스트를 위해 주석 처리
       // removeAutoLogin();
