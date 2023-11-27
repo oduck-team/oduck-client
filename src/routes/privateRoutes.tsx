@@ -3,7 +3,7 @@ import { RouteObject, useNavigate } from "react-router-dom";
 
 import Layout from "@/components/Layout";
 import useAuth from "@/features/auth/hooks/useAuth";
-import useRedirect from "@/hooks/useRedirect";
+import useAutoLogin from "@/features/auth/hooks/useAutoLogin";
 
 import RouteLayout from "../components/Layout/RouteLayout";
 
@@ -11,9 +11,9 @@ const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { user, fetchUser } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
-  const { redirectUrl, handleRedirect } = useRedirect();
+  const { isAutoLogin } = useAutoLogin();
 
   /**
    * 유저 정보가 없다면 로그인 페이지로 이동합니다.
@@ -23,19 +23,23 @@ function PrivateRoute({ children }: PropsWithChildren) {
     console.log(user);
 
     if (!user) {
-      if (redirectUrl) {
-        const handleFetchUser = async () => {
-          console.log("PrivateRoute redirect handleFetchUser");
-          await fetchUser();
-          handleRedirect();
-        };
+      if (isAutoLogin) {
+        console.log("유저는 자동로그인은 설정되어있음");
+        // const handleFetchUser = async () => {
+        //   console.log("PrivateRoute handleFetchUser");
+        //   await fetchUser();
+        // };
 
-        handleFetchUser();
+        // handleFetchUser();
+        return;
       }
+
       console.log("PrivateRoute user가 없어서 로그인 페이지로 이동");
       navigate("/login", { replace: true });
     }
-  }, [navigate, user, redirectUrl]);
+  }, [navigate, user, isAutoLogin]);
+
+  console.log("children 렌더링");
 
   return children;
 }
