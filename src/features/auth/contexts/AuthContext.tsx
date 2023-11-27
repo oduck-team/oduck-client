@@ -40,25 +40,20 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const { setAutoLogin, removeAutoLogin, isAutoLogin } = useAutoLogin();
   const snackbar = useSnackBar();
 
-  const setLoginUser = useCallback(async () => {
-    console.log("AuthProvider fetchUser try");
-    const user = await authApi.getStatus();
-    console.log(user);
-    setUser(user);
-    setAutoLogin(true);
-    console.log("AuthProvider fetchUser try end");
-  }, [authApi, setAutoLogin]);
-
   const fetchUser = useCallback(async () => {
     try {
-      await setLoginUser();
+      console.log("fetchUser 시도");
+      const user = await authApi.getStatus();
+      console.log(`fetchUser user: ${JSON.stringify(user)}`);
+      setUser(user);
+      setAutoLogin(true);
+      console.log("fetchUser 끝");
     } catch (e) {
-      console.log("AuthProvider fetchUser 오류 발생");
-
+      console.log("fetchUser 오류 발생");
       setUser(undefined);
       removeAutoLogin();
     }
-  }, [setLoginUser, removeAutoLogin]);
+  }, [authApi, removeAutoLogin, setAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();
@@ -69,15 +64,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   /** 자동 로그인이 설정된 경우에 유저 정보 가져옴 */
   useEffect(() => {
-    const checkAutoLogin = async () => {
-      console.log("checkAutoLogin");
-      if (isAutoLogin) {
-        console.log("checkAutoLogin true");
-        await fetchUser();
-      }
-    };
-
-    checkAutoLogin();
+    console.log("AuthProvider useEffect");
+    if (isAutoLogin) {
+      fetchUser();
+      console.log("AuthProvider fetchUser 끝");
+    }
   }, [isAutoLogin]);
 
   const value = useMemo<AuthState & AuthAction>(

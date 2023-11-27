@@ -28,6 +28,7 @@ export default function Callback() {
   useEffect(() => {
     if (redirectUrl) {
       const handleFetchUser = async () => {
+        console.log("Callback handleFetchUser");
         await fetchUser();
         handleRedirect();
       };

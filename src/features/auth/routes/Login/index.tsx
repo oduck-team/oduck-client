@@ -26,6 +26,7 @@ export default function Login() {
    * sessionStorage에 저장된 prevPath를 redirect path로 지정
    */
   useEffect(() => {
+    console.log("Login 페이지 redirect url 지정");
     setRedirect(sessionStorage.getItem("prevPath") ?? "/");
   }, [location, setRedirect]);
 
