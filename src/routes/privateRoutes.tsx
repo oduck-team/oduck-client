@@ -11,7 +11,7 @@ const Profile = lazy(() => import("@/features/users/routes/Profile"));
 const ProfileEdit = lazy(() => import("@/features/users/routes/Edit"));
 
 function PrivateRoute({ children }: PropsWithChildren) {
-  const { user } = useAuth();
+  const { user, fetchUser } = useAuth();
   const navigate = useNavigate();
   const { isAutoLogin } = useAutoLogin();
 
@@ -24,13 +24,12 @@ function PrivateRoute({ children }: PropsWithChildren) {
 
     if (!user) {
       if (isAutoLogin) {
-        console.log("유저는 자동로그인은 설정되어있음");
-        // const handleFetchUser = async () => {
-        //   console.log("PrivateRoute handleFetchUser");
-        //   await fetchUser();
-        // };
+        const handleFetchUser = async () => {
+          console.log("PrivateRoute handleFetchUser");
+          await fetchUser();
+        };
 
-        // handleFetchUser();
+        handleFetchUser();
         return;
       }
 
