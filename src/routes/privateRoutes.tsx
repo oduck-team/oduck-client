@@ -24,17 +24,18 @@ function PrivateRoute({ children }: PropsWithChildren) {
 
     if (!user) {
       if (isAutoLogin) {
-        const handleFetchUser = async () => {
-          console.log("PrivateRoute handleFetchUser");
-          await fetchUser();
-        };
+        console.log("(새로고침) 유저X 자동로그인O");
+        fetchUser();
+        // const handleFetchUser = async () => {
+        //   console.log("PrivateRoute handleFetchUser");
+        //   await fetchUser();
+        // };
 
-        handleFetchUser();
-        return;
+        // handleFetchUser();
+      } else {
+        console.log("PrivateRoute user가 없어서 로그인 페이지로 이동");
+        navigate("/login", { replace: true });
       }
-
-      console.log("PrivateRoute user가 없어서 로그인 페이지로 이동");
-      navigate("/login", { replace: true });
     }
   }, [navigate, user, isAutoLogin]);
 
