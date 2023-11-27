@@ -19,27 +19,13 @@ function PrivateRoute({ children }: PropsWithChildren) {
    * 유저 정보가 없다면 로그인 페이지로 이동합니다.
    */
   useEffect(() => {
-    console.log("PrivateRoute useEffect");
-    console.log(user);
-
     if (!user) {
-      if (isAutoLogin) {
-        console.log("(새로고침) 유저X 자동로그인O");
-        fetchUser();
-        // const handleFetchUser = async () => {
-        //   console.log("PrivateRoute handleFetchUser");
-        //   await fetchUser();
-        // };
-
-        // handleFetchUser();
-      } else {
-        console.log("PrivateRoute user가 없어서 로그인 페이지로 이동");
-        navigate("/login", { replace: true });
-      }
+      // 로그인 상태에서 새로고침 시, 로그인 페이지로 이동되는 오류 대응
+      // AutoLogin이 설정되어 있으면 유저정보를 새로 요청
+      if (isAutoLogin) fetchUser();
+      else navigate("/login", { replace: true });
     }
   }, [navigate, user, isAutoLogin]);
-
-  console.log("children 렌더링");
 
   return children;
 }
