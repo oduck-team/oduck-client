@@ -32,7 +32,7 @@ export default function ReviewsRecent() {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["MostRecentReviewCard"],
+    queryKey: ["MostRecentReviewList"],
     queryFn: ({ pageParam }) => reviewApi.getRecentReviewList(pageParam),
     getNextPageParam: (lastPage) => lastPage.cursor || undefined,
     select: (data) => ({

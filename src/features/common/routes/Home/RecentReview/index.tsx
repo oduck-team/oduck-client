@@ -13,7 +13,7 @@ export default function RecentReview() {
   const { user } = useAuth();
   const { reviewApi } = useApi();
   const { data, isLoading } = useInfiniteQuery({
-    queryKey: ["MostRecentReviewCard", "first"],
+    queryKey: ["MostRecentReviewList", "first"],
     queryFn: ({ pageParam }) => reviewApi.getRecentReviewList(pageParam, 1),
     select: (data) => ({
       pages: data.pages.flatMap((page) => page.items),
