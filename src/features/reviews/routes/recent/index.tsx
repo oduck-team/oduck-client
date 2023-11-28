@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
+import Head from "@/components/Head";
 import Loader from "@/components/Loader";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
@@ -48,6 +49,7 @@ export default function ReviewsRecent() {
 
   return (
     <>
+      <Head title="오덕 | 최근 한줄리뷰" />
       <ReviewsRecentContainer>
         <Header>
           <IconButton type="button" onClick={() => navigate(-1)}>
