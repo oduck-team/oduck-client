@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import Button from "@/components/Button";
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -26,9 +27,11 @@ export default function RecentReview() {
         <RecentReviewContainer>
           <Header>
             <Title>최근 한줄리뷰</Title>
-            <Button name="더보기" variant="text" size="sm" color="neutral">
-              더보기
-            </Button>
+            <Link to={"/reviews/recent"}>
+              <Button name="더보기" variant="text" size="sm" color="neutral">
+                더보기
+              </Button>
+            </Link>
           </Header>
           <ReviewConainer>
             {isLoading && <RecentReviewLoading />}

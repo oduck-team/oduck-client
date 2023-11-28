@@ -16,6 +16,7 @@ const HelpDesk = lazy(() => import("@/features/common/routes/HelpDesk"));
 const EmailTerms = lazy(() => import("@/features/common/routes/Terms/Email"));
 const NoticeList = lazy(() => import("@/features/notices/routes/List"));
 const Profile = lazy(() => import("@/features/users/routes/Profile"));
+const RecentReviews = lazy(() => import("@/features/reviews/routes/recent"));
 const NotFound = lazy(() => import("@/features/common/routes/Error/404"));
 
 export const publicRoutes: RouteObject[] = [
@@ -71,6 +72,10 @@ export const publicRoutes: RouteObject[] = [
           {
             path: "/users/:name",
             element: <Profile />,
+          },
+          {
+            path: "/reviews/recent",
+            element: <RecentReviews />,
           },
         ],
       },
