@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import Button from "@/components/Button";
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -12,7 +13,7 @@ export default function RecentReview() {
   const { user } = useAuth();
   const { reviewApi } = useApi();
   const { data, isLoading } = useInfiniteQuery({
-    queryKey: ["MostRecentReviewCard", "first"],
+    queryKey: ["MostRecentReviewList", "first"],
     queryFn: ({ pageParam }) => reviewApi.getRecentReviewList(pageParam, 1),
     select: (data) => ({
       pages: data.pages.flatMap((page) => page.items),
@@ -26,9 +27,11 @@ export default function RecentReview() {
         <RecentReviewContainer>
           <Header>
             <Title>최근 한줄리뷰</Title>
-            <Button name="더보기" variant="text" size="sm" color="neutral">
-              더보기
-            </Button>
+            <Link to={"/reviews/recent"}>
+              <Button name="더보기" variant="text" size="sm" color="neutral">
+                더보기
+              </Button>
+            </Link>
           </Header>
           <ReviewConainer>
             {isLoading && <RecentReviewLoading />}
