@@ -40,6 +40,7 @@ export default function EditForm({ name, description }: EditFromProps) {
             value={form.description}
             placeholder="자기소개를 적어보세요(최대 100자까지 가능합니다)"
             maxLength={100}
+            height={"100"}
             spellCheck={false}
             onChange={(e) => handleInputChange(e)}
           />
