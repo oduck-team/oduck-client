@@ -14,6 +14,7 @@ export const Introduce = styled.p<{ isReadMore: boolean }>`
   width: 100%;
   margin-bottom: 4px;
   padding: 0 16px;
+  word-break: break-all;
 
   ${({ isReadMore }) =>
     isReadMore &&
