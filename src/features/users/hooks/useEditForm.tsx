@@ -50,6 +50,7 @@ export default function useEditForm(name: string, description: string) {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["profile", user?.name]);
         await fetchUser();
+        queryClient.removeQueries(["profile", "edit", user?.name]);
         navigate("/profile");
       },
       onError: (error) => {
