@@ -75,6 +75,9 @@ export default function useEditForm(name: string, description: string) {
             case 400: // 정규식 검사 오류
               toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
+            case 409: // 닉네임 중복 오류
+              toast.error({ message: "이미 사용중인 닉네임입니다." });
+              break;
             default:
               toastDefaultError();
               break;
