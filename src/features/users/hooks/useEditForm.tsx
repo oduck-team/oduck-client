@@ -34,10 +34,7 @@ export default function useEditForm(name: string, description: string) {
   ) => {
     const { name, value } = e.target;
 
-    if (name === "name" && value.length > 10) {
-      setForm((prev) => ({ ...prev, name: prev.name.substring(0, 5) }));
-      return;
-    }
+    if (name === "name" && value.length > 10) return;
     if (name === "description" && value.length > 100) return;
 
     setForm((prev) => ({ ...prev, [name]: value }));
