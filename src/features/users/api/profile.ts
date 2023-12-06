@@ -4,13 +4,16 @@ import { ProfileEditFormData } from "../hooks/useEditForm";
 import { SelectedSort } from "../hooks/useSortBar";
 import { MENU } from "../hooks/useTabMenu";
 
-import reveiwMock1 from "./mock/review1.json";
-import reveiwMock2 from "./mock/review2.json";
-import reveiwMock3 from "./mock/review3.json";
-
 export interface TabListCountResponse {
   count: number;
 }
+
+export type ReviewListResponse = Omit<Review, "anime"> & {
+  animeId: number;
+  title: string;
+  thumbnail: string;
+  score: number | null;
+};
 
 export default class ProfileApi {
   async getProfile(name: string | undefined): Promise<Profile> {
@@ -33,26 +36,12 @@ export default class ProfileApi {
     memberId: number,
     pageParam: string | undefined,
     selected: SelectedSort,
-  ): Promise<CursorPage<Review>> {
+  ): Promise<CursorPage<ReviewListResponse>> {
     const params = this.setParams(pageParam, selected);
-    // FIXME: /members/${memberId} 변경, log 제거
-    console.log(memberId);
-    console.log(params);
 
-    // FIXME: review api 완성 시, mock switch 삭제
-    switch (pageParam) {
-      case "2023-10-03T21:05:31.859":
-        return reveiwMock2;
-      case "2023-09-21T21:05:31.859":
-        return reveiwMock1;
-      default:
-        return reveiwMock3;
-    }
-
-    // FIXME: review api 완성 시, 주석 제거
-    // return await get(`/members/${"26"}/reviews`, {
-    //   params: params,
-    // });
+    return await get(`/members/${memberId}/short-reviews`, {
+      params: params,
+    });
   }
 
   async getTabListCount(
@@ -75,9 +64,8 @@ export default class ProfileApi {
 
     const order = selected.isDESC ? "DESC" : "ASC";
 
-    // FIXME: 사이즈 변경
     const baseParams = {
-      size: 2,
+      size: 10,
       sort,
       order,
     };
