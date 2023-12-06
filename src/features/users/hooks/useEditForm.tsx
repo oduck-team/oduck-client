@@ -34,10 +34,7 @@ export default function useEditForm(name: string, description: string) {
   ) => {
     const { name, value } = e.target;
 
-    if (name === "name" && value.length > 10) {
-      setForm((prev) => ({ ...prev, name: prev.name.substring(0, 5) }));
-      return;
-    }
+    if (name === "name" && value.length > 10) return;
     if (name === "description" && value.length > 100) return;
 
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -46,10 +43,23 @@ export default function useEditForm(name: string, description: string) {
 
   const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormChange) return;
+
+    if (!isNicknameRegexCheck(form.name)) {
+      setStatus({
+        isWarn: true,
+        message:
+          "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
+      });
+
+      return;
+    }
+
     updateProfile.mutate(undefined, {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["profile", user?.name]);
         await fetchUser();
+        queryClient.removeQueries(["profile", "edit", user?.name]);
         navigate("/profile");
       },
       onError: (error) => {
@@ -62,6 +72,9 @@ export default function useEditForm(name: string, description: string) {
             case 400: // 정규식 검사 오류
               toast.error({ message: "사용할 수 없는 닉네임입니다." });
               break;
+            case 409: // 닉네임 중복 오류
+              toast.error({ message: "이미 사용중인 닉네임입니다." });
+              break;
             default:
               toastDefaultError();
               break;
@@ -69,15 +82,6 @@ export default function useEditForm(name: string, description: string) {
         }
       },
     });
-
-    if (!isNicknameRegexCheck(form.name)) {
-      setStatus({
-        isWarn: true,
-        message:
-          "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
-      });
-      return;
-    }
 
     setStatus({ isWarn: false, message: "" });
   }, 200);

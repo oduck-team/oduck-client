@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { TextareaBoxProps } from ".";
 
 export const TextareaBox = styled.textarea<TextareaBoxProps>`
-  ${({ warn = false, theme, negativeMargin }) => css`
+  ${({ warn = false, theme, negativeMargin, height }) => css`
     ${theme.typo["body-2-r"]};
     --scale: 1.1429;
     width: calc(100% * var(--scale));
@@ -24,6 +24,12 @@ export const TextareaBox = styled.textarea<TextareaBoxProps>`
       ${warn ? theme.colors["warn"]["40"] : theme.colors["neutral"]["30"]};
     transition: border 0.2s;
     resize: none;
+
+    /* height를 직접 지정한 경우 */
+    ${height &&
+    css`
+      height: calc(${height}px - ${negativeMargin}px);
+    `}
 
     &::placeholder {
       color: ${theme.colors["neutral"]["50"]};
