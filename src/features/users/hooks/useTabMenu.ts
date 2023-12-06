@@ -36,6 +36,7 @@ export default function useTabMenu(memberId: number) {
   const {
     data: bookmarks,
     isLoading: isLoadingBookmark,
+    isFetchingNextPage: isFetchingBookmarkNext,
     fetchNextPage: fetchNextPageBookmark,
     hasNextPage: hasNextPageBookmark,
   } = useInfiniteQuery(
@@ -55,6 +56,7 @@ export default function useTabMenu(memberId: number) {
   const {
     data: reviews,
     isLoading: isLoadingReview,
+    isFetchingNextPage: isFetchingReviewNext,
     fetchNextPage: fetchNextPageReview,
     hasNextPage: hasNextPageReview,
   } = useInfiniteQuery(
@@ -91,8 +93,10 @@ export default function useTabMenu(memberId: number) {
     selected: selectedSort,
     bookmarks,
     isLoadingBookmark,
+    isFetchingBookmarkNext,
     reviews,
     isLoadingReview,
+    isFetchingReviewNext,
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,

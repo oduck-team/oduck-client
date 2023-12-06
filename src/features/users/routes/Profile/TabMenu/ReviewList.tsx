@@ -6,12 +6,17 @@ import EmptyList from "./EmptyList";
 interface ReviewListProps {
   isMine: boolean;
   list: ReviewListResponse[];
+  isLoading: boolean;
 }
 
-export default function ReviewList({ isMine, list }: ReviewListProps) {
+export default function ReviewList({
+  isMine,
+  list,
+  isLoading,
+}: ReviewListProps) {
   return (
     <>
-      {list.length === 0 && (
+      {list.length === 0 && !isLoading && (
         <EmptyList
           message={`작성한 리뷰가 없어요.${
             isMine ? " 리뷰를 작성해 보세요" : ""

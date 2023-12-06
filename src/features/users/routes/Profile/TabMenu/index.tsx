@@ -27,8 +27,10 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
     selected: selectedSort,
     bookmarks,
     isLoadingBookmark,
+    isFetchingBookmarkNext,
     reviews,
     isLoadingReview,
+    isFetchingReviewNext,
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,
@@ -57,15 +59,25 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
           onClick={handleSortClick}
         />
         {selectedMenu === "한줄리뷰" && (
-          <ReviewList isMine={isMine} list={reviews?.pages ?? []} />
+          <ReviewList
+            isMine={isMine}
+            list={reviews?.pages ?? []}
+            isLoading={isLoadingReview}
+          />
         )}
         {selectedMenu === "입덕애니" && (
-          <BookmarkList isMine={isMine} list={bookmarks?.pages ?? []} />
+          <BookmarkList
+            isMine={isMine}
+            list={bookmarks?.pages ?? []}
+            isLoading={isLoadingBookmark}
+          />
         )}
 
         <Target ref={targetRef} />
 
-        {(isLoadingBookmark || isLoadingReview) && <Loader display="oduck" />}
+        {(isFetchingBookmarkNext || isFetchingReviewNext) && (
+          <Loader display="oduck" />
+        )}
       </ContentContainer>
     </>
   );

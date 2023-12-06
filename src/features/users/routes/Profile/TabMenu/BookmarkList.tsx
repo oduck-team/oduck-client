@@ -4,12 +4,17 @@ import EmptyList from "./EmptyList";
 interface BookmarkListProps {
   isMine: boolean;
   list: Bookmark[];
+  isLoading: boolean;
 }
 
-export default function BookmarkList({ isMine, list }: BookmarkListProps) {
+export default function BookmarkList({
+  isMine,
+  list,
+  isLoading,
+}: BookmarkListProps) {
   return (
     <>
-      {list.length === 0 && (
+      {list.length === 0 && !isLoading && (
         <EmptyList
           message={`입덕한 애니가 없어요.${
             isMine ? " 애니를 추가해 보세요" : ""
