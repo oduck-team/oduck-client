@@ -47,6 +47,7 @@ export default function useTabMenu(memberId: number) {
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,
       }),
+      enabled: selectedMenu === "입덕애니",
     },
   );
 
@@ -65,6 +66,7 @@ export default function useTabMenu(memberId: number) {
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,
       }),
+      enabled: selectedMenu === "한줄리뷰",
     },
   );
 
