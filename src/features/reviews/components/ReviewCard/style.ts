@@ -10,8 +10,8 @@ export const ReviewCardContainer = styled.article<
   transition: background-color ease 0.1s;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      background-color: #fdfdfd;
+    &:hover img {
+      transform: scale(1.2);
     }
   }
 

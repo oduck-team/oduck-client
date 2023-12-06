@@ -5,13 +5,21 @@ export const AnimeConatiner = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Image = styled.img`
+export const ImageContainer = styled.div`
   flex-shrink: 0;
   width: 60px;
   height: 74px;
+  overflow: hidden;
   border-radius: 4px;
-  background-color: #d9d9d9;
   margin-right: 8px;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #d9d9d9;
+  transition: transform ease 0.2s;
 `;
 
 export const TitleContainer = styled.div`
