@@ -1,4 +1,5 @@
 import ReviewCard from "@/features/reviews/components/ReviewCard";
+import ReviewCardSkeleton from "@/features/reviews/components/ReviewCard/ReviewCardSkeleton";
 import { ReviewListResponse } from "@/features/users/api/profile";
 
 import EmptyList from "./EmptyList";
@@ -16,6 +17,11 @@ export default function ReviewList({
 }: ReviewListProps) {
   return (
     <>
+      {isLoading &&
+        Array.from({ length: 2 }, (_, index) => (
+          <ReviewCardSkeleton key={index} />
+        ))}
+
       {list.length === 0 && !isLoading && (
         <EmptyList
           message={`작성한 리뷰가 없어요.${
@@ -26,6 +32,7 @@ export default function ReviewList({
           isMine={isMine}
         />
       )}
+
       {list.map((review) => (
         <ReviewCard
           key={review.animeId}

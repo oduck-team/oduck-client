@@ -1,3 +1,5 @@
+import BookmarkCardSkeleton from "@/features/bookmarks/components/BookmarkCardSkeleton";
+
 import BookmarkCard from "./BookmarkCard";
 import EmptyList from "./EmptyList";
 
@@ -14,6 +16,11 @@ export default function BookmarkList({
 }: BookmarkListProps) {
   return (
     <>
+      {isLoading &&
+        Array.from({ length: 2 }, (_, index) => (
+          <BookmarkCardSkeleton key={index} />
+        ))}
+
       {list.length === 0 && !isLoading && (
         <EmptyList
           message={`입덕한 애니가 없어요.${
@@ -24,6 +31,7 @@ export default function BookmarkList({
           isMine={isMine}
         />
       )}
+
       {list.map((bookmark) => (
         <BookmarkCard
           key={bookmark.animeId}
