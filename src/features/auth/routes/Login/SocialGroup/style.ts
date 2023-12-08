@@ -21,4 +21,16 @@ export const SocialButton = styled.button<{ color: string }>`
   & > span {
     display: none;
   }
+
+  &:disabled {
+    filter: grayscale(1);
+    opacity: 0.3;
+  }
+`;
+
+export const InAppBrowser = styled.p`
+  margin-top: 8px;
+  width: 300px;
+  ${({ theme }) => theme.typo["body-3-r"]}
+  color: ${({ theme }) => theme.colors.neutral[80]}
 `;
