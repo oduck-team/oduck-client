@@ -18,11 +18,11 @@ export default function AboutMe({
   profile: { activity, backgroundImage, description, isMine, name, thumbnail },
 }: AboutMeProps) {
   const {
-    isReadMore,
+    introduceRef,
+    isOpen,
     isShowReadMoreButton,
-    getIntroduceText,
     handleSeeMoreButtonToggle,
-  } = useIntroduceReadMore(description);
+  } = useIntroduceReadMore();
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
 
@@ -44,11 +44,13 @@ export default function AboutMe({
       </ProfileImageSection>
 
       <NickName>{name}</NickName>
-      <Introduce isReadMore={isReadMore}>{getIntroduceText}</Introduce>
+      <Introduce className={isOpen ? undefined : "ellipsis"} ref={introduceRef}>
+        {description}
+      </Introduce>
 
       {isShowReadMoreButton && (
         <SeeMoreButton onClick={handleSeeMoreButtonToggle}>
-          {isReadMore ? "더보기" : "접기"}
+          {isOpen ? "접기" : "더보기"}
         </SeeMoreButton>
       )}
 

@@ -47,10 +47,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
       setAutoLogin(true);
     } catch (e) {
       setUser(undefined);
-      //FIXME: 배포환경 테스트를 위해 주석 처리
-      // removeAutoLogin();
+      removeAutoLogin();
     }
-  }, [authApi, setAutoLogin]);
+  }, [authApi, removeAutoLogin, setAutoLogin]);
 
   const logout = useCallback(async () => {
     authApi.logout();

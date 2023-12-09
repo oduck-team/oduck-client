@@ -1,4 +1,4 @@
-import { SocialGroupContainer, SocialButton } from "./style";
+import { SocialGroupContainer, SocialButton, InAppBrowser } from "./style";
 
 interface SocialSite {
   name: string;
@@ -33,23 +33,35 @@ interface SocialGroupProps {
 }
 
 export default function SocialGroup({ onClick }: SocialGroupProps) {
+  const isInAppBrowser = /inapp|KAKAOTALK/i.test(navigator.userAgent);
+
   return (
-    <SocialGroupContainer>
-      {socialSites.map((socialSite) => (
-        <li key={socialSite.name}>
-          <SocialButton
-            type="button"
-            name={socialSite.name}
-            aria-label={socialSite.name}
-            color={socialSite.primaryColor}
-            onClick={() => onClick(socialSite.provider)}
-          >
-            <span>{socialSite.name}</span>
-            {socialSite.icon}
-          </SocialButton>
-        </li>
-      ))}
-    </SocialGroupContainer>
+    <>
+      <SocialGroupContainer>
+        {socialSites.map((socialSite) => (
+          <li key={socialSite.name}>
+            <SocialButton
+              type="button"
+              name={socialSite.name}
+              aria-label={socialSite.name}
+              color={socialSite.primaryColor}
+              onClick={() => onClick(socialSite.provider)}
+              disabled={isInAppBrowser && socialSite.name === "구글 로그인"}
+            >
+              <span>{socialSite.name}</span>
+              {socialSite.icon}
+            </SocialButton>
+          </li>
+        ))}
+      </SocialGroupContainer>
+
+      {isInAppBrowser && (
+        <InAppBrowser>
+          접속하신 브라우저는 구글 로그인을 이용할 수 없어요. <br />
+          구글 로그인은 다른 브라우저를 이용해 주세요.
+        </InAppBrowser>
+      )}
+    </>
   );
 }
 

@@ -6,11 +6,14 @@ export interface TextareaProps extends ComponentProps<"textarea"> {
   warn?: boolean;
   message?: string;
   className?: string;
+  /** px단위 */
+  height?: string;
 }
 
 export interface TextareaBoxProps extends ComponentProps<"textarea"> {
   warn?: boolean;
   negativeMargin: number; // scale 후 여백 제거를 위한 negative margin
+  height?: string; // px단위
 }
 
 export default function Textarea({
@@ -18,6 +21,7 @@ export default function Textarea({
   message = "",
   style,
   className = "",
+  height,
   ...rest
 }: TextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -37,6 +41,7 @@ export default function Textarea({
         negativeMargin={negativeMargin}
         ref={textareaRef}
         warn={warn}
+        height={height}
         {...rest}
       />
       {warn && message !== "" && <Message>{message}</Message>}
