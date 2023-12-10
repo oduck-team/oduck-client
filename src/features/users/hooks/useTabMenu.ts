@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import useSortBar from "@/features/users/hooks/useSortBar";
 import { useApi } from "@/hooks/useApi";
@@ -16,14 +16,17 @@ export type MENU = typeof REVIEW_MENU | typeof BOOKMARK_MENU;
 
 export default function useTabMenu(memberId: number) {
   const targetRef = useRef(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   const [selectedMenu, setSelectedMenu] = useState<MENU>(REVIEW_MENU);
   const handleTabMenuClick = (text: MENU) => {
     setSelectedMenu(text);
-    text === "한줄리뷰"
-      ? searchParams.set("tab", REVIEW)
-      : searchParams.set("tab", BOOKMARK);
-    setSearchParams(searchParams, { replace: true });
+    // queryString 설정
+    history.replaceState(
+      null,
+      "",
+      `?tab=${text === "한줄리뷰" ? REVIEW : BOOKMARK}`,
+    );
   };
   const {
     selected: selectedSort,
@@ -80,12 +83,15 @@ export default function useTabMenu(memberId: number) {
       selectedMenu === "입덕애니" ? hasNextPageBookmark : hasNextPageReview,
   });
 
-  /** queryString tab === 'bookmark'인 경우, 입덕애니 Menu 선택 */
+  /**
+   * queryString tab === 'bookmark'인 경우, 입덕애니 Menu 선택
+   * sidebar의 입덕애니 메뉴 클릭 또는 새로고침 시 실행
+   * */
   useEffect(() => {
     searchParams.get("tab") === BOOKMARK
       ? setSelectedMenu(BOOKMARK_MENU)
       : setSelectedMenu(REVIEW_MENU);
-  }, [searchParams]);
+  }, [location, searchParams]);
 
   return {
     targetRef,
