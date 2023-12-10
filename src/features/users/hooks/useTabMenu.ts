@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useRef, useEffect, useState } from "react";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import useSortBar from "@/features/users/hooks/useSortBar";
 import { useApi } from "@/hooks/useApi";
@@ -16,17 +16,14 @@ export type MENU = typeof REVIEW_MENU | typeof BOOKMARK_MENU;
 
 export default function useTabMenu(memberId: number) {
   const targetRef = useRef(null);
-  const [searchParams] = useSearchParams();
-  const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedMenu, setSelectedMenu] = useState<MENU>(REVIEW_MENU);
   const handleTabMenuClick = (text: MENU) => {
     setSelectedMenu(text);
-    // queryString 설정
-    history.replaceState(
-      null,
-      "",
-      `?tab=${text === "한줄리뷰" ? REVIEW : BOOKMARK}`,
-    );
+    text === "한줄리뷰"
+      ? searchParams.set("tab", REVIEW)
+      : searchParams.set("tab", BOOKMARK);
+    setSearchParams(searchParams, { replace: true });
   };
   const {
     selected: selectedSort,
@@ -91,7 +88,7 @@ export default function useTabMenu(memberId: number) {
     searchParams.get("tab") === BOOKMARK
       ? setSelectedMenu(BOOKMARK_MENU)
       : setSelectedMenu(REVIEW_MENU);
-  }, [location, searchParams]);
+  }, [searchParams]);
 
   return {
     targetRef,
