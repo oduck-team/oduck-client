@@ -1,6 +1,5 @@
 import { get } from "@/libs/api";
 
-import listOfRecentReviewedMock from "./mock/listOfRecentReviewed.json";
 import newestAnimes from "./mock/newestAnimes.json";
 import recommendAnimesMock from "./mock/RecommendAnimes.json";
 import top10AnimesMock from "./mock/top10Animes.json";
@@ -61,14 +60,6 @@ type ListAnimeResponse = CursorPage<{
   starScoreAvg: number;
 }>;
 
-export type getListOfRecentReviewedResponse = Pick<
-  Anime,
-  "id" | "title" | "thumbnail"
-> & {
-  review: string;
-  avgScore: number;
-};
-
 export type TOP10ListResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
   genres: string[];
   rank: number;
@@ -99,13 +90,6 @@ export default class AnimeApi {
 
   getAverageRating(id: number) {
     return get<{ starRatingAvg: number }>(`/animes/${id}/ratings/average`);
-  }
-
-  async getListOfRecentReviewed(): Promise<getListOfRecentReviewedResponse[]> {
-    return listOfRecentReviewedMock;
-
-    //FIXME: URI 수정
-    // return get<getListOfRecentReviewedResponse[]>(`/someURI`);
   }
 
   async getTOP10List(): Promise<TOP10ListResponse[]> {

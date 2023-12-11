@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
 import Head from "@/components/Head";
-import AnimeMainCarousel from "@/features/animes/components/AnimeMainCarousel";
 import AnimeRanking from "@/features/animes/components/AnimeRanking";
 import useAuth from "@/features/auth/hooks/useAuth";
 
@@ -26,7 +25,6 @@ export default function Home() {
       <Head />
       <HomeContainer>
         <RecentReviewImageCard />
-        <AnimeMainCarousel />
         <AnimeRanking title="이번주 TOP10" />
         <Discord />
         <NewestAnimes />
