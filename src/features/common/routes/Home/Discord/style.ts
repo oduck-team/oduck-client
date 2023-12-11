@@ -13,6 +13,7 @@ export const DiscordContainer = styled.div`
   padding: 0 18px;
   cursor: pointer;
   transition: opacity 0.13s;
+  margin-bottom: 24px;
 
   & > a:hover {
     & > svg {

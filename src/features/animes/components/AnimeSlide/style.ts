@@ -6,6 +6,7 @@ export const AnimeSlideContainer = styled.section`
   flex-direction: column;
   gap: 8px;
   overflow: hidden;
+  margin-bottom: 32px;
 
   /* 캐러셀 item 간격 */
   & .slick-list {

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import { useApi } from "@/hooks/useApi";
 
@@ -16,7 +17,6 @@ import {
   Score,
   StrarIcon,
 } from "./style";
-import { Link } from "react-router-dom";
 
 export default function RecentReviewImageCard() {
   const { reviewApi } = useApi();

@@ -49,6 +49,7 @@ export const Rank = styled.div<RankProps>`
 
 export const AnimeRankingContainer = styled.section`
   overflow: hidden;
+  margin-bottom: 34px;
 
   & > h1 {
     ${({ theme }) => theme.typo["title-2-m"]}

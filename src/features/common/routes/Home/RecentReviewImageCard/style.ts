@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 import { Star } from "@phosphor-icons/react";
 
-export const RecentReviewImageCardContainer = styled.section`
+export const RecentReviewImageCardContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.primary[80]};
+  margin-bottom: 32px;
 `;
 
 export const AnimeConatiner = styled.div`

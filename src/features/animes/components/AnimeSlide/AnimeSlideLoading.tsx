@@ -20,6 +20,7 @@ export default function AnimeSlideLoading() {
 
 const AnimeSlideLoadingContainer = styled.div`
   padding-left: 16px;
+  margin-bottom: 32px;
 `;
 
 const ListContainer = styled.div`
