@@ -14,7 +14,6 @@ import {
   Rank,
   SliderItem,
   SliderItemImage,
-  MainCarouselContainer,
 } from "./style";
 
 interface AnimeRankingProps {
@@ -56,7 +55,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
         <>
           <AnimeRankingContainer>
             <h1>{title}</h1>
-            <MainCarouselContainer ref={mainCarouselRef}>
+            <div ref={mainCarouselRef}>
               <Slider
                 {...SyncingMainCarousel}
                 ref={(mainNav) => setMainNav(mainNav ?? undefined)}
@@ -65,8 +64,8 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 afterChange={() => setDragging(false)}
               >
                 {animes.map((ani, i) => (
-                  <Fragment key={ani.animeId}>
-                    <HighlightItemContainer>
+                  <>
+                    <HighlightItemContainer key={ani.animeId}>
                       <HighlightItem
                         image={ani.thumbnail}
                         data-anime-id={ani.animeId}
@@ -77,27 +76,29 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                         <h2>{ani.title}</h2>
                       </HighlightItem>
                     </HighlightItemContainer>
-                  </Fragment>
+                  </>
                 ))}
               </Slider>
-            </MainCarouselContainer>
+            </div>
 
-            <Slider
-              {...SyncingSubCarousel}
-              asNavFor={mainNav}
-              ref={(subNav) => setSubNav(subNav ?? undefined)}
-            >
-              {animes.map((ani, i) => (
-                <SliderItem key={i}>
-                  <SliderItemImage image={ani.thumbnail}>
-                    <Rank>{i + 1}</Rank>
-                  </SliderItemImage>
-                  <div>{ani.title}</div>
-                </SliderItem>
-              ))}
-              {/* carousel 레이아웃 망가짐 방지: div 추가  */}
-              <div />
-            </Slider>
+            <div className="sub-carousel">
+              <Slider
+                {...SyncingSubCarousel}
+                asNavFor={mainNav}
+                ref={(subNav) => setSubNav(subNav ?? undefined)}
+              >
+                {animes.map((ani, i) => (
+                  <SliderItem key={i}>
+                    <SliderItemImage image={ani.thumbnail}>
+                      <Rank>{i + 1}</Rank>
+                    </SliderItemImage>
+                    <div>{ani.title}</div>
+                  </SliderItem>
+                ))}
+                {/* carousel 레이아웃 망가짐 방지: div 추가  */}
+                <div />
+              </Slider>
+            </div>
           </AnimeRankingContainer>
         </>
       )}

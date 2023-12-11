@@ -57,8 +57,8 @@ export const AnimeRankingContainer = styled.section`
     margin-bottom: 8px;
   }
 
-  /** 캐러셀 item 간격 */
-  & .slick-slider .slick-list {
+  /** 아래쪽 캐러셀의 item 간격 */
+  & .sub-carousel .slick-slider .slick-list {
     margin-right: -8px;
   }
   & .slick-slider .slick-slide > div {
@@ -66,9 +66,8 @@ export const AnimeRankingContainer = styled.section`
   }
 
   /* 아래쪽 캐러셀의 왼쪽 마진 */
-  & .slick-slider:last-child {
+  & .sub-carousel .slick-slider {
     & .slick-track .slick-slide:first-of-type {
-      /* background-color: hotpink; */
       margin-left: 16px;
     }
   }
@@ -89,11 +88,6 @@ export const AnimeRankingContainer = styled.section`
       top: 50px;
     }
   }
-`;
-
-export const MainCarouselContainer = styled.div`
-  margin-left: -16px;
-  margin-right: 16px;
 `;
 
 export const HighlightItemContainer = styled.div`
