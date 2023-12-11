@@ -1,8 +1,6 @@
 import { SerializedStyles, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-import { Rating } from "../AnimeCarousel/SlideItem.style";
-
 interface ItemProps {
   readonly image: string;
 }
@@ -169,13 +167,4 @@ export const SliderItemImage = styled.div<ItemProps>`
   background-position: center;
   position: relative;
   margin-bottom: 8px;
-`;
-
-export const SliderItemRating = styled(Rating)`
-  position: absolute;
-  right: 16px;
-  bottom: 20px;
-  & > svg {
-    margin-top: 1px;
-  }
 `;

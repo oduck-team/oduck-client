@@ -1,4 +1,3 @@
-import { Star } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
 import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ import {
   Rank,
   SliderItem,
   SliderItemImage,
-  SliderItemRating,
 } from "./style";
 
 interface AnimeRankingProps {
@@ -64,10 +62,6 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                       <Rank size="lg">{ani.rank}</Rank>
                       <h3>{ani.genres.join("/")}</h3>
                       <h2>{ani.title}</h2>
-                      <SliderItemRating>
-                        <Star weight="fill" />
-                        <span>{ani.avgScore}</span>
-                      </SliderItemRating>
                     </HighlightItem>
                   </HighlightItemContainer>
                 </Fragment>
