@@ -25,9 +25,9 @@ export default function Home() {
       <Head />
       <HomeContainer>
         <RecentReviewImageCard />
-        <AnimeRanking title="이번주 TOP10" />
-        <Discord />
         <NewestAnimes />
+        <Discord />
+        <AnimeRanking title="이번주 TOP10" />
         <RecentReview />
         {/* TODO: 추천 애니 요청 방법 정하기 */}
         <RecommendAnimes title="덕후들의 눈물샘을 터뜨린" />
