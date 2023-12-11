@@ -25,7 +25,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
   const mainCarouselRef = useRef<HTMLDivElement>(null);
   const [mainNav, setMainNav] = useState<Slider | undefined>();
   const [subNav, setSubNav] = useState<Slider | undefined>();
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false); // main carousel 드래그 상태
   const { animeApi } = useApi();
   const { data: animes, isLoading } = useQuery({
     queryKey: ["top10List"],
@@ -37,6 +37,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
       ".slick-current div[data-anime-id]",
     );
 
+    /** descktop에서 main carousel 드래그 중일때는 페이지 이동 발생하지 않도록 설정*/
     if (dragging) {
       e.stopPropagation();
       return;
