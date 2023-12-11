@@ -2,7 +2,6 @@ import { get } from "@/libs/api";
 
 import newestAnimes from "./mock/newestAnimes.json";
 import recommendAnimesMock from "./mock/RecommendAnimes.json";
-import top10AnimesMock from "./mock/top10Animes.json";
 
 /* 애니 조회 정렬 기준*/
 export type AnimeSort = "LATEST" | "REVIEW_COUNT" | "SCORE";
@@ -60,9 +59,10 @@ type ListAnimeResponse = CursorPage<{
   starScoreAvg: number;
 }>;
 
-export type TOP10ListResponse = Pick<Anime, "id" | "title" | "thumbnail"> & {
+export type TOP10ListResponse = Pick<Anime, "title" | "thumbnail"> & {
+  animeId: number;
   genres: string[];
-  rank: number;
+  rankScore: number;
   avgScore: number;
 };
 
@@ -93,10 +93,7 @@ export default class AnimeApi {
   }
 
   async getTOP10List(): Promise<TOP10ListResponse[]> {
-    return top10AnimesMock;
-
-    //FIXME: URI 수정
-    // return get(`/someURI`)
+    return get(`/animes/weekly`);
   }
 
   async getNewestList(): Promise<AnimeSlideResponse[]> {

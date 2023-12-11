@@ -30,12 +30,14 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
     queryKey: ["top10List"],
     queryFn: () => animeApi.getTOP10List(),
   });
-  const handleClick = (e: React.MouseEvent, animesId: number) => {
+  const handleClick = (e: React.MouseEvent, animeId: number) => {
+    console.log(animeId);
     if (dragging) {
       e.stopPropagation();
       return;
     }
-    navigate(`/animes/${animesId}`);
+
+    navigate(`/animes/${animeId}`);
   };
 
   return (
@@ -53,13 +55,16 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               afterChange={() => setDragging(false)}
             >
               {animes.map((ani, i) => (
-                <Fragment key={i}>
+                <Fragment key={ani.animeId}>
                   <HighlightItemContainer>
                     <HighlightItem
                       image={ani.thumbnail}
-                      onClick={(e: React.MouseEvent) => handleClick(e, ani.id)}
+                      onClick={(e: React.MouseEvent) =>
+                        handleClick(e, ani.animeId)
+                      }
                     >
-                      <Rank size="lg">{ani.rank}</Rank>
+                      <Rank size="lg">{i + 1}</Rank>
+                      {ani.animeId}
                       <h3>{ani.genres.join("/")}</h3>
                       <h2>{ani.title}</h2>
                     </HighlightItem>
@@ -76,7 +81,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               {animes.map((ani, i) => (
                 <SliderItem key={i}>
                   <SliderItemImage image={ani.thumbnail}>
-                    <Rank>{ani.rank}</Rank>
+                    <Rank>{i + 1}</Rank>
                   </SliderItemImage>
                   <div>{ani.title}</div>
                 </SliderItem>
