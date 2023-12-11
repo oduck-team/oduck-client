@@ -53,6 +53,7 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
       </Tab>
       <ContentContainer>
         <SortBar
+          memberId={memberId}
           selectedMenu={selectedMenu}
           selected={selectedSort}
           BUTTONS={SHEET_BUTTONS}
