@@ -7,6 +7,7 @@ export const ActionBarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-top: 10px;
+  cursor: auto;
 `;
 
 export const ButtonContainer = styled.div`

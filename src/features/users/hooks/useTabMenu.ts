@@ -36,6 +36,7 @@ export default function useTabMenu(memberId: number) {
   const {
     data: bookmarks,
     isLoading: isLoadingBookmark,
+    isFetchingNextPage: isFetchingBookmarkNext,
     fetchNextPage: fetchNextPageBookmark,
     hasNextPage: hasNextPageBookmark,
   } = useInfiniteQuery(
@@ -47,6 +48,7 @@ export default function useTabMenu(memberId: number) {
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,
       }),
+      enabled: selectedMenu === "입덕애니",
     },
   );
 
@@ -54,6 +56,7 @@ export default function useTabMenu(memberId: number) {
   const {
     data: reviews,
     isLoading: isLoadingReview,
+    isFetchingNextPage: isFetchingReviewNext,
     fetchNextPage: fetchNextPageReview,
     hasNextPage: hasNextPageReview,
   } = useInfiniteQuery(
@@ -65,6 +68,7 @@ export default function useTabMenu(memberId: number) {
         pages: data.pages.flatMap((page) => page.items),
         pageParams: data.pageParams,
       }),
+      enabled: selectedMenu === "한줄리뷰",
     },
   );
 
@@ -76,7 +80,10 @@ export default function useTabMenu(memberId: number) {
       selectedMenu === "입덕애니" ? hasNextPageBookmark : hasNextPageReview,
   });
 
-  /** queryString tab === 'bookmark'인 경우, 입덕애니 Menu 선택 */
+  /**
+   * queryString tab === 'bookmark'인 경우, 입덕애니 Menu 선택
+   * sidebar의 입덕애니 메뉴 클릭 또는 새로고침 시 실행
+   * */
   useEffect(() => {
     searchParams.get("tab") === BOOKMARK
       ? setSelectedMenu(BOOKMARK_MENU)
@@ -89,8 +96,10 @@ export default function useTabMenu(memberId: number) {
     selected: selectedSort,
     bookmarks,
     isLoadingBookmark,
+    isFetchingBookmarkNext,
     reviews,
     isLoadingReview,
+    isFetchingReviewNext,
     handleTabMenuClick,
     SHEET_BUTTONS,
     handleSortClick,

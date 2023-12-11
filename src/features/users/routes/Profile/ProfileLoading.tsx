@@ -28,10 +28,6 @@ export default function ProfileLoading() {
           <Skeleton w={120} h={21} />
           <Skeleton w={100} h={21} />
         </SortBarContainer>
-        <CardContainer>
-          <Skeleton w={"full"} h={135} />
-          <Skeleton w={"full"} h={135} />
-        </CardContainer>
       </ListContainer>
     </>
   );
@@ -68,10 +64,4 @@ const SortBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 16px 0;
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 `;
