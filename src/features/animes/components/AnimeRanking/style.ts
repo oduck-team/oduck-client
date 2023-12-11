@@ -50,7 +50,6 @@ export const Rank = styled.div<RankProps>`
 export const AnimeRankingContainer = styled.section`
   overflow: hidden;
   margin-bottom: 34px;
-
   & > h1 {
     ${({ theme }) => theme.typo["title-2-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["100"]};
@@ -59,19 +58,21 @@ export const AnimeRankingContainer = styled.section`
   }
 
   /** 캐러셀 item 간격 */
-  & .slick-list {
+  & .slick-slider .slick-list {
     margin-right: -8px;
   }
-  & .slick-slide > div {
+  & .slick-slider .slick-slide > div {
     margin-right: 8px;
   }
 
   /* 아래쪽 캐러셀의 왼쪽 마진 */
   & .slick-slider:last-child {
     & .slick-track .slick-slide:first-of-type {
+      /* background-color: hotpink; */
       margin-left: 16px;
     }
   }
+  */
 
   /* 이전, 다음 버튼 */
   ${({ theme }) => theme.mq("md")} {
@@ -88,6 +89,11 @@ export const AnimeRankingContainer = styled.section`
       top: 50px;
     }
   }
+`;
+
+export const MainCarouselContainer = styled.div`
+  margin-left: -16px;
+  margin-right: 16px;
 `;
 
 export const HighlightItemContainer = styled.div`

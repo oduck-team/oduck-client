@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
@@ -14,6 +14,7 @@ import {
   Rank,
   SliderItem,
   SliderItemImage,
+  MainCarouselContainer,
 } from "./style";
 
 interface AnimeRankingProps {
@@ -22,6 +23,7 @@ interface AnimeRankingProps {
 
 export default function AnimeRanking({ title }: AnimeRankingProps) {
   const navigate = useNavigate();
+  const mainCarouselRef = useRef<HTMLDivElement>(null);
   const [mainNav, setMainNav] = useState<Slider | undefined>();
   const [subNav, setSubNav] = useState<Slider | undefined>();
   const [dragging, setDragging] = useState(false);
@@ -30,14 +32,21 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
     queryKey: ["top10List"],
     queryFn: () => animeApi.getTOP10List(),
   });
-  const handleClick = (e: React.MouseEvent, animeId: number) => {
-    console.log(animeId);
+
+  const handleClick = (e: React.MouseEvent) => {
+    const currentElement = mainCarouselRef.current?.querySelector(
+      ".slick-current div[data-anime-id]",
+    );
+
     if (dragging) {
       e.stopPropagation();
       return;
     }
 
-    navigate(`/animes/${animeId}`);
+    if (currentElement) {
+      const el = currentElement as HTMLDivElement;
+      navigate(`/animes/${el.dataset.animeId}`);
+    }
   };
 
   return (
@@ -47,31 +56,31 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
         <>
           <AnimeRankingContainer>
             <h1>{title}</h1>
-            <Slider
-              {...SyncingMainCarousel}
-              ref={(mainNav) => setMainNav(mainNav ?? undefined)}
-              asNavFor={subNav}
-              beforeChange={() => setDragging(true)}
-              afterChange={() => setDragging(false)}
-            >
-              {animes.map((ani, i) => (
-                <Fragment key={ani.animeId}>
-                  <HighlightItemContainer>
-                    <HighlightItem
-                      image={ani.thumbnail}
-                      onClick={(e: React.MouseEvent) =>
-                        handleClick(e, ani.animeId)
-                      }
-                    >
-                      <Rank size="lg">{i + 1}</Rank>
-                      {ani.animeId}
-                      <h3>{ani.genres.join("/")}</h3>
-                      <h2>{ani.title}</h2>
-                    </HighlightItem>
-                  </HighlightItemContainer>
-                </Fragment>
-              ))}
-            </Slider>
+            <MainCarouselContainer ref={mainCarouselRef}>
+              <Slider
+                {...SyncingMainCarousel}
+                ref={(mainNav) => setMainNav(mainNav ?? undefined)}
+                asNavFor={subNav}
+                beforeChange={() => setDragging(true)}
+                afterChange={() => setDragging(false)}
+              >
+                {animes.map((ani, i) => (
+                  <Fragment key={ani.animeId}>
+                    <HighlightItemContainer>
+                      <HighlightItem
+                        image={ani.thumbnail}
+                        data-anime-id={ani.animeId}
+                        onClick={(e: React.MouseEvent) => handleClick(e)}
+                      >
+                        <Rank size="lg">{i + 1}</Rank>
+                        <h3>{ani.genres.join("/")}</h3>
+                        <h2>{ani.title}</h2>
+                      </HighlightItem>
+                    </HighlightItemContainer>
+                  </Fragment>
+                ))}
+              </Slider>
+            </MainCarouselContainer>
 
             <Slider
               {...SyncingSubCarousel}
@@ -86,7 +95,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                   <div>{ani.title}</div>
                 </SliderItem>
               ))}
-              {/* 마지막 슬라이드 아이템이 조금 짤려서 빈 div 추가  */}
+              {/* carousel 레이아웃 망가짐 방지: div 추가  */}
               <div />
             </Slider>
           </AnimeRankingContainer>
