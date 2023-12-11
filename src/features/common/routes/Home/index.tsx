@@ -9,6 +9,7 @@ import useAuth from "@/features/auth/hooks/useAuth";
 import Discord from "./Discord";
 import NewestAnimes from "./NewestAnimes";
 import RecentReview from "./RecentReview";
+import RecentReviewImageCard from "./RecentReviewImageCard";
 import RecommendAnimes from "./RecommendAnimes";
 import { Bottom, HomeContainer } from "./style";
 
@@ -24,6 +25,7 @@ export default function Home() {
     <>
       <Head />
       <HomeContainer>
+        <RecentReviewImageCard />
         <AnimeMainCarousel />
         <AnimeRanking title="이번주 TOP10" />
         <Discord />
