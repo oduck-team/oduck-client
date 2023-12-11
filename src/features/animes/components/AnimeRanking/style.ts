@@ -35,21 +35,10 @@ const RankSizes: Record<RankSize, SerializedStyles> = {
   `,
 };
 
-export const Rank = styled.div<RankProps>`
-  position: absolute;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${({ theme }) => theme.typo["title-2-b"]};
-  ${({ size = "sm" }) => css`
-    ${RankSizes[size]}
-  `}
-`;
-
 export const AnimeRankingContainer = styled.section`
   overflow: hidden;
   margin-bottom: 34px;
+
   & > h1 {
     ${({ theme }) => theme.typo["title-2-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["100"]};
@@ -61,7 +50,7 @@ export const AnimeRankingContainer = styled.section`
   & .sub-carousel .slick-slider .slick-list {
     margin-right: -8px;
   }
-  & .slick-slider .slick-slide > div {
+  & .sub-carousel .slick-slider .slick-slide > div {
     margin-right: 8px;
   }
 
@@ -71,7 +60,6 @@ export const AnimeRankingContainer = styled.section`
       margin-left: 16px;
     }
   }
-  */
 
   /* 이전, 다음 버튼 */
   ${({ theme }) => theme.mq("md")} {
@@ -96,7 +84,7 @@ export const HighlightItemContainer = styled.div`
   height: 0;
   padding-bottom: 46%;
   margin: 0 auto;
-  margin-bottom: 4px;
+  margin-bottom: 16px;
   cursor: pointer;
 `;
 
@@ -114,7 +102,7 @@ export const HighlightItem = styled.div<ItemProps>`
     lightgray 50%
     no-repeat`};
   background-size: cover;
-  background-position: center;
+  background-position: center 40%;
   padding: 16px;
   color: white;
   display: flex;
@@ -159,13 +147,25 @@ export const SliderItem = styled.div`
 `;
 
 export const SliderItemImage = styled.div<ItemProps>`
+  position: relative;
   width: 100%;
   height: 95px;
   border-radius: 5px;
   background: ${({ image }) => `url(${image}),
       lightgray 50% no-repeat`};
   background-size: cover;
-  background-position: center;
-  position: relative;
+  background-position: center 40%;
   margin-bottom: 8px;
+`;
+
+export const Rank = styled.div<RankProps>`
+  position: absolute;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${({ theme }) => theme.typo["title-2-b"]};
+  ${({ size = "sm" }) => css`
+    ${RankSizes[size]}
+  `}
 `;

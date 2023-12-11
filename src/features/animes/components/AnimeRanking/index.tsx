@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
@@ -88,7 +88,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 ref={(subNav) => setSubNav(subNav ?? undefined)}
               >
                 {animes.map((ani, i) => (
-                  <SliderItem key={i}>
+                  <SliderItem key={ani.animeId}>
                     <SliderItemImage image={ani.thumbnail}>
                       <Rank>{i + 1}</Rank>
                     </SliderItemImage>
