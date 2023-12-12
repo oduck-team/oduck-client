@@ -78,12 +78,15 @@ export const AnimeRankingContainer = styled.section`
   }
 `;
 
+export const MainCarouselContainer = styled.div`
+  margin: 0 16px;
+`;
+
 export const HighlightItemContainer = styled.div`
   position: relative;
   width: calc(100% - 32px);
   height: 0;
   padding-bottom: 46%;
-  margin: 0 auto;
   margin-bottom: 16px;
   cursor: pointer;
 `;

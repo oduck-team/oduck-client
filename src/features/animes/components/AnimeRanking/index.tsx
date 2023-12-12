@@ -14,6 +14,7 @@ import {
   Rank,
   SliderItem,
   SliderItemImage,
+  MainCarouselContainer,
 } from "./style";
 
 interface AnimeRankingProps {
@@ -56,7 +57,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
         <>
           <AnimeRankingContainer>
             <h1>{title}</h1>
-            <div ref={mainCarouselRef}>
+            <MainCarouselContainer ref={mainCarouselRef}>
               <Slider
                 {...SyncingMainCarousel}
                 ref={(mainNav) => setMainNav(mainNav ?? undefined)}
@@ -65,22 +66,20 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 afterChange={() => setDragging(false)}
               >
                 {animes.map((ani, i) => (
-                  <>
-                    <HighlightItemContainer key={ani.animeId}>
-                      <HighlightItem
-                        image={ani.thumbnail}
-                        data-anime-id={ani.animeId}
-                        onClick={(e: React.MouseEvent) => handleClick(e)}
-                      >
-                        <Rank size="lg">{i + 1}</Rank>
-                        <h3>{ani.genres.join("/")}</h3>
-                        <h2>{ani.title}</h2>
-                      </HighlightItem>
-                    </HighlightItemContainer>
-                  </>
+                  <HighlightItemContainer key={ani.animeId}>
+                    <HighlightItem
+                      image={ani.thumbnail}
+                      data-anime-id={ani.animeId}
+                      onClick={(e: React.MouseEvent) => handleClick(e)}
+                    >
+                      <Rank size="lg">{i + 1}</Rank>
+                      <h3>{ani.genres.join("/")}</h3>
+                      <h2>{ani.title}</h2>
+                    </HighlightItem>
+                  </HighlightItemContainer>
                 ))}
               </Slider>
-            </div>
+            </MainCarouselContainer>
 
             <div className="sub-carousel">
               <Slider
