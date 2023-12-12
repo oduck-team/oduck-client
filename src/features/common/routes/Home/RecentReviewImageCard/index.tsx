@@ -14,7 +14,6 @@ import {
   Image,
   RatingContainer,
   RecentReviewImageCardContainer,
-  Score,
   StrarIcon,
 } from "./style";
 
@@ -45,7 +44,7 @@ export default function RecentReviewImageCard() {
               <Content>{data.content}</Content>
               <RatingContainer>
                 <StrarIcon weight="fill" size={14} />
-                <Score>{data.score}</Score>
+                <span>{data.score}</span>
               </RatingContainer>
             </EvaluationContainer>
           </Link>

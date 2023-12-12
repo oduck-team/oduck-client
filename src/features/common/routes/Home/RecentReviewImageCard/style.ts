@@ -86,7 +86,4 @@ export const RatingContainer = styled.div`
 
 export const StrarIcon = styled(Star)`
   margin-right: 4px;
-  /* color: ${({ theme }) => theme.colors.secondary[50]}; */
 `;
-
-export const Score = styled.span``;
