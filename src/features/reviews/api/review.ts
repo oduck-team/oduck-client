@@ -109,7 +109,7 @@ export default class ReviewApi {
   }
 
   /** @desciption 메인 페이지 최상단 최근 리뷰 이미지 카드*/
-  async getRecentReviewCard() {
+  async getRecentReviewCard(): Promise<RecentReviewCardResponse> {
     return recentReveiwCardMock;
 
     // FIXME: URI 변경
