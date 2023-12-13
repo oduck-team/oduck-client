@@ -5,6 +5,7 @@ export const RecentReviewContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 32px;
 `;
 
 export const Header = styled.div`

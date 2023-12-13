@@ -4,7 +4,6 @@ export const HomeContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 32px;
   padding-bottom: 66px;
 `;
 

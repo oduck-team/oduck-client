@@ -5,6 +5,7 @@ import { ReviewSortOption } from "../hook/useGetAnimeReviews";
 import recentReviewMock1 from "./mock/recentReview1.json";
 import recentReviewMock2 from "./mock/recentReview2.json";
 import recentReviewMock3 from "./mock/recentReview3.json";
+import recentReveiwCardMock from "./mock/recentReviewCard.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
 
 export type ReviewInfo = Omit<Review, "anime"> & {
@@ -28,6 +29,14 @@ export type AttractionType =
   | "DRAWING"
   | "VOICE_ACTOR"
   | "MUSIC";
+
+export type RecentReviewCardResponse = Pick<Review, "score" | "content"> & {
+  animeId: number;
+  title: string;
+  thumbnail: string;
+  score: number | null;
+  genres: string[];
+};
 
 export default class ReviewApi {
   /** @description 리뷰 작성 요청 */
@@ -97,6 +106,14 @@ export default class ReviewApi {
     // return await get(`/someURI`, {
     //   params: params,
     // });
+  }
+
+  /** @desciption 메인 페이지 최상단 최근 리뷰 이미지 카드*/
+  async getRecentReviewCard(): Promise<RecentReviewCardResponse> {
+    return recentReveiwCardMock;
+
+    // FIXME: URI 변경
+    // return get('/someuri')
   }
 
   /** @description 애니 별점 평가 추가 */
