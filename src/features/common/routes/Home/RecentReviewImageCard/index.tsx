@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useApi } from "@/hooks/useApi";
 
+import ImageCardLoading from "./ImageCardLoading";
 import {
   AnimeConatiner,
   AnimeInfo,
@@ -19,11 +20,12 @@ import {
 
 export default function RecentReviewImageCard() {
   const { reviewApi } = useApi();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => reviewApi.getRecentReviewCard(),
     queryKey: ["MostRecentReviewList", "card"],
   });
 
+  if (isLoading) return <ImageCardLoading />;
   return (
     <>
       {data && (

@@ -90,7 +90,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 {animes.map((ani, i) => (
                   <SliderItem key={ani.animeId}>
                     <SliderItemImage image={ani.thumbnail}>
-                      <Rank>{i + 1}</Rank>
+                      <Rank className="sub-carousel">{i + 1}</Rank>
                     </SliderItemImage>
                     <div>{ani.title}</div>
                   </SliderItem>

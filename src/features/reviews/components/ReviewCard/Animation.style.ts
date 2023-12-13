@@ -25,13 +25,12 @@ export const Image = styled.img`
 export const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 8px;
 `;
 
 export const Title = styled.h1`
-  ${({ theme }) => theme.typo["body-2-m"]};
+  ${({ theme }) => theme.typo["body-3-m"]};
   color: ${({ theme }) => theme.colors.neutral[70]};
+  margin-bottom: 8px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;

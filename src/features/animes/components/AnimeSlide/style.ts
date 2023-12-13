@@ -41,7 +41,7 @@ export const AnimeSlideContainer = styled.section`
 
   & > h1 {
     ${({ theme }) => theme.colors["neutral"]["100"]};
-    ${({ theme }) => theme.typo["title-2-m"]};
+    ${({ theme }) => theme.typo["title-3-m"]};
     padding-left: 16px;
   }
 `;

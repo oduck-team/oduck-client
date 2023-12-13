@@ -14,11 +14,15 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  & button {
+    color: ${({ theme }) => theme.colors.neutral[60]};
+  }
 `;
 
 export const Title = styled.h1`
   color: ${({ theme }) => theme.colors["neutral"]["100"]};
-  ${({ theme }) => theme.typo["title-2-m"]};
+  ${({ theme }) => theme.typo["title-3-m"]};
 `;
 
 export const ReviewConainer = styled.div`
