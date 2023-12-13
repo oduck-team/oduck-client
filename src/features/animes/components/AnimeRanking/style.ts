@@ -40,7 +40,7 @@ export const AnimeRankingContainer = styled.section`
   margin-bottom: 34px;
 
   & > h1 {
-    ${({ theme }) => theme.typo["title-2-m"]}
+    ${({ theme }) => theme.typo["title-3-m"]}
     color: ${({ theme }) => theme.colors["neutral"]["100"]};
     padding-left: 16px;
     margin-bottom: 8px;
@@ -120,7 +120,7 @@ export const HighlightItem = styled.div<ItemProps>`
   }
 
   & > h2 {
-    ${({ theme }) => theme.typo["title-3-m"]}
+    ${({ theme }) => theme.typo["title-1-m"]}
     width: 85%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -167,8 +167,12 @@ export const Rank = styled.div<RankProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ theme }) => theme.typo["title-2-b"]};
+  ${({ theme }) => theme.typo["title-1-b"]};
   ${({ size = "sm" }) => css`
     ${RankSizes[size]}
   `}
+
+  &.sub-carousel {
+    ${({ theme }) => theme.typo["body-3-r"]};
+  }
 `;
