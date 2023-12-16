@@ -70,7 +70,7 @@ export const InfoContainer = styled.div`
 `;
 
 export const Title = styled.div`
-  ${({ theme }) => theme.typo["body-2-r"]};
+  ${({ theme }) => theme.typo["body-3-r"]};
   color: ${({ theme }) => theme.colors["neutral"]["90"]};
   overflow: hidden;
   text-overflow: ellipsis;
@@ -89,13 +89,13 @@ export const Rating = styled.div`
   flex-shrink: 0;
 
   & > span {
-    ${({ theme }) => theme.typo["body-2-r"]};
+    ${({ theme }) => theme.typo["body-3-r"]};
     color: ${({ theme }) => theme.colors["neutral"]["70"]};
   }
 
   & > svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
     color: ${({ theme }) => theme.colors["primary"]["60"]};
     fill: ${({ theme }) => theme.colors["primary"]["60"]};

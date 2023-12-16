@@ -6,6 +6,7 @@ export const AnimeSlideContainer = styled.section`
   flex-direction: column;
   gap: 8px;
   overflow: hidden;
+  margin-bottom: 32px;
 
   /* 캐러셀 item 간격 */
   & .slick-list {
@@ -40,7 +41,7 @@ export const AnimeSlideContainer = styled.section`
 
   & > h1 {
     ${({ theme }) => theme.colors["neutral"]["100"]};
-    ${({ theme }) => theme.typo["title-2-m"]};
+    ${({ theme }) => theme.typo["title-3-m"]};
     padding-left: 16px;
   }
 `;

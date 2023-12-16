@@ -20,6 +20,7 @@ export default function AnimeRankingLoading() {
 
 const AnimeRankingLoadingContainer = styled.div`
   padding: 0 16px;
+  margin-bottom: 34px;
   width: 100%;
 `;
 

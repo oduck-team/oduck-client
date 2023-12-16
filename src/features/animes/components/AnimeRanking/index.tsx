@@ -1,6 +1,5 @@
-import { Star } from "@phosphor-icons/react";
 import { useQuery } from "@tanstack/react-query";
-import { Fragment, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 
@@ -15,7 +14,7 @@ import {
   Rank,
   SliderItem,
   SliderItemImage,
-  SliderItemRating,
+  MainCarouselContainer,
 } from "./style";
 
 interface AnimeRankingProps {
@@ -24,20 +23,31 @@ interface AnimeRankingProps {
 
 export default function AnimeRanking({ title }: AnimeRankingProps) {
   const navigate = useNavigate();
+  const mainCarouselRef = useRef<HTMLDivElement>(null);
   const [mainNav, setMainNav] = useState<Slider | undefined>();
   const [subNav, setSubNav] = useState<Slider | undefined>();
-  const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false); // main carousel 드래그 상태
   const { animeApi } = useApi();
   const { data: animes, isLoading } = useQuery({
     queryKey: ["top10List"],
     queryFn: () => animeApi.getTOP10List(),
   });
-  const handleClick = (e: React.MouseEvent, animesId: number) => {
+
+  const handleClick = (e: React.MouseEvent) => {
+    const currentElement = mainCarouselRef.current?.querySelector(
+      ".slick-current div[data-anime-id]",
+    );
+
+    /** descktop에서 main carousel 드래그 중일때는 페이지 이동 발생하지 않도록 설정*/
     if (dragging) {
       e.stopPropagation();
       return;
     }
-    navigate(`/animes/${animesId}`);
+
+    if (currentElement) {
+      const el = currentElement as HTMLDivElement;
+      navigate(`/animes/${el.dataset.animeId}`);
+    }
   };
 
   return (
@@ -47,49 +57,48 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
         <>
           <AnimeRankingContainer>
             <h1>{title}</h1>
-            <Slider
-              {...SyncingMainCarousel}
-              ref={(mainNav) => setMainNav(mainNav ?? undefined)}
-              asNavFor={subNav}
-              beforeChange={() => setDragging(true)}
-              afterChange={() => setDragging(false)}
-            >
-              {animes.map((ani, i) => (
-                <Fragment key={i}>
-                  <HighlightItemContainer>
+            <MainCarouselContainer ref={mainCarouselRef}>
+              <Slider
+                {...SyncingMainCarousel}
+                ref={(mainNav) => setMainNav(mainNav ?? undefined)}
+                asNavFor={subNav}
+                beforeChange={() => setDragging(true)}
+                afterChange={() => setDragging(false)}
+              >
+                {animes.map((ani, i) => (
+                  <HighlightItemContainer key={ani.animeId}>
                     <HighlightItem
                       image={ani.thumbnail}
-                      onClick={(e: React.MouseEvent) => handleClick(e, ani.id)}
+                      data-anime-id={ani.animeId}
+                      onClick={(e: React.MouseEvent) => handleClick(e)}
                     >
-                      <Rank size="lg">{ani.rank}</Rank>
+                      <Rank size="lg">{i + 1}</Rank>
                       <h3>{ani.genres.join("/")}</h3>
                       <h2>{ani.title}</h2>
-                      <SliderItemRating>
-                        <Star weight="fill" />
-                        <span>{ani.avgScore}</span>
-                      </SliderItemRating>
                     </HighlightItem>
                   </HighlightItemContainer>
-                </Fragment>
-              ))}
-            </Slider>
+                ))}
+              </Slider>
+            </MainCarouselContainer>
 
-            <Slider
-              {...SyncingSubCarousel}
-              asNavFor={mainNav}
-              ref={(subNav) => setSubNav(subNav ?? undefined)}
-            >
-              {animes.map((ani, i) => (
-                <SliderItem key={i}>
-                  <SliderItemImage image={ani.thumbnail}>
-                    <Rank>{ani.rank}</Rank>
-                  </SliderItemImage>
-                  <div>{ani.title}</div>
-                </SliderItem>
-              ))}
-              {/* 마지막 슬라이드 아이템이 조금 짤려서 빈 div 추가  */}
-              <div />
-            </Slider>
+            <div className="sub-carousel">
+              <Slider
+                {...SyncingSubCarousel}
+                asNavFor={mainNav}
+                ref={(subNav) => setSubNav(subNav ?? undefined)}
+              >
+                {animes.map((ani, i) => (
+                  <SliderItem key={ani.animeId}>
+                    <SliderItemImage image={ani.thumbnail}>
+                      <Rank className="sub-carousel">{i + 1}</Rank>
+                    </SliderItemImage>
+                    <div>{ani.title}</div>
+                  </SliderItem>
+                ))}
+                {/* carousel 레이아웃 망가짐 방지: div 추가  */}
+                <div />
+              </Slider>
+            </div>
           </AnimeRankingContainer>
         </>
       )}

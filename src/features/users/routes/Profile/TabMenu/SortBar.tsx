@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import BottomSheet from "@/components/BottomSheet";
-import useAuth from "@/features/auth/hooks/useAuth";
 import {
   ButtonType,
   SelectedSort,
@@ -22,6 +21,7 @@ import {
 } from "./SortBar.style";
 
 interface SortBarProps {
+  memberId: number;
   selectedMenu: MENU;
   selected: SelectedSort;
   BUTTONS: ButtonType[];
@@ -29,12 +29,12 @@ interface SortBarProps {
 }
 
 export default function SortBar({
+  memberId,
   selectedMenu,
   selected,
   BUTTONS,
   onClick,
 }: SortBarProps) {
-  const { user } = useAuth();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleBottomSheetToggle = () =>
     setIsBottomSheetVisible((prev) => !prev);
@@ -42,11 +42,11 @@ export default function SortBar({
   const { data } = useQuery({
     queryKey: [
       "profile",
-      user?.memberId,
+      memberId,
       "count",
       selectedMenu === "입덕애니" ? "bookmark" : "review",
     ],
-    queryFn: () => profile.getTabListCount(user?.memberId, selectedMenu),
+    queryFn: () => profile.getTabListCount(memberId, selectedMenu),
   });
 
   return (
