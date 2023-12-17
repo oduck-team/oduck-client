@@ -55,7 +55,7 @@ export default class ReviewApi {
   }
 
   /** @description 사용자의 리뷰 좋아요 여부 조회 */
-  async getReviewIsLiked(shortReviewId: number) {
+  async getReviewIsLike(shortReviewId: number) {
     return get<{ isLike: boolean }>(`/likes/${shortReviewId}`);
   }
 
