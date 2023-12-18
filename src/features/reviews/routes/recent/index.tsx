@@ -74,7 +74,6 @@ export default function ReviewsRecent() {
                 <ReviewCard.ActionBar
                   createdAt={review.createdAt}
                   isMine={user?.name === review.name ? true : false}
-                  isLike={review.isLike}
                   likeCount={review.likeCount}
                   isTimeAgo={true}
                   reviewId={review.reviewId}
