@@ -6,7 +6,6 @@
       "score": 7,
       "content": "리뷰 입니다. 리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다.리뷰 입니다. 리뷰 입니다. 리뷰 입니다. 리뷰 입니다.",
       "isSpoiler": true,
-      "isLike": false,
       "likeCount": 12345678910,
       "createdAt": "2023-10-12T21:05:31.859",
       "anime": {
@@ -22,7 +21,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 3220,
       "createdAt": "2022-10-23T21:05:31.859",
       "anime": {
@@ -38,7 +36,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 54321,
       "createdAt": "2022-08-10T21:05:31.859",
       "anime": {
@@ -54,7 +51,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2021-10-09T21:05:31.859",
       "anime": {
@@ -70,7 +66,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2005-10-08T21:05:31.859",
       "anime": {
@@ -86,7 +81,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2023-10-23T21:25:55.859",
       "anime": {
@@ -102,7 +96,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2023-10-06T21:05:31.859",
       "anime": {
@@ -118,7 +111,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2023-10-05T21:05:31.859",
       "anime": {
@@ -134,7 +126,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2023-10-04T21:05:31.859",
       "anime": {
@@ -150,7 +141,6 @@
       "score": 7,
       "content": "리뷰 입니다.",
       "isSpoiler": false,
-      "isLike": true,
       "likeCount": 322,
       "createdAt": "2023-10-03T21:05:31.859",
       "anime": {

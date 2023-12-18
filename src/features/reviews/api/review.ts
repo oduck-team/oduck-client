@@ -89,7 +89,7 @@ export default class ReviewApi {
   async getRecentReviewList(
     pageParam: string | undefined,
     size: number = 10,
-  ): Promise<CursorPage<Review>> {
+  ): Promise<CursorPage<Omit<Review, "isLike">>> {
     const baseParams = { size };
     const params =
       pageParam === undefined
