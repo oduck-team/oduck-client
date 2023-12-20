@@ -32,7 +32,7 @@ export default function ReviewsRecent() {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ["MostRecentReviewList"],
+    queryKey: ["MostRecentReviewList", "list"],
     queryFn: ({ pageParam }) => reviewApi.getRecentReviewList(pageParam),
     getNextPageParam: (lastPage) => lastPage.cursor || undefined,
     select: (data) => ({
@@ -74,7 +74,6 @@ export default function ReviewsRecent() {
                 <ReviewCard.ActionBar
                   createdAt={review.createdAt}
                   isMine={user?.name === review.name ? true : false}
-                  isLike={review.isLike}
                   likeCount={review.likeCount}
                   isTimeAgo={true}
                   reviewId={review.reviewId}

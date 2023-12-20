@@ -69,7 +69,6 @@ export default function Reviews({
                 />
                 <ReviewCard.ActionBar
                   isMine={user?.name === review.name}
-                  isLike={review.isLike}
                   likeCount={review.likeCount}
                   createdAt={review.createdAt}
                   reviewId={review.reviewId}

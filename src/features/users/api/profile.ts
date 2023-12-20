@@ -8,7 +8,7 @@ export interface TabListCountResponse {
   count: number;
 }
 
-export type ReviewListResponse = Omit<Review, "anime"> & {
+export type ReviewListResponse = Omit<Review, "anime" | "isLike"> & {
   animeId: number;
   title: string;
   thumbnail: string;
