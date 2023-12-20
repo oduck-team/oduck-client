@@ -3,16 +3,31 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/Button";
 import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
+import ProfileImageSection from "@/features/users/components/ProfileImageSection";
+import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
 import useEditForm from "@/features/users/hooks/useEditForm";
 
-import { ButtonContainer, EditFormContainer, Form, Title } from "./style";
+import {
+  ButtonContainer,
+  EditFormContainer,
+  Form,
+  InputSection,
+  Title,
+} from "./style";
 
 interface EditFromProps {
   name: string;
   description: string;
+  thumbnail: string;
+  backgroundImage: string;
 }
 
-export default function EditForm({ name, description }: EditFromProps) {
+export default function EditForm({
+  name,
+  description,
+  thumbnail,
+  backgroundImage,
+}: EditFromProps) {
   const { form, status, isFormChange, handleInputChange, handleFormSumbit } =
     useEditForm(name, description);
   const navigate = useNavigate();
@@ -20,31 +35,42 @@ export default function EditForm({ name, description }: EditFromProps) {
   return (
     <EditFormContainer>
       <Form onSubmit={handleFormSumbit}>
-        <div>
-          <Title isRequired>닉네임</Title>
-          <TextInput
-            required
-            name="name"
-            value={form.name}
-            maxLength={10}
-            message={status.message}
-            warn={status.isWarn}
-            spellCheck={false}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
-        <div>
-          <Title>자기소개</Title>
-          <Textarea
-            name="description"
-            value={form.description}
-            placeholder="자기소개를 적어보세요(최대 100자까지 가능합니다)"
-            maxLength={100}
-            height={"100"}
-            spellCheck={false}
-            onChange={(e) => handleInputChange(e)}
-          />
-        </div>
+        <ProfileImageSection>
+          <ProfileImageSection.Art src={backgroundImage} />
+          <ProfileImageSection.ArtEditButton />
+          <ProfileImageSection.ProfileAvatar>
+            <ProfileAvatar.Avatar src={thumbnail} userName="FE" size="xl" />
+            <ProfileAvatar.AvatarEditButton />
+          </ProfileImageSection.ProfileAvatar>
+        </ProfileImageSection>
+
+        <InputSection>
+          <div>
+            <Title isRequired>닉네임</Title>
+            <TextInput
+              required
+              name="name"
+              value={form.name}
+              maxLength={10}
+              message={status.message}
+              warn={status.isWarn}
+              spellCheck={false}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </div>
+          <div>
+            <Title>자기소개</Title>
+            <Textarea
+              name="description"
+              value={form.description}
+              placeholder="자기소개를 적어보세요(최대 100자까지 가능합니다)"
+              maxLength={100}
+              height={"100"}
+              spellCheck={false}
+              onChange={(e) => handleInputChange(e)}
+            />
+          </div>
+        </InputSection>
       </Form>
       <ButtonContainer>
         <Button

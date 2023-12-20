@@ -6,24 +6,19 @@ interface TitleProps {
 }
 
 export const EditFormContainer = styled.div`
-  --profile-art-height: 160px; // 160px
-  --bottom-navigation-height: 74px; // 66px + 8px
-  --margin-top: 60px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: calc(
-    100vh - var(--profile-art-height) - var(--bottom-navigation-height) -
-      var(--margin-top)
-  );
-  padding: 0px 16px;
-  margin-top: var(--margin-top);
 `;
 
 export const Form = styled.form`
+  --profile-art-height: 160px;
+  --input-section-margin-bottom: 16px;
+
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  min-height: calc(
+    100vh - var(--profile-art-height) - var(--input-section-margin-bottom)
+  );
 `;
 
 export const Title = styled.span<TitleProps>`
@@ -42,8 +37,19 @@ export const Title = styled.span<TitleProps>`
     `}
 `;
 
+export const InputSection = styled.div`
+  --margin-top: 60px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0px 16px;
+  margin: var(--margin-top) 0 var(--input-section-margin-bottom);
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 0px 16px;
 `;
