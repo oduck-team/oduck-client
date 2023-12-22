@@ -13,12 +13,16 @@ import {
 
 interface ImageCropModalProps {
   imageSrc: string;
+
+  /** file input과 원본 이미지 상태를 초기화 */
+  resetImage: () => void;
   onClose: () => void;
   onSaveCroppedImage: (file: File) => void;
 }
 
 export default function ImageCropModal({
   imageSrc,
+  resetImage,
   onClose,
   onSaveCroppedImage,
 }: ImageCropModalProps) {
@@ -41,6 +45,8 @@ export default function ImageCropModal({
       }
     } catch (e) {
       console.error(e);
+    } finally {
+      resetImage(); // file input과 원본 이미지 상태를 초기화
     }
   };
 

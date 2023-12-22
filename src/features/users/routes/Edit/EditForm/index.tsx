@@ -50,6 +50,7 @@ export default function EditForm({
     handleArtEditClick,
     handleArtImageChange,
     closeArtCropModal,
+    resetUploadedArtImage,
   } = useArtCrop();
 
   return (
@@ -131,6 +132,7 @@ export default function EditForm({
       {isArtCropModal && artSrc && (
         <ImageCropModal
           imageSrc={artSrc}
+          resetImage={resetUploadedArtImage}
           onClose={closeArtCropModal}
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
         />

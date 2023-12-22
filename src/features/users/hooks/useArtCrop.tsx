@@ -14,6 +14,7 @@ export default function useArtCrop() {
 
   const closeArtCropModal = () => {
     setIsArtCropModal(false);
+    resetUploadedArtImage();
   };
 
   const handleArtImageChange = async (
@@ -26,6 +27,17 @@ export default function useArtCrop() {
     }
   };
 
+  /**
+   * 이미지 crop을 취소하거나 완료하면
+   * input과 원본 이미지 상태 초기화
+   */
+  const resetUploadedArtImage = () => {
+    if (artRef.current) {
+      artRef.current.value = "";
+      setArtSrc(null);
+    }
+  };
+
   return {
     artRef,
     artSrc,
@@ -33,5 +45,6 @@ export default function useArtCrop() {
     handleArtEditClick,
     handleArtImageChange,
     closeArtCropModal,
+    resetUploadedArtImage,
   };
 }
