@@ -1,12 +1,22 @@
+import { StrictPropsWithChildren } from "@/types";
+
 import {
   ArtEditButtonContainer,
   PlusCircleIcon,
 } from "./ProfileArtEditButton.style";
 
-export default function ArtEditButton() {
+interface ArtEditButtonProps {
+  onClick: () => void;
+}
+
+export default function ArtEditButton({
+  onClick,
+  children,
+}: StrictPropsWithChildren<ArtEditButtonProps>) {
   return (
-    <ArtEditButtonContainer>
+    <ArtEditButtonContainer onClick={onClick}>
       <PlusCircleIcon size={24} color="white" />
+      {children}
     </ArtEditButtonContainer>
   );
 }

@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -7,7 +8,9 @@ import ProfileImageSection from "@/features/users/components/ProfileImageSection
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
 import useEditForm from "@/features/users/hooks/useEditForm";
 
+import ImageCropModal from "./ImageCropModal";
 import {
+  ArtFileInput,
   ButtonContainer,
   EditFormContainer,
   Form,
@@ -31,13 +34,22 @@ export default function EditForm({
   const { form, status, isFormChange, handleInputChange, handleFormSumbit } =
     useEditForm(name, description);
   const navigate = useNavigate();
+  /** 이미지 crop */
+  const artRef = useRef<HTMLInputElement>(null); // 배경 이미지 input
+  const [isArtCropModal, setIsArtCropModal] = useState(false);
+  const handleArtEditClick = () => {
+    setIsArtCropModal(true);
+    artRef.current?.click(); // 배경 이미지 input open
+  };
 
   return (
     <EditFormContainer>
       <Form onSubmit={handleFormSumbit}>
         <ProfileImageSection>
           <ProfileImageSection.Art src={backgroundImage} />
-          <ProfileImageSection.ArtEditButton />
+          <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
+            <ArtFileInput type="file" accept="image/*" ref={artRef} />
+          </ProfileImageSection.ArtEditButton>
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar src={thumbnail} userName="FE" size="xl" />
             <ProfileAvatar.AvatarEditButton />
@@ -93,6 +105,11 @@ export default function EditForm({
           취소
         </Button>
       </ButtonContainer>
+
+      {/* 배경 이미지 crop 모달 */}
+      {isArtCropModal && (
+        <ImageCropModal onClose={() => setIsArtCropModal(false)} />
+      )}
     </EditFormContainer>
   );
 }

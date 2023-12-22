@@ -21,6 +21,10 @@ export const Form = styled.form`
   );
 `;
 
+export const ArtFileInput = styled.input`
+  display: none;
+`;
+
 export const Title = styled.span<TitleProps>`
   ${({ theme }) => theme.typo["body-1-m"]}
   display: inline-block;
