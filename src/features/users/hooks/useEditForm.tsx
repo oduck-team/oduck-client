@@ -18,6 +18,7 @@ export default function useEditForm(name: string, description: string) {
   const { profile } = useApi();
   const { fetchUser, user } = useAuth();
   const navigate = useNavigate();
+  const [croppedArtImage, setCroppedArtImage] = useState<File>(); // crop 배경 이미지
   const [form, setForm] = useState<ProfileEditFormData>({
     name: name.length <= 10 ? name : "",
     description: description,
@@ -86,7 +87,15 @@ export default function useEditForm(name: string, description: string) {
     setStatus({ isWarn: false, message: "" });
   }, 200);
 
-  return { form, status, isFormChange, handleInputChange, handleFormSumbit };
+  return {
+    form,
+    status,
+    isFormChange,
+    croppedArtImage,
+    handleInputChange,
+    handleFormSumbit,
+    setCroppedArtImage,
+  };
 }
 
 function isNicknameRegexCheck(nickname: string) {

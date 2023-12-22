@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -6,8 +5,8 @@ import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
 import ProfileImageSection from "@/features/users/components/ProfileImageSection";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
+import useArtCrop from "@/features/users/hooks/useArtCrop";
 import useEditForm from "@/features/users/hooks/useEditForm";
-import { readFile } from "@/libs/imageCrop";
 
 import ImageCropModal from "./ImageCropModal";
 import {
@@ -32,29 +31,26 @@ export default function EditForm({
   thumbnail,
   backgroundImage,
 }: EditFromProps) {
-  const { form, status, isFormChange, handleInputChange, handleFormSumbit } =
-    useEditForm(name, description);
+  const {
+    form,
+    status,
+    isFormChange,
+    croppedArtImage,
+    handleInputChange,
+    handleFormSumbit,
+    setCroppedArtImage,
+  } = useEditForm(name, description);
+
   const navigate = useNavigate();
-  /** 이미지 crop */
-  const artRef = useRef<HTMLInputElement>(null); // 배경 이미지 input
-  const [isArtCropModal, setIsArtCropModal] = useState(false);
-  const [artSrc, setArtSrc] = useState<string>(); // 사용자의 원본 배경 이미지
-  const [croppedArtImage, setCroppedArtImage] = useState<File>(); // crop 배경 이미지
 
-  const handleArtEditClick = () => {
-    setIsArtCropModal(true);
-    if (!artSrc) artRef.current?.click(); // 배경 이미지 input open
-  };
-
-  const handleArtImageChange = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      const imageDataUrl = await readFile(file);
-      setArtSrc(imageDataUrl);
-    }
-  };
+  const {
+    artRef,
+    artSrc,
+    isArtCropModal,
+    handleArtEditClick,
+    handleArtImageChange,
+    closeArtCropModal,
+  } = useArtCrop();
 
   return (
     <EditFormContainer>
@@ -135,7 +131,7 @@ export default function EditForm({
       {isArtCropModal && artSrc && (
         <ImageCropModal
           imageSrc={artSrc}
-          onClose={() => setIsArtCropModal(false)}
+          onClose={closeArtCropModal}
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
         />
       )}
