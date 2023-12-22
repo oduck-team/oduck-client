@@ -5,7 +5,11 @@ import Button from "@/components/Button";
 import Modal from "@/components/Modal";
 import { dataURLtoFile, getCroppedImg } from "@/libs/imageCrop";
 
-import { CropperContainer } from "./ImageCropModal.style";
+import {
+  ContentContainer,
+  CropperContainer,
+  RangeInput,
+} from "./ImageCropModal.style";
 
 interface ImageCropModalProps {
   imageSrc: string;
@@ -43,27 +47,29 @@ export default function ImageCropModal({
   return (
     <Modal onClose={onClose}>
       <Modal.Content>
-        <CropperContainer>
-          <Cropper
-            image={imageSrc}
-            crop={crop}
-            zoom={zoom}
-            aspect={2 / 1}
-            onCropChange={setCrop}
-            onCropComplete={onCropComplete}
-            onZoomChange={setZoom}
+        <ContentContainer>
+          <CropperContainer>
+            <Cropper
+              image={imageSrc}
+              crop={crop}
+              zoom={zoom}
+              aspect={2 / 1}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </CropperContainer>
+          <RangeInput
+            type="range"
+            value={zoom}
+            min={1}
+            max={3}
+            step={0.1}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setZoom(Number(e.target.value))
+            }
           />
-        </CropperContainer>
-        <input
-          type="range"
-          value={zoom}
-          min={1}
-          max={3}
-          step={0.1}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setZoom(Number(e.target.value))
-          }
-        />
+        </ContentContainer>
       </Modal.Content>
       <Modal.Actions>
         <Button
