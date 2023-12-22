@@ -7,6 +7,7 @@ import TextInput from "@/components/TextInput";
 import ProfileImageSection from "@/features/users/components/ProfileImageSection";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
 import useEditForm from "@/features/users/hooks/useEditForm";
+import { readFile } from "@/libs/imageCrop";
 
 import ImageCropModal from "./ImageCropModal";
 import {
@@ -37,18 +38,42 @@ export default function EditForm({
   /** 이미지 crop */
   const artRef = useRef<HTMLInputElement>(null); // 배경 이미지 input
   const [isArtCropModal, setIsArtCropModal] = useState(false);
+  const [artSrc, setArtSrc] = useState<string>(); // 사용자의 원본 배경 이미지
+  const [croppedArtImage, setCroppedArtImage] = useState<File>(); // crop 배경 이미지
+
   const handleArtEditClick = () => {
     setIsArtCropModal(true);
-    artRef.current?.click(); // 배경 이미지 input open
+    if (!artSrc) artRef.current?.click(); // 배경 이미지 input open
+  };
+
+  const handleArtImageChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const imageDataUrl = await readFile(file);
+      setArtSrc(imageDataUrl);
+    }
   };
 
   return (
     <EditFormContainer>
       <Form onSubmit={handleFormSumbit}>
         <ProfileImageSection>
-          <ProfileImageSection.Art src={backgroundImage} />
+          <ProfileImageSection.Art
+            src={
+              croppedArtImage
+                ? URL.createObjectURL(croppedArtImage)
+                : backgroundImage
+            }
+          />
           <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
-            <ArtFileInput type="file" accept="image/*" ref={artRef} />
+            <ArtFileInput
+              type="file"
+              accept="image/*"
+              ref={artRef}
+              onChange={handleArtImageChange}
+            />
           </ProfileImageSection.ArtEditButton>
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar src={thumbnail} userName="FE" size="xl" />
@@ -107,8 +132,12 @@ export default function EditForm({
       </ButtonContainer>
 
       {/* 배경 이미지 crop 모달 */}
-      {isArtCropModal && (
-        <ImageCropModal onClose={() => setIsArtCropModal(false)} />
+      {isArtCropModal && artSrc && (
+        <ImageCropModal
+          imageSrc={artSrc}
+          onClose={() => setIsArtCropModal(false)}
+          onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
+        />
       )}
     </EditFormContainer>
   );
