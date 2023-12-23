@@ -52,7 +52,18 @@ export default class ProfileApi {
     return await get(`/members/${memberId}/${menu}/count`);
   }
 
-  async updateProfile(form: ProfileEditFormData) {
+  async updateProfile(
+    form: ProfileEditFormData,
+    backgroundImage: File | undefined,
+  ) {
+    const data = new FormData();
+
+    for (const [key, value] of Object.entries(form)) {
+      data.append(key, value);
+    }
+
+    if (backgroundImage) data.append("backgroundImage", backgroundImage);
+
     return await patch("/members", form);
   }
 

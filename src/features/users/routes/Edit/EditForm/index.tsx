@@ -35,6 +35,7 @@ export default function EditForm({
     form,
     status,
     isFormChange,
+    isLoading,
     croppedArtImage,
     handleInputChange,
     handleFormSumbit,
@@ -137,6 +138,7 @@ export default function EditForm({
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
         />
       )}
+      {isLoading && <span>로딩중</span>}
     </EditFormContainer>
   );
 }
