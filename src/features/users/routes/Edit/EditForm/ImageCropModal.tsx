@@ -13,7 +13,10 @@ import {
 
 interface ImageCropModalProps {
   imageSrc: string;
-
+  aspectWidth: number; // 이미지 가로 비율
+  aspectHeight: number; // 이미지 세로 비율
+  filename: string;
+  cropShape?: "rect" | "round"; // crop 사각형 또는 원
   /** file input과 원본 이미지 상태를 초기화 */
   resetImage: () => void;
   onClose: () => void;
@@ -22,6 +25,10 @@ interface ImageCropModalProps {
 
 export default function ImageCropModal({
   imageSrc,
+  aspectWidth,
+  aspectHeight,
+  filename,
+  cropShape = "rect",
   resetImage,
   onClose,
   onSaveCroppedImage,
@@ -40,7 +47,7 @@ export default function ImageCropModal({
 
       const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels);
       if (croppedImage) {
-        const file = dataURLtoFile(croppedImage, "background.jpeg");
+        const file = dataURLtoFile(croppedImage, `${filename}.jpeg`);
         onSaveCroppedImage(file);
       }
     } catch (e) {
@@ -59,7 +66,8 @@ export default function ImageCropModal({
               image={imageSrc}
               crop={crop}
               zoom={zoom}
-              aspect={2 / 1}
+              aspect={aspectWidth / aspectHeight}
+              cropShape={cropShape}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}

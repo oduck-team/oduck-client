@@ -162,6 +162,9 @@ export default function EditForm({
       {isArtCropModal && artImageSrc && (
         <ImageCropModal
           imageSrc={artImageSrc}
+          aspectWidth={2}
+          aspectHeight={1}
+          filename="background"
           resetImage={resetUploadedArtImage}
           onClose={closeArtCropModal}
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
@@ -172,6 +175,10 @@ export default function EditForm({
       {isThumbnailCropModal && thumbnailImageSrc && (
         <ImageCropModal
           imageSrc={thumbnailImageSrc}
+          aspectWidth={1}
+          aspectHeight={1}
+          filename="thumbnail"
+          cropShape="round"
           resetImage={resetUploadedThumbnailImage}
           onClose={closeThumbnailCropModal}
           onSaveCroppedImage={(file: File) => setCroppedThumbnailImage(file)}
