@@ -11,7 +11,7 @@ import useEditForm from "@/features/users/hooks/useEditForm";
 
 import ImageCropModal from "./ImageCropModal";
 import {
-  ArtFileInput,
+  FileInput,
   ButtonContainer,
   EditFormContainer,
   Form,
@@ -37,8 +37,8 @@ export default function EditForm({
     status,
     isFormChange,
     isLoading,
-    croppedArtImage,
-    croppedThumbnailImage,
+    previewArt,
+    previewThumbNail,
     handleInputChange,
     handleFormSumbit,
     setCroppedArtImage,
@@ -73,14 +73,10 @@ export default function EditForm({
       <Form onSubmit={handleFormSumbit}>
         <ProfileImageSection>
           <ProfileImageSection.Art
-            src={
-              croppedArtImage
-                ? URL.createObjectURL(croppedArtImage)
-                : backgroundImage
-            }
+            src={previewArt ? previewArt : backgroundImage}
           />
           <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
-            <ArtFileInput
+            <FileInput
               type="file"
               accept="image/*"
               ref={artRef}
@@ -89,16 +85,12 @@ export default function EditForm({
           </ProfileImageSection.ArtEditButton>
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar
-              src={
-                croppedThumbnailImage
-                  ? URL.createObjectURL(croppedThumbnailImage)
-                  : thumbnail
-              }
+              src={previewThumbNail ? previewThumbNail : thumbnail}
               userName="FE"
               size="xl"
             />
             <ProfileAvatar.AvatarEditButton onClick={handleThumbnailEditClick}>
-              <ArtFileInput
+              <FileInput
                 type="file"
                 accept="image/*"
                 ref={thumbnailRef}

@@ -21,7 +21,7 @@ export const Form = styled.form`
   );
 `;
 
-export const ArtFileInput = styled.input`
+export const FileInput = styled.input`
   display: none;
 `;
 

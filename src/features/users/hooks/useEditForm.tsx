@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
@@ -43,6 +43,16 @@ export default function useEditForm(name: string, description: string) {
   const toast = useToast();
   const { toastAuthError, toastDefaultError } = useCommonToastError();
 
+  const previewArt = useMemo(
+    () => croppedArtImage && URL.createObjectURL(croppedArtImage),
+    [croppedArtImage],
+  );
+
+  const previewThumbNail = useMemo(
+    () => croppedThumbnailImage && URL.createObjectURL(croppedThumbnailImage),
+    [croppedThumbnailImage],
+  );
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -70,13 +80,10 @@ export default function useEditForm(name: string, description: string) {
       return;
     }
 
-    let backgroundImage;
-    let thumbnailImage;
-
+    let backgroundImage, thumbnailImage;
     if (croppedArtImage) {
       backgroundImage = await fileToWebPFile(croppedArtImage);
     }
-
     if (croppedThumbnailImage) {
       thumbnailImage = await fileToWebPFile(croppedThumbnailImage);
     }
@@ -126,8 +133,8 @@ export default function useEditForm(name: string, description: string) {
     status,
     isFormChange,
     isLoading,
-    croppedArtImage,
-    croppedThumbnailImage,
+    previewArt,
+    previewThumbNail,
     handleInputChange,
     handleFormSumbit,
     setCroppedArtImage,
