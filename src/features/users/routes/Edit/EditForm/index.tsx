@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/Button";
@@ -5,7 +6,7 @@ import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
 import ProfileImageSection from "@/features/users/components/ProfileImageSection";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
-import useArtCrop from "@/features/users/hooks/useArtCrop";
+import useCropModal from "@/features/users/hooks/useCropModal";
 import useEditForm from "@/features/users/hooks/useEditForm";
 
 import ImageCropModal from "./ImageCropModal";
@@ -44,15 +45,16 @@ export default function EditForm({
 
   const navigate = useNavigate();
 
+  const artRef = useRef<HTMLInputElement>(null); // 배경 이미지 input
+
   const {
-    artRef,
-    artSrc,
+    imageSrc,
     isArtCropModal,
-    handleArtEditClick,
-    handleArtImageChange,
-    closeArtCropModal,
-    resetUploadedArtImage,
-  } = useArtCrop();
+    handleImageEditClick,
+    handleImageChange,
+    closeImageCropModal,
+    resetUploadedImage,
+  } = useCropModal(artRef);
 
   return (
     <EditFormContainer>
@@ -65,12 +67,12 @@ export default function EditForm({
                 : backgroundImage
             }
           />
-          <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
+          <ProfileImageSection.ArtEditButton onClick={handleImageEditClick}>
             <ArtFileInput
               type="file"
               accept="image/*"
               ref={artRef}
-              onChange={handleArtImageChange}
+              onChange={handleImageChange}
             />
           </ProfileImageSection.ArtEditButton>
           <ProfileImageSection.ProfileAvatar>
@@ -130,11 +132,11 @@ export default function EditForm({
       </ButtonContainer>
 
       {/* 배경 이미지 crop 모달 */}
-      {isArtCropModal && artSrc && (
+      {isArtCropModal && imageSrc && (
         <ImageCropModal
-          imageSrc={artSrc}
-          resetImage={resetUploadedArtImage}
-          onClose={closeArtCropModal}
+          imageSrc={imageSrc}
+          resetImage={resetUploadedImage}
+          onClose={closeImageCropModal}
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
         />
       )}
