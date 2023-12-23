@@ -116,8 +116,10 @@ export default function useEditForm(name: string, description: string) {
     setStatus({ isWarn: false, message: "" });
   }, 200);
 
-  /** 배경 이미지가 등록되면 저장 버튼 활성화 */
-  useEffect(() => croppedArtImage && setIsFormChange(true), [croppedArtImage]);
+  /** 배경 이미지 및 썸네일 이미지 등록 시, 저장 버튼 활성화 */
+  useEffect(() => {
+    if (croppedArtImage || croppedThumbnailImage) setIsFormChange(true);
+  }, [croppedArtImage, croppedThumbnailImage]);
 
   return {
     form,
