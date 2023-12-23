@@ -17,6 +17,7 @@ export interface ProfileEditFormData {
 
 interface UpdateProfileMutateVariables {
   backgroundImage: File | undefined;
+  thumbnailImage: File | undefined;
 }
 
 export default function useEditForm(name: string, description: string) {
@@ -24,6 +25,7 @@ export default function useEditForm(name: string, description: string) {
   const { fetchUser, user } = useAuth();
   const navigate = useNavigate();
   const [croppedArtImage, setCroppedArtImage] = useState<File>(); // crop 배경 이미지
+  const [croppedThumbnailImage, setCroppedThumbnailImage] = useState<File>(); // crop 썸네일 이미지
   const [form, setForm] = useState<ProfileEditFormData>({
     name: name.length <= 10 ? name : "",
     description: description,
@@ -33,8 +35,8 @@ export default function useEditForm(name: string, description: string) {
   const [isLoading, setIsLoading] = useState(false); // submit loading 상태
 
   const updateProfile = useMutation(
-    ({ backgroundImage }: UpdateProfileMutateVariables) =>
-      profile.updateProfile(form, backgroundImage),
+    ({ backgroundImage, thumbnailImage }: UpdateProfileMutateVariables) =>
+      profile.updateProfile(form, backgroundImage, thumbnailImage),
   );
   const queryClient = useQueryClient();
 
@@ -69,13 +71,18 @@ export default function useEditForm(name: string, description: string) {
     }
 
     let backgroundImage;
+    let thumbnailImage;
 
     if (croppedArtImage) {
       backgroundImage = await fileToWebPFile(croppedArtImage);
     }
 
+    if (croppedThumbnailImage) {
+      thumbnailImage = await fileToWebPFile(croppedThumbnailImage);
+    }
+
     updateProfile.mutate(
-      { backgroundImage },
+      { backgroundImage, thumbnailImage },
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries(["profile", user?.name]);
@@ -118,9 +125,11 @@ export default function useEditForm(name: string, description: string) {
     isFormChange,
     isLoading,
     croppedArtImage,
+    croppedThumbnailImage,
     handleInputChange,
     handleFormSumbit,
     setCroppedArtImage,
+    setCroppedThumbnailImage,
   };
 }
 

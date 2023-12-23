@@ -38,23 +38,35 @@ export default function EditForm({
     isFormChange,
     isLoading,
     croppedArtImage,
+    croppedThumbnailImage,
     handleInputChange,
     handleFormSumbit,
     setCroppedArtImage,
+    setCroppedThumbnailImage,
   } = useEditForm(name, description);
 
   const navigate = useNavigate();
 
   const artRef = useRef<HTMLInputElement>(null); // 배경 이미지 input
+  const thumbnailRef = useRef<HTMLInputElement>(null); // 썸네일 이미지 input
 
   const {
-    imageSrc,
-    isArtCropModal,
-    handleImageEditClick,
-    handleImageChange,
-    closeImageCropModal,
-    resetUploadedImage,
+    imageSrc: artImageSrc,
+    isImageCropModal: isArtCropModal,
+    handleImageEditClick: handleArtEditClick,
+    handleImageChange: handleArtImageChange,
+    closeImageCropModal: closeArtCropModal,
+    resetUploadedImage: resetUploadedArtImage,
   } = useCropModal(artRef);
+
+  const {
+    imageSrc: thumbnailImageSrc,
+    isImageCropModal: isThumbnailCropModal,
+    handleImageEditClick: handleThumbnailEditClick,
+    handleImageChange: handleThumbnailImageChange,
+    closeImageCropModal: closeThumbnailCropModal,
+    resetUploadedImage: resetUploadedThumbnailImage,
+  } = useCropModal(thumbnailRef);
 
   return (
     <EditFormContainer>
@@ -67,17 +79,32 @@ export default function EditForm({
                 : backgroundImage
             }
           />
-          <ProfileImageSection.ArtEditButton onClick={handleImageEditClick}>
+          <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
             <ArtFileInput
               type="file"
               accept="image/*"
               ref={artRef}
-              onChange={handleImageChange}
+              onChange={handleArtImageChange}
             />
           </ProfileImageSection.ArtEditButton>
           <ProfileImageSection.ProfileAvatar>
-            <ProfileAvatar.Avatar src={thumbnail} userName="FE" size="xl" />
-            <ProfileAvatar.AvatarEditButton />
+            <ProfileAvatar.Avatar
+              src={
+                croppedThumbnailImage
+                  ? URL.createObjectURL(croppedThumbnailImage)
+                  : thumbnail
+              }
+              userName="FE"
+              size="xl"
+            />
+            <ProfileAvatar.AvatarEditButton onClick={handleThumbnailEditClick}>
+              <ArtFileInput
+                type="file"
+                accept="image/*"
+                ref={thumbnailRef}
+                onChange={handleThumbnailImageChange}
+              />
+            </ProfileAvatar.AvatarEditButton>
           </ProfileImageSection.ProfileAvatar>
         </ProfileImageSection>
 
@@ -132,12 +159,22 @@ export default function EditForm({
       </ButtonContainer>
 
       {/* 배경 이미지 crop 모달 */}
-      {isArtCropModal && imageSrc && (
+      {isArtCropModal && artImageSrc && (
         <ImageCropModal
-          imageSrc={imageSrc}
-          resetImage={resetUploadedImage}
-          onClose={closeImageCropModal}
+          imageSrc={artImageSrc}
+          resetImage={resetUploadedArtImage}
+          onClose={closeArtCropModal}
           onSaveCroppedImage={(file: File) => setCroppedArtImage(file)}
+        />
+      )}
+
+      {/* 썸네일 이미지 crop 모달 */}
+      {isThumbnailCropModal && thumbnailImageSrc && (
+        <ImageCropModal
+          imageSrc={thumbnailImageSrc}
+          resetImage={resetUploadedThumbnailImage}
+          onClose={closeThumbnailCropModal}
+          onSaveCroppedImage={(file: File) => setCroppedThumbnailImage(file)}
         />
       )}
       {isLoading && <span>로딩중</span>}

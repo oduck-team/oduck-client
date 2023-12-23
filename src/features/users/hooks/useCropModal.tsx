@@ -5,16 +5,16 @@ import { readFile } from "@/libs/imageCrop";
 export default function useCropModal(
   inputRef: React.RefObject<HTMLInputElement>,
 ) {
-  const [isArtCropModal, setIsArtCropModal] = useState(false);
+  const [isImageCropModal, setIsImageCropModal] = useState(false);
   const [imageSrc, setImageSrc] = useState<string | null>(null); // 사용자의 원본 이미지
 
   const handleImageEditClick = () => {
-    setIsArtCropModal(true);
+    setIsImageCropModal(true);
     if (!imageSrc) inputRef.current?.click(); // 이미지 input open
   };
 
   const closeImageCropModal = () => {
-    setIsArtCropModal(false);
+    setIsImageCropModal(false);
     resetUploadedImage();
   };
 
@@ -39,7 +39,7 @@ export default function useCropModal(
 
   return {
     imageSrc,
-    isArtCropModal,
+    isImageCropModal,
     handleImageEditClick,
     handleImageChange,
     closeImageCropModal,

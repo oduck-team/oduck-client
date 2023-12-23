@@ -55,6 +55,7 @@ export default class ProfileApi {
   async updateProfile(
     form: ProfileEditFormData,
     backgroundImage: File | undefined,
+    thumbnailImage: File | undefined,
   ) {
     const data = new FormData();
 
@@ -63,6 +64,7 @@ export default class ProfileApi {
     }
 
     if (backgroundImage) data.append("backgroundImage", backgroundImage);
+    if (thumbnailImage) data.append("thumbnail", thumbnailImage);
 
     return await patch("/members", form);
   }
