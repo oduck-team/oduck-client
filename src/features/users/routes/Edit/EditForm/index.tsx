@@ -154,7 +154,7 @@ export default function EditForm({
       {isArtCropModal && artImageSrc && (
         <ImageCropModal
           imageSrc={artImageSrc}
-          aspectWidth={2}
+          aspectWidth={3}
           aspectHeight={1}
           filename="background"
           resetImage={resetUploadedArtImage}
