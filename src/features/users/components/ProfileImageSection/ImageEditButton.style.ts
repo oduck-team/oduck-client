@@ -28,7 +28,9 @@ export const PlusCircleIcon = styled(PlusCircle)`
   left: 50%;
   color: ${({ theme }) => theme.colors.neutral["05"]};
   transform: translate(-50%, -50%);
-  transition: transform linear 0.2s;
+  transition:
+    transform linear 0.2s,
+    color linear 0.2s;
 
   &.resetIcon {
     color: ${({ theme }) => theme.colors.warn["50"]};
