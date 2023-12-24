@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import Textarea from "@/components/TextArea";
 import TextInput from "@/components/TextInput";
 import ProfileImageSection from "@/features/users/components/ProfileImageSection";
+import ImageEditButton from "@/features/users/components/ProfileImageSection/ImageEditButton";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
 import useCropModal from "@/features/users/hooks/useCropModal";
 import useEditForm from "@/features/users/hooks/useEditForm";
@@ -75,7 +76,7 @@ export default function EditForm({
           <ProfileImageSection.Art
             src={previewArt ? previewArt : backgroundImage}
           />
-          <ProfileImageSection.ArtEditButton
+          <ImageEditButton
             croppedImage={previewArt}
             onClick={handleArtEditClick}
             onReset={() => {
@@ -89,7 +90,7 @@ export default function EditForm({
               ref={artRef}
               onChange={handleArtImageChange}
             />
-          </ProfileImageSection.ArtEditButton>
+          </ImageEditButton>
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar
               src={previewThumbNail ? previewThumbNail : thumbnail}

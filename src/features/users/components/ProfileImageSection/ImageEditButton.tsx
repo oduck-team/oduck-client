@@ -3,25 +3,27 @@ import { PlusCircle, XCircle } from "@phosphor-icons/react";
 import { StrictPropsWithChildren } from "@/types";
 
 import {
-  ArtEditButtonContainer,
+  ImageEditButtonContainer,
   IconContainer,
   XButton,
 } from "./ProfileArtEditButton.style";
 
-interface ArtEditButtonProps {
+interface ImageEditButtonProps {
   croppedImage: string | null;
+  borderRadius?: "50%" | "none";
   onClick: () => void;
   onReset: () => void;
 }
 
-export default function ArtEditButton({
+export default function ImageEditButton({
   croppedImage,
+  borderRadius = "none",
   onClick,
   onReset,
   children,
-}: StrictPropsWithChildren<ArtEditButtonProps>) {
+}: StrictPropsWithChildren<ImageEditButtonProps>) {
   return (
-    <ArtEditButtonContainer onClick={onClick}>
+    <ImageEditButtonContainer onClick={onClick} borderRadius={borderRadius}>
       <IconContainer hasXButton={Boolean(croppedImage)}>
         <PlusCircle size={24} color="white" />
         {croppedImage && (
@@ -37,6 +39,6 @@ export default function ArtEditButton({
         )}
       </IconContainer>
       {children}
-    </ArtEditButtonContainer>
+    </ImageEditButtonContainer>
   );
 }

@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const ArtEditButtonContainer = styled.div`
+export const ImageEditButtonContainer = styled.div<{ borderRadius: string }>`
   position: absolute;
   top: 0;
   left: 0;
@@ -10,6 +10,12 @@ export const ArtEditButtonContainer = styled.div`
   height: 160px;
   background-color: ${({ theme }) => theme.colors.neutral[100]};
   cursor: pointer;
+
+  ${({ borderRadius }) =>
+    borderRadius === "50%" &&
+    css`
+      border-radius: 50%;
+    `}
 `;
 
 export const IconContainer = styled.div<{ hasXButton: boolean }>`
