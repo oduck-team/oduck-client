@@ -78,6 +78,7 @@ export default function EditForm({
           />
           <ImageEditButton
             croppedImage={previewArt}
+            height={160}
             onClick={handleArtEditClick}
             onReset={() => {
               resetUploadedArtImage();
@@ -97,14 +98,22 @@ export default function EditForm({
               userName="FE"
               size="xl"
             />
-            <ProfileAvatar.AvatarEditButton onClick={handleThumbnailEditClick}>
+            <ImageEditButton
+              croppedImage={previewThumbNail}
+              borderRadius="50%"
+              onClick={handleThumbnailEditClick}
+              onReset={() => {
+                resetUploadedThumbnailImage();
+                setCroppedThumbnailImage(null);
+              }}
+            >
               <FileInput
                 type="file"
                 accept="image/*"
                 ref={thumbnailRef}
                 onChange={handleThumbnailImageChange}
               />
-            </ProfileAvatar.AvatarEditButton>
+            </ImageEditButton>
           </ProfileImageSection.ProfileAvatar>
         </ProfileImageSection>
 

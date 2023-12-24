@@ -1,13 +1,16 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-export const ImageEditButtonContainer = styled.div<{ borderRadius: string }>`
+export const ImageEditButtonContainer = styled.div<{
+  borderRadius: string;
+  height: string | number;
+}>`
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0.7;
   width: 100%;
-  height: 160px;
+  height: ${({ height }) => (height === "100%" ? "100%" : `${height}px`)};
   background-color: ${({ theme }) => theme.colors.neutral[100]};
   cursor: pointer;
 

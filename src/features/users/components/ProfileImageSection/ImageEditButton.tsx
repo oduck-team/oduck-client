@@ -11,6 +11,8 @@ import {
 interface ImageEditButtonProps {
   croppedImage: string | null;
   borderRadius?: "50%" | "none";
+  /** default height: 100%, number는 px 단위 */
+  height?: "100%" | number;
   onClick: () => void;
   onReset: () => void;
 }
@@ -18,12 +20,17 @@ interface ImageEditButtonProps {
 export default function ImageEditButton({
   croppedImage,
   borderRadius = "none",
+  height = "100%",
   onClick,
   onReset,
   children,
 }: StrictPropsWithChildren<ImageEditButtonProps>) {
   return (
-    <ImageEditButtonContainer onClick={onClick} borderRadius={borderRadius}>
+    <ImageEditButtonContainer
+      onClick={onClick}
+      borderRadius={borderRadius}
+      height={height}
+    >
       <IconContainer hasXButton={Boolean(croppedImage)}>
         <PlusCircle size={24} color="white" />
         {croppedImage && (
