@@ -1,11 +1,8 @@
-import { PlusCircle, XCircle } from "@phosphor-icons/react";
-
 import { StrictPropsWithChildren } from "@/types";
 
 import {
   ImageEditButtonContainer,
-  IconContainer,
-  XButton,
+  PlusCircleIcon,
 } from "./ProfileArtEditButton.style";
 
 interface ImageEditButtonProps {
@@ -25,26 +22,17 @@ export default function ImageEditButton({
   onReset,
   children,
 }: StrictPropsWithChildren<ImageEditButtonProps>) {
+  /* crop된 이미지가 있으면 이미지 제거, 없으면 이미지 등록 */
+  const handleClick = croppedImage ? onReset : onClick;
+
   return (
     <ImageEditButtonContainer
-      onClick={onClick}
+      onClick={handleClick}
       borderRadius={borderRadius}
       height={height}
     >
-      <IconContainer hasXButton={Boolean(croppedImage)}>
-        <PlusCircle size={24} color="white" />
-        {croppedImage && (
-          <XButton
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onReset();
-            }}
-          >
-            <XCircle size={24} />
-          </XButton>
-        )}
-      </IconContainer>
+      {<PlusCircleIcon size={24} hasCroppedImage={Boolean(croppedImage)} />}
+
       {children}
     </ImageEditButtonContainer>
   );
