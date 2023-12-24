@@ -24,8 +24,9 @@ export default function useEditForm(name: string, description: string) {
   const { profile } = useApi();
   const { fetchUser, user } = useAuth();
   const navigate = useNavigate();
-  const [croppedArtImage, setCroppedArtImage] = useState<File>(); // crop 배경 이미지
-  const [croppedThumbnailImage, setCroppedThumbnailImage] = useState<File>(); // crop 썸네일 이미지
+  const [croppedArtImage, setCroppedArtImage] = useState<File | null>(null); // crop 배경 이미지
+  const [croppedThumbnailImage, setCroppedThumbnailImage] =
+    useState<File | null>(null); // crop 썸네일 이미지
   const [form, setForm] = useState<ProfileEditFormData>({
     name: name.length <= 10 ? name : "",
     description: description,

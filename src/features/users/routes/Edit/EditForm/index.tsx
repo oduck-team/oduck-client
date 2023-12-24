@@ -75,7 +75,14 @@ export default function EditForm({
           <ProfileImageSection.Art
             src={previewArt ? previewArt : backgroundImage}
           />
-          <ProfileImageSection.ArtEditButton onClick={handleArtEditClick}>
+          <ProfileImageSection.ArtEditButton
+            croppedImage={previewArt}
+            onClick={handleArtEditClick}
+            onReset={() => {
+              resetUploadedArtImage();
+              setCroppedArtImage(null);
+            }}
+          >
             <FileInput
               type="file"
               accept="image/*"
