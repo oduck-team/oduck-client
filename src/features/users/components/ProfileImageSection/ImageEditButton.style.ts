@@ -22,20 +22,16 @@ export const ImageEditButtonContainer = styled.div<{
     `}
 `;
 
-export const PlusCircleIcon = styled(PlusCircle)<{ hasCroppedImage: boolean }>`
+export const PlusCircleIcon = styled(PlusCircle)`
   position: absolute;
   top: 50%;
   left: 50%;
+  color: ${({ theme }) => theme.colors.neutral["05"]};
   transform: translate(-50%, -50%);
   transition: transform linear 0.2s;
 
-  ${({ hasCroppedImage, theme }) =>
-    hasCroppedImage
-      ? css`
-          color: ${theme.colors.warn[50]};
-          transform: translate(-50%, -50%) rotate(45deg);
-        `
-      : css`
-          color: ${theme.colors.neutral["05"]};
-        `}
+  &.resetIcon {
+    color: ${({ theme }) => theme.colors.warn["50"]};
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 `;

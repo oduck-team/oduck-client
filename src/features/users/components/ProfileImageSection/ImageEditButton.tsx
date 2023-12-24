@@ -3,7 +3,7 @@ import { StrictPropsWithChildren } from "@/types";
 import {
   ImageEditButtonContainer,
   PlusCircleIcon,
-} from "./ProfileArtEditButton.style";
+} from "./ImageEditButton.style";
 
 interface ImageEditButtonProps {
   croppedImage: string | null;
@@ -31,7 +31,10 @@ export default function ImageEditButton({
       borderRadius={borderRadius}
       height={height}
     >
-      {<PlusCircleIcon size={24} hasCroppedImage={Boolean(croppedImage)} />}
+      <PlusCircleIcon
+        className={croppedImage ? "resetIcon" : undefined}
+        size={24}
+      />
 
       {children}
     </ImageEditButtonContainer>
