@@ -3,12 +3,12 @@ import { useState } from "react";
 
 import Stat from "@/components/Stat";
 import ProfileAvatar from "@/features/users/components/ProfileImageSection/ProfileAvatar";
-import useIntroduceReadMore from "@/features/users/hooks/useIntroduceReadMore";
+import useReadMoreText from "@/hooks/useReadMoreText";
 
 import ProfileImageSection from "../../../components/ProfileImageSection";
 
 import StatModal from "./StatModal";
-import { Introduce, NickName, SeeMoreButton, StatContainer } from "./style";
+import { Introduce, NickName, ReadMoreButton, StatContainer } from "./style";
 
 interface AboutMeProps {
   profile: Profile;
@@ -17,12 +17,8 @@ interface AboutMeProps {
 export default function AboutMe({
   profile: { activity, backgroundImage, description, isMine, name, thumbnail },
 }: AboutMeProps) {
-  const {
-    introduceRef,
-    isOpen,
-    isShowReadMoreButton,
-    handleSeeMoreButtonToggle,
-  } = useIntroduceReadMore();
+  const { textRef, isOpen, isShowReadMoreButton, handleReadMoreButtonToggle } =
+    useReadMoreText();
   const [isStatModalVisible, setIsStatModalVisible] = useState(false);
   const handleStatModalToggle = () => setIsStatModalVisible((prev) => !prev);
 
@@ -44,14 +40,14 @@ export default function AboutMe({
       </ProfileImageSection>
 
       <NickName>{name}</NickName>
-      <Introduce className={isOpen ? undefined : "ellipsis"} ref={introduceRef}>
+      <Introduce className={isOpen ? undefined : "ellipsis"} ref={textRef}>
         {description}
       </Introduce>
 
       {isShowReadMoreButton && (
-        <SeeMoreButton onClick={handleSeeMoreButtonToggle}>
+        <ReadMoreButton onClick={handleReadMoreButtonToggle}>
           {isOpen ? "접기" : "더보기"}
-        </SeeMoreButton>
+        </ReadMoreButton>
       )}
 
       <StatContainer onClick={handleStatModalToggle}>
