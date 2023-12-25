@@ -1,9 +1,24 @@
 import styled from "@emotion/styled";
 
 export const Plot = styled.p`
+  ${({ theme }) => theme.typo["body-3-r"]};
   display: -webkit-box;
   margin-top: 8px;
+  word-break: break-all;
+
+  &.ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+`;
+
+export const ReadMoreButton = styled.button`
+  all: unset;
   ${({ theme }) => theme.typo["body-3-r"]};
+  cursor: pointer;
+  display: block;
 `;
 
 export const Grid = styled.ul`
