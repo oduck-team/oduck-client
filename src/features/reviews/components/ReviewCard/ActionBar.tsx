@@ -1,3 +1,11 @@
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
+
+import LoginAlertModal from "@/features/auth/components/LoginAlertModal";
+import useAuth from "@/features/auth/hooks/useAuth";
+import useGetIsLike from "@/features/reviews/hook/useGetIsLike";
+import useToggleLike from "@/features/reviews/hook/useToggleLike";
+import useDebounce from "@/hooks/useDebounce";
 import { compactNumber } from "@/utils/common";
 
 import { ActionBarContainer, ButtonContainer } from "./ActionBar.style";
@@ -6,7 +14,7 @@ import ReviewMoreButton from "./ReviewMoreButton";
 
 export interface ActionBarProps {
   isMine: boolean;
-  isLike: boolean;
+  isLike?: boolean;
   likeCount: number;
   createdAt?: string;
   isTimeAgo?: boolean;
@@ -16,6 +24,9 @@ export interface ActionBarProps {
   isSpoiler: boolean;
   score: number;
 }
+
+const DEBOUNCE_DELAY = 200;
+
 export default function ActionBar({
   isMine,
   isLike,
@@ -30,25 +41,46 @@ export default function ActionBar({
 }: ActionBarProps) {
   const date = isTimeAgo ? timeAgo(createdAt) : dateWithDots(createdAt);
 
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const data = useGetIsLike(reviewId);
+  const userLike = data ? data.isLike : isLike;
+  const likeMutation = useToggleLike(reviewId, animeId, userLike ?? false);
+  const { user } = useAuth();
+
+  const handleClickLike = useDebounce(() => {
+    if (!user) {
+      setIsLoginModalVisible(true);
+      return;
+    }
+    likeMutation.mutate();
+  }, DEBOUNCE_DELAY);
+
   return (
-    <ActionBarContainer onClick={(e) => e.stopPropagation()}>
-      {date && <time>{date}</time>}
-      <ButtonContainer>
-        <ReviewLikeButton
-          isLike={isLike}
-          count={compactNumber(likeCount, "ko-KR")}
-          onClick={() => {}}
-        />
-        <ReviewMoreButton
-          isMine={isMine}
-          reviewId={reviewId}
-          animeId={animeId}
-          content={content}
-          isSpoiler={isSpoiler}
-          score={score}
-        />
-      </ButtonContainer>
-    </ActionBarContainer>
+    <>
+      <ActionBarContainer onClick={(e) => e.stopPropagation()}>
+        {date && <time>{date}</time>}
+        <ButtonContainer>
+          <ReviewLikeButton
+            isLike={userLike ?? false}
+            count={compactNumber(likeCount, "ko-KR")}
+            onClick={handleClickLike}
+          />
+          <ReviewMoreButton
+            isMine={isMine}
+            reviewId={reviewId}
+            animeId={animeId}
+            content={content}
+            isSpoiler={isSpoiler}
+            score={score}
+          />
+        </ButtonContainer>
+      </ActionBarContainer>
+      <AnimatePresence>
+        {isLoginModalVisible && (
+          <LoginAlertModal onClose={() => setIsLoginModalVisible(false)} />
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

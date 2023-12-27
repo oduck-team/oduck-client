@@ -54,7 +54,6 @@ export default function ReviewList({
             createdAt={review.createdAt}
             isTimeAgo={false}
             isMine={isMine}
-            isLike={review.isLike}
             likeCount={review.likeCount}
             reviewId={review.reviewId}
             animeId={review.animeId}

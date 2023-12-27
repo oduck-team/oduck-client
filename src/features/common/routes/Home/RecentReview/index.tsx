@@ -49,7 +49,6 @@ export default function RecentReview() {
                 <ReviewCard.ActionBar
                   createdAt={data.pages[0].createdAt}
                   isMine={user?.name === data.pages[0].name ? true : false}
-                  isLike={data.pages[0].isLike}
                   likeCount={data.pages[0].likeCount}
                   isTimeAgo={true}
                   reviewId={data.pages[0].reviewId}

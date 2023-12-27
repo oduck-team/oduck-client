@@ -8,10 +8,10 @@ import AnimeRanking from "@/features/animes/components/AnimeRanking";
 import useAuth from "@/features/auth/hooks/useAuth";
 
 import Discord from "./Discord";
-import NewestAnimes from "./NewestAnimes";
-import RecentReview from "./RecentReview";
-import RecentReviewImageCard from "./RecentReviewImageCard";
-import RecommendAnimes from "./RecommendAnimes";
+// import NewestAnimes from "./NewestAnimes";
+// import RecentReview from "./RecentReview";
+// import RecentReviewImageCard from "./RecentReviewImageCard";
+// import RecommendAnimes from "./RecommendAnimes";
 import { Bottom, HomeContainer } from "./style";
 
 export default function Home() {
@@ -27,31 +27,31 @@ export default function Home() {
     <>
       <Head />
       <HomeContainer>
-        <ErrorBoundary onReset={reset}>
+        {/* <ErrorBoundary onReset={reset}>
           <RecentReviewImageCard />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
-        <ErrorBoundary onReset={reset}>
+        {/* <ErrorBoundary onReset={reset}>
           <NewestAnimes />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
         <Discord />
         <ErrorBoundary onReset={reset}>
           <AnimeRanking title="이번주 TOP10" />
         </ErrorBoundary>
 
-        <ErrorBoundary onReset={reset}>
+        {/* <ErrorBoundary onReset={reset}>
           <RecentReview />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
         {/* TODO: 추천 애니 요청 방법 정하기 */}
-        <ErrorBoundary onReset={reset}>
+        {/* <ErrorBoundary onReset={reset}>
           <RecommendAnimes title="덕후들의 눈물샘을 터뜨린" />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
-        <ErrorBoundary onReset={reset}>
+        {/* <ErrorBoundary onReset={reset}>
           <RecommendAnimes title="이불밖을 못 나오게 하는" />
-        </ErrorBoundary>
+        </ErrorBoundary> */}
 
         <Bottom>
           <span>감명 깊게 본 애니를 다른 회원님들과 공유해보세요!</span>

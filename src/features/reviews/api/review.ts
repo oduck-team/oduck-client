@@ -8,7 +8,7 @@ import recentReviewMock3 from "./mock/recentReview3.json";
 import recentReveiwCardMock from "./mock/recentReviewCard.json";
 import recentReviewOnlyOneMock from "./mock/recentReviewOnlyOne.json";
 
-export type ReviewInfo = Omit<Review, "anime"> & {
+export type ReviewInfo = Omit<Review, "anime" | "isLike"> & {
   animeId: number;
   thumbnail: string;
 };
@@ -49,6 +49,16 @@ export default class ReviewApi {
     return patch(`/short-reviews/${reviewId}`, review);
   }
 
+  /** @description 리뷰 좋아요 추가/삭제 */
+  async toggleReviewLike(shortReviewId: number): Promise<void> {
+    return post(`/likes`, { shortReviewId });
+  }
+
+  /** @description 사용자의 리뷰 좋아요 여부 조회 */
+  async getReviewIsLike(shortReviewId: number) {
+    return get<{ isLike: boolean }>(`/likes/${shortReviewId}`);
+  }
+
   /** @description 한 애니의 리뷰 목록 요청 */
   async getAnimeReviews(
     animeId: number,
@@ -79,7 +89,7 @@ export default class ReviewApi {
   async getRecentReviewList(
     pageParam: string | undefined,
     size: number = 10,
-  ): Promise<CursorPage<Review>> {
+  ): Promise<CursorPage<Omit<Review, "isLike">>> {
     const baseParams = { size };
     const params =
       pageParam === undefined
