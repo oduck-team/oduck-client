@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import BaseStat from "@/components/Stat";
 
 export const Container = styled.div`
-  padding-bottom: 24px;
+  padding-bottom: 27px;
 `;
 
 export const Banner = styled.div`

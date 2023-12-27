@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 
+import { theme } from "@/styles/theme";
+
 import { ProgressProps } from ".";
+
+type Color = keyof typeof theme.colors;
 
 export const ProgressContainer = styled.div<ProgressProps>(
   ({ color = "primary", value, height, isRounded, theme }) => ({
@@ -14,7 +18,8 @@ export const ProgressContainer = styled.div<ProgressProps>(
     "& div": {
       height: "100%",
       width: `${value}%`,
-      backgroundColor: theme.colors[color]["60"],
+      backgroundColor:
+        color in theme.colors ? theme.colors[color as Color]["60"] : color,
       borderRadius: isRounded ? "999px" : 0,
     },
   }),
