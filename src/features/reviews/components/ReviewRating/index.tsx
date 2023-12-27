@@ -25,7 +25,7 @@ interface ReviewRatingProps {
 const DEBOUNCE_DELAY = 200;
 
 export default function ReviewRating({ animeId }: ReviewRatingProps) {
-  const hasReview = true; // dev용 변수
+  const hasReview = false; // dev용 변수
 
   const { user } = useAuth();
   const toast = useToast();
