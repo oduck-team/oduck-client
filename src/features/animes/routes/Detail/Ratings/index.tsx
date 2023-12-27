@@ -2,6 +2,7 @@ import { Star } from "@phosphor-icons/react";
 
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
+import { AttractionPointStatics } from "@/features/animes/api/AnimeApi";
 
 import Section from "../Section";
 
@@ -14,7 +15,12 @@ import {
   Grid,
 } from "./style";
 
-export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
+interface Props {
+  starScoreAvg: number;
+  statics: AttractionPointStatics;
+}
+
+export default function Ratings({ starScoreAvg, statics }: Props) {
   return (
     <Section>
       <h1>별점</h1>
@@ -38,28 +44,36 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
         <h2>입덕포인트</h2>
         <Grid>
           <AttractionPointLabel>작화</AttractionPointLabel>
-          <Progress isRounded value={100} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress isRounded value={statics.drawing} />
+          <AttractionPointRatio>{statics.drawing}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>스토리</AttractionPointLabel>
-          <Progress isRounded value={60} style={{ opacity: 0.9 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress isRounded value={statics.story} style={{ opacity: 0.9 }} />
+          <AttractionPointRatio>{statics.story}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>음악</AttractionPointLabel>
-          <Progress isRounded value={50} style={{ opacity: 0.8 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress isRounded value={statics.music} style={{ opacity: 0.8 }} />
+          <AttractionPointRatio>{statics.music}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>캐릭터</AttractionPointLabel>
-          <Progress isRounded value={40} style={{ opacity: 0.7 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.character}
+            style={{ opacity: 0.7 }}
+          />
+          <AttractionPointRatio>{statics.character}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>성우</AttractionPointLabel>
-          <Progress isRounded value={30} style={{ opacity: 0.6 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.voiceActor}
+            style={{ opacity: 0.6 }}
+          />
+          <AttractionPointRatio>{statics.voiceActor}%</AttractionPointRatio>
         </Grid>
       </AttractionPoint>
     </Section>
