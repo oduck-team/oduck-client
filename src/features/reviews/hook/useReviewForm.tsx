@@ -101,10 +101,12 @@ export default function useReviewForm(
       attractionMutation.mutate(selectedAttraction, {
         onSuccess: () => {
           // 리뷰 내용을 제외한 입덕포인트만 변경된 경우 toast 생성
-          if (!isReviewChanged)
+          if (!isReviewChanged) {
             toast.success({
               message: "입덕포인트가 수정되었어요.",
             });
+            onReview();
+          }
         },
       });
 
@@ -132,8 +134,6 @@ export default function useReviewForm(
             },
           },
         );
-      // 모달 닫기
-      else onReview();
     } else {
       // 리뷰 추가
       addReview.mutate(review, {
@@ -146,6 +146,8 @@ export default function useReviewForm(
         },
       });
     }
+    // 변경 사항이 없을 때 모달 닫기
+    if (!isAttractionChanged && !isReviewChanged) onReview();
   }, DEBOUNCE_DELAY);
 
   return {
