@@ -30,7 +30,7 @@ export type AllFilterTypes =
   | StatusFilter
   | EpisodeCountFilter;
 
-const REQUEST_SIZE = 10; // 요청당 개수
+export const REQUEST_SIZE = 10; // 요청당 개수
 
 /**
  * @description 애니메이션 목록을 필터와 함께 조회합니다

@@ -6,6 +6,7 @@ import Button from "@/components/Button";
 import Empty from "@/components/Error/Empty";
 import Head from "@/components/Head";
 import Header from "@/components/Layout/Header";
+import Loader from "@/components/Loader";
 import { TabItem } from "@/components/Tabs";
 import AnimeCard from "@/features/animes/components/AnimeCard";
 import useIntersectionObserver from "@/hooks/useIntersectionObserver";
@@ -83,18 +84,16 @@ export default function AnimeList() {
           onChange={(value) => changeSort(value as AnimeSort)}
         />
         <Content>
-          {(animesQuery.isLoading || animesQuery.isFetching) &&
+          {animesQuery.isLoading &&
             Array.from({ length: 7 }, (_, i) => (
               <GridAnimeCardSkeleton key={i} />
             ))}
 
-          {!animesQuery.isLoading &&
-            !animesQuery.isFetching &&
-            animesQuery.data?.pages.length === 0 && (
-              <Empty message="애니가 없어요" />
-            )}
+          {animesQuery.data?.pages.length === 0 && (
+            <Empty message="애니가 없어요" />
+          )}
 
-          {!animesQuery.isLoading && !animesQuery.isFetching && (
+          {animesQuery.data && (
             <>
               {animesQuery.data?.pages.map((item) => (
                 <AnimeCard
@@ -103,9 +102,12 @@ export default function AnimeList() {
                   onClick={() => navigate(`/animes/${item.id}`)}
                 />
               ))}
-              <div ref={observeRef}></div>
             </>
           )}
+
+          <div ref={observeRef} />
+
+          {animesQuery.isFetchingNextPage && <Loader display="oduck" />}
         </Content>
         <Filter
           isVisible={bottomSheetVisible}
