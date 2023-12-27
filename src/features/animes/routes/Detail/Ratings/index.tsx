@@ -1,3 +1,4 @@
+import { useTheme } from "@emotion/react";
 import { Star } from "@phosphor-icons/react";
 
 import Progress from "@/components/Progress";
@@ -21,6 +22,14 @@ interface Props {
 }
 
 export default function Ratings({ starScoreAvg, statics }: Props) {
+  const ranks = calculateRanks(statics);
+  const theme = useTheme();
+
+  const progressColor = (val: number) =>
+    theme.colors["primary"][
+      (60 - 10 * val).toString() as keyof typeof theme.colors.primary
+    ];
+
   return (
     <Section>
       <h1>별점</h1>
@@ -33,9 +42,7 @@ export default function Ratings({ starScoreAvg, statics }: Props) {
           value={starScoreAvg * 2}
           readonly
           style={{
-            marginTop: "2px",
-            marginRight: "auto",
-            marginLeft: "auto",
+            margin: "2px auto 0",
           }}
         />
       </AverageRatings>
@@ -44,17 +51,29 @@ export default function Ratings({ starScoreAvg, statics }: Props) {
         <h2>입덕포인트</h2>
         <Grid>
           <AttractionPointLabel>작화</AttractionPointLabel>
-          <Progress isRounded value={statics.drawing} />
+          <Progress
+            isRounded
+            value={statics.drawing}
+            color={progressColor(ranks.drawing)}
+          />
           <AttractionPointRatio>{statics.drawing}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>스토리</AttractionPointLabel>
-          <Progress isRounded value={statics.story} style={{ opacity: 0.9 }} />
+          <Progress
+            isRounded
+            value={statics.story}
+            color={progressColor(ranks.story)}
+          />
           <AttractionPointRatio>{statics.story}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>음악</AttractionPointLabel>
-          <Progress isRounded value={statics.music} style={{ opacity: 0.8 }} />
+          <Progress
+            isRounded
+            value={statics.music}
+            color={progressColor(ranks.music)}
+          />
           <AttractionPointRatio>{statics.music}%</AttractionPointRatio>
         </Grid>
         <Grid>
@@ -62,7 +81,7 @@ export default function Ratings({ starScoreAvg, statics }: Props) {
           <Progress
             isRounded
             value={statics.character}
-            style={{ opacity: 0.7 }}
+            color={progressColor(ranks.character)}
           />
           <AttractionPointRatio>{statics.character}%</AttractionPointRatio>
         </Grid>
@@ -71,11 +90,39 @@ export default function Ratings({ starScoreAvg, statics }: Props) {
           <Progress
             isRounded
             value={statics.voiceActor}
-            style={{ opacity: 0.6 }}
+            color={progressColor(ranks.voiceActor)}
           />
           <AttractionPointRatio>{statics.voiceActor}%</AttractionPointRatio>
         </Grid>
       </AttractionPoint>
     </Section>
   );
+}
+
+function calculateRanks(obj: AttractionPointStatics) {
+  const ranks: AttractionPointStatics = {
+    drawing: 0,
+    story: 0,
+    music: 0,
+    character: 0,
+    voiceActor: 0,
+  };
+
+  const sorted: [string, number][] = Object.entries(obj).sort(
+    (a, b) => b[1] - a[1],
+  );
+
+  let currentRank = 0;
+  let currentScore = sorted[0][1];
+
+  const scores = sorted.map((el) => el[1]);
+  scores.forEach((val, i) => {
+    const key = sorted[i][0] as keyof AttractionPoint;
+    const rank = currentScore <= val ? currentRank : currentRank + 1;
+    ranks[key] = rank;
+    currentRank = rank;
+    currentScore = val;
+  });
+
+  return ranks;
 }

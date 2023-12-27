@@ -5,6 +5,7 @@ export const AverageRatings = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 2px;
+  margin-top: 24px;
 `;
 
 export const AverageRatingsOverview = styled.div`

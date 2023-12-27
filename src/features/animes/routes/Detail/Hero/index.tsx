@@ -120,14 +120,7 @@ export default function Hero({
           style={{ margin: "0 auto" }}
         />
         <ReviewRating animeId={id} />
-        <BookmarkContainer
-          style={{
-            width: "100%",
-            paddingTop: "16px",
-            marginTop: "16px",
-            borderTop: "solid 1px #F1F1F1",
-          }}
-        >
+        <BookmarkContainer>
           <BookmarkButton animeId={id} />
         </BookmarkContainer>
       </Actions>

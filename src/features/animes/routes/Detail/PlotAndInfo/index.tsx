@@ -1,6 +1,8 @@
+import useReadMoreText from "@/hooks/useReadMoreText";
+
 import Section from "../Section";
 
-import { Grid, Plot } from "./style";
+import { Grid, Plot, ReadMoreButton } from "./style";
 
 interface PlotAndInfoProps {
   /** 줄거리 */
@@ -22,10 +24,20 @@ export default function PlotAndInfo({
   voiceActors,
   studios,
 }: PlotAndInfoProps) {
+  const { textRef, isOpen, isShowReadMoreButton, handleReadMoreButtonToggle } =
+    useReadMoreText();
+
   return (
     <Section>
       <h1>줄거리 및 정보</h1>
-      <Plot isExpanded={true}>{summary}</Plot>
+      <Plot ref={textRef} className={isOpen ? undefined : "ellipsis"}>
+        {summary}
+      </Plot>
+      {isShowReadMoreButton && (
+        <ReadMoreButton onClick={handleReadMoreButtonToggle}>
+          {isOpen ? "접기" : "더보기"}
+        </ReadMoreButton>
+      )}
       <Grid>
         <li>
           <span>작가</span>

@@ -1,13 +1,24 @@
 import styled from "@emotion/styled";
 
-export const Plot = styled.p<{ isExpanded: boolean }>`
+export const Plot = styled.p`
+  ${({ theme }) => theme.typo["body-3-r"]};
   display: -webkit-box;
   margin-top: 8px;
-  margin-bottom: 8px;
-  -webkit-line-clamp: ${({ isExpanded }) => (isExpanded ? "none" : "2")};
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-all;
+
+  &.ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+`;
+
+export const ReadMoreButton = styled.button`
+  all: unset;
+  ${({ theme }) => theme.typo["body-3-r"]};
+  cursor: pointer;
+  display: block;
 `;
 
 export const Grid = styled.ul`
@@ -23,12 +34,15 @@ export const Grid = styled.ul`
   }
 
   & > li > span:first-of-type {
-    color: ${({ theme }) => theme.colors.neutral["70"]};
+    color: ${({ theme }) => theme.colors.neutral["60"]};
     padding-right: 8px;
     max-width: 140px;
+    ${({ theme }) => theme.typo["body-3-r"]};
+    letter-spacing: normal;
   }
 
   & > li > span:last-of-type {
     text-align: left;
+    ${({ theme }) => theme.typo["body-3-m"]};
   }
 `;
