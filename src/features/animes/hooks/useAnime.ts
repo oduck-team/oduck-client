@@ -16,7 +16,7 @@ export default function useAnime(animeId: number) {
   });
 
   const { data: statics } = useQuery({
-    queryKey: ["attraction", animeId],
+    queryKey: ["attraction", animeId, "statics"],
     queryFn: () => animeApi.getAttractionPoint(animeId),
   });
 
