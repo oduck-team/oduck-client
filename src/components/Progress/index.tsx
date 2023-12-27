@@ -1,14 +1,12 @@
 import { ComponentProps } from "react";
 
-import { theme } from "@/styles/theme";
-
 import { ProgressContainer } from "./style";
 
 export interface ProgressProps extends ComponentProps<"div"> {
   max?: number;
   min?: number;
   value?: number;
-  color?: keyof typeof theme.colors;
+  color?: string;
   height?: number;
   isRounded?: boolean;
 }
