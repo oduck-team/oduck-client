@@ -14,6 +14,7 @@ import useDebounce from "@/hooks/useDebounce";
 import useEvaluation from "../../hook/useEvaluation";
 import ShortReviewModal from "../ReviewRating/ShortReviewModal";
 
+import ReviewDeleteModal from "./ReviewDeleteModal";
 import {
   MoreButton,
   MyRating,
@@ -43,6 +44,7 @@ export default function ReviewMoreButton({
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
   const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const evaluationMutation = useEvaluation({ animeId });
 
@@ -67,7 +69,10 @@ export default function ReviewMoreButton({
     );
   }, DEBOUNCE_DELAY);
 
-  const handleReviewDeleteClick = () => console.log("리뷰삭제");
+  const handleReviewDeleteClick = () => {
+    handleDropDownModalToggle();
+    setIsDeleteModalVisible(true);
+  };
 
   const handleReviewSpoilerReport = () => {
     handleDropDownModalToggle();
@@ -150,6 +155,14 @@ export default function ReviewMoreButton({
               <Rating size="lg" onRate={handleRate} value={score} />
             </RatingContainer>
           </ShortReviewModal>
+        )}
+
+        {isDeleteModalVisible && (
+          <ReviewDeleteModal
+            reviewId={reviewId}
+            animeId={animeId}
+            onClose={() => setIsDeleteModalVisible(false)}
+          />
         )}
       </AnimatePresence>
     </>
