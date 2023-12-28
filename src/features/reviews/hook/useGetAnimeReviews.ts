@@ -52,6 +52,7 @@ export default function useGetAnimeReviews(animeId: number) {
 
   const {
     data: reviews,
+    isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
     isLoading,
@@ -83,6 +84,7 @@ export default function useGetAnimeReviews(animeId: number) {
   return {
     reviews,
     isLoading,
+    isFetchingNextPage,
     targetRef,
     SORT_OPTION,
     selectedSortOption,
