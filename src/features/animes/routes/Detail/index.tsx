@@ -32,7 +32,11 @@ export default function AnimeDetail() {
   if (anime)
     return (
       <>
-        <Head title={`${anime.title} | 오덕`} image={anime.thumbnail} />
+        <Head
+          title={`${anime.title} 리뷰 | 오덕`}
+          description={`${anime.title} 리뷰 - ${anime.summary}`}
+          image={anime.thumbnail}
+        />
         <AnimeDetailContainer>
           {/* TODO: 평점 */}
           <Hero {...anime} starScoreAvg={starRatingAvg} />

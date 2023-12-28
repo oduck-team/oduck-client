@@ -47,7 +47,7 @@ export default function HelpDesk() {
 
   return (
     <>
-      <Head title="오덕 | 고객센터" />
+      <Head title="고객센터 | 오덕" />
       <HelpDeskContainer>
         {success && <Success />}
         <Header>

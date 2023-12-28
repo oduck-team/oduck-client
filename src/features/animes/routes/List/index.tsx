@@ -61,7 +61,10 @@ export default function AnimeList() {
 
   return (
     <>
-      <Head title="오덕 | 애니" description="다양한 애니메이션을 만나보세요!" />
+      <Head
+        title="리뷰를 남기고 싶은 애니 찾기 | 오덕"
+        description="다양한 애니메이션을 태그와 최신순, 이름순, 리뷰순으로 만나보세요!"
+      />
       <AnimeListContainer>
         <Header>
           <Header.Left />
