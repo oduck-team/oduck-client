@@ -25,22 +25,32 @@ export default function useReview(animeId: number, onReview: () => void) {
     }
   };
 
+  // 공통 쿼리 무효화 (리뷰 추가, 수정, 삭제에 사용)
+  const invalidateCommonQuries = () => {
+    queryClient.invalidateQueries(["profile", user?.memberId, "review"]); // 회원 리뷰 목록
+    queryClient.invalidateQueries(["review", animeId, user?.memberId]); // 애니 리뷰 목록
+    queryClient.invalidateQueries(["MostRecentReviewList"]); // 최신 리뷰
+  };
+
+  // 리뷰 개수와 관련된 쿼리 무효화 (리뷰 추가, 삭제에 사용)
+  const invalidateCountQuries = () => {
+    queryClient.invalidateQueries(["profile", user?.name]); // 프로필 (activity)
+    queryClient.invalidateQueries([
+      "profile",
+      user?.memberId,
+      "count",
+      "review",
+    ]); // 회원 리뷰 개수
+    queryClient.invalidateQueries(["anime", animeId, user?.memberId]); // 애니의 리뷰 개수
+  };
+
   // 리뷰 추가
   const addReview = useMutation({
     mutationFn: (review: AddReviewDto) => reviewApi.addReview(review),
     onSuccess: () => {
-      queryClient.invalidateQueries(["profile", user?.name]);
-      queryClient.invalidateQueries(["profile", user?.memberId, "review"]);
-      queryClient.invalidateQueries([
-        "profile",
-        user?.memberId,
-        "count",
-        "review",
-      ]);
-      queryClient.invalidateQueries(["review", animeId, user?.memberId]);
-      queryClient.invalidateQueries(["anime", animeId, user?.memberId]);
-      // TODO: 최신 리뷰 목록 query 무효화
-      onReview();
+      invalidateCommonQuries();
+      invalidateCountQuries();
+      onReview(); // 리뷰 모달 닫기
     },
     onError: (error) => handleError(error),
   });
@@ -55,13 +65,23 @@ export default function useReview(animeId: number, onReview: () => void) {
       review: AddReviewDto;
     }) => reviewApi.updateReview(reviewId, review),
     onSuccess: () => {
-      queryClient.invalidateQueries(["profile", user?.memberId, "review"]);
-      queryClient.invalidateQueries(["review", animeId, user?.memberId]);
-      // TODO: 최신 리뷰 목록 query 무효화
-      onReview();
+      invalidateCommonQuries();
+      onReview(); // 리뷰 모달 닫기
     },
     onError: (error) => handleError(error),
   });
 
-  return { addReview, updateReview };
+  // 리뷰 삭제
+  const deleteReview = useMutation({
+    mutationFn: (reviewId: number) => reviewApi.deleteReview(reviewId),
+    onSuccess: () => {
+      invalidateCommonQuries();
+      invalidateCountQuries();
+      queryClient.invalidateQueries(["attraction", animeId]); // 입덕포인트 무효화
+      onReview(); // 삭제 모달 닫기
+    },
+    onError: (error) => handleError(error),
+  });
+
+  return { addReview, updateReview, deleteReview };
 }
