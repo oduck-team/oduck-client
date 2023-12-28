@@ -4,7 +4,7 @@ import { StrictPropsWithChildren } from "@/types";
 
 import ActionBar from "./ActionBar";
 import Anime from "./Animation";
-import ReviewComent from "./ReviewComent";
+import ReviewComment from "./ReviewComment";
 import { ReviewCardContainer } from "./style";
 import UserRating from "./UserRating";
 
@@ -42,5 +42,5 @@ export default function ReviewCard({
 
 ReviewCard.Anime = Anime;
 ReviewCard.UserRating = UserRating;
-ReviewCard.Comment = ReviewComent;
+ReviewCard.Comment = ReviewComment;
 ReviewCard.ActionBar = ActionBar;

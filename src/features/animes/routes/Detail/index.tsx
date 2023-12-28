@@ -1,9 +1,10 @@
+import { useQueryErrorResetBoundary } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
+import ErrorBoundary from "@/components/Error/ErrorBoundary";
 import Head from "@/components/Head";
 import Loader from "@/components/Loader";
 import SectionDivider from "@/components/SectionDivider";
-import useGetAnimeReviews from "@/features/reviews/hook/useGetAnimeReviews";
 
 import useAnime from "../../hooks/useAnime";
 
@@ -15,6 +16,7 @@ import { AnimeDetailContainer } from "./style";
 
 export default function AnimeDetail() {
   const { id: animeId } = useParams();
+  const { reset } = useQueryErrorResetBoundary();
 
   const {
     starRatingAvg,
@@ -22,15 +24,6 @@ export default function AnimeDetail() {
     anime,
     isLoading: isAnimeLoading,
   } = useAnime(Number(animeId));
-
-  const {
-    reviews,
-    isLoading,
-    targetRef,
-    SORT_OPTION,
-    selectedSortOption,
-    handleChipClick,
-  } = useGetAnimeReviews(Number(animeId));
 
   if (isAnimeLoading) {
     return <Loader />;
@@ -60,16 +53,12 @@ export default function AnimeDetail() {
           )}
           <SectionDivider />
           {/* 리뷰 목록 */}
-          <Reviews
-            reviews={reviews?.pages ?? []}
-            isLoading={isLoading}
-            totalReviewCount={anime.reviewCount}
-            sortOptions={SORT_OPTION}
-            selectedOption={selectedSortOption}
-            handleChipClick={handleChipClick}
-          />
-          <div ref={targetRef}></div>
-          {isLoading && <Loader display="oduck" />}
+          <ErrorBoundary onReset={reset}>
+            <Reviews
+              animeId={Number(animeId)}
+              totalReviewCount={anime.reviewCount}
+            />
+          </ErrorBoundary>
         </AnimeDetailContainer>
       </>
     );
