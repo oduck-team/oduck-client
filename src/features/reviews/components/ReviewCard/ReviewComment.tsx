@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { ReviewComentContainer } from "./ReviewComent.style";
+import { ReviewCommentContainer } from "./ReviewComment.style";
 import SpoilerComment from "./SpoilerComment";
 
 export type TextSize = "sm" | "md";
@@ -11,7 +11,7 @@ interface ReviewTextProps {
   textSize?: TextSize;
 }
 
-export default function ReviewComent({
+export default function ReviewComment({
   text,
   isSpoiler,
   textSize = "md",
@@ -25,9 +25,9 @@ export default function ReviewComent({
   }, [isSpoiler]);
 
   return (
-    <ReviewComentContainer textSize={textSize}>
+    <ReviewCommentContainer textSize={textSize}>
       {isSpoilerComment && <SpoilerComment onClick={handleShowSpoilerClick} />}
       {!isSpoilerComment && text}
-    </ReviewComentContainer>
+    </ReviewCommentContainer>
   );
 }
