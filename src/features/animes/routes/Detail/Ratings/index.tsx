@@ -3,6 +3,7 @@ import { Star } from "@phosphor-icons/react";
 
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
+import { AttractionPointStatics } from "@/features/animes/api/AnimeApi";
 
 import Section from "../Section";
 
@@ -15,21 +16,13 @@ import {
   Grid,
 } from "./style";
 
-// 임시
-type AttractionPointStatics = {
-  [K in keyof AttractionPoint]: number;
-};
+interface Props {
+  starScoreAvg: number;
+  statics: AttractionPointStatics;
+}
 
-const MOCK_STATICS: AttractionPointStatics = {
-  drawing: 100.0,
-  story: 30.0,
-  music: 70.0,
-  character: 45.0,
-  voiceActor: 10.0,
-};
-
-export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
-  const ranks = calculateRanks(MOCK_STATICS);
+export default function Ratings({ starScoreAvg, statics }: Props) {
+  const ranks = calculateRanks(statics);
   const theme = useTheme();
 
   const progressColor = (val: number) =>
@@ -60,48 +53,46 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
           <AttractionPointLabel>작화</AttractionPointLabel>
           <Progress
             isRounded
-            value={MOCK_STATICS.drawing}
+            value={statics.drawing}
             color={progressColor(ranks.drawing)}
           />
-          <AttractionPointRatio>{MOCK_STATICS.drawing}%</AttractionPointRatio>
+          <AttractionPointRatio>{statics.drawing}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>스토리</AttractionPointLabel>
           <Progress
             isRounded
-            value={MOCK_STATICS.story}
+            value={statics.story}
             color={progressColor(ranks.story)}
           />
-          <AttractionPointRatio>{MOCK_STATICS.story}%</AttractionPointRatio>
+          <AttractionPointRatio>{statics.story}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>음악</AttractionPointLabel>
           <Progress
             isRounded
-            value={MOCK_STATICS.music}
+            value={statics.music}
             color={progressColor(ranks.music)}
           />
-          <AttractionPointRatio>{MOCK_STATICS.music}%</AttractionPointRatio>
+          <AttractionPointRatio>{statics.music}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>캐릭터</AttractionPointLabel>
           <Progress
             isRounded
-            value={MOCK_STATICS.character}
+            value={statics.character}
             color={progressColor(ranks.character)}
           />
-          <AttractionPointRatio>{MOCK_STATICS.character}%</AttractionPointRatio>
+          <AttractionPointRatio>{statics.character}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>성우</AttractionPointLabel>
           <Progress
             isRounded
-            value={MOCK_STATICS.voiceActor}
+            value={statics.voiceActor}
             color={progressColor(ranks.voiceActor)}
           />
-          <AttractionPointRatio>
-            {MOCK_STATICS.voiceActor}%
-          </AttractionPointRatio>
+          <AttractionPointRatio>{statics.voiceActor}%</AttractionPointRatio>
         </Grid>
       </AttractionPoint>
     </Section>

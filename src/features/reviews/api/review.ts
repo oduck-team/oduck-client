@@ -154,6 +154,17 @@ export default class ReviewApi {
     });
   }
 
+  /** @description 입덕 포인트 수정 */
+  async updateAttractionPoint(
+    animeId: number,
+    attractionElements: AttractionType[],
+  ) {
+    return patch(`/attraction-points`, {
+      animeId,
+      attractionElements,
+    });
+  }
+
   /** @description 입덕 포인트 존재 여부 조회 */
   async getUserAttractionPointStatus(animeId: number) {
     return get<{ isAttractionPoint: boolean }>(`/attraction-points/${animeId}`);

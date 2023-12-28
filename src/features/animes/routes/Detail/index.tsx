@@ -18,6 +18,7 @@ export default function AnimeDetail() {
 
   const {
     starRatingAvg,
+    attractionStatics,
     anime,
     isLoading: isAnimeLoading,
   } = useAnime(Number(animeId));
@@ -43,18 +44,17 @@ export default function AnimeDetail() {
           {/* TODO: 평점 */}
           <Hero {...anime} starScoreAvg={starRatingAvg} />
           <SectionDivider />
-
           {/* 줄거리 및 정보 */}
           <PlotAndInfo
             {...anime}
             voiceActors={anime.voiceActors.map((actor) => actor.name)}
           />
           <SectionDivider />
-
           {/* 평점 */}
-          <Ratings starScoreAvg={starRatingAvg} />
+          {attractionStatics && (
+            <Ratings starScoreAvg={starRatingAvg} statics={attractionStatics} />
+          )}
           <SectionDivider />
-
           {/* 리뷰 목록 */}
           <Reviews
             reviews={reviews?.pages ?? []}
