@@ -49,6 +49,13 @@ export default class ReviewApi {
     return patch(`/short-reviews/${reviewId}`, review);
   }
 
+  /** @description 리뷰 삭제 요청 */
+  async deleteReview(reviewId: number) {
+    return Promise.resolve(console.log(`${reviewId} 삭제완료`));
+    // TODO: 실제 api 반영
+    // return del(`/short-reviews/${reviewId}`);
+  }
+
   /** @description 리뷰 좋아요 추가/삭제 */
   async toggleReviewLike(shortReviewId: number): Promise<void> {
     return post(`/likes`, { shortReviewId });
@@ -77,6 +84,7 @@ export default class ReviewApi {
             cursor: pageParam,
             ...baseParams,
           };
+    // return Promise.reject(new Error("fail"));
     return get<CursorPage<ReviewInfo>>(`/short-reviews/animes/${animeId}`, {
       params,
     });
