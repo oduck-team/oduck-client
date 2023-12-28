@@ -84,7 +84,6 @@ export default class ReviewApi {
             cursor: pageParam,
             ...baseParams,
           };
-    // return Promise.reject(new Error("fail"));
     return get<CursorPage<ReviewInfo>>(`/short-reviews/animes/${animeId}`, {
       params,
     });
