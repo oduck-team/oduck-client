@@ -8,7 +8,7 @@ interface HeadProps {
 
 export default function Head({
   title = "오덕 | 애니 리뷰 · 애니 평가 서비스",
-  description = "애니 리뷰 커뮤니티 오덕입니다. 애니 리뷰를 중심으로 다양한 애니 커뮤니티를 만나보세요.",
+  description = "오덕에서 애니 리뷰를 중심으로 다양한 애니 커뮤니티를 만나보세요.",
   image = "https://oduck.io/logo/logo-rect.png",
 }: HeadProps) {
   return (
