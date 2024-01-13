@@ -8,6 +8,7 @@ import { dataURLtoFile, getCroppedImg } from "@/libs/imageCrop";
 import {
   ContentContainer,
   CropperContainer,
+  Information,
   RangeInput,
 } from "./ImageCropModal.style";
 
@@ -83,6 +84,7 @@ export default function ImageCropModal({
               setZoom(Number(e.target.value))
             }
           />
+          <Information>이미지 저장은 아직 지원되지 않습니다.</Information>
         </ContentContainer>
       </Modal.Content>
       <Modal.Actions>

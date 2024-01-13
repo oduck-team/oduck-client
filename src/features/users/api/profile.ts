@@ -63,8 +63,12 @@ export default class ProfileApi {
       data.append(key, value);
     }
 
-    if (backgroundImage) data.append("backgroundImage", backgroundImage);
-    if (thumbnailImage) data.append("thumbnail", thumbnailImage);
+    //TODO: 서버에서 이미지 업로드 구현 시, 주석 해제
+    if (backgroundImage && thumbnailImage) {
+      console.log("");
+    }
+    // if (backgroundImage) data.append("backgroundImage", backgroundImage);
+    // if (thumbnailImage) data.append("thumbnail", thumbnailImage);
 
     return await patch("/members", form);
   }
