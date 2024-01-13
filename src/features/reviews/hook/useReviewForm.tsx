@@ -26,28 +26,28 @@ export default function useReviewForm(
   const { user } = useAuth();
   const { addReview, updateReview } = useReview(animeId, onReview);
 
-  const { userAttraction, addAttraction, status } = useAttractionPoint(animeId);
+  const { userAttraction, attractionMutation } = useAttractionPoint(animeId);
 
   const toast = useToast();
 
   const [form, setForm] = useState<ReviewForm>({
     content: userReviewData?.content ?? "",
     isSpoiler: userReviewData?.isSpoiler ?? false,
-    character: userAttraction?.character ?? false,
     drawing: userAttraction?.drawing ?? false,
     story: userAttraction?.story ?? false,
-    voiceActor: userAttraction?.voiceActor ?? false,
     music: userAttraction?.music ?? false,
+    character: userAttraction?.character ?? false,
+    voiceActor: userAttraction?.voiceActor ?? false,
   });
 
   useEffect(() => {
     setForm((prev) => ({
       ...prev,
-      character: userAttraction?.character ?? false,
       drawing: userAttraction?.drawing ?? false,
       story: userAttraction?.story ?? false,
-      voiceActor: userAttraction?.voiceActor ?? false,
       music: userAttraction?.music ?? false,
+      character: userAttraction?.character ?? false,
+      voiceActor: userAttraction?.voiceActor ?? false,
     }));
   }, [userAttraction]);
 
@@ -78,42 +78,53 @@ export default function useReviewForm(
       return;
     }
 
-    // 체크한 입덕 포인트
-    const selectedAttraction = Object.keys(form)
-      .filter(
-        (key) =>
-          form[key as keyof ReviewForm] === true &&
-          !["content, isSpoiler"].includes(key),
-      )
+    const { content, isSpoiler, ...attraction } = form;
+    const isReviewChanged = !userReviewData
+      ? true
+      : userReviewData.content !== content ||
+        userReviewData.isSpoiler !== isSpoiler;
+
+    // 체크한 입덕포인트
+    const selectedAttraction = Object.keys(attraction)
+      .filter((key) => attraction[key as keyof AttractionPoint] === true)
       .map((key) =>
         key === "voiceActor" ? "VOICE_ACTOR" : key.toUpperCase(),
       ) as AttractionType[];
 
-    console.log("입덕 포인트: ", selectedAttraction);
+    const isAttractionChanged = !userAttraction
+      ? true
+      : Object.entries(userAttraction).toString() !==
+        Object.entries({ ...attraction }).toString();
 
-    // 입덕 포인트 추가: 체크된 입덕 포인트가 있는 경우에만 요청
-    if (selectedAttraction.length !== 0 && !status?.isAttractionPoint) {
-      addAttraction.mutate(selectedAttraction);
-    }
+    // 입덕포인트 추가/수정: 변경된 값이 있는 경우에만 수행
+    if (selectedAttraction.length !== 0 && isAttractionChanged)
+      attractionMutation.mutate(selectedAttraction, {
+        onSuccess: () => {
+          // 리뷰 내용을 제외한 입덕포인트만 변경된 경우 toast 생성
+          if (!isReviewChanged) {
+            toast.success({
+              message: "입덕포인트가 수정되었어요.",
+            });
+            onReview();
+          }
+        },
+      });
 
-    // TODO: 입덕 포인트 수정
+    const review = {
+      name: user?.name ?? "",
+      animeId,
+      hasSpoiler: isSpoiler,
+      content: content,
+    };
 
     // 리뷰 수정
     if (userReviewData) {
       // 내용에 변화가 있을 경우에만 요청
-      if (
-        userReviewData.content !== form.content ||
-        userReviewData.isSpoiler !== form.isSpoiler
-      )
+      if (isReviewChanged)
         updateReview.mutate(
           {
             reviewId: userReviewData.reviewId,
-            review: {
-              name: user?.name ?? "",
-              animeId,
-              hasSpoiler: form.isSpoiler,
-              content: form.content,
-            },
+            review,
           },
           {
             onSuccess: () => {
@@ -123,28 +134,20 @@ export default function useReviewForm(
             },
           },
         );
-      // 모달 닫기
-      else onReview();
     } else {
       // 리뷰 추가
-      addReview.mutate(
-        {
-          name: user?.name ?? "",
-          animeId,
-          hasSpoiler: form.isSpoiler,
-          content: form.content,
+      addReview.mutate(review, {
+        onSuccess: () => {
+          toast.success({
+            message: "리뷰가 등록되었어요.",
+            buttonText: "내 모든 리뷰 보러 가기",
+            onClickButton: () => navigate("/profile"),
+          });
         },
-        {
-          onSuccess: () => {
-            toast.success({
-              message: "리뷰가 등록되었어요.",
-              buttonText: "내 모든 리뷰 보러 가기",
-              onClickButton: () => navigate("/profile"),
-            });
-          },
-        },
-      );
+      });
     }
+    // 변경 사항이 없을 때 모달 닫기
+    if (!isAttractionChanged && !isReviewChanged) onReview();
   }, DEBOUNCE_DELAY);
 
   return {

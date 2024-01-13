@@ -68,7 +68,7 @@ export default function Search() {
 
   return (
     <>
-      <Head title="오덕 | 검색하기" />
+      <Head title="이름으로 애니를 검색하기 | 오덕" />
 
       <SearchContainer>
         <Header>

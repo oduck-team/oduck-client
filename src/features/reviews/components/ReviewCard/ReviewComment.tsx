@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { ReviewComentContainer } from "./ReviewComent.style";
+import { ReviewCommentContainer } from "./ReviewComment.style";
 import SpoilerComment from "./SpoilerComment";
 
 export type TextSize = "sm" | "md";
@@ -11,7 +11,7 @@ interface ReviewTextProps {
   textSize?: TextSize;
 }
 
-export default function ReviewComent({
+export default function ReviewComment({
   text,
   isSpoiler,
   textSize = "md",
@@ -19,10 +19,15 @@ export default function ReviewComent({
   const [isSpoilerComment, setIsSpoilerComment] = useState(isSpoiler);
   const handleShowSpoilerClick = () => setIsSpoilerComment(false);
 
+  // 리뷰 수정에서 스포일러 여부 수정 시 바로 반영되도록 함
+  useEffect(() => {
+    setIsSpoilerComment(isSpoiler);
+  }, [isSpoiler]);
+
   return (
-    <ReviewComentContainer textSize={textSize}>
+    <ReviewCommentContainer textSize={textSize}>
       {isSpoilerComment && <SpoilerComment onClick={handleShowSpoilerClick} />}
       {!isSpoilerComment && text}
-    </ReviewComentContainer>
+    </ReviewCommentContainer>
   );
 }

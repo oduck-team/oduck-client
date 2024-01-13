@@ -5,7 +5,8 @@ export const Main = styled.main`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 60px); // dvh를 지원하지 않는 브라우저 대응
+  height: calc(100dvh - 60px);
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;

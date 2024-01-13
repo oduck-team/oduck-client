@@ -1,5 +1,35 @@
 # oduck-client
 
+<div align="center">
+  <div>
+    <a href="https://oduck.io">
+      <img
+        src="https://avatars.githubusercontent.com/u/140365011?s=200&v=4"
+        alt="Oduck"
+        height="64"
+      />
+    </a>
+  </div>
+  <h3>
+    <b>
+      Oduck
+    </b>
+  </h3>
+  <p>
+    오덕 | 애니 리뷰 · 애니 평가 서비스
+  </p>
+
+
+  <br />
+  <div>
+    <a href="https://oduck.io" display=flex>
+      <img height=300 alt="oduck landing" 
+src="https://github.com/oduck-team/oduck-client/assets/105474635/174bbd10-ca3e-48c0-a2d0-ded8858c20de">
+      <img height=300 alt="oduck review" src="https://github.com/oduck-team/oduck-client/assets/105474635/40015256-5144-48c5-84d8-bc49d83b4fc7">
+    </a>
+  </div>
+</div>
+
 ## 💬 커밋 메세지 컨벤션
 
 ### 커밋 형식

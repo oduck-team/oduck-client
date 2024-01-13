@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-import { TextSize } from "./ReviewComent";
+import { TextSize } from "./ReviewComment";
 
-export const ReviewComentContainer = styled.div<{ textSize: TextSize }>`
+export const ReviewCommentContainer = styled.h1<{ textSize: TextSize }>`
   ${({ theme }) => theme.typo["body-3-r"]}
   ${({ theme }) => theme.colors.neutral[80]}
   display: -webkit-box;

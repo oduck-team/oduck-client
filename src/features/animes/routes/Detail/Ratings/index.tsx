@@ -1,7 +1,9 @@
+import { useTheme } from "@emotion/react";
 import { Star } from "@phosphor-icons/react";
 
 import Progress from "@/components/Progress";
 import Rating from "@/components/Rating";
+import { AttractionPointStatics } from "@/features/animes/api/AnimeApi";
 
 import Section from "../Section";
 
@@ -14,7 +16,20 @@ import {
   Grid,
 } from "./style";
 
-export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
+interface Props {
+  starScoreAvg: number;
+  statics: AttractionPointStatics;
+}
+
+export default function Ratings({ starScoreAvg, statics }: Props) {
+  const ranks = calculateRanks(statics);
+  const theme = useTheme();
+
+  const progressColor = (val: number) =>
+    theme.colors["primary"][
+      (60 - 10 * val).toString() as keyof typeof theme.colors.primary
+    ];
+
   return (
     <Section>
       <h1>별점</h1>
@@ -27,9 +42,7 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
           value={starScoreAvg * 2}
           readonly
           style={{
-            marginTop: "2px",
-            marginRight: "auto",
-            marginLeft: "auto",
+            margin: "2px auto 0",
           }}
         />
       </AverageRatings>
@@ -38,30 +51,78 @@ export default function Ratings({ starScoreAvg }: { starScoreAvg: number }) {
         <h2>입덕포인트</h2>
         <Grid>
           <AttractionPointLabel>작화</AttractionPointLabel>
-          <Progress isRounded value={100} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.drawing}
+            color={progressColor(ranks.drawing)}
+          />
+          <AttractionPointRatio>{statics.drawing}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>스토리</AttractionPointLabel>
-          <Progress isRounded value={60} style={{ opacity: 0.9 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.story}
+            color={progressColor(ranks.story)}
+          />
+          <AttractionPointRatio>{statics.story}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>음악</AttractionPointLabel>
-          <Progress isRounded value={50} style={{ opacity: 0.8 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.music}
+            color={progressColor(ranks.music)}
+          />
+          <AttractionPointRatio>{statics.music}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>캐릭터</AttractionPointLabel>
-          <Progress isRounded value={40} style={{ opacity: 0.7 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.character}
+            color={progressColor(ranks.character)}
+          />
+          <AttractionPointRatio>{statics.character}%</AttractionPointRatio>
         </Grid>
         <Grid>
           <AttractionPointLabel>성우</AttractionPointLabel>
-          <Progress isRounded value={30} style={{ opacity: 0.6 }} />
-          <AttractionPointRatio>100%</AttractionPointRatio>
+          <Progress
+            isRounded
+            value={statics.voiceActor}
+            color={progressColor(ranks.voiceActor)}
+          />
+          <AttractionPointRatio>{statics.voiceActor}%</AttractionPointRatio>
         </Grid>
       </AttractionPoint>
     </Section>
   );
+}
+
+function calculateRanks(obj: AttractionPointStatics) {
+  const ranks: AttractionPointStatics = {
+    drawing: 0,
+    story: 0,
+    music: 0,
+    character: 0,
+    voiceActor: 0,
+  };
+
+  const sorted: [string, number][] = Object.entries(obj).sort(
+    (a, b) => b[1] - a[1],
+  );
+
+  let currentRank = 0;
+  let currentScore = sorted[0][1];
+
+  const scores = sorted.map((el) => el[1]);
+  scores.forEach((val, i) => {
+    const key = sorted[i][0] as keyof AttractionPoint;
+    const rank = currentScore <= val ? currentRank : currentRank + 1;
+    ranks[key] = rank;
+    currentRank = rank;
+    currentScore = val;
+  });
+
+  return ranks;
 }

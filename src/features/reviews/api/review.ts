@@ -49,6 +49,13 @@ export default class ReviewApi {
     return patch(`/short-reviews/${reviewId}`, review);
   }
 
+  /** @description 리뷰 삭제 요청 */
+  async deleteReview(reviewId: number) {
+    return Promise.resolve(console.log(`${reviewId} 삭제완료`));
+    // TODO: 실제 api 반영
+    // return del(`/short-reviews/${reviewId}`);
+  }
+
   /** @description 리뷰 좋아요 추가/삭제 */
   async toggleReviewLike(shortReviewId: number): Promise<void> {
     return post(`/likes`, { shortReviewId });
@@ -149,6 +156,17 @@ export default class ReviewApi {
     attractionElements: AttractionType[],
   ) {
     return post(`/attraction-points`, {
+      animeId,
+      attractionElements,
+    });
+  }
+
+  /** @description 입덕 포인트 수정 */
+  async updateAttractionPoint(
+    animeId: number,
+    attractionElements: AttractionType[],
+  ) {
+    return patch(`/attraction-points`, {
       animeId,
       attractionElements,
     });

@@ -23,7 +23,7 @@ export const Introduce = styled.p`
   }
 `;
 
-export const SeeMoreButton = styled.button`
+export const ReadMoreButton = styled.button`
   ${({ theme }) => theme.typo["body-3-r"]};
   color: ${({ theme }) => theme.colors.neutral[50]};
   position: relative;

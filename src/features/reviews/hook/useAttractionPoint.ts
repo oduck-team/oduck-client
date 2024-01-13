@@ -26,13 +26,16 @@ export default function useAttractionPoint(animeId: number) {
     queryFn: () => reviewApi.getUserAttractionPointStatus(animeId),
   });
 
-  // 입덕 포인트 추가
-  const addAttraction = useMutation({
-    mutationFn: (attractions: AttractionType[]) =>
-      reviewApi.addAttractionPoint(animeId, attractions),
+  // 입덕 포인트 추가/수정
+  const attractionMutation = useMutation({
+    mutationFn: (attractions: AttractionType[]) => {
+      if (!status?.isAttractionPoint)
+        return reviewApi.addAttractionPoint(animeId, attractions);
+      return reviewApi.updateAttractionPoint(animeId, attractions);
+    },
     onSuccess: () => {
+      // 사용자 입덕 포인트, 입덕 포인트 존재 여부, 입덕 포인트 통계 무효화
       queryClient.invalidateQueries(["attraction", animeId]);
-      // TODO: 애니 입덕 포인트 통계 query 무효화
     },
     onError: (error) => {
       if (error instanceof AxiosError && error.response?.status) {
@@ -49,5 +52,5 @@ export default function useAttractionPoint(animeId: number) {
     },
   });
 
-  return { userAttraction, status, addAttraction };
+  return { userAttraction, status, attractionMutation };
 }

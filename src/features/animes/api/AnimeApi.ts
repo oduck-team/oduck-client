@@ -59,6 +59,10 @@ type ListAnimeResponse = CursorPage<{
   starScoreAvg: number;
 }>;
 
+export type AttractionPointStatics = {
+  [K in keyof AttractionPoint]: number;
+};
+
 export type TOP10ListResponse = Pick<Anime, "title" | "thumbnail"> & {
   animeId: number;
   genres: string[];
@@ -90,6 +94,10 @@ export default class AnimeApi {
 
   getAverageRating(id: number) {
     return get<{ starRatingAvg: number }>(`/animes/${id}/ratings/average`);
+  }
+
+  getAttractionPoint(id: number) {
+    return get<AttractionPointStatics>(`/attraction-points/animes/${id}`);
   }
 
   async getTOP10List(): Promise<TOP10ListResponse[]> {

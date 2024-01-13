@@ -38,7 +38,7 @@ export default function NoticeList() {
   return (
     <>
       <Head
-        title="오덕 | 공지사항"
+        title="공지사항 | 오덕"
         description="오덕의 새로운 소식을 만나보세요"
       />
       <Header>

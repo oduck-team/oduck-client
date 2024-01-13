@@ -41,9 +41,9 @@ export default function Profile() {
       {userProfile && (
         <>
           <Head
-            title={`오덕 | ${
+            title={`${
               userProfile.isMine ? "내 프로필" : userProfile.name
-            }`}
+            }님의 프로필 | 오덕 `}
           />
           <ProfileContainer>
             <AboutMe profile={userProfile} />
