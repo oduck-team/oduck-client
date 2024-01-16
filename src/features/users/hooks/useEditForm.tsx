@@ -62,6 +62,13 @@ export default function useEditForm(name: string, description: string) {
     if (name === "description" && value.length > 100) return;
 
     setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "name" && status.isWarn) {
+      if (isNicknameRegexCheck(value)) {
+        setStatus({ isWarn: false, message: "" });
+      }
+    }
+
     setIsFormChange(true);
   };
 
@@ -77,6 +84,7 @@ export default function useEditForm(name: string, description: string) {
         message:
           "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
       });
+      setIsLoading(false);
 
       return;
     }
