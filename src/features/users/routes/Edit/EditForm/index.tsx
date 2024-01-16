@@ -95,7 +95,7 @@ export default function EditForm({
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar
               src={previewThumbNail ? previewThumbNail : thumbnail}
-              userName="FE"
+              userName={form.name}
               size="xl"
             />
             <ImageEditButton
