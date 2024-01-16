@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
-import useDebounce from "@/hooks/useDebounce";
 import { fileToWebPFile } from "@/libs/compressor";
 import { useCommonToastError } from "@/libs/error";
 
@@ -66,8 +65,9 @@ export default function useEditForm(name: string, description: string) {
     setIsFormChange(true);
   };
 
-  const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
+  const handleFormSumbit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!isFormChange || !user) return;
     setIsLoading(true);
 
@@ -122,7 +122,7 @@ export default function useEditForm(name: string, description: string) {
     );
 
     setStatus({ isWarn: false, message: "" });
-  }, 200);
+  };
 
   /** 배경 이미지 및 썸네일 이미지 등록 시, 저장 버튼 활성화 */
   useEffect(() => {

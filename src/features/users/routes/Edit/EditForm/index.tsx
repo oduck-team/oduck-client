@@ -152,6 +152,7 @@ export default function EditForm({
           color={isFormChange ? "primary" : "neutral"}
           isBlock
           size="lg"
+          disabled={isLoading}
           onClick={handleFormSumbit}
         >
           저장
@@ -193,7 +194,6 @@ export default function EditForm({
           onSaveCroppedImage={(file: File) => setCroppedThumbnailImage(file)}
         />
       )}
-      {isLoading && <span>로딩중</span>}
     </EditFormContainer>
   );
 }
