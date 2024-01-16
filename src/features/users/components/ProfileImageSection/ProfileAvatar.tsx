@@ -1,7 +1,6 @@
 import Avatar from "@/components/Avatar";
 import { StrictPropsWithChildren } from "@/types";
 
-import AvatarEditButton from "./AvatarEditButton";
 import { ProfileAvatarContainer } from "./ProfileAvatar.style";
 
 export default function ProfileAvatar({ children }: StrictPropsWithChildren) {
@@ -9,4 +8,3 @@ export default function ProfileAvatar({ children }: StrictPropsWithChildren) {
 }
 
 ProfileAvatar.Avatar = Avatar;
-ProfileAvatar.AvatarEditButton = AvatarEditButton;

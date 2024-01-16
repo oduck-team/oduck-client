@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
 import useDebounce from "@/hooks/useDebounce";
+import { fileToWebPFile } from "@/libs/compressor";
 import { useCommonToastError } from "@/libs/error";
 
 export interface ProfileEditFormData {
@@ -14,20 +15,44 @@ export interface ProfileEditFormData {
   description: string;
 }
 
+interface UpdateProfileMutateVariables {
+  backgroundImage: File | undefined;
+  thumbnailImage: File | undefined;
+}
+
 export default function useEditForm(name: string, description: string) {
   const { profile } = useApi();
   const { fetchUser, user } = useAuth();
   const navigate = useNavigate();
+  const [croppedArtImage, setCroppedArtImage] = useState<File | null>(null); // crop 배경 이미지
+  const [croppedThumbnailImage, setCroppedThumbnailImage] =
+    useState<File | null>(null); // crop 썸네일 이미지
   const [form, setForm] = useState<ProfileEditFormData>({
     name: name.length <= 10 ? name : "",
     description: description,
   });
   const [status, setStatus] = useState({ isWarn: false, message: "" });
   const [isFormChange, setIsFormChange] = useState(false);
-  const updateProfile = useMutation(() => profile.updateProfile(form));
+  const [isLoading, setIsLoading] = useState(false); // submit loading 상태
+
+  const updateProfile = useMutation(
+    ({ backgroundImage, thumbnailImage }: UpdateProfileMutateVariables) =>
+      profile.updateProfile(form, backgroundImage, thumbnailImage),
+  );
   const queryClient = useQueryClient();
+
   const toast = useToast();
   const { toastAuthError, toastDefaultError } = useCommonToastError();
+
+  const previewArt = useMemo(
+    () => croppedArtImage && URL.createObjectURL(croppedArtImage),
+    [croppedArtImage],
+  );
+
+  const previewThumbNail = useMemo(
+    () => croppedThumbnailImage && URL.createObjectURL(croppedThumbnailImage),
+    [croppedThumbnailImage],
+  );
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -43,7 +68,8 @@ export default function useEditForm(name: string, description: string) {
 
   const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isFormChange) return;
+    if (!isFormChange || !user) return;
+    setIsLoading(true);
 
     if (!isNicknameRegexCheck(form.name)) {
       setStatus({
@@ -55,38 +81,66 @@ export default function useEditForm(name: string, description: string) {
       return;
     }
 
-    updateProfile.mutate(undefined, {
-      onSuccess: async () => {
-        await queryClient.invalidateQueries(["profile", user?.name]);
-        await fetchUser();
-        queryClient.removeQueries(["profile", "edit", user?.name]);
-        navigate("/profile");
-      },
-      onError: (error) => {
-        if (error instanceof AxiosError && error.response?.status) {
-          const status = error.response.status;
-          switch (status) {
-            case 401: // 인증 오류
-              toastAuthError();
-              break;
-            case 400: // 정규식 검사 오류
-              toast.error({ message: "사용할 수 없는 닉네임입니다." });
-              break;
-            case 409: // 닉네임 중복 오류
-              toast.error({ message: "이미 사용중인 닉네임입니다." });
-              break;
-            default:
-              toastDefaultError();
-              break;
+    let backgroundImage, thumbnailImage;
+    if (croppedArtImage) {
+      backgroundImage = await fileToWebPFile(croppedArtImage);
+    }
+    if (croppedThumbnailImage) {
+      thumbnailImage = await fileToWebPFile(croppedThumbnailImage);
+    }
+
+    updateProfile.mutate(
+      { backgroundImage, thumbnailImage },
+      {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries(["profile", user?.name]);
+          await fetchUser();
+          queryClient.removeQueries(["profile", "edit", user?.name]);
+          navigate("/profile");
+        },
+        onError: (error) => {
+          if (error instanceof AxiosError && error.response?.status) {
+            const status = error.response.status;
+            switch (status) {
+              case 401: // 인증 오류
+                toastAuthError();
+                break;
+              case 400: // 정규식 검사 오류
+                toast.error({ message: "사용할 수 없는 닉네임입니다." });
+                break;
+              case 409: // 닉네임 중복 오류
+                toast.error({ message: "이미 사용중인 닉네임입니다." });
+                break;
+              default:
+                toastDefaultError();
+                break;
+            }
           }
-        }
+        },
+        onSettled: () => setIsLoading(false),
       },
-    });
+    );
 
     setStatus({ isWarn: false, message: "" });
   }, 200);
 
-  return { form, status, isFormChange, handleInputChange, handleFormSumbit };
+  /** 배경 이미지 및 썸네일 이미지 등록 시, 저장 버튼 활성화 */
+  useEffect(() => {
+    if (croppedArtImage || croppedThumbnailImage) setIsFormChange(true);
+  }, [croppedArtImage, croppedThumbnailImage]);
+
+  return {
+    form,
+    status,
+    isFormChange,
+    isLoading,
+    previewArt,
+    previewThumbNail,
+    handleInputChange,
+    handleFormSumbit,
+    setCroppedArtImage,
+    setCroppedThumbnailImage,
+  };
 }
 
 function isNicknameRegexCheck(nickname: string) {
