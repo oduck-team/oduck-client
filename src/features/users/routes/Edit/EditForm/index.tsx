@@ -95,7 +95,7 @@ export default function EditForm({
           <ProfileImageSection.ProfileAvatar>
             <ProfileAvatar.Avatar
               src={previewThumbNail ? previewThumbNail : thumbnail}
-              userName="FE"
+              userName={form.name}
               size="xl"
             />
             <ImageEditButton
@@ -152,6 +152,7 @@ export default function EditForm({
           color={isFormChange ? "primary" : "neutral"}
           isBlock
           size="lg"
+          disabled={isLoading}
           onClick={handleFormSumbit}
         >
           저장
@@ -193,7 +194,6 @@ export default function EditForm({
           onSaveCroppedImage={(file: File) => setCroppedThumbnailImage(file)}
         />
       )}
-      {isLoading && <span>로딩중</span>}
     </EditFormContainer>
   );
 }

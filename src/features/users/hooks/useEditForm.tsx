@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
 import { useApi } from "@/hooks/useApi";
-import useDebounce from "@/hooks/useDebounce";
 import { fileToWebPFile } from "@/libs/compressor";
 import { useCommonToastError } from "@/libs/error";
 
@@ -63,11 +62,19 @@ export default function useEditForm(name: string, description: string) {
     if (name === "description" && value.length > 100) return;
 
     setForm((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "name" && status.isWarn) {
+      if (isNicknameRegexCheck(value)) {
+        setStatus({ isWarn: false, message: "" });
+      }
+    }
+
     setIsFormChange(true);
   };
 
-  const handleFormSumbit = useDebounce(async (e: React.FormEvent) => {
+  const handleFormSumbit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!isFormChange || !user) return;
     setIsLoading(true);
 
@@ -77,6 +84,7 @@ export default function useEditForm(name: string, description: string) {
         message:
           "한글, 영문, 숫자만 입력 가능합니다. 한글 또는 영문은 반드시 포함하여 2자~10자 닉네임을 설정해주세요.",
       });
+      setIsLoading(false);
 
       return;
     }
@@ -122,7 +130,7 @@ export default function useEditForm(name: string, description: string) {
     );
 
     setStatus({ isWarn: false, message: "" });
-  }, 200);
+  };
 
   /** 배경 이미지 및 썸네일 이미지 등록 시, 저장 버튼 활성화 */
   useEffect(() => {
