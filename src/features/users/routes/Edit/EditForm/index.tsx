@@ -75,6 +75,7 @@ export default function EditForm({
         <ProfileImageSection>
           <ProfileImageSection.Art
             src={previewArt ? previewArt : backgroundImage}
+            userName={name}
           />
           <ImageEditButton
             croppedImage={previewArt}
