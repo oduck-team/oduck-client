@@ -19,8 +19,7 @@ interface API {
   reviewApi: ReviewApi;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const OduckApiContext = createContext<API | null | any>(null);
+export const OduckApiContext = createContext<API | null>(null);
 
 /** @desc: api */
 const authApi = new AuthApi();
