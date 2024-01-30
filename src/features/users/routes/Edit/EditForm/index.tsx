@@ -75,6 +75,7 @@ export default function EditForm({
         <ProfileImageSection>
           <ProfileImageSection.Art
             src={previewArt ? previewArt : backgroundImage}
+            userName={name}
           />
           <ImageEditButton
             croppedImage={previewArt}
@@ -123,6 +124,7 @@ export default function EditForm({
             <TextInput
               required
               name="name"
+              aria-label="닉네임 입력"
               value={form.name}
               maxLength={10}
               message={status.message}
@@ -135,6 +137,7 @@ export default function EditForm({
             <Title>자기소개</Title>
             <Textarea
               name="description"
+              aria-label="자기소개 입력"
               value={form.description}
               placeholder="자기소개를 적어보세요(최대 100자까지 가능합니다)"
               maxLength={100}
