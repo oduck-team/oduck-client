@@ -50,6 +50,14 @@ export default function AnimeList() {
     applyFilters,
   } = useFilterAnimes();
 
+  /** 중복된 데이터 제거 */
+  const uniqueAnimesQuery = {
+    ...animesQuery.data,
+    pages: [
+      ...new Set(animesQuery.data?.pages.map((page) => JSON.stringify(page))),
+    ].map((page) => JSON.parse(page)),
+  };
+
   const observeRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -92,13 +100,13 @@ export default function AnimeList() {
               <GridAnimeCardSkeleton key={i} />
             ))}
 
-          {animesQuery.data?.pages.length === 0 && (
+          {uniqueAnimesQuery.pages.length === 0 && (
             <Empty message="애니가 없어요" />
           )}
 
           {animesQuery.data && (
             <>
-              {animesQuery.data?.pages.map((item) => (
+              {uniqueAnimesQuery.pages.map((item) => (
                 <AnimeCard
                   {...item}
                   key={item.id}
