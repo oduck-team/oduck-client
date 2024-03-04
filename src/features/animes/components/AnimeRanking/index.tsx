@@ -69,7 +69,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 {animes.map((ani, i) => (
                   <HighlightItemContainer key={ani.animeId}>
                     <HighlightItem
-                      image={ani.thumbnail}
+                      image={ani.thumbnail || ""}
                       data-anime-id={ani.animeId}
                       onClick={(e: React.MouseEvent) => handleClick(e)}
                     >
@@ -97,7 +97,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               >
                 {animes.map((ani, i) => (
                   <SliderItem key={ani.animeId}>
-                    <SliderItemImage image={ani.thumbnail}>
+                    <SliderItemImage image={ani.thumbnail || ""}>
                       <Rank className="sub-carousel">{i + 1}</Rank>
                     </SliderItemImage>
                     <div>{ani.title}</div>
