@@ -30,7 +30,13 @@ export default function useAnimes({
       }),
     getNextPageParam: (lastPage) => lastPage.cursor || undefined,
     select: (data) => ({
-      pages: data.pages.flatMap((page) => page.items),
+      pages:
+        // 별점순 정렬인 경우, 별점이 내림차순 되도록 정렬
+        queryParams.sort === "SCORE"
+          ? data.pages
+              .flatMap((page) => page.items)
+              .sort((a, b) => b.starScoreAvg - a.starScoreAvg)
+          : data.pages.flatMap((page) => page.items),
       pageParams: data.pageParams,
     }),
     enabled: autoFetch,

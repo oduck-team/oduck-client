@@ -58,6 +58,18 @@ export default function useFilterAnimes() {
   }); // 요청 필터
   const animesQuery = useAnimes({ autoFetch: true, queryParams: filterParams });
 
+  /**
+   * 서버에서 잘못된 데이터가 넘어오는 중.
+   * 중복된 데이터 제거
+   */
+  const uniqueAnimesQueryData = {
+    ...animesQuery.data,
+    pages: [
+      ...new Set(animesQuery.data?.pages.map((page) => JSON.stringify(page))),
+    ] //
+      .map((page) => JSON.parse(page)),
+  };
+
   /** 상단 Tab 최신순, 리뷰순, 평점순 */
   const changeSort = (sort: AnimeSort) => {
     const queryParams = filterToQueryParams(selectedFilters);
@@ -159,6 +171,7 @@ export default function useFilterAnimes() {
 
   return {
     animesQuery,
+    uniqueAnimesQueryData,
     filterOptions,
     selectedFilters,
     changeSort,
