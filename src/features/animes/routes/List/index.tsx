@@ -38,6 +38,7 @@ const DEFAULT_TAB_ID = "LATEST";
 export default function AnimeList() {
   const {
     animesQuery,
+    uniqueAnimesQueryData,
     bottomSheetVisible,
     bottomSheetOpen,
     bottomSheetClose,
@@ -49,14 +50,6 @@ export default function AnimeList() {
     resetFilter,
     applyFilters,
   } = useFilterAnimes();
-
-  /** 중복된 데이터 제거 */
-  const uniqueAnimesQuery = {
-    ...animesQuery.data,
-    pages: [
-      ...new Set(animesQuery.data?.pages.map((page) => JSON.stringify(page))),
-    ].map((page) => JSON.parse(page)),
-  };
 
   const observeRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -100,13 +93,13 @@ export default function AnimeList() {
               <GridAnimeCardSkeleton key={i} />
             ))}
 
-          {uniqueAnimesQuery.pages.length === 0 && (
+          {uniqueAnimesQueryData.pages.length === 0 && (
             <Empty message="애니가 없어요" />
           )}
 
           {animesQuery.data && (
             <>
-              {uniqueAnimesQuery.pages.map((item) => (
+              {uniqueAnimesQueryData.pages.map((item) => (
                 <AnimeCard
                   {...item}
                   key={item.id}
