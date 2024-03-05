@@ -52,7 +52,7 @@ export const Image = styled.div<ImageProps>`
   border-radius: 5px;
   ${({ image }) => css`
     background:
-      url(${image}),
+      url("${image}"),
       lightgray 50% no-repeat;
   `}
   background-size: cover;
