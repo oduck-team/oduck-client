@@ -38,16 +38,13 @@ export default function AnimeCard({
   onClick,
   display = "default",
 }: AnimeCardProps) {
-  console.log("animCard");
-  console.log(title, thumbnail);
-
   return (
     <AnimeCardContainer
       onClick={(e: React.MouseEvent) => onClick(id, e)}
       display={display}
     >
       <div className="image-container">
-        <Image className="image" image={thumbnail || ""} />
+        <Image className="image" image={thumbnail} />
       </div>
       <InfoContainer>
         <Title>{title}</Title>
