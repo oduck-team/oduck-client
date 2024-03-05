@@ -101,7 +101,7 @@ export const HighlightItem = styled.div<ItemProps>`
   background: ${({
     image,
   }) => `linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, #000 100%),
-    url(${image}),
+    url('${image}'),
     lightgray 50%
     no-repeat`};
   background-size: cover;
@@ -155,7 +155,7 @@ export const SliderItemImage = styled.div<ItemProps>`
   width: 100%;
   height: 95px;
   border-radius: 5px;
-  background: ${({ image }) => `url(${image}),
+  background: ${({ image }) => `url('${image}'),
       lightgray 50% no-repeat`};
   background-size: cover;
   background-position: center 40%;
