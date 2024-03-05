@@ -60,6 +60,9 @@ export default function AnimeList() {
     enabled: animesQuery.hasNextPage,
   });
 
+  console.log("uniqueAnimesQueryData");
+  console.log(uniqueAnimesQueryData.pages);
+
   return (
     <>
       <Head

@@ -51,6 +51,9 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
     }
   };
 
+  console.log("animeRanking");
+  console.log(animes);
+
   return (
     <>
       {isLoading && <AnimeRankingLoading />}
