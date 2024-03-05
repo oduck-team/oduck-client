@@ -44,7 +44,7 @@ export default function AnimeCard({
       display={display}
     >
       <div className="image-container">
-        <Image className="image" image={thumbnail} />
+        <Image className="image" image={thumbnail || ""} />
       </div>
       <InfoContainer>
         <Title>{title}</Title>

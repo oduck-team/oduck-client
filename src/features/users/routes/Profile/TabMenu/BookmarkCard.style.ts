@@ -22,6 +22,7 @@ export const ImageContainer = styled.div`
   overflow: hidden;
   border-radius: 4px;
   margin-right: 8px;
+  background-color: #d9d9d9;
 `;
 
 export const Image = styled.img`

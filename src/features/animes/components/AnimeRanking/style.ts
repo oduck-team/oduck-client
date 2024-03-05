@@ -112,6 +112,7 @@ export const HighlightItem = styled.div<ItemProps>`
   flex-direction: column;
   justify-content: flex-end;
   transition: all 0.5s;
+  z-index: 10;
 
   & > h3 {
     ${({ theme }) => theme.typo["body-3-r"]}

@@ -7,6 +7,7 @@ import { useApi } from "@/hooks/useApi";
 import { SyncingMainCarousel, SyncingSubCarousel } from "@/libs/carousel";
 
 import AnimeRankingLoading from "./AnimeRankingLoading";
+import NotExistAnime from "./NotExistAnime";
 import {
   HighlightItem,
   HighlightItemContainer,
@@ -68,7 +69,7 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                 {animes.map((ani, i) => (
                   <HighlightItemContainer key={ani.animeId}>
                     <HighlightItem
-                      image={ani.thumbnail}
+                      image={ani.thumbnail || ""}
                       data-anime-id={ani.animeId}
                       onClick={(e: React.MouseEvent) => handleClick(e)}
                     >
@@ -77,6 +78,13 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
                       <h2>{ani.title}</h2>
                     </HighlightItem>
                   </HighlightItemContainer>
+                ))}
+
+                {Array.from({ length: 10 - animes.length }, (_, i) => (
+                  <NotExistAnime
+                    key={i + animes.length + 1}
+                    message="애니 리뷰를 부탁해요."
+                  />
                 ))}
               </Slider>
             </MainCarouselContainer>
@@ -89,11 +97,15 @@ export default function AnimeRanking({ title }: AnimeRankingProps) {
               >
                 {animes.map((ani, i) => (
                   <SliderItem key={ani.animeId}>
-                    <SliderItemImage image={ani.thumbnail}>
+                    <SliderItemImage image={ani.thumbnail || ""}>
                       <Rank className="sub-carousel">{i + 1}</Rank>
                     </SliderItemImage>
                     <div>{ani.title}</div>
                   </SliderItem>
+                ))}
+
+                {Array.from({ length: 10 - animes.length }, (_, i) => (
+                  <NotExistAnime key={i + animes.length + 1} />
                 ))}
                 {/* carousel 레이아웃 망가짐 방지: div 추가  */}
                 <div />
