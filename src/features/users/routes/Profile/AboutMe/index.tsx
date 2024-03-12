@@ -33,7 +33,10 @@ export default function AboutMe({
     <>
       <ProfileImageSection>
         <ProfileImageSection.Art src={backgroundImage} userName={name} />
-        <ProfileImageSection.ProfileSetupButton isMine={isMine} />
+        <ProfileImageSection.ProfileSetupButton
+          isMine={isMine}
+          userName={name}
+        />
         <ProfileImageSection.ProfileAvatar>
           <ProfileAvatar.Avatar src={thumbnail} userName={name} size="xl" />
         </ProfileImageSection.ProfileAvatar>
