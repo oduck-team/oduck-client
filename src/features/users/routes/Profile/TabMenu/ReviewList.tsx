@@ -6,12 +6,14 @@ import EmptyList from "./EmptyList";
 
 interface ReviewListProps {
   isMine: boolean;
+  memberId: number;
   list: ReviewListResponse[];
   isLoading: boolean;
 }
 
 export default function ReviewList({
   isMine,
+  memberId,
   list,
   isLoading,
 }: ReviewListProps) {
@@ -54,6 +56,7 @@ export default function ReviewList({
             createdAt={review.createdAt}
             isTimeAgo={false}
             isMine={isMine}
+            memberId={memberId}
             likeCount={review.likeCount}
             reviewId={review.reviewId}
             animeId={review.animeId}

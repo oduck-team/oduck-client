@@ -62,6 +62,7 @@ export default function TabMenu({ isMine, memberId }: TabMenuProps) {
         {selectedMenu === "한줄리뷰" && (
           <ReviewList
             isMine={isMine}
+            memberId={memberId}
             list={reviews?.pages ?? []}
             isLoading={isLoadingReview}
           />
