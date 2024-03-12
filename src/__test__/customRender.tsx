@@ -4,6 +4,7 @@ import { RenderOptions, render } from "@testing-library/react";
 import { PropsWithChildren } from "react";
 
 import { OduckApiContext } from "@/contexts/OduckApiContext";
+import { ToastContextProvider } from "@/contexts/ToastContext";
 import { theme } from "@/styles/theme";
 
 export default function customRender(
@@ -23,8 +24,7 @@ export function RenderWithProviders(
     <OduckApiContext.Provider value={oduck}>
       <QueryClientProvider client={testClient}>
         <ThemeProvider theme={theme}>
-          {children}
-          {/* </IconContext.Provider> */}
+          <ToastContextProvider>{children}</ToastContextProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </OduckApiContext.Provider>
