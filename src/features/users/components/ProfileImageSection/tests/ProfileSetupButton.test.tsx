@@ -14,7 +14,10 @@ describe("ProfileSetupButton", () => {
       customRender(
         <MemoryRouter>
           <ProfileImageSection>
-            <ProfileImageSection.ProfileSetupButton isMine={true} />
+            <ProfileImageSection.ProfileSetupButton
+              isMine={true}
+              userName="testUser"
+            />
           </ProfileImageSection>
         </MemoryRouter>,
       );
@@ -38,7 +41,10 @@ describe("ProfileSetupButton", () => {
               path="/"
               element={
                 <ProfileImageSection>
-                  <ProfileImageSection.ProfileSetupButton isMine={true} />
+                  <ProfileImageSection.ProfileSetupButton
+                    isMine={true}
+                    userName="testUser"
+                  />
                 </ProfileImageSection>
               }
             />
@@ -61,7 +67,10 @@ describe("ProfileSetupButton", () => {
     customRender(
       <MemoryRouter>
         <ProfileImageSection>
-          <ProfileImageSection.ProfileSetupButton isMine={false} />
+          <ProfileImageSection.ProfileSetupButton
+            isMine={false}
+            userName="testUser"
+          />
         </ProfileImageSection>
       </MemoryRouter>,
     );
