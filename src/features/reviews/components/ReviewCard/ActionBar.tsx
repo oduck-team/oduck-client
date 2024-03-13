@@ -14,6 +14,7 @@ import ReviewMoreButton from "./ReviewMoreButton";
 
 export interface ActionBarProps {
   isMine: boolean;
+  memberId?: number;
   isLike?: boolean;
   likeCount: number;
   createdAt?: string;
@@ -29,6 +30,7 @@ const DEBOUNCE_DELAY = 200;
 
 export default function ActionBar({
   isMine,
+  memberId,
   isLike,
   likeCount,
   createdAt,
@@ -44,7 +46,12 @@ export default function ActionBar({
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
   const data = useGetIsLike(reviewId);
   const userLike = data ? data.isLike : isLike;
-  const likeMutation = useToggleLike(reviewId, animeId, userLike ?? false);
+  const likeMutation = useToggleLike(
+    reviewId,
+    animeId,
+    userLike ?? false,
+    memberId,
+  );
   const { user } = useAuth();
 
   const handleClickLike = useDebounce(() => {

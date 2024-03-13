@@ -17,6 +17,7 @@ export default function useToggleLike(
   reviewId: number,
   animeId: number,
   isLike: boolean,
+  memberId?: number, // 다른 사용자 프로필의 memberId
 ) {
   const queryClient = useQueryClient();
   const { reviewApi } = useApi();
@@ -29,7 +30,11 @@ export default function useToggleLike(
     onMutate: async () => {
       // optimistic update를 overwrite하지 않도록 refetch를 cancel
       await queryClient.cancelQueries(["review", animeId, user?.memberId]);
-      await queryClient.cancelQueries(["profile", user?.memberId, "review"]);
+      await queryClient.cancelQueries([
+        "profile",
+        memberId || user?.memberId,
+        "review",
+      ]);
       await queryClient.cancelQueries(["reviewLike", reviewId, user?.memberId]);
       await queryClient.cancelQueries(["MostRecentReviewList"]);
 
@@ -44,7 +49,7 @@ export default function useToggleLike(
         queryClient,
         reviewId,
         isLike,
-        ["profile", user?.memberId, "review"], // 회원 리뷰 목록
+        ["profile", memberId || user?.memberId, "review"], // 회원 리뷰 목록
       );
       const prevRecentReviewList = optimisticUpdateReviews(
         queryClient,
@@ -79,7 +84,7 @@ export default function useToggleLike(
         refetchType: "none", // 사용자의 요청 전까지는 refetch가 일어나지 않도록 합니다.
       });
       queryClient.invalidateQueries({
-        queryKey: ["profile", user?.memberId, "review"],
+        queryKey: ["profile", memberId || user?.memberId, "review"],
         refetchType: "none",
       });
       queryClient.invalidateQueries({
@@ -109,7 +114,7 @@ export default function useToggleLike(
       );
       rollBack(
         queryClient,
-        ["profile", user?.memberId, "review"],
+        ["profile", memberId || user?.memberId, "review"],
         context.prevUserReviewList,
       );
       rollBack(

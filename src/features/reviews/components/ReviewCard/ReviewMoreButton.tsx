@@ -5,7 +5,6 @@ import { useState } from "react";
 
 import BackdropPortal from "@/components/Backdrop/BackdropPortal";
 import Rating from "@/components/Rating";
-import useSnackBar from "@/components/SnackBar/useSnackBar";
 import useToast from "@/components/Toast/useToast";
 import DropDownModal from "@/features/users/components/DropDownModal";
 import useDropDownModal from "@/features/users/components/DropDownModal/useDropDownModal";
@@ -42,7 +41,6 @@ export default function ReviewMoreButton({
 }: ReviewMoreButtonProps) {
   const theme = useTheme();
   const { isDropDownModalOpen, handleDropDownModalToggle } = useDropDownModal();
-  const snackBar = useSnackBar();
   const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
@@ -74,18 +72,6 @@ export default function ReviewMoreButton({
     setIsDeleteModalVisible(true);
   };
 
-  const handleReviewSpoilerReport = () => {
-    handleDropDownModalToggle();
-    snackBar.open({ message: "신고가 접수되었어요." });
-  };
-
-  const handleReviewEtcReport = () => {
-    handleDropDownModalToggle();
-    snackBar.open({
-      message: "신고가 접수되었어요.",
-    });
-  };
-
   const handleBackdropClick = () => {
     if (isDropDownModalOpen) handleDropDownModalToggle();
     if (isReviewModalVisible) handleReviewModalToggle();
@@ -93,78 +79,78 @@ export default function ReviewMoreButton({
 
   return (
     <>
-      <MoreButton
-        name="더보기"
-        icon={<DotsThree color={theme.colors.neutral["50"]} />}
-        variant="text"
-        size="sm"
-        color="neutral"
-        onClick={handleDropDownModalToggle}
-      />
-
-      <AnimatePresence>
-        {(isDropDownModalOpen || isReviewModalVisible) && (
-          <BackdropPortal onClick={handleBackdropClick} />
-        )}
-
-        {isDropDownModalOpen && (
-          <DropDownModal
-            key="DropDownModal"
-            onDropDownModalToggle={handleDropDownModalToggle}
-          >
-            <DropDownModal.Button
-              name={isMine ? "수정하기" : "스포일러 신고"}
-              size="lg"
-              variant="solid"
-              color="neutral"
-              onClick={() =>
-                isMine ? handleReviewEditClick() : handleReviewSpoilerReport()
-              }
-            >
-              {isMine ? "수정하기" : "스포일러 신고"}
-            </DropDownModal.Button>
-            <DropDownModal.Button
-              name={isMine ? "삭제하기" : "기타 신고"}
-              size="lg"
-              variant="solid"
-              color="neutral"
-              onClick={() =>
-                isMine ? handleReviewDeleteClick() : handleReviewEtcReport()
-              }
-            >
-              {isMine ? "삭제하기" : "기타 신고"}
-            </DropDownModal.Button>
-          </DropDownModal>
-        )}
-
-        {isReviewModalVisible && (
-          <ShortReviewModal
-            key="ShortReviewModal"
-            onClose={() => setIsReviewModalVisible(false)}
-            onReview={() => setIsReviewModalVisible(false)}
-            showBackdrop={false}
-            userReviewData={{
-              reviewId,
-              animeId,
-              content,
-              isSpoiler,
-            }}
-          >
-            <MyRating>내 별점</MyRating>
-            <RatingContainer>
-              <Rating size="lg" onRate={handleRate} value={score} />
-            </RatingContainer>
-          </ShortReviewModal>
-        )}
-
-        {isDeleteModalVisible && (
-          <ReviewDeleteModal
-            reviewId={reviewId}
-            animeId={animeId}
-            onClose={() => setIsDeleteModalVisible(false)}
+      {isMine && (
+        <>
+          <MoreButton
+            name="더보기"
+            icon={<DotsThree color={theme.colors.neutral["50"]} />}
+            variant="text"
+            size="sm"
+            color="neutral"
+            onClick={handleDropDownModalToggle}
           />
-        )}
-      </AnimatePresence>
+
+          <AnimatePresence>
+            {(isDropDownModalOpen || isReviewModalVisible) && (
+              <BackdropPortal onClick={handleBackdropClick} />
+            )}
+
+            {isDropDownModalOpen && (
+              <DropDownModal
+                key="DropDownModal"
+                onDropDownModalToggle={handleDropDownModalToggle}
+              >
+                <DropDownModal.Button
+                  name="수정하기"
+                  size="lg"
+                  variant="solid"
+                  color="neutral"
+                  onClick={handleReviewEditClick}
+                >
+                  수정하기
+                </DropDownModal.Button>
+                <DropDownModal.Button
+                  name="삭제하기"
+                  size="lg"
+                  variant="solid"
+                  color="neutral"
+                  onClick={handleReviewDeleteClick}
+                >
+                  삭제하기
+                </DropDownModal.Button>
+              </DropDownModal>
+            )}
+
+            {isReviewModalVisible && (
+              <ShortReviewModal
+                key="ShortReviewModal"
+                onClose={() => setIsReviewModalVisible(false)}
+                onReview={() => setIsReviewModalVisible(false)}
+                showBackdrop={false}
+                userReviewData={{
+                  reviewId,
+                  animeId,
+                  content,
+                  isSpoiler,
+                }}
+              >
+                <MyRating>내 별점</MyRating>
+                <RatingContainer>
+                  <Rating size="lg" onRate={handleRate} value={score} />
+                </RatingContainer>
+              </ShortReviewModal>
+            )}
+
+            {isDeleteModalVisible && (
+              <ReviewDeleteModal
+                reviewId={reviewId}
+                animeId={animeId}
+                onClose={() => setIsDeleteModalVisible(false)}
+              />
+            )}
+          </AnimatePresence>
+        </>
+      )}
     </>
   );
 }

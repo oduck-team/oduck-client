@@ -62,24 +62,4 @@ describe("ProfileSetupButton", () => {
       expect(screen.getByText("프로필 수정 페이지")).toBeInTheDocument();
     });
   });
-
-  it("다른 사용자의 프로필 설정 버튼 클릭하면, '신고하기' 버튼이 렌더링 된다.", () => {
-    customRender(
-      <MemoryRouter>
-        <ProfileImageSection>
-          <ProfileImageSection.ProfileSetupButton
-            isMine={false}
-            userName="testUser"
-          />
-        </ProfileImageSection>
-      </MemoryRouter>,
-    );
-
-    const button = screen.getByRole("button");
-    fireEvent.click(button);
-
-    const reportButton = screen.getByLabelText("신고하기");
-
-    expect(reportButton).toBeInTheDocument();
-  });
 });
