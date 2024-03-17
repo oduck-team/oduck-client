@@ -20,7 +20,11 @@ export default function Anime({ anime }: AnimeProps) {
   return (
     <AnimeConatiner>
       <ImageContainer>
-        <Image src={anime.thumbnail} alt={anime.title} />
+        <Image
+          className="image-thumbnail"
+          src={anime.thumbnail}
+          alt={anime.title}
+        />
       </ImageContainer>
 
       <TitleContainer>

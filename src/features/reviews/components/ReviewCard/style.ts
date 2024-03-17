@@ -10,7 +10,7 @@ export const ReviewCardContainer = styled.article<
   transition: background-color ease 0.1s;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover img {
+    &:hover .image-thumbnail {
       transform: scale(1.2);
     }
   }
