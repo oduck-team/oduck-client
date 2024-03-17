@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import useToast from "@/components/Toast/useToast";
 import useAuth from "@/features/auth/hooks/useAuth";
@@ -12,17 +11,18 @@ import { useCommonToastError } from "@/libs/error";
 export interface ProfileEditFormData {
   name: string;
   description: string;
+  backgroundImage?: string;
+  thumbnail?: string;
 }
 
 interface UpdateProfileMutateVariables {
-  backgroundImage: File | undefined;
-  thumbnailImage: File | undefined;
+  backgroundImagePath: string | undefined;
+  thumbnailImagePath: string | undefined;
 }
 
 export default function useEditForm(name: string, description: string) {
-  const { profile } = useApi();
+  const { profile, fileApi } = useApi();
   const { fetchUser, user } = useAuth();
-  const navigate = useNavigate();
   const [croppedArtImage, setCroppedArtImage] = useState<File | null>(null); // crop 배경 이미지
   const [croppedThumbnailImage, setCroppedThumbnailImage] =
     useState<File | null>(null); // crop 썸네일 이미지
@@ -35,8 +35,11 @@ export default function useEditForm(name: string, description: string) {
   const [isLoading, setIsLoading] = useState(false); // submit loading 상태
 
   const updateProfile = useMutation(
-    ({ backgroundImage, thumbnailImage }: UpdateProfileMutateVariables) =>
-      profile.updateProfile(form, backgroundImage, thumbnailImage),
+    ({
+      backgroundImagePath,
+      thumbnailImagePath,
+    }: UpdateProfileMutateVariables) =>
+      profile.updateProfile(form, backgroundImagePath, thumbnailImagePath),
   );
   const queryClient = useQueryClient();
 
@@ -89,22 +92,41 @@ export default function useEditForm(name: string, description: string) {
       return;
     }
 
-    let backgroundImage, thumbnailImage;
+    let backgroundImagePath, thumbnailImagePath;
     if (croppedArtImage) {
-      backgroundImage = await fileToWebPFile(croppedArtImage);
+      const webPFile = await fileToWebPFile(croppedArtImage);
+
+      backgroundImagePath = await fileApi.uploadImage({
+        path: `user/${user.memberId}`,
+        filename: "backgroundImage",
+        file: webPFile,
+      });
     }
+
     if (croppedThumbnailImage) {
-      thumbnailImage = await fileToWebPFile(croppedThumbnailImage);
+      const webPFile = await fileToWebPFile(croppedThumbnailImage);
+
+      thumbnailImagePath = await fileApi.uploadImage({
+        path: `user/${user.memberId}`,
+        filename: "thumbnailImage",
+        file: webPFile,
+      });
     }
 
     updateProfile.mutate(
-      { backgroundImage, thumbnailImage },
+      { backgroundImagePath, thumbnailImagePath },
       {
         onSuccess: async () => {
           await queryClient.invalidateQueries(["profile", user?.name]);
           await fetchUser();
           queryClient.removeQueries(["profile", "edit", user?.name]);
-          navigate("/profile");
+
+          const path =
+            process.env.NODE_ENV === "production"
+              ? "https://oduck.io/profile"
+              : "http://localhost:5173/profile";
+
+          window.location.href = path;
         },
         onError: (error) => {
           if (error instanceof AxiosError && error.response?.status) {
