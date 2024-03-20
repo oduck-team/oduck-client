@@ -54,21 +54,11 @@ export default class ProfileApi {
 
   async updateProfile(
     form: ProfileEditFormData,
-    backgroundImage: File | undefined,
-    thumbnailImage: File | undefined,
+    backgroundImage: string | undefined,
+    thumbnailImage: string | undefined,
   ) {
-    const data = new FormData();
-
-    for (const [key, value] of Object.entries(form)) {
-      data.append(key, value);
-    }
-
-    //TODO: 서버에서 이미지 업로드 구현 시, 주석 해제
-    if (backgroundImage && thumbnailImage) {
-      console.log("");
-    }
-    // if (backgroundImage) data.append("backgroundImage", backgroundImage);
-    // if (thumbnailImage) data.append("thumbnail", thumbnailImage);
+    if (backgroundImage) form = { ...form, backgroundImage };
+    if (thumbnailImage) form = { ...form, thumbnail: thumbnailImage };
 
     return await patch("/members", form);
   }

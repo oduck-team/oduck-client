@@ -19,8 +19,3 @@ export const CropperContainer = styled.div`
 export const RangeInput = styled.input`
   margin: 16px 0 4px;
 `;
-
-export const Information = styled.span`
-  ${({ theme }) => theme.typo["body-2-r"]}
-  color: ${({ theme }) => theme.colors.warn[60]};
-`;
